@@ -1,0 +1,32 @@
+{
+  "parent": "oldustry:acquire_refined_iron",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:improved_furnace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_improved_furnace.description"
+    },
+    "icon": {
+      "id": "oldustry:improved_furnace"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_improved_furnace.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

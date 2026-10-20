@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:2x_insulated_gold_cable",
+    "M": "oldustry:machine_casing"
+  },
+  "pattern": [
+    " C ",
+    " M ",
+    " C "
+  ],
+  "result": {
+    "id": "oldustry:mv_transformer"
+  }
+}

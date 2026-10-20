@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/advanced_machine_down",
+    "east": "oldustry:block/advanced_machine_west",
+    "north": "oldustry:block/advanced_machine_south",
+    "particle": "oldustry:block/advanced_machine_south",
+    "south": "oldustry:block/advanced_machine_north",
+    "up": "oldustry:block/advanced_machine_up",
+    "west": "oldustry:block/advanced_machine_east"
+  }
+}

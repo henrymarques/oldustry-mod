@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cf_pellet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:cf_pellet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:cf_pack"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cf_pellet"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:cf_pack"
+    ]
+  }
+}

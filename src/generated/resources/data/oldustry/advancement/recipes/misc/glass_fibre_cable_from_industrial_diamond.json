@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_industrial_diamond": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:industrial_diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:glass_fibre_cable_from_industrial_diamond"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_industrial_diamond"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:glass_fibre_cable_from_industrial_diamond"
+    ]
+  }
+}

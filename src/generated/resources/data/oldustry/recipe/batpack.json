@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "oldustry:re_battery",
+    "C": "oldustry:electronic_circuit",
+    "T": "#c:ingots/tin"
+  },
+  "pattern": [
+    "BCB",
+    "BTB",
+    "B B"
+  ],
+  "result": {
+    "id": "oldustry:batpack"
+  }
+}

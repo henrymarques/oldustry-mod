@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/mfe_down",
+    "east": "oldustry:block/mfe_west",
+    "north": "oldustry:block/mfe_south",
+    "particle": "oldustry:block/mfe_south",
+    "south": "oldustry:block/mfe_north",
+    "up": "oldustry:block/mfe_up",
+    "west": "oldustry:block/mfe_east"
+  }
+}

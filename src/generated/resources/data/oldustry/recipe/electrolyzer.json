@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:electronic_circuit",
+    "E": "oldustry:empty_cell",
+    "M": "oldustry:machine_casing",
+    "c": "oldustry:insulated_copper_cable"
+  },
+  "pattern": [
+    "c c",
+    "cCc",
+    "EME"
+  ],
+  "result": {
+    "id": "oldustry:electrolyzer"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:insulated_copper_cable",
+    "R": "minecraft:redstone",
+    "T": "#c:ingots/tin"
+  },
+  "pattern": [
+    " C ",
+    "TRT",
+    "TRT"
+  ],
+  "result": {
+    "id": "oldustry:re_battery"
+  }
+}

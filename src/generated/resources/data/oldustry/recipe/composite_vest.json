@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "oldustry:advanced_alloy",
+    "I": "minecraft:iron_chestplate",
+    "L": "minecraft:leather_chestplate"
+  },
+  "pattern": [
+    "A A",
+    "ALA",
+    "AIA"
+  ],
+  "result": {
+    "id": "oldustry:composite_vest"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:electronic_circuit",
+    "M": "oldustry:machine_casing",
+    "T": "#c:ingots/tin"
+  },
+  "pattern": [
+    "TCT",
+    "TMT",
+    "TCT"
+  ],
+  "result": {
+    "id": "oldustry:canner"
+  }
+}

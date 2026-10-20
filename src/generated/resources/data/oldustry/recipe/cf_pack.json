@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:compressed_plants",
+    "P": "oldustry:cf_pellet",
+    "T": "#c:ingots/tin"
+  },
+  "pattern": [
+    "TPT",
+    "PCP",
+    "TPT"
+  ],
+  "result": {
+    "id": "oldustry:cf_pack"
+  }
+}

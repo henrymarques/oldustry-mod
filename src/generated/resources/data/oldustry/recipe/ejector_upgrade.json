@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "E": "oldustry:electronic_circuit",
+    "H": "minecraft:hopper",
+    "P": "minecraft:piston",
+    "W": "oldustry:insulated_copper_cable"
+  },
+  "pattern": [
+    "PHP",
+    "WEW"
+  ],
+  "result": {
+    "id": "oldustry:ejector_upgrade"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_coolant_cell": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:coolant_cell"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:overclocker_upgrade"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_coolant_cell"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:overclocker_upgrade"
+    ]
+  }
+}

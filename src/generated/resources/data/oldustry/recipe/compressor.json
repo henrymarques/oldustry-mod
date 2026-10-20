@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:electronic_circuit",
+    "M": "oldustry:machine_casing",
+    "S": "minecraft:stone"
+  },
+  "pattern": [
+    "S S",
+    "SMS",
+    "SCS"
+  ],
+  "result": {
+    "id": "oldustry:compressor"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "F": "oldustry:iron_fence",
+    "M": "oldustry:machine_casing",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "RFR",
+    "RMR",
+    "RFR"
+  ],
+  "result": {
+    "id": "oldustry:magnetizer"
+  }
+}

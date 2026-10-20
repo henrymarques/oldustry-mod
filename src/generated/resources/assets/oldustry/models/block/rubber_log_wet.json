@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "oldustry:block/rubber_log_wet",
+    "side": "oldustry:block/rubber_log_side",
+    "top": "oldustry:block/rubber_log_top"
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "variants": {
+    "axis=x,tap_face=east,wet=false": {
+      "model": "oldustry:block/rubber_log_dry",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,tap_face=east,wet=true": {
+      "model": "oldustry:block/rubber_log_wet",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,tap_face=none,wet=false": {
+      "model": "oldustry:block/rubber_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,tap_face=none,wet=true": {
+      "model": "oldustry:block/rubber_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,tap_face=north,wet=false": {
+      "model": "oldustry:block/rubber_log_dry",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,tap_face=north,wet=true": {
+      "model": "oldustry:block/rubber_log_wet",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,tap_face=south,wet=false": {
+      "model": "oldustry:block/rubber_log_dry",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,tap_face=south,wet=true": {
+      "model": "oldustry:block/rubber_log_wet",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,tap_face=west,wet=false": {
+      "model": "oldustry:block/rubber_log_dry",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,tap_face=west,wet=true": {
+      "model": "oldustry:block/rubber_log_wet",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,tap_face=east,wet=false": {
+      "model": "oldustry:block/rubber_log_dry",
+      "y": 90
+    },
+    "axis=y,tap_face=east,wet=true": {
+      "model": "oldustry:block/rubber_log_wet",
+      "y": 90
+    },
+    "axis=y,tap_face=none,wet=false": {
+      "model": "oldustry:block/rubber_log"
+    },
+    "axis=y,tap_face=none,wet=true": {
+      "model": "oldustry:block/rubber_log"
+    },
+    "axis=y,tap_face=north,wet=false": {
+      "model": "oldustry:block/rubber_log_dry"
+    },
+    "axis=y,tap_face=north,wet=true": {
+      "model": "oldustry:block/rubber_log_wet"
+    },
+    "axis=y,tap_face=south,wet=false": {
+      "model": "oldustry:block/rubber_log_dry",
+      "y": 180
+    },
+    "axis=y,tap_face=south,wet=true": {
+      "model": "oldustry:block/rubber_log_wet",
+      "y": 180
+    },
+    "axis=y,tap_face=west,wet=false": {
+      "model": "oldustry:block/rubber_log_dry",
+      "y": 270
+    },
+    "axis=y,tap_face=west,wet=true": {
+      "model": "oldustry:block/rubber_log_wet",
+      "y": 270
+    },
+    "axis=z,tap_face=east,wet=false": {
+      "model": "oldustry:block/rubber_log_dry",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z,tap_face=east,wet=true": {
+      "model": "oldustry:block/rubber_log_wet",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z,tap_face=none,wet=false": {
+      "model": "oldustry:block/rubber_log",
+      "x": 90
+    },
+    "axis=z,tap_face=none,wet=true": {
+      "model": "oldustry:block/rubber_log",
+      "x": 90
+    },
+    "axis=z,tap_face=north,wet=false": {
+      "model": "oldustry:block/rubber_log_dry",
+      "x": 90
+    },
+    "axis=z,tap_face=north,wet=true": {
+      "model": "oldustry:block/rubber_log_wet",
+      "x": 90
+    },
+    "axis=z,tap_face=south,wet=false": {
+      "model": "oldustry:block/rubber_log_dry",
+      "x": 90,
+      "y": 180
+    },
+    "axis=z,tap_face=south,wet=true": {
+      "model": "oldustry:block/rubber_log_wet",
+      "x": 90,
+      "y": 180
+    },
+    "axis=z,tap_face=west,wet=false": {
+      "model": "oldustry:block/rubber_log_dry",
+      "x": 90,
+      "y": 270
+    },
+    "axis=z,tap_face=west,wet=true": {
+      "model": "oldustry:block/rubber_log_wet",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

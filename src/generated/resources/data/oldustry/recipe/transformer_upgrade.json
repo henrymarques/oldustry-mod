@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "E": "oldustry:electronic_circuit",
+    "G": "minecraft:glass",
+    "T": "oldustry:mv_transformer",
+    "W": "oldustry:2x_insulated_gold_cable"
+  },
+  "pattern": [
+    "GGG",
+    "WTW",
+    "GEG"
+  ],
+  "result": {
+    "id": "oldustry:transformer_upgrade"
+  }
+}

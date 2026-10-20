@@ -1,0 +1,43 @@
+{
+  "variants": {
+    "strength=0": {
+      "model": "oldustry:block/iron_scaffold"
+    },
+    "strength=1": {
+      "model": "oldustry:block/iron_scaffold"
+    },
+    "strength=10": {
+      "model": "oldustry:block/iron_scaffold"
+    },
+    "strength=11": {
+      "model": "oldustry:block/iron_scaffold"
+    },
+    "strength=12": {
+      "model": "oldustry:block/iron_scaffold_reinforced"
+    },
+    "strength=2": {
+      "model": "oldustry:block/iron_scaffold"
+    },
+    "strength=3": {
+      "model": "oldustry:block/iron_scaffold"
+    },
+    "strength=4": {
+      "model": "oldustry:block/iron_scaffold"
+    },
+    "strength=5": {
+      "model": "oldustry:block/iron_scaffold"
+    },
+    "strength=6": {
+      "model": "oldustry:block/iron_scaffold"
+    },
+    "strength=7": {
+      "model": "oldustry:block/iron_scaffold"
+    },
+    "strength=8": {
+      "model": "oldustry:block/iron_scaffold"
+    },
+    "strength=9": {
+      "model": "oldustry:block/iron_scaffold"
+    }
+  }
+}

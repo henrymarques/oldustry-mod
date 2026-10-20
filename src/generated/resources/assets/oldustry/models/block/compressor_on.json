@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/compressor_on_down",
+    "east": "oldustry:block/compressor_on_west",
+    "north": "oldustry:block/compressor_on_south",
+    "particle": "oldustry:block/compressor_on_south",
+    "south": "oldustry:block/compressor_on_north",
+    "up": "oldustry:block/compressor_on_up",
+    "west": "oldustry:block/compressor_on_east"
+  }
+}

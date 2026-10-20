@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "plantball",
+  "key": {
+    "P": "minecraft:cactus"
+  },
+  "pattern": [
+    "PPP",
+    "P P",
+    "PPP"
+  ],
+  "result": {
+    "id": "oldustry:plantball"
+  }
+}

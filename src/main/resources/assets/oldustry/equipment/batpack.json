@@ -1,0 +1,6 @@
+{
+  "layers": {
+    "humanoid": [ { "texture": "oldustry:batpack" } ],
+    "humanoid_baby": [ { "texture": "oldustry:batpack" } ]
+  }
+}

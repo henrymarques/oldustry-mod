@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/induction_down",
+    "east": "oldustry:block/induction_west",
+    "north": "oldustry:block/induction_south",
+    "particle": "oldustry:block/induction_south",
+    "south": "oldustry:block/induction_north",
+    "up": "oldustry:block/induction_up",
+    "west": "oldustry:block/induction_east"
+  }
+}

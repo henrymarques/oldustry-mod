@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/pump_down",
+    "east": "oldustry:block/pump_west",
+    "north": "oldustry:block/pump_south",
+    "particle": "oldustry:block/pump_south",
+    "south": "oldustry:block/pump_north",
+    "up": "oldustry:block/pump_up",
+    "west": "oldustry:block/pump_east"
+  }
+}

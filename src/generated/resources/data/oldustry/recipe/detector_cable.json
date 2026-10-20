@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "C": "oldustry:electronic_circuit",
+    "I": "oldustry:3x_insulated_hv_cable",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    " C ",
+    "RIR",
+    " R "
+  ],
+  "result": {
+    "id": "oldustry:detector_cable"
+  }
+}

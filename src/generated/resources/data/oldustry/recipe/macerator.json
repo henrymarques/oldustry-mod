@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:electronic_circuit",
+    "F": "minecraft:flint",
+    "M": "oldustry:machine_casing",
+    "S": "minecraft:cobblestone"
+  },
+  "pattern": [
+    "FFF",
+    "SMS",
+    " C "
+  ],
+  "result": {
+    "id": "oldustry:macerator"
+  }
+}

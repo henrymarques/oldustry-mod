@@ -1,0 +1,11 @@
+{
+  "type": "neoforge:add_table",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:archaeology/ocean_ruin_warm"
+    }
+  ],
+  "priority": 0,
+  "table": "oldustry:chests/tin_one"
+}

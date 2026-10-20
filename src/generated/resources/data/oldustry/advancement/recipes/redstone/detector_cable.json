@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_3x_hv": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:3x_insulated_hv_cable"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:detector_cable"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_3x_hv"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:detector_cable"
+    ]
+  }
+}

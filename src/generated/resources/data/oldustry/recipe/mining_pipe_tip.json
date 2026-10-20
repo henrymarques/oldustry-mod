@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "D": "minecraft:diamond",
+    "T": "#c:ingots/tin"
+  },
+  "pattern": [
+    "TDT"
+  ],
+  "result": {
+    "id": "oldustry:mining_pipe_tip"
+  }
+}

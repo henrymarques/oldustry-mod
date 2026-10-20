@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "experience": 0.1,
+  "ingredient": "oldustry:hydrated_coal_dust",
+  "result": {
+    "id": "oldustry:coal_dust"
+  }
+}

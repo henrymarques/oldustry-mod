@@ -1,0 +1,32 @@
+{
+  "parent": "oldustry:build_improved_furnace",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:electric_furnace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_elec_furnace.description"
+    },
+    "icon": {
+      "id": "oldustry:electric_furnace"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_elec_furnace.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

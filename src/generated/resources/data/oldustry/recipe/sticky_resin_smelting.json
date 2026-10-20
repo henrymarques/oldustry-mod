@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "experience": 0.3,
+  "ingredient": "oldustry:sticky_resin",
+  "result": {
+    "id": "oldustry:rubber"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "oldustry:block/cable_arm_4",
+  "textures": {
+    "all": "oldustry:block/copper_cable"
+  }
+}

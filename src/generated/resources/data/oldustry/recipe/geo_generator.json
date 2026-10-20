@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:empty_cell",
+    "E": "oldustry:generator",
+    "G": "minecraft:glass",
+    "I": "#c:ingots/refined_iron"
+  },
+  "pattern": [
+    "GCG",
+    "GCG",
+    "IEI"
+  ],
+  "result": {
+    "id": "oldustry:geo_generator"
+  }
+}

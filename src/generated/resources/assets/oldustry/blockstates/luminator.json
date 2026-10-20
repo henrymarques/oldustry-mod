@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "active=false,facing=down": {
+      "model": "oldustry:block/luminator_down_off"
+    },
+    "active=false,facing=east": {
+      "model": "oldustry:block/luminator_east_off"
+    },
+    "active=false,facing=north": {
+      "model": "oldustry:block/luminator_north_off"
+    },
+    "active=false,facing=south": {
+      "model": "oldustry:block/luminator_south_off"
+    },
+    "active=false,facing=up": {
+      "model": "oldustry:block/luminator_up_off"
+    },
+    "active=false,facing=west": {
+      "model": "oldustry:block/luminator_west_off"
+    },
+    "active=true,facing=down": {
+      "model": "oldustry:block/luminator_down_on"
+    },
+    "active=true,facing=east": {
+      "model": "oldustry:block/luminator_east_on"
+    },
+    "active=true,facing=north": {
+      "model": "oldustry:block/luminator_north_on"
+    },
+    "active=true,facing=south": {
+      "model": "oldustry:block/luminator_south_on"
+    },
+    "active=true,facing=up": {
+      "model": "oldustry:block/luminator_up_on"
+    },
+    "active=true,facing=west": {
+      "model": "oldustry:block/luminator_west_on"
+    }
+  }
+}

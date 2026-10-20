@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "oldustry:insulated_copper_cable",
+    "E": "oldustry:electronic_circuit",
+    "G": "minecraft:glowstone_dust"
+  },
+  "pattern": [
+    " G ",
+    "CEC",
+    "C C"
+  ],
+  "result": {
+    "id": "oldustry:eu_reader"
+  }
+}

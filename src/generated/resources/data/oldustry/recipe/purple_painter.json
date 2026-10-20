@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "painter",
+  "ingredients": [
+    "oldustry:painter",
+    "minecraft:purple_dye"
+  ],
+  "result": {
+    "id": "oldustry:purple_painter"
+  }
+}

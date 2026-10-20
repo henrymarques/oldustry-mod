@@ -1,0 +1,6 @@
+{
+  "layers": {
+    "humanoid": [ { "texture": "oldustry:lappack" } ],
+    "humanoid_baby": [ { "texture": "oldustry:lappack" } ]
+  }
+}

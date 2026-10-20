@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "oldustry:insulated_copper_cable",
+    "I": "minecraft:iron_ingot",
+    "S": "oldustry:solar_panel"
+  },
+  "pattern": [
+    "III",
+    "ISI",
+    "CCC"
+  ],
+  "result": {
+    "id": "oldustry:solar_helmet"
+  }
+}

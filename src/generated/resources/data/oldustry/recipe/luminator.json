@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:insulated_copper_cable",
+    "G": "minecraft:glass",
+    "I": "#c:ingots/refined_iron",
+    "T": "oldustry:tin_cable"
+  },
+  "pattern": [
+    "ICI",
+    "GTG",
+    "GGG"
+  ],
+  "result": {
+    "count": 8,
+    "id": "oldustry:luminator"
+  }
+}

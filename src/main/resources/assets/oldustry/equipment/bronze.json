@@ -1,0 +1,13 @@
+{
+  "layers": {
+    "humanoid": [
+      { "texture": "oldustry:bronze" }
+    ],
+    "humanoid_baby": [
+      { "texture": "oldustry:bronze" }
+    ],
+    "humanoid_leggings": [
+      { "texture": "oldustry:bronze" }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_bars_side_alt",
+  "textures": {
+    "bars": "oldustry:block/iron_fence",
+    "edge": "oldustry:block/iron_fence"
+  }
+}

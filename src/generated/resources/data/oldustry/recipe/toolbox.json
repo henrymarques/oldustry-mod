@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "#c:chests/wooden",
+    "I": "#c:ingots/refined_iron"
+  },
+  "pattern": [
+    "ICI",
+    "III"
+  ],
+  "result": {
+    "id": "oldustry:toolbox"
+  }
+}

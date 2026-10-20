@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": "oldustry:re_battery",
+    "C": "oldustry:insulated_copper_cable",
+    "P": "#minecraft:planks"
+  },
+  "pattern": [
+    "PCP",
+    "BBB",
+    "PPP"
+  ],
+  "result": {
+    "id": "oldustry:batbox"
+  }
+}

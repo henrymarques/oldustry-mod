@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "oldustry:electronic_circuit",
+    "F": "oldustry:fuel_can",
+    "I": "#c:ingots/refined_iron",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "ICI",
+    "IFI",
+    "R R"
+  ],
+  "result": {
+    "id": "oldustry:fuel_jetpack"
+  }
+}

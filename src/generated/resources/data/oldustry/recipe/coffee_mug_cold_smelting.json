@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "experience": 0.1,
+  "ingredient": "oldustry:coffee_mug_cold",
+  "result": {
+    "id": "oldustry:coffee_mug_dark"
+  }
+}

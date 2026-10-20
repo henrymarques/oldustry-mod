@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "oldustry:small_iron_dust",
+    "oldustry:small_iron_dust"
+  ],
+  "result": {
+    "id": "oldustry:iron_dust"
+  }
+}

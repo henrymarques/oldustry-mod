@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "P": "#c:ingots/refined_iron",
+    "s": "oldustry:iron_fence"
+  },
+  "pattern": [
+    "PPP",
+    " s ",
+    "s s"
+  ],
+  "result": {
+    "count": 16,
+    "id": "oldustry:iron_scaffold"
+  }
+}

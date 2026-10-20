@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "T": "#c:ingots/tin"
+  },
+  "pattern": [
+    "T T",
+    " T "
+  ],
+  "result": {
+    "id": "minecraft:bucket"
+  }
+}

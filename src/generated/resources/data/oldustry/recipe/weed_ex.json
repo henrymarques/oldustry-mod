@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:empty_cell",
+    "G": "oldustry:grin_powder",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "R",
+    "G",
+    "C"
+  ],
+  "result": {
+    "id": "oldustry:weed_ex"
+  }
+}

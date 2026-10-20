@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "oldustry:stone_mug",
+    "oldustry:coffee_powder",
+    "minecraft:water_bucket"
+  ],
+  "result": {
+    "id": "oldustry:coffee_mug_cold"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "T": "#c:ingots/tin"
+  },
+  "pattern": [
+    " TT",
+    "T T",
+    "TTT"
+  ],
+  "result": {
+    "id": "oldustry:fuel_can"
+  }
+}

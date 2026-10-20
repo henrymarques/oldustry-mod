@@ -1,0 +1,28 @@
+{
+  "parent": "oldustry:build_elec_furnace",
+  "criteria": {
+    "crafted": {
+      "conditions": {
+        "recipe_id": "oldustry:induction"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_ind_furnace.description"
+    },
+    "icon": {
+      "id": "oldustry:induction"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_ind_furnace.title"
+    }
+  },
+  "requirements": [
+    [
+      "crafted"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

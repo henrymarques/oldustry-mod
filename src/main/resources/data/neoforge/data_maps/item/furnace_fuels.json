@@ -1,0 +1,8 @@
+{
+  "values": {
+    "oldustry:scrap": { "burn_time": 350 },
+    "oldustry:scrap_box": { "burn_time": 3150 },
+    "oldustry:rubber_sapling": { "burn_time": 80 },
+    "oldustry:lava_cell": { "burn_time": 20000 }
+  }
+}

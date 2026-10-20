@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": "oldustry:advanced_alloy",
+    "D": "minecraft:diamond",
+    "I": "oldustry:iridium_ore"
+  },
+  "pattern": [
+    "IAI",
+    "ADA",
+    "IAI"
+  ],
+  "result": {
+    "id": "oldustry:iridium_plate"
+  }
+}

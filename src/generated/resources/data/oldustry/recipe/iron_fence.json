@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": "#c:ingots/refined_iron"
+  },
+  "pattern": [
+    "III",
+    "III"
+  ],
+  "result": {
+    "count": 12,
+    "id": "oldustry:iron_fence"
+  }
+}

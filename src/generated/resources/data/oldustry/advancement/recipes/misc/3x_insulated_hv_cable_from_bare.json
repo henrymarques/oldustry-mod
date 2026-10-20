@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_hv_cable": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:hv_cable"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:3x_insulated_hv_cable_from_bare"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_hv_cable"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:3x_insulated_hv_cable_from_bare"
+    ]
+  }
+}

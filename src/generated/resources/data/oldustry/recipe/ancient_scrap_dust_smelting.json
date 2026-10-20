@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "experience": 0.7,
+  "ingredient": "oldustry:ancient_scrap_dust",
+  "result": {
+    "id": "oldustry:ancient_scrap"
+  }
+}

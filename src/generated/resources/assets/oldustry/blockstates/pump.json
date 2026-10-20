@@ -1,0 +1,50 @@
+{
+  "variants": {
+    "active=false,facing=down": {
+      "model": "oldustry:block/pump",
+      "x": 90
+    },
+    "active=false,facing=east": {
+      "model": "oldustry:block/pump",
+      "y": 90
+    },
+    "active=false,facing=north": {
+      "model": "oldustry:block/pump"
+    },
+    "active=false,facing=south": {
+      "model": "oldustry:block/pump",
+      "y": 180
+    },
+    "active=false,facing=up": {
+      "model": "oldustry:block/pump",
+      "x": 270
+    },
+    "active=false,facing=west": {
+      "model": "oldustry:block/pump",
+      "y": 270
+    },
+    "active=true,facing=down": {
+      "model": "oldustry:block/pump_on",
+      "x": 90
+    },
+    "active=true,facing=east": {
+      "model": "oldustry:block/pump_on",
+      "y": 90
+    },
+    "active=true,facing=north": {
+      "model": "oldustry:block/pump_on"
+    },
+    "active=true,facing=south": {
+      "model": "oldustry:block/pump_on",
+      "y": 180
+    },
+    "active=true,facing=up": {
+      "model": "oldustry:block/pump_on",
+      "x": 270
+    },
+    "active=true,facing=west": {
+      "model": "oldustry:block/pump_on",
+      "y": 270
+    }
+  }
+}

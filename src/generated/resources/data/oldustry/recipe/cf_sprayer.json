@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": "minecraft:iron_bars",
+    "s": "minecraft:stick"
+  },
+  "pattern": [
+    "SS ",
+    "Ss ",
+    "  S"
+  ],
+  "result": {
+    "id": "oldustry:cf_sprayer"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:blasting",
+  "experience": 0.5,
+  "ingredient": "#c:dusts/tin",
+  "result": {
+    "id": "oldustry:tin_ingot"
+  }
+}

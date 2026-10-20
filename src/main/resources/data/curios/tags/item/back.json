@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "oldustry:batpack",
+    "oldustry:lappack",
+    "oldustry:fuel_jetpack",
+    "oldustry:cf_pack"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "experience": 0.1,
+  "ingredient": "oldustry:rubber_log",
+  "result": {
+    "id": "minecraft:jungle_log"
+  }
+}

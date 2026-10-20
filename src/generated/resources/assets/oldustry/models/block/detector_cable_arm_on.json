@@ -1,0 +1,6 @@
+{
+  "parent": "oldustry:block/cable_arm_8",
+  "textures": {
+    "all": "oldustry:block/detector_cable_on"
+  }
+}

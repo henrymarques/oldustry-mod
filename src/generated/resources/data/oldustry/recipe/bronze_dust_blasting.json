@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:blasting",
+  "experience": 0.5,
+  "ingredient": "#c:dusts/bronze",
+  "result": {
+    "id": "oldustry:bronze_ingot"
+  }
+}

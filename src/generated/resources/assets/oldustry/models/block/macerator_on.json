@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/macerator_on_down",
+    "east": "oldustry:block/macerator_on_west",
+    "north": "oldustry:block/macerator_on_south",
+    "particle": "oldustry:block/macerator_on_south",
+    "south": "oldustry:block/macerator_on_north",
+    "up": "oldustry:block/macerator_on_up",
+    "west": "oldustry:block/macerator_on_east"
+  }
+}

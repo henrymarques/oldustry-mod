@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "oldustry:re_battery",
+    "C": "oldustry:electronic_circuit",
+    "I": "#c:ingots/refined_iron"
+  },
+  "pattern": [
+    " I ",
+    "ICI",
+    "IBI"
+  ],
+  "result": {
+    "id": "oldustry:mining_drill"
+  }
+}

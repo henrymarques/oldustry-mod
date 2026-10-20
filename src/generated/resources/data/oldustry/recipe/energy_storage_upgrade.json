@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": "oldustry:re_battery",
+    "C": "oldustry:insulated_copper_cable",
+    "E": "oldustry:electronic_circuit",
+    "W": "#minecraft:planks"
+  },
+  "pattern": [
+    "WWW",
+    "CBC",
+    "WEW"
+  ],
+  "result": {
+    "id": "oldustry:energy_storage_upgrade"
+  }
+}

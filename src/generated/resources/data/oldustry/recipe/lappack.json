@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "oldustry:advanced_circuit",
+    "B": "oldustry:batpack",
+    "L": "minecraft:lapis_block"
+  },
+  "pattern": [
+    "LAL",
+    "LBL",
+    "L L"
+  ],
+  "result": {
+    "id": "oldustry:lappack"
+  }
+}

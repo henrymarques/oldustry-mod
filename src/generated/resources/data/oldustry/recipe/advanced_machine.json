@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": "oldustry:advanced_alloy",
+    "C": "oldustry:carbon_plate",
+    "M": "oldustry:machine_casing"
+  },
+  "pattern": [
+    " A ",
+    "CMC",
+    " A "
+  ],
+  "result": {
+    "id": "oldustry:advanced_machine"
+  }
+}

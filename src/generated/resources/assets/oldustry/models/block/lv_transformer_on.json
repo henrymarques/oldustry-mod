@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/lv_transformer_on_down",
+    "east": "oldustry:block/lv_transformer_on_west",
+    "north": "oldustry:block/lv_transformer_on_south",
+    "particle": "oldustry:block/lv_transformer_on_south",
+    "south": "oldustry:block/lv_transformer_on_north",
+    "up": "oldustry:block/lv_transformer_on_up",
+    "west": "oldustry:block/lv_transformer_on_east"
+  }
+}

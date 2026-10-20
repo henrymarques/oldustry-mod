@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "oldustry:bronze_pickaxe",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "oldustry:bronze_sword",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "oldustry:bronze_helmet",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "oldustry:bronze_chestplate",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "oldustry:bronze_leggings",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "oldustry:bronze_boots",
+          "weight": 3
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "oldustry:chests/bronze_gear"
+}

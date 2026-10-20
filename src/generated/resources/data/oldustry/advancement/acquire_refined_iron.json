@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:story/smelt_iron",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:refined_iron_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.acquire_refined_iron.description"
+    },
+    "icon": {
+      "id": "oldustry:refined_iron_ingot"
+    },
+    "title": {
+      "translate": "advancements.oldustry.acquire_refined_iron.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:insulated_copper_cable",
+    "I": "minecraft:copper_ingot",
+    "P": "#minecraft:planks"
+  },
+  "pattern": [
+    "PCP",
+    "III",
+    "PCP"
+  ],
+  "result": {
+    "id": "oldustry:lv_transformer"
+  }
+}

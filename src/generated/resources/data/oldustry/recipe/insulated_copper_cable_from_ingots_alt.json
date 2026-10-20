@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "minecraft:copper_ingot",
+    "R": "#c:rubber"
+  },
+  "pattern": [
+    "RCR",
+    "RCR",
+    "RCR"
+  ],
+  "result": {
+    "count": 6,
+    "id": "oldustry:insulated_copper_cable"
+  }
+}

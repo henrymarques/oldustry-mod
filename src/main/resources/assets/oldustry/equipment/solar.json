@@ -1,0 +1,6 @@
+{
+  "layers": {
+    "humanoid": [ { "texture": "oldustry:solar" } ],
+    "humanoid_baby": [ { "texture": "oldustry:solar" } ]
+  }
+}

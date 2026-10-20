@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:2x_insulated_gold_cable",
+    "E": "oldustry:energy_crystal",
+    "M": "oldustry:machine_casing"
+  },
+  "pattern": [
+    "CEC",
+    "EME",
+    "CEC"
+  ],
+  "result": {
+    "id": "oldustry:mfe"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_painter": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:painter"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:gray_painter"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_painter"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:gray_painter"
+    ]
+  }
+}

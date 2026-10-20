@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "oldustry:advanced_circuit",
+    "G": "minecraft:glowstone_dust",
+    "S": "oldustry:od_scanner",
+    "c": "oldustry:2x_insulated_gold_cable"
+  },
+  "pattern": [
+    " G ",
+    "GCG",
+    "cSc"
+  ],
+  "result": {
+    "id": "oldustry:ov_scanner"
+  }
+}

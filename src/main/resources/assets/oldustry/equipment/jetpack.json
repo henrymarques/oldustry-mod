@@ -1,0 +1,6 @@
+{
+  "layers": {
+    "humanoid": [ { "texture": "oldustry:jetpack" } ],
+    "humanoid_baby": [ { "texture": "oldustry:jetpack" } ]
+  }
+}

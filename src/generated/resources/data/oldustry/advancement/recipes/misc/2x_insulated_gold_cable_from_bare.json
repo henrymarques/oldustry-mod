@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gold_cable": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:gold_cable"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:2x_insulated_gold_cable_from_bare"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gold_cable"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:2x_insulated_gold_cable_from_bare"
+    ]
+  }
+}

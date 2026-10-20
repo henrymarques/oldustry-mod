@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "oldustry:empty_cell",
+    "minecraft:lava_bucket"
+  ],
+  "result": {
+    "id": "oldustry:lava_cell"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mining_drill": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:mining_drill"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:diamond_drill"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mining_drill"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:diamond_drill"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "oldustry:build_drill",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:diamond_drill"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_ddrill.description"
+    },
+    "icon": {
+      "id": "oldustry:diamond_drill"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_ddrill.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

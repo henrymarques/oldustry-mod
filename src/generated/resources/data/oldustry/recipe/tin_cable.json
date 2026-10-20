@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "T": "#c:ingots/tin"
+  },
+  "pattern": [
+    "TTT"
+  ],
+  "result": {
+    "count": 9,
+    "id": "oldustry:tin_cable"
+  }
+}

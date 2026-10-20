@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "oldustry:re_battery",
+    "C": "oldustry:electronic_circuit",
+    "W": "oldustry:wrench"
+  },
+  "pattern": [
+    "  W",
+    " C ",
+    "B  "
+  ],
+  "result": {
+    "id": "oldustry:electric_wrench"
+  }
+}

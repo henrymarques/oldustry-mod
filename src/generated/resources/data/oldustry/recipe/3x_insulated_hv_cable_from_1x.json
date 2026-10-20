@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "#c:rubber",
+    "#c:rubber",
+    "oldustry:insulated_hv_cable"
+  ],
+  "result": {
+    "id": "oldustry:3x_insulated_hv_cable"
+  }
+}

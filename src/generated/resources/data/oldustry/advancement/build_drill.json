@@ -1,0 +1,32 @@
+{
+  "parent": "oldustry:build_generator",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:mining_drill"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_drill.description"
+    },
+    "icon": {
+      "id": "oldustry:mining_drill"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_drill.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

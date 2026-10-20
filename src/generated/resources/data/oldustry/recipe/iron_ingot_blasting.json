@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:blasting",
+  "experience": 0.2,
+  "ingredient": "#c:ingots/iron",
+  "result": {
+    "id": "oldustry:refined_iron_ingot"
+  }
+}

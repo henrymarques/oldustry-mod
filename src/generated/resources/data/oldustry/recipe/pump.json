@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:electronic_circuit",
+    "E": "oldustry:empty_cell",
+    "I": "#c:ingots/refined_iron",
+    "M": "oldustry:machine_casing"
+  },
+  "pattern": [
+    "ECE",
+    "IMI",
+    "ECE"
+  ],
+  "result": {
+    "id": "oldustry:pump"
+  }
+}

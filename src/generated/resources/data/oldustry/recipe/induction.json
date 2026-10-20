@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "minecraft:copper_ingot",
+    "F": "oldustry:electric_furnace",
+    "M": "oldustry:advanced_machine"
+  },
+  "pattern": [
+    "CCC",
+    "CFC",
+    "CMC"
+  ],
+  "result": {
+    "id": "oldustry:induction"
+  }
+}

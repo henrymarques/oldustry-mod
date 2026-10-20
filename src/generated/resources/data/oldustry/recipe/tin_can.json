@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "T": "#c:ingots/tin"
+  },
+  "pattern": [
+    "T T",
+    "TTT"
+  ],
+  "result": {
+    "count": 4,
+    "id": "oldustry:tin_can"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": "oldustry:advanced_machine",
+    "C": "oldustry:advanced_circuit",
+    "L": "oldustry:lapotron_crystal",
+    "M": "oldustry:mfe"
+  },
+  "pattern": [
+    "LCL",
+    "LML",
+    "LAL"
+  ],
+  "result": {
+    "id": "oldustry:mfsu"
+  }
+}

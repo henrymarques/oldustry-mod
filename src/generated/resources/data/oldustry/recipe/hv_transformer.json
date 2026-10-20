@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:3x_insulated_hv_cable",
+    "D": "oldustry:electronic_circuit",
+    "E": "oldustry:energy_crystal",
+    "M": "oldustry:mv_transformer"
+  },
+  "pattern": [
+    " C ",
+    "DEM",
+    " C "
+  ],
+  "result": {
+    "id": "oldustry:hv_transformer"
+  }
+}

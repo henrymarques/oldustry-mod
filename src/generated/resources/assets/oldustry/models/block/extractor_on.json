@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/extractor_on_down",
+    "east": "oldustry:block/extractor_on_west",
+    "north": "oldustry:block/extractor_on_south",
+    "particle": "oldustry:block/extractor_on_south",
+    "south": "oldustry:block/extractor_on_north",
+    "up": "oldustry:block/extractor_on_up",
+    "west": "oldustry:block/extractor_on_east"
+  }
+}

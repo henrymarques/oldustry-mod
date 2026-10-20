@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": "minecraft:cobblestone"
+  },
+  "pattern": [
+    "SS ",
+    "SSS",
+    "SS "
+  ],
+  "result": {
+    "id": "oldustry:stone_mug"
+  }
+}

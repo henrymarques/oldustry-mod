@@ -1,0 +1,6 @@
+{
+  "parent": "oldustry:block/luminator_down",
+  "textures": {
+    "all": "oldustry:block/luminator"
+  }
+}

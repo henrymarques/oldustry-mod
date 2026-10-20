@@ -1,0 +1,15 @@
+{
+  "values": [
+    "oldustry:coal_dust",
+    "oldustry:iron_dust",
+    "oldustry:gold_dust",
+    "oldustry:copper_dust",
+    "oldustry:tin_dust",
+    "oldustry:bronze_dust",
+    "oldustry:clay_dust",
+    "oldustry:silver_dust",
+    "oldustry:small_iron_dust",
+    "oldustry:hydrated_coal_dust",
+    "oldustry:ancient_scrap_dust"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/geo_generator_down",
+    "east": "oldustry:block/geo_generator_west",
+    "north": "oldustry:block/geo_generator_south",
+    "particle": "oldustry:block/geo_generator_south",
+    "south": "oldustry:block/geo_generator_north",
+    "up": "oldustry:block/geo_generator_up",
+    "west": "oldustry:block/geo_generator_east"
+  }
+}

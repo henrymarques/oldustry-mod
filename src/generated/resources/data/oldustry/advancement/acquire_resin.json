@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:story/mine_stone",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:sticky_resin"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.acquire_resin.description"
+    },
+    "icon": {
+      "id": "oldustry:sticky_resin"
+    },
+    "title": {
+      "translate": "advancements.oldustry.acquire_resin.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

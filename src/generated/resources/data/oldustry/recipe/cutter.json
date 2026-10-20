@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "#c:ingots/refined_iron",
+    "I": "minecraft:iron_ingot"
+  },
+  "pattern": [
+    "A A",
+    " A ",
+    "I I"
+  ],
+  "result": {
+    "id": "oldustry:cutter"
+  }
+}

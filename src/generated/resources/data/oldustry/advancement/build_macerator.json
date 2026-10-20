@@ -1,0 +1,32 @@
+{
+  "parent": "oldustry:build_generator",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:macerator"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_macerator.description"
+    },
+    "icon": {
+      "id": "oldustry:macerator"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_macerator.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

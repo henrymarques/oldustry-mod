@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/machine_casing_down",
+    "east": "oldustry:block/machine_casing_west",
+    "north": "oldustry:block/machine_casing_south",
+    "particle": "oldustry:block/machine_casing_south",
+    "south": "oldustry:block/machine_casing_north",
+    "up": "oldustry:block/machine_casing_up",
+    "west": "oldustry:block/machine_casing_east"
+  }
+}

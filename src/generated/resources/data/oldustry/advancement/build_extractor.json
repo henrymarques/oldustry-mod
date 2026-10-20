@@ -1,0 +1,32 @@
+{
+  "parent": "oldustry:build_generator",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:extractor"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_extractor.description"
+    },
+    "icon": {
+      "id": "oldustry:extractor"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_extractor.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

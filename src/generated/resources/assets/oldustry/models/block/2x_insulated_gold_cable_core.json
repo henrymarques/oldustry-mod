@@ -1,0 +1,6 @@
+{
+  "parent": "oldustry:block/cable_core_6",
+  "textures": {
+    "all": "oldustry:block/2x_insulated_gold_cable"
+  }
+}

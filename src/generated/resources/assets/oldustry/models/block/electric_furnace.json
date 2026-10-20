@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/electric_furnace_down",
+    "east": "oldustry:block/electric_furnace_west",
+    "north": "oldustry:block/electric_furnace_south",
+    "particle": "oldustry:block/electric_furnace_south",
+    "south": "oldustry:block/electric_furnace_north",
+    "up": "oldustry:block/electric_furnace_up",
+    "west": "oldustry:block/electric_furnace_east"
+  }
+}

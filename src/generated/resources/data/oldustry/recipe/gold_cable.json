@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "G": "minecraft:gold_ingot"
+  },
+  "pattern": [
+    "GGG"
+  ],
+  "result": {
+    "count": 12,
+    "id": "oldustry:gold_cable"
+  }
+}

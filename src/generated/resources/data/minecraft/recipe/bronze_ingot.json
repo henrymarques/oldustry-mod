@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "oldustry:bronze_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "oldustry:bronze_ingot"
+  }
+}

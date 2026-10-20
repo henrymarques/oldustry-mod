@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/snow_height2",
+  "textures": {
+    "particle": "oldustry:block/rubber_sheet",
+    "texture": "oldustry:block/rubber_sheet"
+  }
+}

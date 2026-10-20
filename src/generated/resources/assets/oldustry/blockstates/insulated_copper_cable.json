@@ -1,0 +1,87 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "oldustry:block/insulated_copper_cable_core"
+      },
+      "when": {
+        "foam": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "oldustry:block/insulated_copper_cable_arm"
+      },
+      "when": {
+        "foam": "0",
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "oldustry:block/insulated_copper_cable_arm",
+        "y": 180
+      },
+      "when": {
+        "foam": "0",
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "oldustry:block/insulated_copper_cable_arm",
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "foam": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "oldustry:block/insulated_copper_cable_arm",
+        "y": 270
+      },
+      "when": {
+        "foam": "0",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "oldustry:block/insulated_copper_cable_arm",
+        "x": 270
+      },
+      "when": {
+        "foam": "0",
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "oldustry:block/insulated_copper_cable_arm",
+        "x": 90
+      },
+      "when": {
+        "down": "true",
+        "foam": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "oldustry:block/insulated_copper_cable_foam"
+      },
+      "when": {
+        "foam": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "oldustry:block/insulated_copper_cable_hard"
+      },
+      "when": {
+        "foam": "2"
+      }
+    }
+  ]
+}

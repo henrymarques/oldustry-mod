@@ -1,0 +1,32 @@
+{
+  "parent": "oldustry:build_batbox",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:mfe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_mfe.description"
+    },
+    "icon": {
+      "id": "oldustry:mfe"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_mfe.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

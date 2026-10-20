@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "#c:dusts/coal",
+    "E": "oldustry:electronic_circuit",
+    "G": "minecraft:glass",
+    "N": "oldustry:generator"
+  },
+  "pattern": [
+    "CGC",
+    "GCG",
+    "ENE"
+  ],
+  "result": {
+    "id": "oldustry:solar_panel"
+  }
+}

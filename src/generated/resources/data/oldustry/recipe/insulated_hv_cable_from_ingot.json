@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": "#c:ingots/refined_iron",
+    "R": "#c:rubber"
+  },
+  "pattern": [
+    " R ",
+    "RIR",
+    " R "
+  ],
+  "result": {
+    "count": 4,
+    "id": "oldustry:insulated_hv_cable"
+  }
+}

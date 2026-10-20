@@ -1,0 +1,6 @@
+{
+  "parent": "oldustry:block/luminator_south",
+  "textures": {
+    "all": "oldustry:block/luminator"
+  }
+}

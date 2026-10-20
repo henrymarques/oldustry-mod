@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:story/mine_stone",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:tin_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "raw_tin": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:raw_tin"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "uranium_drop": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:uranium_drop"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "uranium_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:uranium_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.mine_ore.description"
+    },
+    "icon": {
+      "id": "oldustry:tin_ore"
+    },
+    "title": {
+      "translate": "advancements.oldustry.mine_ore.title"
+    }
+  },
+  "requirements": [
+    [
+      "has",
+      "raw_tin",
+      "uranium_drop",
+      "uranium_ore"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:electronic_circuit",
+    "D": "oldustry:energy_crystal",
+    "L": "minecraft:lapis_lazuli"
+  },
+  "pattern": [
+    "LCL",
+    "LDL",
+    "LCL"
+  ],
+  "result": {
+    "id": "oldustry:lapotron_crystal"
+  }
+}

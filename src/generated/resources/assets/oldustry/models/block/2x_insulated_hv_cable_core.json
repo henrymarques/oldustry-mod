@@ -1,0 +1,6 @@
+{
+  "parent": "oldustry:block/cable_core_10",
+  "textures": {
+    "all": "oldustry:block/2x_insulated_hv_cable"
+  }
+}

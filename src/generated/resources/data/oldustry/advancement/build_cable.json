@@ -1,0 +1,32 @@
+{
+  "parent": "oldustry:acquire_refined_iron",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:insulated_copper_cable"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_cable.description"
+    },
+    "icon": {
+      "id": "oldustry:insulated_copper_cable"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_cable.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

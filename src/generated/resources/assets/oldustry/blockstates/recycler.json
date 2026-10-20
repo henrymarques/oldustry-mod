@@ -1,0 +1,50 @@
+{
+  "variants": {
+    "active=false,facing=down": {
+      "model": "oldustry:block/recycler",
+      "x": 90
+    },
+    "active=false,facing=east": {
+      "model": "oldustry:block/recycler",
+      "y": 90
+    },
+    "active=false,facing=north": {
+      "model": "oldustry:block/recycler"
+    },
+    "active=false,facing=south": {
+      "model": "oldustry:block/recycler",
+      "y": 180
+    },
+    "active=false,facing=up": {
+      "model": "oldustry:block/recycler",
+      "x": 270
+    },
+    "active=false,facing=west": {
+      "model": "oldustry:block/recycler",
+      "y": 270
+    },
+    "active=true,facing=down": {
+      "model": "oldustry:block/recycler_on",
+      "x": 90
+    },
+    "active=true,facing=east": {
+      "model": "oldustry:block/recycler_on",
+      "y": 90
+    },
+    "active=true,facing=north": {
+      "model": "oldustry:block/recycler_on"
+    },
+    "active=true,facing=south": {
+      "model": "oldustry:block/recycler_on",
+      "y": 180
+    },
+    "active=true,facing=up": {
+      "model": "oldustry:block/recycler_on",
+      "x": 270
+    },
+    "active=true,facing=west": {
+      "model": "oldustry:block/recycler_on",
+      "y": 270
+    }
+  }
+}

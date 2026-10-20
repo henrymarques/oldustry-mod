@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "#c:ingots/bronze",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "BB",
+    "SB",
+    "S "
+  ],
+  "result": {
+    "id": "oldustry:bronze_axe"
+  }
+}

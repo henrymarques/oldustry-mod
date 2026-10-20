@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/canner_down",
+    "east": "oldustry:block/canner_west",
+    "north": "oldustry:block/canner_south",
+    "particle": "oldustry:block/canner_south",
+    "south": "oldustry:block/canner_north",
+    "up": "oldustry:block/canner_up",
+    "west": "oldustry:block/canner_east"
+  }
+}

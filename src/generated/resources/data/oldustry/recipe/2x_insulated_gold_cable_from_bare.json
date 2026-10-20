@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "#c:rubber",
+    "#c:rubber",
+    "oldustry:gold_cable"
+  ],
+  "result": {
+    "id": "oldustry:2x_insulated_gold_cable"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:electronic_circuit",
+    "F": "oldustry:improved_furnace",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    " C ",
+    "RFR"
+  ],
+  "result": {
+    "id": "oldustry:electric_furnace"
+  }
+}

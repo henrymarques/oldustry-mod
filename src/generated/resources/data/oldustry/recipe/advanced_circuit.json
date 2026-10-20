@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:electronic_circuit",
+    "G": "minecraft:glowstone_dust",
+    "L": "minecraft:lapis_lazuli",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "RGR",
+    "LCL",
+    "RGR"
+  ],
+  "result": {
+    "id": "oldustry:advanced_circuit"
+  }
+}

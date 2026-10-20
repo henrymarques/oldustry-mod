@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "D": "oldustry:industrial_diamond",
+    "G": "minecraft:glass",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "GGG",
+    "RDR",
+    "GGG"
+  ],
+  "result": {
+    "count": 4,
+    "id": "oldustry:glass_fibre_cable"
+  }
+}

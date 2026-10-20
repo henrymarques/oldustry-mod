@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/batbox_on_down",
+    "east": "oldustry:block/batbox_on_west",
+    "north": "oldustry:block/batbox_on_south",
+    "particle": "oldustry:block/batbox_on_south",
+    "south": "oldustry:block/batbox_on_north",
+    "up": "oldustry:block/batbox_on_up",
+    "west": "oldustry:block/batbox_on_east"
+  }
+}

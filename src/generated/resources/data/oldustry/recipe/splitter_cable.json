@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "I": "oldustry:3x_insulated_hv_cable",
+    "L": "minecraft:lever",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    " R ",
+    "ILI",
+    " R "
+  ],
+  "result": {
+    "id": "oldustry:splitter_cable"
+  }
+}

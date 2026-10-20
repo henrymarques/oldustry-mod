@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "D": "minecraft:dirt",
+    "G": "minecraft:glowstone_dust",
+    "I": "#c:ingots/refined_iron",
+    "M": "oldustry:compressor"
+  },
+  "pattern": [
+    " G ",
+    "DMD",
+    "IDI"
+  ],
+  "result": {
+    "id": "oldustry:recycler"
+  }
+}

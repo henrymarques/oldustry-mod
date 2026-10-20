@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "oldustry:coffee_beans"
+  ],
+  "result": {
+    "id": "oldustry:coffee_powder"
+  }
+}

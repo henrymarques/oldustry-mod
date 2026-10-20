@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_grin_powder": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:grin_powder"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:weed_ex"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_grin_powder"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:weed_ex"
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "oldustry:block/mining_pipe_column",
+  "textures": {
+    "all": "oldustry:block/mining_pipe_tip"
+  }
+}

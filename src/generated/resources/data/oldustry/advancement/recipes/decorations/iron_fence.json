@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_refined_iron": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:ingots/refined_iron"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:iron_fence"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_refined_iron"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:iron_fence"
+    ]
+  }
+}

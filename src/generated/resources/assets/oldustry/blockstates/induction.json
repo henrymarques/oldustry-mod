@@ -1,0 +1,50 @@
+{
+  "variants": {
+    "active=false,facing=down": {
+      "model": "oldustry:block/induction",
+      "x": 90
+    },
+    "active=false,facing=east": {
+      "model": "oldustry:block/induction",
+      "y": 90
+    },
+    "active=false,facing=north": {
+      "model": "oldustry:block/induction"
+    },
+    "active=false,facing=south": {
+      "model": "oldustry:block/induction",
+      "y": 180
+    },
+    "active=false,facing=up": {
+      "model": "oldustry:block/induction",
+      "x": 270
+    },
+    "active=false,facing=west": {
+      "model": "oldustry:block/induction",
+      "y": 270
+    },
+    "active=true,facing=down": {
+      "model": "oldustry:block/induction_on",
+      "x": 90
+    },
+    "active=true,facing=east": {
+      "model": "oldustry:block/induction_on",
+      "y": 90
+    },
+    "active=true,facing=north": {
+      "model": "oldustry:block/induction_on"
+    },
+    "active=true,facing=south": {
+      "model": "oldustry:block/induction_on",
+      "y": 180
+    },
+    "active=true,facing=up": {
+      "model": "oldustry:block/induction_on",
+      "x": 270
+    },
+    "active=true,facing=west": {
+      "model": "oldustry:block/induction_on",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "oldustry:build_generator",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:chainsaw"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_chainsaw.description"
+    },
+    "icon": {
+      "id": "oldustry:chainsaw"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_chainsaw.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

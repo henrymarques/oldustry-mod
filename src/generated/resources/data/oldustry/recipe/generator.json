@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": "oldustry:re_battery",
+    "F": "minecraft:furnace",
+    "M": "oldustry:machine_casing"
+  },
+  "pattern": [
+    "B",
+    "M",
+    "F"
+  ],
+  "result": {
+    "id": "oldustry:generator"
+  }
+}

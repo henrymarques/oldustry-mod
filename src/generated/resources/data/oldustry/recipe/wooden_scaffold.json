@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "P": "#minecraft:planks",
+    "s": "minecraft:stick"
+  },
+  "pattern": [
+    "PPP",
+    " s ",
+    "s s"
+  ],
+  "result": {
+    "count": 16,
+    "id": "oldustry:wooden_scaffold"
+  }
+}

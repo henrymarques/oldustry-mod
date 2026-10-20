@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "painter",
+  "ingredients": [
+    "oldustry:painter",
+    "minecraft:magenta_dye"
+  ],
+  "result": {
+    "id": "oldustry:magenta_painter"
+  }
+}

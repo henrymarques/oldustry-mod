@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "T": "#c:ingots/tin"
+  },
+  "pattern": [
+    "T T",
+    "T T",
+    "T T"
+  ],
+  "result": {
+    "count": 6,
+    "id": "oldustry:mining_pipe"
+  }
+}
