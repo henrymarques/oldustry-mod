@@ -105,26 +105,24 @@ public class MachineScreen extends AbstractContainerScreen<MachineMenu> {
                 }
             }
             case MINER -> {
-                // EU bar top-left; progress arrow center
+                // JAR GuiMiner: 14px bolt under the pipe. No progress arrow on this texture.
                 int charge = MachineGui.scaled(energy, capacity, 14);
                 if (charge > 0) {
-                    blit(graphics, texture, 8, 17 + 14 - charge, 176, 14 - charge, 14, charge);
-                }
-                int arrow = MachineGui.scaled(progress, duration, 24);
-                if (arrow > 0) {
-                    blit(graphics, texture, 79, 34, 176, 14, arrow + 1, 16);
+                    blit(graphics, texture, 81, 41 + 14 - charge, 176, 14 - charge, 14, charge);
                 }
             }
             case PUMP -> {
+                // JAR GuiPump: EU bolt at 62,36; charge column at 99 (41px) with the frame on top.
                 int charge = MachineGui.scaled(energy, capacity, 14);
                 if (charge > 0) {
-                    blit(graphics, texture, 8, 17 + 14 - charge, 176, 14 - charge, 14, charge);
+                    blit(graphics, texture, 62, 36 + 14 - charge, 176, 14 - charge, 14, charge);
                 }
-                // pump charge bar reuse fuel slots: data[4] = pumpCharge, data[5] = 200
-                int pumpBar = MachineGui.scaled(fuel, fuelMax, 14);
-                if (pumpBar > 0) {
-                    blit(graphics, texture, 80, 36 + 14 - pumpBar, 176, 14 - pumpBar, 14, pumpBar);
+                int fill = MachineGui.scaled(fuel, fuelMax, 41);
+                blit(graphics, texture, 99, 61 - fill, 176, 55, 12, 5);
+                if (fill > 0) {
+                    blit(graphics, texture, 99, 25 + 41 - fill, 176, 14, 12, fill);
                 }
+                blit(graphics, texture, 98, 19, 188, 14, 13, 47);
             }
             case CANNER -> {
                 // JAR GuiCanner: energy (31,27) 14px; progress (74,36) 34×13
@@ -164,7 +162,7 @@ public class MachineScreen extends AbstractContainerScreen<MachineMenu> {
             return;
         }
         if (overlay == MachineGui.Overlay.MINER) {
-            graphics.text(font, Component.translatable("info.oldustry.miner." + minerStatus()), 8, 72, LABEL, false);
+            graphics.text(font, Component.translatable("info.oldustry.miner." + minerStatus()), 8, inventoryLabelY - MachineGui.MINER_STATUS_GAP, LABEL, false);
             return;
         }
         if (overlay != MachineGui.Overlay.STORAGE) {

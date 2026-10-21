@@ -35,7 +35,8 @@ public class ReBatteryItem extends ElectricItem {
             if (offer <= 0) {
                 continue;
             }
-            int moved = electric.chargeIgnoreTransfer(target, offer);
+            // JAR charge(stack, transfer, battery.tier): tier-2 tools reject a tier-1 RE battery.
+            int moved = electric.chargeAtTier(target, offer, spec().tier(), true);
             if (moved > 0) {
                 dischargeIgnoreTransfer(battery, moved, electric.spec().tier());
             }

@@ -1,14 +1,20 @@
 package com.oldustry.data.recipe;
 
+import com.oldustry.item.CfPackItem;
+import com.oldustry.item.SprayerItem;
+import com.oldustry.registry.ModDataComponents;
 import com.oldustry.registry.ModItems;
 import com.oldustry.registry.OldustryTags;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 
 final class EnergyRecipes extends RecipeProvider {
     EnergyRecipes(HolderLookup.Provider registries, RecipeOutput output) {
@@ -699,15 +705,19 @@ final class EnergyRecipes extends RecipeProvider {
             .unlockedBy("has_advanced_machine", has(ModItems.ADVANCED_MACHINE.get()))
             .save(output);
 
-        // ── CF Pack ──
-        shaped(RecipeCategory.MISC, ModItems.CF_PACK.get())
+        // JAR: empty sprayer / circuit / empty sprayer, fuel can / tin / fuel can, fuel can / empty / fuel can.
+        // Result is an empty pack. Only the crafted-empty sprayer is accepted.
+        shaped(RecipeCategory.MISC, new ItemStackTemplate(
+                ModItems.CF_PACK.get(),
+                DataComponentPatch.builder().set(ModDataComponents.FOAM.get(), CfPackItem.CRAFTED).build()))
+            .define('S', DataComponentIngredient.of(false, ModDataComponents.FOAM.get(), SprayerItem.CRAFTED, ModItems.CF_SPRAYER.get()))
+            .define('C', ModItems.ELECTRONIC_CIRCUIT.get())
+            .define('F', ModItems.FUEL_CAN.get())
             .define('T', OldustryTags.Items.INGOTS_TIN)
-            .define('P', ModItems.CF_PELLET.get())
-            .define('C', ModItems.COMPRESSED_PLANTS.get())
-            .pattern("TPT")
-            .pattern("PCP")
-            .pattern("TPT")
-            .unlockedBy("has_cf_pellet", has(ModItems.CF_PELLET.get()))
+            .pattern("SCS")
+            .pattern("FTF")
+            .pattern("F F")
+            .unlockedBy("has_fuel_can", has(ModItems.FUEL_CAN.get()))
             .save(output);
     }
 }

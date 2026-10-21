@@ -48,7 +48,7 @@ public class ChainsawItem extends ElectricToolItem {
             return InteractionResult.PASS;
         }
         boolean creative = player.getAbilities().instabuild;
-        if (!creative && energy(stack) < euPerUse()) {
+        if (!creative && !canPay(stack, euPerUse(), player)) {
             return InteractionResult.FAIL;
         }
         List<ItemStack> drops = target.onSheared(player, stack, entity.level(), pos);
@@ -57,7 +57,7 @@ public class ChainsawItem extends ElectricToolItem {
                 target.spawnShearedDrop(serverLevel, pos, drop);
             }
             if (!creative) {
-                discharge(stack, euPerUse(), 99);
+                pay(stack, euPerUse(), player);
             }
         }
         entity.gameEvent(GameEvent.SHEAR, player);
@@ -76,7 +76,7 @@ public class ChainsawItem extends ElectricToolItem {
         Player player = context.getPlayer();
         ItemStack stack = context.getItemInHand();
         boolean creative = player != null && player.getAbilities().instabuild;
-        if (!creative && energy(stack) < euPerUse()) {
+        if (!creative && !canPay(stack, euPerUse(), player)) {
             return InteractionResult.FAIL;
         }
         if (player instanceof ServerPlayer serverPlayer) {
@@ -85,7 +85,7 @@ public class ChainsawItem extends ElectricToolItem {
         level.setBlockAndUpdate(pos, trimmed);
         level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, trimmed));
         if (!level.isClientSide() && !creative) {
-            discharge(stack, euPerUse(), 99);
+            pay(stack, euPerUse(), player);
         }
         return InteractionResult.SUCCESS;
     }

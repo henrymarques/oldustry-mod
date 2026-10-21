@@ -1,5 +1,6 @@
 package com.oldustry.compat.jade;
 
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import com.oldustry.Oldustry;
@@ -12,11 +13,15 @@ import net.minecraft.resources.Identifier;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.StreamServerDataProvider;
 
-/** Server-only Jade sync: EU + process progress for machines. */
+/**
+ * Server-only Jade sync: EU + process progress for machines.
+ * Jade's default {@code appendServerData} disagrees with {@code IServerDataProvider} on nullness.
+ */
+@SuppressWarnings("null")
 public enum MachineEnergyProvider implements StreamServerDataProvider<BlockAccessor, MachineEnergyProvider.Data> {
     INSTANCE;
 
-    public static final Identifier UID = Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "machine_eu");
+    public static final @NonNull Identifier UID = Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "machine_eu");
 
     public record Data(int energy, int capacity, int progress, int duration) {}
 
@@ -42,12 +47,12 @@ public enum MachineEnergyProvider implements StreamServerDataProvider<BlockAcces
     }
 
     @Override
-    public StreamCodec<RegistryFriendlyByteBuf, Data> streamCodec() {
+    public @NonNull StreamCodec<RegistryFriendlyByteBuf, Data> streamCodec() {
         return CODEC;
     }
 
     @Override
-    public Identifier getUid() {
+    public @NonNull Identifier getUid() {
         return UID;
     }
 }

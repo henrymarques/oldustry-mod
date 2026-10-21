@@ -23,6 +23,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -30,9 +31,13 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -49,7 +54,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jspecify.annotations.Nullable;
 
-public class CableBlock extends BaseEntityBlock implements Wrenchable {
+public class CableBlock extends BaseEntityBlock implements Wrenchable, SimpleWaterloggedBlock {
     public static final IntegerProperty COLOR = IntegerProperty.create("color", 0, 16);
     public static final IntegerProperty FOAM = IntegerProperty.create("foam", 0, 2);
     /** Detector: EU flow this sample; splitter: in EnergyNet (JAR setActive). */
@@ -60,6 +65,7 @@ public class CableBlock extends BaseEntityBlock implements Wrenchable {
     public static final BooleanProperty WEST = BlockStateProperties.WEST;
     public static final BooleanProperty UP = BlockStateProperties.UP;
     public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final Map<Direction, BooleanProperty> PROPERTY = Map.of(
         Direction.NORTH, NORTH,
         Direction.EAST, EAST,
@@ -83,7 +89,8 @@ public class CableBlock extends BaseEntityBlock implements Wrenchable {
         registerDefaultState(stateDefinition.any()
             .setValue(COLOR, 0).setValue(FOAM, 0).setValue(ACTIVE, false)
             .setValue(NORTH, false).setValue(EAST, false).setValue(SOUTH, false)
-            .setValue(WEST, false).setValue(UP, false).setValue(DOWN, false));
+            .setValue(WEST, false).setValue(UP, false).setValue(DOWN, false)
+            .setValue(WATERLOGGED, false));
     }
 
     private static VoxelShape[] buildShapes(int t) {
@@ -146,12 +153,13 @@ public class CableBlock extends BaseEntityBlock implements Wrenchable {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(COLOR, FOAM, ACTIVE, NORTH, EAST, SOUTH, WEST, UP, DOWN);
+        builder.add(COLOR, FOAM, ACTIVE, NORTH, EAST, SOUTH, WEST, UP, DOWN, WATERLOGGED);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return connections(defaultBlockState(), context.getLevel(), context.getClickedPos());
+        boolean water = context.getLevel().getFluidState(context.getClickedPos()).is(Fluids.WATER);
+        return connections(defaultBlockState(), context.getLevel(), context.getClickedPos()).setValue(WATERLOGGED, water);
     }
 
     @Override
@@ -165,7 +173,15 @@ public class CableBlock extends BaseEntityBlock implements Wrenchable {
         BlockState neighborState,
         RandomSource random
     ) {
+        if (state.getValue(WATERLOGGED)) {
+            ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
         return connections(state, level, pos);
+    }
+
+    @Override
+    protected FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     private BlockState connections(BlockState state, BlockGetter level, BlockPos pos) {
@@ -258,12 +274,13 @@ public class CableBlock extends BaseEntityBlock implements Wrenchable {
             if (!level.isClientSide()) {
                 boolean fromPack = CfPackItem.consumePellet(
                     CuriosWearables.chestOrCurios(player, ModItems.CF_PACK.get()));
-                if (!fromPack && stack.getDamageValue() > SprayerItem.MAX_DAMAGE - SprayerItem.SPRAY_COST - 1) {
+                int charge = SprayerItem.charge(stack);
+                if (!fromPack && !SprayerItem.canSprayFromSelf(charge)) {
                     return InteractionResult.FAIL;
                 }
-                level.setBlock(pos, state.setValue(FOAM, 1), Block.UPDATE_ALL);
+                level.setBlock(pos, state.setValue(FOAM, 1).setValue(WATERLOGGED, false), Block.UPDATE_ALL);
                 if (!fromPack) {
-                    stack.hurtAndBreak(SprayerItem.SPRAY_COST, player, hand);
+                    SprayerItem.setCharge(stack, SprayerItem.afterSpray(charge));
                 }
                 level.scheduleTick(pos, this, 500);
             }
@@ -280,7 +297,7 @@ public class CableBlock extends BaseEntityBlock implements Wrenchable {
         for (BooleanProperty prop : PROPERTY.values()) {
             s = s.setValue(prop, from.getValue(prop));
         }
-        return s;
+        return s.setValue(WATERLOGGED, from.getValue(WATERLOGGED));
     }
 
     @Override
@@ -301,6 +318,17 @@ public class CableBlock extends BaseEntityBlock implements Wrenchable {
             return cable.redstone();
         }
         return 0;
+    }
+
+    /** Water stays in the cell (fence-style). Foam is a full block; lava must not replace the cable. */
+    @Override
+    protected boolean canBeReplaced(BlockState state, Fluid fluid) {
+        return state.getValue(FOAM) == 0 && fluid == Fluids.WATER;
+    }
+
+    @Override
+    public boolean canPlaceLiquid(@Nullable LivingEntity user, BlockGetter level, BlockPos pos, BlockState state, Fluid type) {
+        return state.getValue(FOAM) == 0 && type == Fluids.WATER;
     }
 
     @Override

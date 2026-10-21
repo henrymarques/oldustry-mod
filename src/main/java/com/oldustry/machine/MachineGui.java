@@ -9,6 +9,9 @@ public final class MachineGui {
     public static final int WIDTH = 176;
     public static final int HEIGHT = 166;
     public static final int STORAGE_HEIGHT = 196;
+    /** 166 plus a band so the miner status sits above the inventory label. */
+    public static final int MINER_HEIGHT = 186;
+    public static final int MINER_STATUS_GAP = 12;
 
     public enum Role {
         HIDDEN,
@@ -43,7 +46,11 @@ public final class MachineGui {
     }
 
     public static int height(MachineKind kind) {
-        return kind.type == MachineKind.Type.STORAGE ? STORAGE_HEIGHT : HEIGHT;
+        return switch (kind.type) {
+            case STORAGE -> STORAGE_HEIGHT;
+            case MINING -> MINER_HEIGHT;
+            default -> HEIGHT;
+        };
     }
 
     public static Identifier texture(MachineKind kind) {
@@ -150,22 +157,22 @@ public final class MachineGui {
                 case 1 -> xy(56, 53);
                 default -> hidden();
             };
-            // Miner: drill(0)=top-right, scanner(1)=middle, pipe(2)=left, discharge(3)=bottom, out(4-6)=row
+            // JAR ContainerMiner: drill 45,22 / pipe 81,22 / scanner 117,22; discharge 81,59.
+            // Outputs 4–6 are the drop buffer (JAR ejected). Left of the battery, off the painted holes.
             case MINING -> switch (index) {
-                case 0 -> xy(116, 17);  // drill slot (top right)
-                case 1 -> xy(116, 35);  // scanner slot
-                case 2 -> xy(62, 35);   // pipe supply (left center)
-                case 3 -> xy(62, 53);   // discharge (battery)
-                case 4 -> xy(8,  53);   // output 1
-                case 5 -> xy(26, 53);   // output 2
-                case 6 -> xy(44, 53);   // output 3
+                case 0 -> xy(45, 22);
+                case 1 -> xy(117, 22);
+                case 2 -> xy(81, 22);
+                case 3 -> xy(81, 59);
+                case 4 -> xy(8, 53);
+                case 5 -> xy(26, 53);
+                case 6 -> xy(44, 53);
                 default -> hidden();
             };
-            // Pump: empty_cell(0), output(1), discharge(2)
+            // JAR ContainerPump: cell 62,17; discharge 62,53. Filled container is ejected, not a slot.
             case PUMPING -> switch (index) {
-                case 0 -> xy(62, 17);   // empty cell in
-                case 1 -> xy(116, 35);  // filled cell out
-                case 2 -> xy(62, 53);   // discharge
+                case 0 -> xy(62, 17);
+                case 2 -> xy(62, 53);
                 default -> hidden();
             };
             // Canner JAR ContainerCanner: res(69,17) out(119,35) can(69,53) discharge(30,45)
@@ -207,7 +214,8 @@ public final class MachineGui {
             case GENERATOR -> xywh(94, 35, 24, 17);
             case GEO -> xywh(89, 39, 22, 6);
             case STORAGE -> xywh(79, 34, 25, 16);
-            case MINER, PUMP -> xywh(8, 17, 14, 14); // top-left EU bar
+            case MINER -> xywh(81, 41, 14, 14); // JAR GuiMiner, under the pipe
+            case PUMP -> xywh(62, 36, 14, 14); // JAR GuiPump energy bolt
             case CANNER -> xywh(31, 27, 14, 14); // JAR GuiCanner energy at 31,27
             case ELECTROLYZER -> xywh(79, 34, 25, 16);
             case INDUCTION -> xywh(56, 36, 14, 14);

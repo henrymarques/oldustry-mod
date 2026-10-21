@@ -89,12 +89,13 @@ public class OldustryItemTags extends TagsProvider<Item> {
         tag(ItemTags.LEG_ARMOR).add(ModItems.BRONZE_LEGGINGS.getKey());
         tag(ItemTags.FOOT_ARMOR).add(ModItems.BRONZE_BOOTS.getKey());
         tag(OldustryTags.Items.ADVANCED_ALLOY).add(ModItems.ADVANCED_ALLOY.getKey());
-        // Magnetizer lift (JAR iron/gold/chain + bronze deviation)
+        // Magnetizer lift: JAR iron/gold/chain + isMetalArmor (static boots). Bronze is the deviation.
         tag(OldustryTags.Items.METAL_SHOES)
             .add(Items.IRON_BOOTS.builtInRegistryHolder().key())
             .add(Items.GOLDEN_BOOTS.builtInRegistryHolder().key())
             .add(Items.CHAINMAIL_BOOTS.builtInRegistryHolder().key())
-            .add(ModItems.BRONZE_BOOTS.getKey());
+            .add(ModItems.BRONZE_BOOTS.getKey())
+            .add(ModItems.STATIC_BOOTS.getKey());
 
         tag(ItemTags.LOGS).add(ModItems.RUBBER_LOG.getKey());
         tag(ItemTags.LOGS_THAT_BURN).add(ModItems.RUBBER_LOG.getKey());

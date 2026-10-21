@@ -1,9 +1,19 @@
+License scope
+
+The MIT License below applies to original Oldustry material whose copyright holders
+have the authority to grant this license, including original source code,
+documentation, and artwork contributed to this project.
+
+It does not apply to third-party material included in or adapted for this
+repository, including material from IndustrialCraft 2. Such material remains
+subject to the rights and terms of its respective copyright holders. This file
+does not grant permission to use that material.
+
+The NeoForge MDK template files are separately covered by TEMPLATE_LICENSE.txt.
+
 MIT License
 
-Copyright (c) 2023 NeoForged project
-
-This license applies to the template files as supplied by github.com/NeoForged/MDK
-
+Copyright (c) 2026 Henrique Marques and Oldustry contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

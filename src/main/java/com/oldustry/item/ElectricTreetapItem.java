@@ -4,6 +4,7 @@ import com.oldustry.energy.ElectricCharge;
 import com.oldustry.registry.ModBlocks;
 
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -16,7 +17,8 @@ public class ElectricTreetapItem extends ElectricItem {
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        if (energy(context.getItemInHand()) < 50) {
+        ItemStack stack = context.getItemInHand();
+        if (!canPay(stack, 50, context.getPlayer())) {
             return InteractionResult.FAIL;
         }
         BlockState state = context.getLevel().getBlockState(context.getClickedPos());
@@ -25,7 +27,7 @@ public class ElectricTreetapItem extends ElectricItem {
         }
         InteractionResult result = state.useItemOn(new net.minecraft.world.item.ItemStack(com.oldustry.registry.ModItems.TREETAP.get()), context.getLevel(), context.getPlayer(), context.getHand(), new net.minecraft.world.phys.BlockHitResult(context.getClickLocation(), context.getClickedFace(), context.getClickedPos(), false));
         if (result.consumesAction() && !context.getLevel().isClientSide()) {
-            discharge(context.getItemInHand(), 50, 99);
+            pay(stack, 50, context.getPlayer());
         }
         return result;
     }

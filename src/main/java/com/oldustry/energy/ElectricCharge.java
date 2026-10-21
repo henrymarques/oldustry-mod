@@ -21,6 +21,39 @@ public final class ElectricCharge {
         return Math.min(amount, Math.max(0, spec.max - energy));
     }
 
+    /**
+     * JAR {@code ElectricItemManager.charge}: nothing moves when the target tier is above the charger.
+     */
+    public static int chargeAtTier(int energy, int amount, Spec spec, int sourceTier, boolean ignoreTransfer) {
+        if (spec.tier() > sourceTier) {
+            return 0;
+        }
+        return ignoreTransfer ? chargeIgnoreTransfer(energy, amount, spec) : charge(energy, amount, spec);
+    }
+
+    /**
+     * JAR {@code chargeFromArmor} for one worn pack: dump into the tool (ignore transfer).
+     * Armor tier must reach the tool tier. Returns EU moved.
+     */
+    public static int chargeFromArmor(int toolEnergy, Spec tool, int armorEnergy, Spec armor) {
+        if (!armor.canProvide() || armor.tier() < tool.tier()) {
+            return 0;
+        }
+        int room = chargeIgnoreTransfer(toolEnergy, Integer.MAX_VALUE, tool);
+        return dischargeIgnoreTransfer(armorEnergy, room, armor, Integer.MAX_VALUE);
+    }
+
+    /**
+     * JAR {@code ElectricItemManager.use}: pay {@code amount} in full, or nothing.
+     * Transfer limit and tier do not apply — the item is spending its own EU.
+     */
+    public static int spend(int energy, int amount) {
+        if (amount <= 0 || energy < amount) {
+            return 0;
+        }
+        return amount;
+    }
+
     public static int discharge(int energy, int amount, Spec spec, int sinkTier) {
         if (!spec.canProvide || sinkTier < spec.tier || amount <= 0 || energy <= 0) {
             return 0;

@@ -161,18 +161,23 @@ public final class OldustryMaterials {
         );
     }
 
+    /** Chest/head slot and equipment asset. No durability and no anvil repair. */
+    public static Item.Properties utilityEquip(Item.Properties props, ResourceKey<EquipmentAsset> asset, ArmorType type) {
+        ArmorMaterial material = utilityPack(asset);
+        return props.component(
+            DataComponents.EQUIPPABLE,
+            Equippable.builder(type.getSlot())
+                .setEquipSound(material.equipSound())
+                .setAsset(material.assetId())
+                .build()
+        );
+    }
+
     /** Like {@code humanoidArmor} but no ENCHANTABLE and no attribute modifiers. */
     public static Item.Properties utilityArmor(Item.Properties props, ResourceKey<EquipmentAsset> asset, ArmorType type) {
         ArmorMaterial material = utilityPack(asset);
-        return props
+        return utilityEquip(props, asset, type)
             .durability(type.getDurability(material.durability()))
-            .component(
-                DataComponents.EQUIPPABLE,
-                Equippable.builder(type.getSlot())
-                    .setEquipSound(material.equipSound())
-                    .setAsset(material.assetId())
-                    .build()
-            )
             .repairable(material.repairIngredient());
     }
 

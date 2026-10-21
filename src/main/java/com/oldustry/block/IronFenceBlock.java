@@ -1,12 +1,11 @@
 package com.oldustry.block;
 
+import com.oldustry.compat.CuriosWearables;
 import com.oldustry.registry.OldustryTags;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.IronBarsBlock;
@@ -30,16 +29,24 @@ public class IronFenceBlock extends IronBarsBlock {
         builder.add(CHARGE);
     }
 
+    /** JAR {@code isPole}: no iron fence on the four horizontal sides. */
+    private static boolean isPole(Level level, BlockPos pos) {
+        return !(level.getBlockState(pos.north()).getBlock() instanceof IronFenceBlock)
+            && !(level.getBlockState(pos.south()).getBlock() instanceof IronFenceBlock)
+            && !(level.getBlockState(pos.west()).getBlock() instanceof IronFenceBlock)
+            && !(level.getBlockState(pos.east()).getBlock() instanceof IronFenceBlock);
+    }
+
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity,
             net.minecraft.world.entity.InsideBlockEffectApplier effectApplier, boolean isPrecise) {
-        if (!(entity instanceof Player player) || level.isClientSide()) {
+        if (!(entity instanceof Player player) || !isPole(level, pos)) {
             return;
         }
         int charge = state.getValue(CHARGE);
         boolean powered = charge > 0;
-        ItemStack shoes = player.getItemBySlot(EquipmentSlot.FEET);
-        boolean metalShoes = !shoes.isEmpty() && shoes.is(OldustryTags.Items.METAL_SHOES);
+        // Feet slot, or Curios — static boots live on the feet accessory. Motion is client-auth.
+        boolean metalShoes = CuriosWearables.wearingFeet(player, OldustryTags.Items.METAL_SHOES);
         if (!powered || !metalShoes) {
             if (player.isShiftKeyDown()) {
                 Vec3 m = player.getDeltaMovement();
@@ -51,7 +58,9 @@ public class IronFenceBlock extends IronBarsBlock {
             }
             return;
         }
-        level.setBlock(pos, state.setValue(CHARGE, charge - 1), Block.UPDATE_CLIENTS);
+        if (!level.isClientSide()) {
+            level.setBlock(pos, state.setValue(CHARGE, charge - 1), Block.UPDATE_CLIENTS);
+        }
         Vec3 m = player.getDeltaMovement();
         double y = m.y + 0.075;
         if (y > 0) {

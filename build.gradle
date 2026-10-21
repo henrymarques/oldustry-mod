@@ -194,6 +194,15 @@ tasks.register('machineGuiCheck', JavaExec) {
     enableAssertions = true
 }
 
+tasks.register('cfChargeCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks CF sprayer and CF pack charge numbers'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.item.CfChargeCheck'
+    enableAssertions = true
+}
+
 tasks.register('pointExplosionCheck', JavaExec) {
     group = 'verification'
     description = 'Checks the IC2 point-explosion cube with assertions'
@@ -209,6 +218,7 @@ tasks.named('test', Test).configure {
     dependsOn tasks.named('energyCheck')
     dependsOn tasks.named('machineGuiCheck')
     dependsOn tasks.named('pointExplosionCheck')
+    dependsOn tasks.named('cfChargeCheck')
 }
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.

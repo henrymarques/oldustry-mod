@@ -1,5 +1,7 @@
 package com.oldustry.compat.jade;
 
+import org.jspecify.annotations.NonNull;
+
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import snownee.jade.api.BlockAccessor;
@@ -12,7 +14,7 @@ public enum MachineEnergyComponentProvider implements IBlockComponentProvider {
     INSTANCE;
 
     @Override
-    public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
+    public void appendTooltip(@NonNull ITooltip tooltip, BlockAccessor accessor, @NonNull IPluginConfig config) {
         MachineEnergyProvider.INSTANCE.decodeFromData(accessor).ifPresent(data -> {
             if (data.capacity() > 0) {
                 tooltip.add(Component.translatable(
@@ -29,7 +31,7 @@ public enum MachineEnergyComponentProvider implements IBlockComponentProvider {
     }
 
     @Override
-    public Identifier getUid() {
+    public @NonNull Identifier getUid() {
         return MachineEnergyProvider.UID;
     }
 }

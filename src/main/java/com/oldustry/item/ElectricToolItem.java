@@ -43,19 +43,17 @@ public class ElectricToolItem extends ElectricItem {
     @Override
     public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
         // JAR ElectricItemManager.use: only drain when the full operation cost is available (no partial).
-        if (!level.isClientSide()
-            && state.getDestroySpeed(level, pos) != 0
-            && energy(stack) >= euPerUse) {
-            discharge(stack, euPerUse, 99);
+        // Charge lands in onBlockDestroyed (JAR use), so an empty tool mines once at hand speed, then the pack dumps.
+        if (!level.isClientSide() && state.getDestroySpeed(level, pos) != 0) {
+            pay(stack, euPerUse, entity);
         }
         return true;
     }
 
     @Override
     public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        // Same full-cost gate as mining (JAR hitEntity does not drain; keep cost if we do).
-        if (energy(stack) >= euPerUse) {
-            discharge(stack, euPerUse, 99);
+        if (!attacker.level().isClientSide()) {
+            pay(stack, euPerUse, attacker);
         }
     }
 }

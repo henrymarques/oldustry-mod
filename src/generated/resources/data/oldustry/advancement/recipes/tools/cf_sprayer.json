@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_iron_bars": {
+    "has_cobblestone": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:iron_bars"
+            "items": "minecraft:cobblestone"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_iron_bars"
+      "has_cobblestone"
     ]
   ],
   "rewards": {

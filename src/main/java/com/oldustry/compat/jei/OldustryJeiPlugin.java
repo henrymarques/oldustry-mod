@@ -2,6 +2,8 @@ package com.oldustry.compat.jei;
 
 import java.util.List;
 
+import org.jspecify.annotations.NonNull;
+
 import com.oldustry.Oldustry;
 import com.oldustry.machine.MachineKind;
 import com.oldustry.machine.MachineRecipes;
@@ -23,22 +25,22 @@ import net.minecraft.world.item.Items;
 
 @JeiPlugin
 public final class OldustryJeiPlugin implements IModPlugin {
-    public static final IRecipeType<MachineRecipes.Listed> MACERATOR =
+    public static final @NonNull IRecipeType<MachineRecipes.@NonNull Listed> MACERATOR =
         IRecipeType.create(Oldustry.MOD_ID, "macerator", MachineRecipes.Listed.class);
-    public static final IRecipeType<MachineRecipes.Listed> EXTRACTOR =
+    public static final @NonNull IRecipeType<MachineRecipes.@NonNull Listed> EXTRACTOR =
         IRecipeType.create(Oldustry.MOD_ID, "extractor", MachineRecipes.Listed.class);
-    public static final IRecipeType<MachineRecipes.Listed> COMPRESSOR =
+    public static final @NonNull IRecipeType<MachineRecipes.@NonNull Listed> COMPRESSOR =
         IRecipeType.create(Oldustry.MOD_ID, "compressor", MachineRecipes.Listed.class);
-    public static final IRecipeType<MachineRecipes.Listed> RECYCLER =
+    public static final @NonNull IRecipeType<MachineRecipes.@NonNull Listed> RECYCLER =
         IRecipeType.create(Oldustry.MOD_ID, "recycler", MachineRecipes.Listed.class);
 
     @Override
-    public Identifier getPluginUid() {
+    public @NonNull Identifier getPluginUid() {
         return Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "jei");
     }
 
     @Override
-    public void registerCategories(IRecipeCategoryRegistration registration) {
+    public void registerCategories(@NonNull IRecipeCategoryRegistration registration) {
         IGuiHelper gui = registration.getJeiHelpers().getGuiHelper();
         registration.addRecipeCategories(
             new ProcessRecipeCategory(gui, MACERATOR, ModBlocks.MACERATOR.get(), "gui.oldustry.jei.macerator"),
@@ -49,13 +51,15 @@ public final class OldustryJeiPlugin implements IModPlugin {
     }
 
     @Override
-    public void registerRecipes(IRecipeRegistration registration) {
+    public void registerRecipes(@NonNull IRecipeRegistration registration) {
         registration.addRecipes(MACERATOR, MachineRecipes.list(MachineKind.Type.MACERATOR));
         registration.addRecipes(EXTRACTOR, MachineRecipes.list(MachineKind.Type.EXTRACTOR));
         registration.addRecipes(COMPRESSOR, MachineRecipes.list(MachineKind.Type.COMPRESSOR));
-        registration.addRecipes(RECYCLER, List.of(
+        @SuppressWarnings("null")
+        @NonNull List<MachineRecipes.@NonNull Listed> scrap = List.of(
             new MachineRecipes.Listed(new ItemStack(Items.DIRT), new ItemStack(ModItems.SCRAP.get()))
-        ));
+        );
+        registration.addRecipes(RECYCLER, scrap);
         registration.addIngredientInfo(
             ModBlocks.RECYCLER.get(),
             Component.translatable("gui.oldustry.jei.recycler.info")
@@ -63,7 +67,7 @@ public final class OldustryJeiPlugin implements IModPlugin {
     }
 
     @Override
-    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+    public void registerRecipeCatalysts(@NonNull IRecipeCatalystRegistration registration) {
         registration.addCraftingStation(MACERATOR, ModBlocks.MACERATOR.get());
         registration.addCraftingStation(EXTRACTOR, ModBlocks.EXTRACTOR.get());
         registration.addCraftingStation(COMPRESSOR, ModBlocks.COMPRESSOR.get());

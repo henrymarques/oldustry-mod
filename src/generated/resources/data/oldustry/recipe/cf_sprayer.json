@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "S": "minecraft:iron_bars",
+    "S": "minecraft:cobblestone",
     "s": "minecraft:stick"
   },
   "pattern": [
@@ -11,6 +11,10 @@
     "  S"
   ],
   "result": {
+    "components": {
+      "oldustry:foam": 0
+    },
+    "count": 1,
     "id": "oldustry:cf_sprayer"
   }
 }

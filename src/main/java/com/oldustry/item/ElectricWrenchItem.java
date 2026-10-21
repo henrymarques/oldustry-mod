@@ -40,12 +40,13 @@ public class ElectricWrenchItem extends ElectricItem {
             return InteractionResult.PASS;
         }
         int cost = WrenchEu.eu(intended, lossless);
-        if (energy(context.getItemInHand()) < cost) {
+        ItemStack stack = context.getItemInHand();
+        if (!canPay(stack, cost, context.getPlayer())) {
             return InteractionResult.FAIL;
         }
         WrenchHandler.Result result = WrenchHandler.apply(context, lossless);
         if (result != WrenchHandler.Result.PASS && !context.getLevel().isClientSide()) {
-            discharge(context.getItemInHand(), cost, 99);
+            pay(stack, cost, context.getPlayer());
         }
         return result == WrenchHandler.Result.PASS ? InteractionResult.PASS : InteractionResult.SUCCESS;
     }

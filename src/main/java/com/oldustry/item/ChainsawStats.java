@@ -38,7 +38,7 @@ public final class ChainsawStats {
                         Tool.Rule.deniesDrops(blocks.getOrThrow(material.incorrectBlocksForDrops())),
                         Tool.Rule.minesAndDrops(blocks.getOrThrow(BlockTags.MINEABLE_WITH_AXE), material.speed()),
                         // JAR flat efficiency on leaves/wool/vines (IShearable + Material.leaves).
-                        Tool.Rule.minesAndDrops(HolderSet.direct(Blocks.COBWEB.builtInRegistryHolder()), SPEED),
+                        Tool.Rule.minesAndDrops(HolderSet.direct(BuiltInRegistries.BLOCK.wrapAsHolder(Blocks.COBWEB)), SPEED),
                         Tool.Rule.overrideSpeed(blocks.getOrThrow(BlockTags.SHEARS_EXTREME_BREAKING_SPEED), SPEED),
                         Tool.Rule.overrideSpeed(blocks.getOrThrow(BlockTags.SHEARS_MAJOR_BREAKING_SPEED), SPEED),
                         Tool.Rule.overrideSpeed(blocks.getOrThrow(BlockTags.SHEARS_MINOR_BREAKING_SPEED), SPEED)

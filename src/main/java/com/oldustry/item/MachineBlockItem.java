@@ -27,7 +27,6 @@ public class MachineBlockItem extends BlockItem {
                 builder.accept(line);
             }
         }
-        super.appendHoverText(stack, context, display, builder, flag);
     }
 
     private static Component generatorTooltip(MachineKind kind) {

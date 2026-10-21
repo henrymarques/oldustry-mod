@@ -13,8 +13,10 @@ import com.oldustry.energy.ProcessLogic;
 import com.oldustry.energy.UpgradeLogic;
 import com.oldustry.energy.Wind;
 import com.oldustry.energy.WindLogic;
+import com.oldustry.item.CfPackItem;
 import com.oldustry.item.ElectricItem;
 import com.oldustry.item.FuelJetpackItem;
+import com.oldustry.item.JetpackFuel;
 import com.oldustry.item.ScannerItem;
 import com.oldustry.item.SolarHelmetItem;
 import com.oldustry.item.UpgradeItem;
@@ -297,7 +299,7 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
             return 0;
         }
         int extra = FuelLogic.extraFurnaceBurn(id);
-        int furnace = extra > 0 ? extra : level.fuelValues().burnDuration(fuel);
+        int furnace = extra > 0 ? extra : fuel.getBurnTime(RecipeType.SMELTING, level.fuelValues());
         return FuelLogic.generatorBurnTicks(furnace, false);
     }
 
@@ -423,7 +425,7 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
         }
         AABB box = new AABB(pos);
         for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, box)) {
-            if (entity.getType().builtInRegistryHolder().is(EntityTypeTags.UNDEAD)) {
+            if (entity.is(EntityTypeTags.UNDEAD)) {
                 entity.igniteForSeconds(20);
             } else if (entity instanceof net.minecraft.world.entity.monster.Enemy) {
                 entity.igniteForSeconds(10);
@@ -700,7 +702,7 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
         if (energy < hoist) {
             return false;
         }
-        electric.discharge(drill, use, 99);
+        electric.spend(drill, use);
         energy -= hoist;
         java.util.List<ItemStack> drops = Block.getDrops(state, level, target, level.getBlockEntity(target));
         level.removeBlock(target, false);
@@ -760,21 +762,20 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
 
     private boolean tickPump(ServerLevel level, BlockPos pos) {
         dischargeSlot(2);
-        int pumpCharge = lava;
-
-        if (pumpCharge < PUMP_CHARGE_TARGET) {
+        // Older builds parked the filled cell in a slot the GUI does not draw.
+        ItemStack stuck = items.get(1);
+        if (!stuck.isEmpty()) {
+            ejectPumpItem(level, pos, stuck);
+            items.set(1, ItemStack.EMPTY);
+        }
+        if (lava < PUMP_CHARGE_TARGET) {
             if (energy <= 0) {
                 return false;
             }
             int add = Math.min(energy, 128);
             energy -= add;
-            lava = pumpCharge + add;
+            lava += add;
             return true;
-        }
-
-        ItemStack cellSlot = items.get(0);
-        if (cellSlot.isEmpty() || !cellSlot.is(ModItems.EMPTY_CELL.get())) {
-            return false;
         }
 
         BlockPos fluidPos = null;
@@ -790,23 +791,20 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
                 }
             }
         }
-
         if (fluidPos == null || !isPumpableSource(level, fluidPos)) {
             return false;
         }
 
         var fluid = level.getBlockState(fluidPos).getFluidState();
-        ItemStack filled;
-        if (fluid.is(net.minecraft.tags.FluidTags.WATER)) {
-            filled = new ItemStack(ModItems.WATER_CELL.get());
-        } else if (fluid.is(net.minecraft.tags.FluidTags.LAVA)) {
-            filled = new ItemStack(ModItems.LAVA_CELL.get());
-        } else {
-            return false;
-        }
-
-        ItemStack out = items.get(1);
-        if (!canOutput(out, filled)) {
+        ItemStack container = items.get(0);
+        ItemStack filled = filledContainer(container, fluid);
+        if (!filled.isEmpty()) {
+            ejectPumpItem(level, pos, filled);
+            container.shrink(1);
+            if (container.isEmpty()) {
+                items.set(0, ItemStack.EMPTY);
+            }
+        } else if (!container.isEmpty() || !takeAdjacentBucket(level, pos, fluid)) {
             return false;
         }
 
@@ -814,10 +812,94 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
         if (linkedMiner != null) {
             linkedMiner.canProvideLiquid = false;
         }
-        cellSlot.shrink(1);
-        mergeOut(1, filled);
-        lava = pumpCharge - PUMP_CHARGE_TARGET;
+        lava -= PUMP_CHARGE_TARGET;
         return true;
+    }
+
+    /** JAR {@code LiquidContainerRegistry.fillLiquidContainer}: cell or bucket in the pump slot. */
+    private static ItemStack filledContainer(ItemStack container, net.minecraft.world.level.material.FluidState fluid) {
+        boolean water = fluid.is(net.minecraft.tags.FluidTags.WATER);
+        boolean lava = fluid.is(net.minecraft.tags.FluidTags.LAVA);
+        if (container.is(ModItems.EMPTY_CELL.get())) {
+            if (water) {
+                return new ItemStack(ModItems.WATER_CELL.get());
+            }
+            if (lava) {
+                return new ItemStack(ModItems.LAVA_CELL.get());
+            }
+        }
+        if (container.is(Items.BUCKET)) {
+            if (water) {
+                return new ItemStack(Items.WATER_BUCKET);
+            }
+            if (lava) {
+                return new ItemStack(Items.LAVA_BUCKET);
+            }
+        }
+        return ItemStack.EMPTY;
+    }
+
+    /** JAR {@code putInChestBucket}: one empty bucket in an adjacent chest. */
+    private boolean takeAdjacentBucket(ServerLevel level, BlockPos pos, net.minecraft.world.level.material.FluidState fluid) {
+        ItemStack filled = filledContainer(new ItemStack(Items.BUCKET), fluid);
+        if (filled.isEmpty()) {
+            return false;
+        }
+        for (Direction dir : Direction.values()) {
+            BlockEntity neighbor = level.getBlockEntity(pos.relative(dir));
+            if (!(neighbor instanceof Container container) || neighbor instanceof MachineBlockEntity) {
+                continue;
+            }
+            for (int i = 0; i < container.getContainerSize(); i++) {
+                ItemStack stack = container.getItem(i);
+                if (!stack.is(Items.BUCKET)) {
+                    continue;
+                }
+                stack.shrink(1);
+                if (stack.isEmpty()) {
+                    container.setItem(i, filled.copy());
+                } else if (!mergeInto(container, filled)) {
+                    Block.popResource(level, pos, filled);
+                }
+                container.setChanged();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean mergeInto(Container container, ItemStack filled) {
+        for (int i = 0; i < container.getContainerSize(); i++) {
+            ItemStack slot = container.getItem(i);
+            if (slot.isEmpty()) {
+                container.setItem(i, filled.copy());
+                return true;
+            }
+            if (ItemStack.isSameItemSameComponents(slot, filled) && slot.getCount() < slot.getMaxStackSize()) {
+                slot.grow(1);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** JAR {@code distributeDrop}: adjacent inventories, then the ground. Skips our own machines. */
+    private void ejectPumpItem(ServerLevel level, BlockPos pos, ItemStack stack) {
+        ItemStack left = stack.copy();
+        for (Direction dir : Direction.values()) {
+            if (left.isEmpty()) {
+                return;
+            }
+            BlockPos neighbor = pos.relative(dir);
+            if (level.getBlockEntity(neighbor) instanceof MachineBlockEntity) {
+                continue;
+            }
+            int moved = insert(level, neighbor, dir.getOpposite(), left, left.getCount());
+            left.shrink(moved);
+        }
+        if (!left.isEmpty()) {
+            Block.popResource(level, pos, left);
+        }
     }
 
     private static boolean isPumpableSource(ServerLevel level, BlockPos pos) {
@@ -856,8 +938,12 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
                 cannerOperate(mode, false, resource, vessel, out);
                 lava = 0;
                 progress = 0;
-                setChanged();
-                return false;
+                // JAR starts the next charge on this same tick when the machine can still run.
+                resource = items.get(0);
+                vessel = items.get(1);
+                out = items.get(2);
+                mode = cannerMode(vessel);
+                canOp = cannerCanOperate(mode, resource, vessel, out);
             } else {
                 cannerOperate(mode, true, resource, vessel, out);
             }
@@ -934,11 +1020,11 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
                     yield false;
                 }
                 if (vessel.is(ModItems.FUEL_JETPACK.get())) {
-                    yield FuelJetpackItem.fuel(vessel) < FuelJetpackItem.MAX_FUEL && canOutput(out, vessel);
+                    yield canOutput(out, vessel);
                 }
                 yield canOutput(out, new ItemStack(ModItems.FILLED_FUEL_CAN.get()));
             }
-            case 3 -> vessel.getDamageValue() > 2
+            case 3 -> CfPackItem.acceptsPellet(CfPackItem.charge(vessel))
                 && resource.is(ModItems.CF_PELLET.get())
                 && canOutput(out, vessel);
             default -> false;
@@ -960,7 +1046,7 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
                     if (vessel.is(ModItems.FUEL_JETPACK.get())) {
                         ItemStack result = vessel.copy();
                         result.setCount(1);
-                        FuelJetpackItem.setFuel(result, FuelJetpackItem.fuel(result) + lava);
+                        FuelJetpackItem.setFuel(result, JetpackFuel.afterCanner(FuelJetpackItem.fuel(result), lava));
                         lava = 0;
                         vessel.shrink(1);
                         mergeOut(2, result);
@@ -973,14 +1059,12 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
                 }
             }
             case 3 -> {
+                // One pellet adds 2. A full run from empty ends at 260.
                 resource.shrink(1);
-                vessel.setDamageValue(vessel.getDamageValue() - 2);
-                if (resource.isEmpty() || vessel.getDamageValue() <= 1) {
-                    ItemStack result = vessel.copy();
-                    if (result.getDamageValue() <= 1) {
-                        result.setDamageValue(0);
-                    }
-                    mergeOut(2, result);
+                int charge = CfPackItem.afterPellet(CfPackItem.charge(vessel));
+                CfPackItem.setCharge(vessel, charge);
+                if (CfPackItem.leaveCanner(charge, !resource.isEmpty())) {
+                    mergeOut(2, vessel.copy());
                     vessel.setCount(0);
                 }
             }
@@ -1004,15 +1088,9 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
         return 0;
     }
 
-    /** EU value stored per fuel cell consumed. Matches IC2 JAR (see CannerFuelValues). */
-    static int cannerFuelValue(ItemStack resource) {
-        if (resource.is(ModItems.COALFUEL_CELL.get())) {
-            return CannerFuelValues.COALFUEL;
-        }
-        if (resource.is(ModItems.BIOFUEL_CELL.get())) {
-            return CannerFuelValues.BIOFUEL;
-        }
-        return 0;
+    /** Fuel units this input adds. Boosters read the quality already stored this cycle. */
+    int cannerFuelValue(ItemStack resource) {
+        return CannerFuelValues.value(resource, lava);
     }
 
     // ── Electrolyzer (JAR TileEntityElectrolyzer) ──
@@ -1545,7 +1623,7 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
         liquidX = input.getIntOr("liquidX", 0);
         liquidY = input.getIntOr("liquidY", 0);
         liquidZ = input.getIntOr("liquidZ", 0);
-        lastMineMode = input.getIntOr("lastMineMode", 0);
+        lastMineMode = input.getIntOr("lastMineMode", MODE_NONE);
     }
 
     @Override
@@ -1818,8 +1896,7 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
             case PUMPING -> stack.is(ModItems.EMPTY_CELL.get());
             case CANNING -> switch (slot) {
                 case 0 -> stack.has(DataComponents.FOOD)
-                    || stack.is(ModItems.COALFUEL_CELL.get())
-                    || stack.is(ModItems.BIOFUEL_CELL.get())
+                    || CannerFuelValues.isFuel(stack)
                     || stack.is(ModItems.CF_PELLET.get());
                 case 1 -> stack.is(ModItems.TIN_CAN.get())
                     || stack.is(ModItems.FUEL_CAN.get())

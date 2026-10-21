@@ -3,11 +3,15 @@ package com.oldustry.item;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.function.Consumer;
+
 import com.oldustry.block.FoamBlock;
 import com.oldustry.compat.CuriosWearables;
 import com.oldustry.registry.ModBlocks;
+import com.oldustry.registry.ModDataComponents;
 import com.oldustry.registry.ModItems;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -15,17 +19,48 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class SprayerItem extends Item {
-    public static final int MAX_DAMAGE = 1602;
-    public static final int SPRAY_COST = 100;
+    public static final int MAX = CfCharge.SPRAYER_MAX;
+    /** Crafted empty. */
+    public static final int CRAFTED = CfCharge.SPRAYER_CRAFTED;
+    public static final int SPRAY_COST = CfCharge.SPRAY_COST;
     public static final int SPRAY_MASS = 13;
+
+    public static int charge(ItemStack stack) {
+        return Math.clamp(stack.getOrDefault(ModDataComponents.FOAM.get(), 0), 0, MAX);
+    }
+
+    public static void setCharge(ItemStack stack, int value) {
+        int next = Math.clamp(value, 0, MAX);
+        if (charge(stack) == next) {
+            return;
+        }
+        stack.set(ModDataComponents.FOAM.get(), next);
+    }
+
+    /** JAR {@code RecipeGradual}: each pellet slot adds 100, clamped to max. */
+    public static int addPellets(int charge, int pellets) {
+        return CfCharge.addPellets(charge, pellets);
+    }
+
+    /** A spray from the tool itself needs at least 100 units. The pack bypasses this. */
+    public static boolean canSprayFromSelf(int charge) {
+        return CfCharge.canSprayFromSelf(charge);
+    }
+
+    public static int afterSpray(int charge) {
+        return CfCharge.afterSpray(charge);
+    }
 
     public SprayerItem(Item.Properties properties) {
         super(properties);
@@ -37,10 +72,10 @@ public class SprayerItem extends Item {
             return false;
         }
         ItemStack other = slot.getItem();
-        if (!other.is(ModItems.CF_PELLET.get()) || stack.getDamageValue() <= 0) {
+        if (!other.is(ModItems.CF_PELLET.get()) || charge(stack) >= MAX) {
             return false;
         }
-        stack.setDamageValue(Math.max(0, stack.getDamageValue() - SPRAY_COST));
+        setCharge(stack, addPellets(charge(stack), 1));
         other.shrink(1);
         return true;
     }
@@ -55,7 +90,8 @@ public class SprayerItem extends Item {
         Player player = context.getPlayer();
         boolean fromPack = player != null && CfPackItem.consumePellet(
             CuriosWearables.chestOrCurios(player, ModItems.CF_PACK.get()));
-        if (!fromPack && stack.getDamageValue() > MAX_DAMAGE - SPRAY_COST - 1) {
+        int held = charge(stack);
+        if (!fromPack && !canSprayFromSelf(held)) {
             return InteractionResult.FAIL;
         }
         BlockPos pos = context.getClickedPos();
@@ -68,9 +104,30 @@ public class SprayerItem extends Item {
             return InteractionResult.FAIL;
         }
         if (!fromPack && player != null) {
-            stack.hurtAndBreak(SPRAY_COST, player, context.getHand());
+            setCharge(stack, afterSpray(held));
         }
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public boolean isBarVisible(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public int getBarWidth(ItemStack stack) {
+        return Math.round(13f * charge(stack) / (float) MAX);
+    }
+
+    @Override
+    public int getBarColor(ItemStack stack) {
+        float fill = charge(stack) / (float) MAX;
+        return fill < 0.15f ? 0xFF5555 : (fill < 0.5f ? 0xFFAA00 : 0x55FF55);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag flag) {
+        builder.accept(Component.translatable("info.oldustry.foam.stored", charge(stack), MAX).withStyle(ChatFormatting.GRAY));
     }
 
     private static boolean spray(Level level, BlockPos origin, boolean[] dirs, boolean scaffold) {

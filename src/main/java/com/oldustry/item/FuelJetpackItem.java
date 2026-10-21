@@ -1,5 +1,8 @@
 package com.oldustry.item;
 
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
 import com.oldustry.network.KeysPayload;
@@ -8,6 +11,7 @@ import com.oldustry.registry.ModDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -18,12 +22,14 @@ import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * JAR {@code ItemArmorJetpack} (fuel). Tank is {@link ModDataComponents#FUEL} (~18000), not durability.
- * Thrust must run on the <em>client</em> (player movement is client-auth); server consumes fuel.
+ * JAR {@code ItemArmorJetpack} (fuel). Tank is {@link ModDataComponents#FUEL}
+ * holding the readable charge ({@link JetpackFuel#MAX}), not item damage.
+ * Thrust must run on the client (player movement is client-auth); server consumes fuel.
  */
 public class FuelJetpackItem extends Item {
-    /** JAR maxCharge = maxDamage − 2 with maxDamage 18002. */
-    public static final int MAX_FUEL = 18000;
+    public static final int MAX_FUEL = JetpackFuel.MAX;
+    /** JAR sets this to 10, then decrements on the same tick. */
+    private static final Map<UUID, Integer> HOVER_LOCK = new ConcurrentHashMap<>();
 
     public FuelJetpackItem(Properties properties) {
         super(properties);
@@ -42,22 +48,24 @@ public class FuelJetpackItem extends Item {
     }
 
     /**
-     * JAR {@code useJetpack}: power 1.0, drop 0.2, consume 9 / hover 6.
-     * Fuel hover: does <em>not</em> climb — clamps motionY to −0.1 (slow sink). Electric uses +0.1 with jump.
+     * JAR {@code useJetpack}: power 1.0, drop 0.2. {@code use} asks for 9 / hover 6 and the
+     * damage write reads back 4 less, so the tank drops 13 / 10.
+     * Fuel hover clamps motionY to −0.1 and keeps a faster previous rise. Electric uses +0.1 with jump.
      * @param consumeFuel server only
      * @return true if thrust applied
      */
     public static boolean tickFlight(Player player, ItemStack stack, boolean jump, boolean forward, boolean consumeFuel) {
+        if (consumeFuel) {
+            tickHoverToggle(player, stack);
+        }
         if (player.getAbilities().flying) {
             return false;
         }
         boolean hover = stack.getOrDefault(ModDataComponents.HOVER.get(), false);
         double motionY = player.getDeltaMovement().y;
-        // JAR −0.35; −0.15 = less gap before catch. Jump still thrusts (then hover clamps sink).
-        boolean thrust = jump || (hover && !player.onGround() && motionY < -0.15);
+        boolean thrust = jump || (hover && motionY < -0.35);
         int charge = fuel(stack);
-        // Creative: fly without filling (survival still needs FUEL > 0).
-        if (!thrust || (charge <= 0 && !player.getAbilities().instabuild)) {
+        if (!thrust || charge <= 0) {
             return false;
         }
 
@@ -90,12 +98,10 @@ public class FuelJetpackItem extends Item {
         // JAR: motionY = min(motionY + power * 0.2, 0.6)
         double nextY = Math.min(prevY + power * 0.2f, 0.6);
         if (hover) {
-            // JAR fuel maxHoverY = −0.1 always (no climb). Hard clamp while jump so sink stays steady.
             float maxHoverY = -0.1f;
             if (nextY > maxHoverY) {
                 nextY = maxHoverY;
-                // JAR restores prevmotion when it was above clamp — skips that while jump (keeps −0.1 sink).
-                if (!jump && prevY > nextY) {
+                if (prevY > nextY) {
                     nextY = prevY;
                 }
             }
@@ -103,10 +109,31 @@ public class FuelJetpackItem extends Item {
         player.setDeltaMovement(m.x, nextY, m.z);
         player.resetFallDistance();
 
-        if (consumeFuel && !player.getAbilities().instabuild) {
-            setFuel(stack, charge - (hover ? 6 : 9));
+        if (consumeFuel) {
+            setFuel(stack, JetpackFuel.afterUse(charge, hover ? JetpackFuel.USE_HOVER : JetpackFuel.USE_NORMAL));
         }
         return true;
+    }
+
+    /** JAR: jump and mode-switch together, then 10 ticks before it can flip again. */
+    private static void tickHoverToggle(Player player, ItemStack stack) {
+        int lock = HOVER_LOCK.getOrDefault(player.getUUID(), 0);
+        if (lock == 0 && KeysPayload.jump(player) && KeysPayload.mode(player)) {
+            boolean next = !stack.getOrDefault(ModDataComponents.HOVER.get(), false);
+            stack.set(ModDataComponents.HOVER.get(), next);
+            lock = 10;
+            if (player instanceof ServerPlayer server) {
+                server.sendSystemMessage(Component.translatable(next ? "info.oldustry.jetpack.hover.on" : "info.oldustry.jetpack.hover.off"), true);
+            }
+        }
+        if (lock > 0) {
+            lock--;
+            if (lock == 0) {
+                HOVER_LOCK.remove(player.getUUID());
+            } else {
+                HOVER_LOCK.put(player.getUUID(), lock);
+            }
+        }
     }
 
     @Override

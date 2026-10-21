@@ -206,6 +206,38 @@ public final class EnergyCheck {
         assert ElectricCharge.dischargeIgnoreTransfer(50, 200, re, 1) == 50;
         assert ElectricCharge.dischargeIgnoreTransfer(10000, 200, re, 0) == 0;
         assert ElectricCharge.chargeIgnoreTransfer(9900, 200, re) == 100;
+        // JAR charge tier: RE (tier 1) fills a tier-1 tool and refuses a tier-2 tool.
+        ElectricCharge.Spec tier2 = new ElectricCharge.Spec(10000, 50, 2, true);
+        assert ElectricCharge.chargeAtTier(0, 200, re, 1, true) == 200;
+        assert ElectricCharge.chargeAtTier(0, 200, tier2, 1, true) == 0;
+        assert ElectricCharge.chargeAtTier(0, 200, tier2, 2, false) == 50;
+        // JAR chargeFromArmor: one use dumps the tool full (transfer 100 does not cap it). Tier still gates.
+        ElectricCharge.Spec pack = new ElectricCharge.Spec(60000, 100, 1, true);
+        ElectricCharge.Spec drill = new ElectricCharge.Spec(10000, 100, 1, true);
+        assert ElectricCharge.chargeFromArmor(0, drill, 60000, pack) == 10000;
+        assert ElectricCharge.chargeFromArmor(10000, drill, 60000, pack) == 0;
+        assert ElectricCharge.chargeFromArmor(0, tier2, 60000, pack) == 0 : "batpack tier 1 must refuse tier 2";
+        ElectricCharge.Spec lap = new ElectricCharge.Spec(300000, 250, 2, true);
+        assert ElectricCharge.chargeFromArmor(0, tier2, 300000, lap) == 10000;
+        // use(): fill, pay 50, fill again. Pack loses the empty room, tool ends full.
+        int toolE = 0;
+        int packE = 60000;
+        int moved = ElectricCharge.chargeFromArmor(toolE, drill, packE, pack);
+        toolE += moved;
+        packE -= moved;
+        assert ElectricCharge.spend(toolE, 50) == 50;
+        toolE -= 50;
+        moved = ElectricCharge.chargeFromArmor(toolE, drill, packE, pack);
+        toolE += moved;
+        packE -= moved;
+        assert toolE == 10000 && packE == 49950 : toolE + "/" + packE;
+        // Pack shorter than the operation: first pull moves what it has, spend pays nothing.
+        assert ElectricCharge.chargeFromArmor(0, drill, 30, pack) == 30;
+        assert ElectricCharge.spend(30, 50) == 0;
+        // JAR use() spends the full operation cost. discharge() would cap OV (250) and lossless wrench (10000) at transfer.
+        assert ElectricCharge.spend(10000, 250) == 250;
+        assert ElectricCharge.spend(249, 250) == 0;
+        assert ElectricCharge.spend(12000, WrenchEu.eu(WrenchHandler.Result.REMOVE, true)) == 10000;
         assert ElectricCharge.consumeOnce(1200, 1200) == 1200;
         assert ElectricCharge.consumeOnce(1199, 1200) == 0 : "one-shot needs full room";
         assert ElectricCharge.consumeOnce(800, 800) == 800;
@@ -262,32 +294,37 @@ public final class EnergyCheck {
         assert WrenchEu.eu(WrenchHandler.Result.REMOVE, true) == 10000;
         assert new ElectricCharge.Spec(12000, 250, 1, true).max() == 12000;
         assert new ElectricCharge.Spec(10000, 100, 1, true).transfer() == 100;
-        assert BronzeStats.DURABILITY == 350 && BronzeStats.DURABILITY > 250;
-        assert BronzeStats.SPEED == 6.5f && BronzeStats.SPEED > 6f;
-        assert BronzeStats.ENCHANT == 14;
-        assert DrillStats.MINING_SPEED == 10f;
-        assert DrillStats.DIAMOND_SPEED == 20f;
-        assert DrillStats.DIAMOND_SPEED == 2f * DrillStats.MINING_SPEED;
+        assert pin(BronzeStats.DURABILITY) == 350 && BronzeStats.DURABILITY > 250;
+        assert pin(BronzeStats.SPEED) == 6.5f && BronzeStats.SPEED > 6f;
+        assert pin(BronzeStats.ENCHANT) == 14;
+        assert pin(DrillStats.MINING_SPEED) == 10f;
+        assert pin(DrillStats.DIAMOND_SPEED) == 20f;
+        assert pin(DrillStats.DIAMOND_SPEED) == 2f * DrillStats.MINING_SPEED;
         // JAR EU costs unchanged despite speed desvio
-        assert DrillStats.MINING_EU == 50;
-        assert DrillStats.DIAMOND_EU == 80;
-        assert com.oldustry.item.FuelJetpackItem.MAX_FUEL == 18000;
-        assert DrillStats.MINING_ENCHANT == 14;
-        assert DrillStats.DIAMOND_ENCHANT == 10;
+        assert pin(DrillStats.MINING_EU) == 50;
+        assert pin(DrillStats.DIAMOND_EU) == 80;
+        assert pin(com.oldustry.item.JetpackFuel.MAX) == 17998;
+        assert com.oldustry.item.JetpackFuel.afterUse(17998, 9) == 17985;
+        assert com.oldustry.item.JetpackFuel.afterUse(20, 6) == 10;
+        assert com.oldustry.item.JetpackFuel.afterUse(10, 9) == 0;
+        assert com.oldustry.item.JetpackFuel.afterCanner(0, 6 * 2548) == 15286;
+        assert com.oldustry.item.JetpackFuel.afterCanner(15286, 6 * 2548) == 17998;
+        assert pin(DrillStats.MINING_ENCHANT) == 14;
+        assert pin(DrillStats.DIAMOND_ENCHANT) == 10;
         // Chainsaw: JAR efficiency 12 / EU 100; desvio speed 15
-        assert ChainsawStats.SPEED == 15f && ChainsawStats.SPEED > 12f;
-        assert ChainsawStats.EU == 100;
+        assert pin(ChainsawStats.SPEED) == 15f && ChainsawStats.SPEED > 12f;
+        assert pin(ChainsawStats.EU) == 100;
         // Generator / geo JAR numbers
         assert MachineKind.GENERATOR.capacity == 4000 && MachineKind.GENERATOR.packet == 10;
         assert MachineKind.GEO_GENERATOR.buffer() == 32 && MachineKind.GEO_GENERATOR.packet == 20;
-        assert FuelLogic.GEO_MAX_LAVA == 24000 && FuelLogic.GEO_CELL == 1000;
+        assert pin(FuelLogic.GEO_MAX_LAVA) == 24000 && pin(FuelLogic.GEO_CELL) == 1000;
 
         // ── Canner EU numbers (JAR spec) ──
         assert MachineKind.CANNER.capacity == 600 : "canner buf must be 600";
         assert MachineKind.CANNER.euPerTick() == 1 : "canner must use 1 EU/t";
         // coalfuel=2548, biofuel=868 (IC2 JAR spec)
-        assert com.oldustry.machine.CannerFuelValues.COALFUEL == 2548 : "coalfuel EU";
-        assert com.oldustry.machine.CannerFuelValues.BIOFUEL == 868 : "biofuel EU";
+        assert pin(com.oldustry.machine.CannerFuelValues.COALFUEL) == 2548 : "coalfuel EU";
+        assert pin(com.oldustry.machine.CannerFuelValues.BIOFUEL) == 868 : "biofuel EU";
         // Filled tin can desvio (experimental wiki): 1 hunger → sat 3.2 via modifier 1.6
         assert net.minecraft.world.food.FoodConstants.saturationByModifier(1, 1.6f) == 3.2f;
         // miner buf=1000 (JAR spec); pump charge target 200
@@ -307,6 +344,15 @@ public final class EnergyCheck {
         assert !MachineGui.hasGui(MachineKind.MAGNETIZER);
 
         System.out.println("EnergyCheck ok");
+    }
+
+    /** ECJ folds {@code static final == literal} into "comparing identical expressions". A call stays a real spec lock. */
+    private static int pin(int value) {
+        return value;
+    }
+
+    private static float pin(float value) {
+        return value;
     }
 
     private EnergyCheck() {}

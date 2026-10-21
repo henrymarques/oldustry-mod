@@ -118,7 +118,6 @@ public final class ModItems {
     public static final DeferredItem<Item> URANIUM_INGOT = item("uranium_ingot");
     public static final DeferredItem<Item> URANIUM_DROP = item("uranium_drop");
     public static final DeferredItem<Item> MIXED_METAL_INGOT = item("mixed_metal_ingot");
-    public static final DeferredItem<Item> ANCIENT_SCRAP = item("ancient_scrap");
 
     public static final DeferredItem<Item> COAL_DUST = item("coal_dust");
     public static final DeferredItem<Item> IRON_DUST = item("iron_dust");
@@ -147,8 +146,10 @@ public final class ModItems {
     public static final DeferredItem<Item> INDUSTRIAL_CREDIT = item("industrial_credit");
     public static final DeferredItem<Item> CF_PELLET = item("cf_pellet");
     public static final DeferredItem<Item> CF_PACK = ITEMS.registerItem("cf_pack", props -> new CfPackItem(
-        OldustryMaterials.utilityArmor(props.stacksTo(1), OldustryMaterials.BATPACK_EQUIPMENT, ArmorType.CHESTPLATE)
-            .durability(CfPackItem.MAX_DAMAGE)));
+        OldustryMaterials.utilityEquip(
+            props.stacksTo(1).component(ModDataComponents.FOAM.get(), CfPackItem.CRAFTED),
+            OldustryMaterials.BATPACK_EQUIPMENT,
+            ArmorType.CHESTPLATE)));
     public static final DeferredItem<Item> COAL_BALL = item("coal_ball");
     public static final DeferredItem<Item> COMPRESSED_COAL_BALL = item("compressed_coal_ball");
     public static final DeferredItem<Item> COAL_CHUNK = item("coal_chunk");
@@ -156,7 +157,8 @@ public final class ModItems {
     public static final DeferredItem<Item> STICKY_RESIN = ITEMS.registerItem("sticky_resin", StickyResinItem::new);
     public static final DeferredItem<Item> RUBBER = item("rubber");
     public static final DeferredItem<Item> TREETAP = ITEMS.registerItem("treetap", props -> new TreetapItem(props.stacksTo(1).durability(16)));
-    public static final DeferredItem<Item> CF_SPRAYER = ITEMS.registerItem("cf_sprayer", props -> new SprayerItem(props.stacksTo(1).durability(SprayerItem.MAX_DAMAGE)));
+    public static final DeferredItem<Item> CF_SPRAYER = ITEMS.registerItem("cf_sprayer", props -> new SprayerItem(
+        props.stacksTo(1).component(ModDataComponents.FOAM.get(), SprayerItem.CRAFTED)));
 
     public static final DeferredItem<Item> BRONZE_PICKAXE = ITEMS.registerItem("bronze_pickaxe", props -> new Item(props.pickaxe(OldustryMaterials.BRONZE, 1, -2.8f)));
     public static final DeferredItem<Item> BRONZE_AXE = ITEMS.registerItem("bronze_axe", props -> new Item(props.axe(OldustryMaterials.BRONZE, 6, -3.1f)));
@@ -246,8 +248,8 @@ public final class ModItems {
     // JAR ItemArmorUtility: 0 defense / no enchantable component.
     public static final DeferredItem<Item> SOLAR_HELMET = ITEMS.registerItem("solar_helmet", props -> new SolarHelmetItem(OldustryMaterials.utilityArmor(props, OldustryMaterials.SOLAR_EQUIPMENT, ArmorType.HELMET)));
     public static final DeferredItem<Item> STATIC_BOOTS = ITEMS.registerItem("static_boots", props -> new StaticBootsItem(props.humanoidArmor(OldustryMaterials.pack(OldustryMaterials.RUBBER_EQUIPMENT), ArmorType.BOOTS)));
-    // Tank = FUEL component (desvio); utilityArmor still sets tiny armor durability (unused as tank).
-    public static final DeferredItem<Item> FUEL_JETPACK = ITEMS.registerItem("fuel_jetpack", props -> new FuelJetpackItem(OldustryMaterials.utilityArmor(
+    // Tank = FUEL component (desvio). No armor durability: JAR damageArmor is empty.
+    public static final DeferredItem<Item> FUEL_JETPACK = ITEMS.registerItem("fuel_jetpack", props -> new FuelJetpackItem(OldustryMaterials.utilityEquip(
         props.stacksTo(1).component(ModDataComponents.FUEL.get(), 0),
         OldustryMaterials.JETPACK_EQUIPMENT,
         ArmorType.CHESTPLATE)));

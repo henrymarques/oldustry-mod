@@ -121,11 +121,10 @@ public class MachineMenu extends AbstractContainerMenu {
                 case 2 -> stack.is(ModItems.MINING_PIPE.get());
                 default -> false;
             };
-            case PUMPING -> stack.is(ModItems.EMPTY_CELL.get());
+            case PUMPING -> stack.is(ModItems.EMPTY_CELL.get()) || stack.is(Items.BUCKET);
             case CANNING -> switch (slot) {
                 case 0 -> stack.has(net.minecraft.core.component.DataComponents.FOOD)
-                    || stack.is(ModItems.COALFUEL_CELL.get())
-                    || stack.is(ModItems.BIOFUEL_CELL.get())
+                    || CannerFuelValues.isFuel(stack)
                     || stack.is(ModItems.CF_PELLET.get());
                 case 1 -> stack.is(ModItems.TIN_CAN.get())
                     || stack.is(ModItems.FUEL_CAN.get())

@@ -1,16 +1,28 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
-    "C": "oldustry:compressed_plants",
-    "P": "oldustry:cf_pellet",
+    "C": "oldustry:electronic_circuit",
+    "F": "oldustry:fuel_can",
+    "S": {
+      "type": "neoforge:components",
+      "components": {
+        "oldustry:foam": 0
+      },
+      "items": "oldustry:cf_sprayer"
+    },
     "T": "#c:ingots/tin"
   },
   "pattern": [
-    "TPT",
-    "PCP",
-    "TPT"
+    "SCS",
+    "FTF",
+    "F F"
   ],
   "result": {
+    "components": {
+      "oldustry:foam": 0
+    },
+    "count": 1,
     "id": "oldustry:cf_pack"
   }
 }

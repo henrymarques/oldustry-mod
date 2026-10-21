@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
+import org.jspecify.annotations.NonNull;
+
 import com.oldustry.registry.ModBlocks;
 import com.oldustry.registry.ModItems;
 
@@ -17,7 +19,7 @@ import net.minecraft.world.level.block.Blocks;
 /** IC2 1.117 maps for macerator/extractor/compressor/recycler. Furnace uses vanilla smelting. */
 public final class MachineRecipes {
     /** One JEI-facing recipe row (input count from {@link #consume}). */
-    public record Listed(ItemStack input, ItemStack output) {}
+    public record Listed(@NonNull ItemStack input, @NonNull ItemStack output) {}
     public static ItemStack macerator(Item item) {
         if (item == Items.COPPER_ORE || item == Items.DEEPSLATE_COPPER_ORE || item == Items.RAW_COPPER) {
             return new ItemStack(ModItems.COPPER_DUST.get(), item == Items.RAW_COPPER ? 1 : 2);
@@ -33,9 +35,6 @@ public final class MachineRecipes {
         }
         if (item == ModItems.TIN_ORE.get() || item == ModItems.RAW_TIN.get()) {
             return new ItemStack(ModItems.TIN_DUST.get(), item == ModItems.RAW_TIN.get() ? 1 : 2);
-        }
-        if (item == ModItems.URANIUM_ORE.get() || item == ModItems.URANIUM_DROP.get()) {
-            return new ItemStack(ModItems.URANIUM_DROP.get(), item == ModItems.URANIUM_DROP.get() ? 1 : 2);
         }
         if (item == Items.COAL) {
             return new ItemStack(ModItems.COAL_DUST.get());
@@ -91,7 +90,7 @@ public final class MachineRecipes {
         if (item == Items.NETHER_QUARTZ_ORE) {
             return new ItemStack(Items.QUARTZ, 4);
         }
-        // Modern: ancient debris → 2 dust (furnace → ancient scrap). Not in IC2 1.117.
+        // Modern: ancient debris → 2 dust (furnace → netherite scrap). Not in IC2 1.117.
         if (item == Items.ANCIENT_DEBRIS) {
             return new ItemStack(ModItems.ANCIENT_SCRAP_DUST.get(), 2);
         }
@@ -186,20 +185,22 @@ public final class MachineRecipes {
     }
 
     /** All mapped recipes for JEI (macerator/extractor/compressor). Recycler is open-ended — not listed. */
-    public static List<Listed> list(MachineKind.Type type) {
+    public static @NonNull List<@NonNull Listed> list(MachineKind.Type type) {
         Function<Item, ItemStack> map = switch (type) {
             case MACERATOR -> MachineRecipes::macerator;
             case EXTRACTOR -> MachineRecipes::extractor;
             case COMPRESSOR -> MachineRecipes::compressor;
-            default -> item -> ItemStack.EMPTY;
+            default -> _ -> ItemStack.EMPTY;
         };
-        List<Listed> recipes = new ArrayList<>();
+        List<@NonNull Listed> recipes = new ArrayList<>();
         for (Item item : BuiltInRegistries.ITEM) {
             ItemStack out = map.apply(item);
             if (out.isEmpty()) {
                 continue;
             }
-            recipes.add(new Listed(new ItemStack(item, consume(type, item)), out.copy()));
+            @SuppressWarnings("null")
+            ItemStack input = new ItemStack(item, consume(type, item));
+            recipes.add(new Listed(input, out.copy()));
         }
         return recipes;
     }

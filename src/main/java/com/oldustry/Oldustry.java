@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 import com.oldustry.data.OldustryData;
+import com.oldustry.item.CfSprayerChargeRecipe;
 import com.oldustry.item.ScrapBoxItem;
 import com.oldustry.network.KeysPayload;
 import com.oldustry.registry.ModBlockEntities;
@@ -48,6 +49,7 @@ public class Oldustry {
         ModFeatures.register(modEventBus);
         ModSounds.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
+        CfSprayerChargeRecipe.register(modEventBus);
         modContainer.registerConfig(ModConfig.Type.COMMON, OldustryConfig.SPEC);
         modEventBus.addListener(OldustryData::gatherClient);
         modEventBus.addListener(Oldustry::setup);

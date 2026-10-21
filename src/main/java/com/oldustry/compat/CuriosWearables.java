@@ -1,5 +1,10 @@
 package com.oldustry.compat;
 
+import java.util.function.Consumer;
+
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import com.oldustry.Oldustry;
 import com.oldustry.item.ElectricArmorItem;
 import com.oldustry.item.ElectricItem;
@@ -10,6 +15,7 @@ import com.oldustry.network.KeysPayload;
 
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -28,7 +34,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 @SuppressWarnings("removal")
 @EventBusSubscriber(modid = Oldustry.MOD_ID)
 public final class CuriosWearables {
-    private static final EntityCapability<IItemHandler, Void> CURIOS_ITEMS = EntityCapability.createVoid(
+    private static final @NonNull EntityCapability<@NonNull IItemHandler, @Nullable Void> CURIOS_ITEMS = EntityCapability.createVoid(
         Identifier.fromNamespaceAndPath("curios", "item_handler"),
         IItemHandler.class
     );
@@ -47,12 +53,7 @@ public final class CuriosWearables {
         }
         for (int i = 0; i < curios.getSlots(); i++) {
             ItemStack stack = curios.getStackInSlot(i);
-            if (stack.getItem() instanceof ElectricArmorItem pack) {
-                // Same as chestplate inventoryTick: charge hotbar/inv/offhand from pack EU.
-                if (!player.getAbilities().instabuild) {
-                    pack.chargePlayer(stack, player);
-                }
-            } else if (stack.getItem() instanceof SolarHelmetItem && player.level() instanceof ServerLevel server) {
+            if (stack.getItem() instanceof SolarHelmetItem && player.level() instanceof ServerLevel server) {
                 SolarHelmetItem.tickCharge(server, player);
             } else if (stack.getItem() instanceof StaticBootsItem) {
                 StaticBootsItem.chargeFromWalk(player, stack);
@@ -61,6 +62,26 @@ public final class CuriosWearables {
                 FuelJetpackItem.tickFlight(player, stack, KeysPayload.jump(player), KeysPayload.forward(player), true);
             }
         }
+    }
+
+    /** Armor feet, then any Curios stack. Magnetizer accepts static boots in the feet accessory. */
+    public static boolean wearingFeet(Player player, TagKey<Item> tag) {
+        if (player.getItemBySlot(EquipmentSlot.FEET).is(tag)) {
+            return true;
+        }
+        if (!ModList.get().isLoaded("curios")) {
+            return false;
+        }
+        IItemHandler curios = player.getCapability(CURIOS_ITEMS);
+        if (curios == null) {
+            return false;
+        }
+        for (int i = 0; i < curios.getSlots(); i++) {
+            if (curios.getStackInSlot(i).is(tag)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static ItemStack chestOrCurios(Player player, Item item) {
@@ -81,6 +102,23 @@ public final class CuriosWearables {
             }
         }
         return ItemStack.EMPTY;
+    }
+
+    /** Worn Curios packs. Tools pull from these in {@code ElectricItem#pay}; this is not a tick. */
+    public static void forEachPack(Player player, Consumer<ItemStack> packs) {
+        if (!ModList.get().isLoaded("curios")) {
+            return;
+        }
+        IItemHandler curios = player.getCapability(CURIOS_ITEMS);
+        if (curios == null) {
+            return;
+        }
+        for (int i = 0; i < curios.getSlots(); i++) {
+            ItemStack stack = curios.getStackInSlot(i);
+            if (stack.getItem() instanceof ElectricArmorItem) {
+                packs.accept(stack);
+            }
+        }
     }
 
     /** Chest pack first, then Curios electric items (batpack on back, etc.). */

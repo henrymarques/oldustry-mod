@@ -23,6 +23,12 @@ public final class ModDataComponents {
         () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT).build()
     );
 
+    /** Remaining construction foam. Sprayer max 1600, pack max 260. Both crafted at 0. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> FOAM = COMPONENTS.register(
+        "foam",
+        () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT).build()
+    );
+
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> FUEL = COMPONENTS.register(
         "fuel",
         () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT).build()

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cf_pellet": {
+    "has_fuel_can": {
       "conditions": {
         "items": [
           {
-            "items": "oldustry:cf_pellet"
+            "items": "oldustry:fuel_can"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_cf_pellet"
+      "has_fuel_can"
     ]
   ],
   "rewards": {

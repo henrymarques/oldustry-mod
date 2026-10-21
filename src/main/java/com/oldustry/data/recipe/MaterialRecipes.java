@@ -139,8 +139,8 @@ final class MaterialRecipes extends RecipeProvider {
         blastAndSmeltTag(OldustryTags.Items.DUSTS_IRON, Items.IRON_INGOT, 0.5f, "iron_dust");
         blastAndSmeltTag(OldustryTags.Items.DUSTS_GOLD, Items.GOLD_INGOT, 0.5f, "gold_dust");
         smelt(ModItems.HYDRATED_COAL_DUST.get(), ModItems.COAL_DUST.get(), 0.1f, "hydrated_coal_dust");
-        // 1 ancient scrap dust → ancient scrap (macerator yields 2 from debris).
-        smelt(ModItems.ANCIENT_SCRAP_DUST.get(), ModItems.ANCIENT_SCRAP.get(), 0.7f, "ancient_scrap_dust");
+        // 1 ancient scrap dust → netherite scrap (macerator yields 2 from debris).
+        smelt(ModItems.ANCIENT_SCRAP_DUST.get(), Items.NETHERITE_SCRAP, 0.7f, "ancient_scrap_dust");
         blastTag(Tags.Items.INGOTS_IRON, ModItems.REFINED_IRON_INGOT.get(), 0.2f, "iron_ingot");
         smelt(ModItems.STICKY_RESIN.get(), ModItems.RUBBER.get(), 0.3f, "sticky_resin");
         smelt(ModItems.RUBBER_LOG.get(), Items.JUNGLE_LOG, 0.1f, "rubber_log");

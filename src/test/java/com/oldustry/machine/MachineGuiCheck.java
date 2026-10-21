@@ -76,6 +76,19 @@ public final class MachineGuiCheck {
         assert MachineGui.slot(MachineKind.CANNER, 1)[0] == 69 && MachineGui.slot(MachineKind.CANNER, 1)[1] == 53;
         assert MachineGui.slot(MachineKind.CANNER, 2)[0] == 119 && MachineGui.slot(MachineKind.CANNER, 2)[1] == 35;
         assert MachineGui.slot(MachineKind.CANNER, 3)[0] == 30 && MachineGui.slot(MachineKind.CANNER, 3)[1] == 45;
+        // JAR ContainerMiner / GuiMiner
+        assert MachineGui.slot(MachineKind.MINER, 0)[0] == 45 && MachineGui.slot(MachineKind.MINER, 0)[1] == 22;
+        assert MachineGui.slot(MachineKind.MINER, 2)[0] == 81 && MachineGui.slot(MachineKind.MINER, 2)[1] == 22;
+        assert MachineGui.slot(MachineKind.MINER, 1)[0] == 117 && MachineGui.slot(MachineKind.MINER, 1)[1] == 22;
+        assert MachineGui.slot(MachineKind.MINER, 3)[0] == 81 && MachineGui.slot(MachineKind.MINER, 3)[1] == 59;
+        int[] minerEu = MachineGui.energyGauge(MachineGui.Overlay.MINER);
+        assert minerEu[0] == 81 && minerEu[1] == 41 && minerEu[2] == 14 && minerEu[3] == 14;
+        // JAR ContainerPump / GuiPump
+        assert MachineGui.slot(MachineKind.PUMP, 0)[0] == 62 && MachineGui.slot(MachineKind.PUMP, 0)[1] == 17;
+        assert MachineGui.slot(MachineKind.PUMP, 2)[0] == 62 && MachineGui.slot(MachineKind.PUMP, 2)[1] == 53;
+        assert MachineGui.slot(MachineKind.PUMP, 1)[0] < 0;
+        int[] pumpEu = MachineGui.energyGauge(MachineGui.Overlay.PUMP);
+        assert pumpEu[0] == 62 && pumpEu[1] == 36 && pumpEu[2] == 14 && pumpEu[3] == 14;
         int[] cannerEu = MachineGui.energyGauge(MachineGui.Overlay.CANNER);
         assert cannerEu[0] == 31 && cannerEu[1] == 27 && cannerEu[2] == 14;
 

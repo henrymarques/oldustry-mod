@@ -11,6 +11,7 @@ import com.oldustry.machine.MachineKind;
 import com.oldustry.registry.ModBlocks;
 import com.oldustry.registry.ModItems;
 
+import net.minecraft.core.Direction;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
@@ -147,16 +148,19 @@ public class OldustryModelProvider extends ModelProvider {
     }
 
     private static void luminator(BlockModelGenerators gens, ItemModelGenerators itemModels, MachineBlock block) {
-        PropertyDispatch<net.minecraft.client.data.models.MultiVariant> facing = PropertyDispatch.initial(MachineBlock.FACING, MachineBlock.ACTIVE)
-            .generate((dir, active) -> {
-                Identifier parent = Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "block/luminator_" + dir.getSerializedName());
+        PropertyDispatch<net.minecraft.client.data.models.MultiVariant> facing = PropertyDispatch.initial(MachineBlock.FACING, MachineBlock.ACTIVE, MachineBlock.COVER)
+            .generate((dir, active, cover) -> {
+                // Floor plate is always the full sheet. JAR ignores fullCover when facing up.
+                boolean sheet = cover && dir != Direction.UP;
+                String shape = dir.getSerializedName() + (sheet ? "_cover" : "");
+                Identifier parent = Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "block/luminator_" + shape);
                 TextureMapping map = new TextureMapping().put(
                     TextureSlot.ALL,
                     active ? TextureMapping.getBlockTexture(block) : TextureMapping.getBlockTexture(block, "_dark")
                 );
                 ModelTemplate template = new ModelTemplate(
                     java.util.Optional.of(parent),
-                    java.util.Optional.of("_" + dir.getSerializedName() + (active ? "_on" : "_off")),
+                    java.util.Optional.of("_" + shape + (active ? "_on" : "_off")),
                     TextureSlot.ALL
                 );
                 return BlockModelGenerators.plainVariant(template.create(block, map, gens.modelOutput));

@@ -1,13 +1,17 @@
 package com.oldustry.data.recipe;
 
+import com.oldustry.item.SprayerItem;
+import com.oldustry.registry.ModDataComponents;
 import com.oldustry.registry.ModItems;
 import com.oldustry.registry.OldustryTags;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.Tags;
 
@@ -117,13 +121,16 @@ final class MiscRecipes extends RecipeProvider {
             .unlockedBy("has_clay_dust", has(OldustryTags.Items.DUSTS_CLAY))
             .save(output);
 
-        shaped(RecipeCategory.TOOLS, ModItems.CF_SPRAYER.get())
-            .define('S', Items.IRON_BARS)
+        // JAR: cobble/cobble/empty, cobble/stick/empty, empty/empty/cobble. Result is an empty tank.
+        shaped(RecipeCategory.TOOLS, new ItemStackTemplate(
+                ModItems.CF_SPRAYER.get(),
+                DataComponentPatch.builder().set(ModDataComponents.FOAM.get(), SprayerItem.CRAFTED).build()))
+            .define('S', Items.COBBLESTONE)
             .define('s', Items.STICK)
             .pattern("SS ")
             .pattern("Ss ")
             .pattern("  S")
-            .unlockedBy("has_iron_bars", has(Items.IRON_BARS))
+            .unlockedBy("has_cobblestone", has(Items.COBBLESTONE))
             .save(output);
 
         shaped(RecipeCategory.REDSTONE, ModItems.REINFORCED_DOOR.get())

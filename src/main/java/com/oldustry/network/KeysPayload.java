@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.jspecify.annotations.NonNull;
+
 import com.oldustry.Oldustry;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -22,7 +24,9 @@ public record KeysPayload(byte flags) implements CustomPacketPayload {
     public static final byte FORWARD = 16;
     public static final byte MODE_CLICK = 32;
 
-    public static final Type<KeysPayload> TYPE = new Type<>(Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "keys"));
+    public static final @NonNull Type<KeysPayload> TYPE = new Type<>(Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "keys"));
+    // StreamCodec.composite uses unannotated Function; the record accessor and byte ctor cannot match it.
+    @SuppressWarnings("null")
     public static final StreamCodec<RegistryFriendlyByteBuf, KeysPayload> STREAM = StreamCodec.composite(
         ByteBufCodecs.BYTE,
         KeysPayload::flags,
@@ -68,7 +72,7 @@ public record KeysPayload(byte flags) implements CustomPacketPayload {
     }
 
     @Override
-    public Type<? extends CustomPacketPayload> type() {
+    public @NonNull Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
 }

@@ -27,10 +27,11 @@ public class ScannerItem extends ElectricItem {
     /** OD=2 / OV=4 on success; 0 if not enough EU. Drains 50 / 250. IC2 startLayerScan. */
     public int startLayerScan(ItemStack stack) {
         int cost = valuable ? 250 : 50;
+        // Machine slot: the scanner pays its own EU. No player pack.
         if (energy(stack) < cost) {
             return 0;
         }
-        discharge(stack, cost, 99);
+        spend(stack, cost);
         return valuable ? 4 : 2;
     }
 
@@ -42,11 +43,13 @@ public class ScannerItem extends ElectricItem {
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         int cost = valuable ? 250 : 50;
-        if (energy(stack) < cost) {
+        if (!canPay(stack, cost, player)) {
             return InteractionResult.FAIL;
         }
         if (!level.isClientSide()) {
-            discharge(stack, cost, 99);
+            if (!pay(stack, cost, player)) {
+                return InteractionResult.FAIL;
+            }
             int range = valuable ? 4 : 2;
             int score = 0;
             int scanned = 0;
