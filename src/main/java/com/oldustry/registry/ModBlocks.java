@@ -9,6 +9,7 @@ import com.oldustry.block.FoamBlock;
 import com.oldustry.block.IronFenceBlock;
 import com.oldustry.block.MachineBlock;
 import com.oldustry.block.MachineCasingBlock;
+import com.oldustry.block.ItntBlock;
 import com.oldustry.block.MiningPipeBlock;
 import com.oldustry.block.ResinSheetBlock;
 import com.oldustry.block.RubberLogBlock;
@@ -140,16 +141,22 @@ public final class ModBlocks {
     public static final DeferredBlock<MachineBlock> ELECTROLYZER = machine(MachineKind.ELECTROLYZER);
     public static final DeferredBlock<MachineBlock> MAGNETIZER = machine(MachineKind.MAGNETIZER);
     public static final DeferredBlock<MachineBlock> INDUCTION = machine(MachineKind.INDUCTION);
+    public static final DeferredBlock<ItntBlock> ITNT = BLOCKS.registerBlock(
+        "itnt",
+        ItntBlock::new,
+        p -> p.mapColor(MapColor.FIRE).instabreak().sound(SoundType.GRASS)
+    );
 
     public static final DeferredBlock<MiningPipeBlock> MINING_PIPE = BLOCKS.registerBlock(
         "mining_pipe",
         props -> new MiningPipeBlock(false, props),
         p -> p.mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(0.5f).sound(SoundType.METAL).noOcclusion().noCollision()
     );
+    // JAR BlockMiningTip: default full cube, hardness 6, resistance 10. Not the pipe column.
     public static final DeferredBlock<MiningPipeBlock> MINING_PIPE_TIP = BLOCKS.registerBlock(
         "mining_pipe_tip",
         props -> new MiningPipeBlock(true, props),
-        p -> p.mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(0.5f).sound(SoundType.METAL).noOcclusion().noCollision()
+        p -> p.mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(6.0f, 10.0f).sound(SoundType.METAL)
     );
 
     public static final DeferredBlock<CableBlock> INSULATED_COPPER_CABLE = cable(CableKind.COPPER);

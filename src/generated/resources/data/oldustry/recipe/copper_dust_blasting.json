@@ -1,6 +1,5 @@
 {
   "type": "minecraft:blasting",
-  "experience": 0.5,
   "ingredient": "#c:dusts/copper",
   "result": {
     "id": "minecraft:copper_ingot"

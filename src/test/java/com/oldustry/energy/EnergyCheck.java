@@ -211,6 +211,15 @@ public final class EnergyCheck {
         assert ElectricCharge.chargeAtTier(0, 200, re, 1, true) == 200;
         assert ElectricCharge.chargeAtTier(0, 200, tier2, 1, true) == 0;
         assert ElectricCharge.chargeAtTier(0, 200, tier2, 2, false) == 50;
+        // JAR TileEntityMiner.chargeTools: offer is the whole buffer; item transfer caps it.
+        // Scanner first at tier 2 (50), drill second at tier 1 (100). OV tier 2 refuses the drill's tier-1 offer.
+        ElectricCharge.Spec scanner = new ElectricCharge.Spec(10000, 50, 1, true);
+        assert ElectricCharge.chargeAtTier(0, 1000, scanner, 2, false) == 50;
+        assert ElectricCharge.chargeAtTier(0, 1000, re, 1, false) == 100;
+        assert ElectricCharge.chargeAtTier(0, 1000, tier2, 1, false) == 0;
+        // JAR InvSlotDischarge.discharge(room, ignoreLimit=true): a tier-1 cell fills the 1000 buf in one tick.
+        assert ElectricCharge.dischargeIgnoreTransfer(10000, 1000, re, 1) == 1000;
+        assert ElectricCharge.dischargeIgnoreTransfer(10000, 1000, tier2, 1) == 0;
         // JAR chargeFromArmor: one use dumps the tool full (transfer 100 does not cap it). Tier still gates.
         ElectricCharge.Spec pack = new ElectricCharge.Spec(60000, 100, 1, true);
         ElectricCharge.Spec drill = new ElectricCharge.Spec(10000, 100, 1, true);

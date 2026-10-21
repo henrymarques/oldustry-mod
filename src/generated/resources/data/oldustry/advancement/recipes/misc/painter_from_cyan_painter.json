@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cyan_painter": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:cyan_painter"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:painter_from_cyan_painter"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cyan_painter"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:painter_from_cyan_painter"
+    ]
+  }
+}

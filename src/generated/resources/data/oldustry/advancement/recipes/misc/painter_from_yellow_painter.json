@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:painter_from_yellow_painter"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_yellow_painter": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:yellow_painter"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_yellow_painter"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:painter_from_yellow_painter"
+    ]
+  }
+}

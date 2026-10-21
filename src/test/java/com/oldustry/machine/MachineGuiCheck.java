@@ -81,6 +81,8 @@ public final class MachineGuiCheck {
         assert MachineGui.slot(MachineKind.MINER, 2)[0] == 81 && MachineGui.slot(MachineKind.MINER, 2)[1] == 22;
         assert MachineGui.slot(MachineKind.MINER, 1)[0] == 117 && MachineGui.slot(MachineKind.MINER, 1)[1] == 22;
         assert MachineGui.slot(MachineKind.MINER, 3)[0] == 81 && MachineGui.slot(MachineKind.MINER, 3)[1] == 59;
+        assert MachineGui.slot(MachineKind.MINER, 4)[0] < 0;
+        assert MachineGui.role(MachineKind.MINER, 4) == MachineGui.Role.HIDDEN;
         int[] minerEu = MachineGui.energyGauge(MachineGui.Overlay.MINER);
         assert minerEu[0] == 81 && minerEu[1] == 41 && minerEu[2] == 14 && minerEu[3] == 14;
         // JAR ContainerPump / GuiPump

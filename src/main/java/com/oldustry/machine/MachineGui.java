@@ -91,13 +91,12 @@ public final class MachineGui {
             case SOLAR, WIND -> slot == 1 ? Role.CHARGE : Role.HIDDEN;
             case WATER -> slot == 0 ? Role.FUEL : slot == 1 ? Role.CHARGE : Role.HIDDEN;
             case STORAGE -> slot == 0 ? Role.CHARGE : slot == 1 ? Role.DISCHARGE : Role.HIDDEN;
-            // Miner: drill=0, scanner=1, pipe=2, discharge=3, out=4-6
+            // Miner: drill=0, scanner=1, pipe=2, discharge=3. Drops are ejected, not stored.
             case MINING -> switch (slot) {
                 case 0 -> Role.INPUT;   // drill
                 case 1 -> Role.INPUT;   // scanner
                 case 2 -> Role.INPUT;   // pipe supply
                 case 3 -> Role.DISCHARGE;
-                case 4, 5, 6 -> Role.OUTPUT;
                 default -> Role.HIDDEN;
             };
             // Pump: empty_cell=0, output=1, discharge=2
@@ -158,15 +157,11 @@ public final class MachineGui {
                 default -> hidden();
             };
             // JAR ContainerMiner: drill 45,22 / pipe 81,22 / scanner 117,22; discharge 81,59.
-            // Outputs 4–6 are the drop buffer (JAR ejected). Left of the battery, off the painted holes.
             case MINING -> switch (index) {
                 case 0 -> xy(45, 22);
                 case 1 -> xy(117, 22);
                 case 2 -> xy(81, 22);
                 case 3 -> xy(81, 59);
-                case 4 -> xy(8, 53);
-                case 5 -> xy(26, 53);
-                case 6 -> xy(44, 53);
                 default -> hidden();
             };
             // JAR ContainerPump: cell 62,17; discharge 62,53. Filled container is ejected, not a slot.

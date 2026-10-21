@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_coffee_mug_cold": {
+    "has_coffee_mug_dark": {
       "conditions": {
         "items": [
           {
-            "items": "oldustry:coffee_mug_cold"
+            "items": "oldustry:coffee_mug_dark"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_coffee_mug_cold"
+      "has_coffee_mug_dark"
     ]
   ],
   "rewards": {

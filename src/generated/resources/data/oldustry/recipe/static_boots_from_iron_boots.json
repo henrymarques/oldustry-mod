@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "oldustry:insulated_copper_cable",
+    "H": "minecraft:iron_boots",
+    "S": "#minecraft:wool"
+  },
+  "pattern": [
+    " H ",
+    " S ",
+    "CCC"
+  ],
+  "result": {
+    "id": "oldustry:static_boots"
+  }
+}

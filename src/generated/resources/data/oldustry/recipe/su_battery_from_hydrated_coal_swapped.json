@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:hydrated_coal_dust",
+    "R": "minecraft:redstone",
+    "c": "oldustry:insulated_copper_cable"
+  },
+  "pattern": [
+    "c",
+    "R",
+    "C"
+  ],
+  "result": {
+    "count": 8,
+    "id": "oldustry:su_battery"
+  }
+}

@@ -69,6 +69,15 @@ final class EquipmentRecipes extends RecipeProvider {
             .pattern("AIA")
             .unlockedBy("has_alloy", has(ModItems.ADVANCED_ALLOY.get()))
             .save(output);
+        shaped(RecipeCategory.COMBAT, ModItems.COMPOSITE_VEST.get())
+            .define('A', ModItems.ADVANCED_ALLOY.get())
+            .define('L', Items.LEATHER_CHESTPLATE)
+            .define('I', Items.IRON_CHESTPLATE)
+            .pattern("A A")
+            .pattern("AIA")
+            .pattern("ALA")
+            .unlockedBy("has_alloy", has(ModItems.ADVANCED_ALLOY.get()))
+            .save(output, OldustryRecipeProvider.id("composite_vest_swapped"));
 
         shaped(RecipeCategory.TOOLS, ModItems.PAINTER.get())
             .define('C', ItemTags.WOOL)
@@ -85,6 +94,11 @@ final class EquipmentRecipes extends RecipeProvider {
             .group("painter")
             .unlockedBy("has_painter", has(ModItems.PAINTER.get()))
             .save(output));
+        ModItems.PAINTERS.forEach(painter -> shapeless(RecipeCategory.MISC, ModItems.PAINTER.get())
+            .requires(painter.get())
+            .group("painter")
+            .unlockedBy("has_" + painter.getId().getPath(), has(painter.get()))
+            .save(output, OldustryRecipeProvider.id("painter_from_" + painter.getId().getPath())));
 
         shaped(RecipeCategory.TOOLS, ModItems.TOOLBOX.get())
             .define('I', OldustryTags.Items.INGOTS_REFINED_IRON)

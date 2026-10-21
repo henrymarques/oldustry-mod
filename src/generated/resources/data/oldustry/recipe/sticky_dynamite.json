@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "D": "oldustry:dynamite",
+    "R": "oldustry:sticky_resin"
+  },
+  "pattern": [
+    "DDD",
+    "DRD",
+    "DDD"
+  ],
+  "result": {
+    "count": 8,
+    "id": "oldustry:sticky_dynamite"
+  }
+}

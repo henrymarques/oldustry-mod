@@ -2,14 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "C": "oldustry:electronic_circuit",
-    "I": "#c:ingots/refined_iron",
     "M": "oldustry:machine_casing",
-    "P": "oldustry:mining_pipe_tip"
+    "P": "oldustry:mining_pipe"
   },
   "pattern": [
-    "ICI",
-    "PMP",
-    "ICI"
+    "CMC",
+    " P ",
+    " P "
   ],
   "result": {
     "id": "oldustry:miner"

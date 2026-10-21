@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "oldustry:item/luminator"
+    "model": "oldustry:block/luminator_column"
   }
 }

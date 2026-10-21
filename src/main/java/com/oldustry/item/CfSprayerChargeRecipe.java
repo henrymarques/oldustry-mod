@@ -28,6 +28,7 @@ public class CfSprayerChargeRecipe extends CustomRecipe {
         SERIALIZERS.register("cf_sprayer_charge", () -> new RecipeSerializer<>(CODEC, STREAM_CODEC));
 
     public static void register(IEventBus bus) {
+        ObsidianCellsRecipe.bootstrap();
         SERIALIZERS.register(bus);
     }
 

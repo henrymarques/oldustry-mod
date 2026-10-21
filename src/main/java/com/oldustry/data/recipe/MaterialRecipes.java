@@ -28,7 +28,7 @@ final class MaterialRecipes extends RecipeProvider {
         nineBlockStorageRecipes(RecipeCategory.MISC, ModItems.BRONZE_INGOT.get(), RecipeCategory.BUILDING_BLOCKS, ModItems.BRONZE_BLOCK.get());
         nineBlockStorageRecipes(RecipeCategory.MISC, ModItems.URANIUM_INGOT.get(), RecipeCategory.BUILDING_BLOCKS, ModItems.URANIUM_BLOCK.get());
 
-        shapeless(RecipeCategory.MISC, ModItems.BRONZE_DUST.get(), 4)
+        shapeless(RecipeCategory.MISC, ModItems.BRONZE_DUST.get(), 2)
             .requires(OldustryTags.Items.DUSTS_COPPER)
             .requires(OldustryTags.Items.DUSTS_COPPER)
             .requires(OldustryTags.Items.DUSTS_COPPER)
@@ -50,6 +50,14 @@ final class MaterialRecipes extends RecipeProvider {
             .pattern("CTC")
             .unlockedBy("has_copper_dust", has(OldustryTags.Items.DUSTS_COPPER))
             .save(output, OldustryRecipeProvider.id("small_iron_dust_from_copper_tin"));
+        shaped(RecipeCategory.MISC, ModItems.SMALL_IRON_DUST.get())
+            .define('C', OldustryTags.Items.DUSTS_COPPER)
+            .define('T', OldustryTags.Items.DUSTS_TIN)
+            .pattern("TCT")
+            .pattern("CTC")
+            .pattern("TCT")
+            .unlockedBy("has_copper_dust", has(OldustryTags.Items.DUSTS_COPPER))
+            .save(output, OldustryRecipeProvider.id("small_iron_dust_from_tin_copper"));
 
         shaped(RecipeCategory.MISC, ModItems.CARBON_FIBER.get())
             .define('C', OldustryTags.Items.DUSTS_COAL)
@@ -107,6 +115,24 @@ final class MaterialRecipes extends RecipeProvider {
             .pattern("CCC")
             .unlockedBy("has_coal_dust", has(OldustryTags.Items.DUSTS_COAL))
             .save(output);
+        shaped(RecipeCategory.MISC, ModItems.HYDRATED_COAL_DUST.get(), 8)
+            .define('C', OldustryTags.Items.DUSTS_COAL)
+            .define('W', ModItems.WATER_CELL.get())
+            .pattern("CCC")
+            .pattern("CWC")
+            .pattern("CCC")
+            .unlockedBy("has_coal_dust", has(OldustryTags.Items.DUSTS_COAL))
+            .save(output, OldustryRecipeProvider.id("hydrated_coal_dust_from_cell"));
+        shapeless(RecipeCategory.MISC, ModItems.HYDRATED_COAL_DUST.get())
+            .requires(OldustryTags.Items.DUSTS_COAL)
+            .requires(Items.WATER_BUCKET)
+            .unlockedBy("has_coal_dust", has(OldustryTags.Items.DUSTS_COAL))
+            .save(output, OldustryRecipeProvider.id("hydrated_coal_dust_single"));
+        shapeless(RecipeCategory.MISC, ModItems.HYDRATED_COAL_DUST.get())
+            .requires(OldustryTags.Items.DUSTS_COAL)
+            .requires(ModItems.WATER_CELL.get())
+            .unlockedBy("has_coal_dust", has(OldustryTags.Items.DUSTS_COAL))
+            .save(output, OldustryRecipeProvider.id("hydrated_coal_dust_single_from_cell"));
 
         shaped(RecipeCategory.MISC, ModItems.INDUSTRIAL_CREDIT.get(), 16)
             .define('I', OldustryTags.Items.INGOTS_REFINED_IRON)
@@ -133,15 +159,16 @@ final class MaterialRecipes extends RecipeProvider {
 
         blastAndSmeltTag(OldustryTags.Items.ORES_TIN, ModItems.TIN_INGOT.get(), 0.5f, "tin_ore");
         blastAndSmeltTag(OldustryTags.Items.RAW_MATERIALS_TIN, ModItems.TIN_INGOT.get(), 0.5f, "raw_tin");
-        blastAndSmeltTag(OldustryTags.Items.DUSTS_TIN, ModItems.TIN_INGOT.get(), 0.5f, "tin_dust");
-        blastAndSmeltTag(OldustryTags.Items.DUSTS_BRONZE, ModItems.BRONZE_INGOT.get(), 0.5f, "bronze_dust");
-        blastAndSmeltTag(OldustryTags.Items.DUSTS_COPPER, Items.COPPER_INGOT, 0.5f, "copper_dust");
-        blastAndSmeltTag(OldustryTags.Items.DUSTS_IRON, Items.IRON_INGOT, 0.5f, "iron_dust");
-        blastAndSmeltTag(OldustryTags.Items.DUSTS_GOLD, Items.GOLD_INGOT, 0.5f, "gold_dust");
-        smelt(ModItems.HYDRATED_COAL_DUST.get(), ModItems.COAL_DUST.get(), 0.1f, "hydrated_coal_dust");
+        blastAndSmeltTag(OldustryTags.Items.DUSTS_TIN, ModItems.TIN_INGOT.get(), 0.0f, "tin_dust");
+        blastAndSmeltTag(OldustryTags.Items.DUSTS_BRONZE, ModItems.BRONZE_INGOT.get(), 0.0f, "bronze_dust");
+        blastAndSmeltTag(OldustryTags.Items.DUSTS_COPPER, Items.COPPER_INGOT, 0.0f, "copper_dust");
+        blastAndSmeltTag(OldustryTags.Items.DUSTS_IRON, Items.IRON_INGOT, 0.0f, "iron_dust");
+        blastAndSmeltTag(OldustryTags.Items.DUSTS_GOLD, Items.GOLD_INGOT, 0.0f, "gold_dust");
+        smelt(ModItems.HYDRATED_COAL_DUST.get(), ModItems.COAL_DUST.get(), 0.0f, "hydrated_coal_dust");
         // 1 ancient scrap dust → netherite scrap (macerator yields 2 from debris).
         smelt(ModItems.ANCIENT_SCRAP_DUST.get(), Items.NETHERITE_SCRAP, 0.7f, "ancient_scrap_dust");
         blastTag(Tags.Items.INGOTS_IRON, ModItems.REFINED_IRON_INGOT.get(), 0.2f, "iron_ingot");
+        smeltTag(Tags.Items.INGOTS_IRON, ModItems.REFINED_IRON_INGOT.get(), 0.2f, "iron_ingot");
         smelt(ModItems.STICKY_RESIN.get(), ModItems.RUBBER.get(), 0.3f, "sticky_resin");
         smelt(ModItems.RUBBER_LOG.get(), Items.JUNGLE_LOG, 0.1f, "rubber_log");
         smelt(ModItems.COFFEE_MUG_COLD.get(), ModItems.COFFEE_MUG_DARK.get(), 0.1f, "coffee_mug_cold");

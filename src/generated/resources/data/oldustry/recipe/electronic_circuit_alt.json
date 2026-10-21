@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:insulated_copper_cable",
+    "I": "#c:ingots/refined_iron",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "CRC",
+    "CIC",
+    "CRC"
+  ],
+  "result": {
+    "id": "oldustry:electronic_circuit"
+  }
+}

@@ -1,15 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "T": "#c:ingots/tin"
+    "I": "#c:ingots/refined_iron",
+    "T": "oldustry:treetap"
   },
   "pattern": [
-    "T T",
-    "T T",
-    "T T"
+    "I I",
+    "I I",
+    "ITI"
   ],
   "result": {
-    "count": 6,
+    "count": 8,
     "id": "oldustry:mining_pipe"
   }
 }

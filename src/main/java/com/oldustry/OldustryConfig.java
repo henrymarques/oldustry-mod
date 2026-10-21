@@ -18,6 +18,7 @@ public final class OldustryConfig {
     public static final ModConfigSpec.BooleanValue MINER_LAPOTRON;
     public static final ModConfigSpec.BooleanValue SOUNDS_ENABLED;
     public static final ModConfigSpec.IntValue SOUND_SOURCE_LIMIT;
+    public static final ModConfigSpec.BooleanValue CRAFT_ITNT;
 
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
@@ -38,6 +39,7 @@ public final class OldustryConfig {
         MINER_LAPOTRON = b.comment("Allow tier-3 (lapotron) input on the Miner (default false = tier-1 RE battery)").define("enableMinerLapotron", false);
         SOUNDS_ENABLED = b.define("soundsEnabled", true);
         SOUND_SOURCE_LIMIT = b.defineInRange("soundSourceLimit", 32, 0, 256);
+        CRAFT_ITNT = b.comment("Industrial TNT recipes (flint + TNT). Default on, same as the other enableCrafting* flags.").define("enableCraftingITnt", true);
         SPEC = b.build();
     }
 

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_orange_painter": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:orange_painter"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:painter_from_orange_painter"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_orange_painter"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:painter_from_orange_painter"
+    ]
+  }
+}

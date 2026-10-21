@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "oldustry:itnt",
+    "minecraft:string"
+  ],
+  "result": {
+    "count": 8,
+    "id": "oldustry:dynamite"
+  }
+}

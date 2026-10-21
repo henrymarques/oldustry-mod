@@ -96,7 +96,7 @@ public final class ModItems {
     public static final DeferredItem<BlockItem> MAGNETIZER = ITEMS.registerSimpleBlockItem(ModBlocks.MAGNETIZER);
     public static final DeferredItem<BlockItem> INDUCTION = ITEMS.registerSimpleBlockItem(ModBlocks.INDUCTION);
     public static final DeferredItem<BlockItem> MINING_PIPE = ITEMS.registerSimpleBlockItem(ModBlocks.MINING_PIPE);
-    public static final DeferredItem<BlockItem> MINING_PIPE_TIP = ITEMS.registerSimpleBlockItem(ModBlocks.MINING_PIPE_TIP);
+    public static final DeferredItem<BlockItem> ITNT = ITEMS.registerSimpleBlockItem(ModBlocks.ITNT);
     public static final DeferredItem<BlockItem> INSULATED_COPPER_CABLE = ITEMS.registerSimpleBlockItem(ModBlocks.INSULATED_COPPER_CABLE);
     public static final DeferredItem<BlockItem> COPPER_CABLE = ITEMS.registerSimpleBlockItem(ModBlocks.COPPER_CABLE);
     public static final DeferredItem<BlockItem> GOLD_CABLE = ITEMS.registerSimpleBlockItem(ModBlocks.GOLD_CABLE);
@@ -192,7 +192,9 @@ public final class ModItems {
     public static final DeferredItem<Item> HYDRATED_COAL_CLUMP = item("hydrated_coal_clump");
 
     public static final DeferredItem<Item> EMPTY_CELL = item("empty_cell");
-    public static final DeferredItem<Item> WATER_CELL = item("water_cell");
+    /** Empty cell comes back from liquid crafting. Obsidian uses {@code ObsidianCellsRecipe} and keeps the cells. */
+    public static final DeferredItem<Item> WATER_CELL = ITEMS.registerItem("water_cell",
+        props -> new Item(props.craftRemainder(EMPTY_CELL.get())));
     public static final DeferredItem<Item> LAVA_CELL = item("lava_cell");
     public static final DeferredItem<Item> AIR_CELL = item("air_cell");
     public static final DeferredItem<Item> COAL_CELL = item("coal_cell");

@@ -30,9 +30,6 @@ public final class MachineRecipes {
         if (item == Items.GOLD_ORE || item == Items.DEEPSLATE_GOLD_ORE || item == Items.NETHER_GOLD_ORE || item == Items.RAW_GOLD) {
             return new ItemStack(ModItems.GOLD_DUST.get(), item == Items.RAW_GOLD ? 1 : 2);
         }
-        if (item == Items.COAL_ORE || item == Items.DEEPSLATE_COAL_ORE) {
-            return new ItemStack(ModItems.COAL_DUST.get(), 2);
-        }
         if (item == ModItems.TIN_ORE.get() || item == ModItems.RAW_TIN.get()) {
             return new ItemStack(ModItems.TIN_DUST.get(), item == ModItems.RAW_TIN.get() ? 1 : 2);
         }
@@ -51,8 +48,8 @@ public final class MachineRecipes {
         if (item == ModItems.TIN_INGOT.get()) {
             return new ItemStack(ModItems.TIN_DUST.get());
         }
-        if (item == ModItems.BRONZE_INGOT.get()) {
-            return new ItemStack(ModItems.BRONZE_DUST.get());
+        if (item == Items.STONE) {
+            return new ItemStack(Items.COBBLESTONE);
         }
         if (item == Items.COBBLESTONE) {
             return new ItemStack(Items.SAND);
@@ -81,14 +78,20 @@ public final class MachineRecipes {
         if (item == Items.FERMENTED_SPIDER_EYE) {
             return new ItemStack(ModItems.GRIN_POWDER.get());
         }
-        if (item == Items.NETHERRACK) {
-            return new ItemStack(Items.QUARTZ, 1);
+        if (item == Items.GLOWSTONE) {
+            return new ItemStack(Items.GLOWSTONE_DUST, 4);
         }
-        if (item == Items.NETHER_BRICKS || item == Items.NETHER_BRICK) {
-            return new ItemStack(Items.QUARTZ, 2);
+        if (item == Items.ICE) {
+            return new ItemStack(Items.SNOWBALL);
+        }
+        if (item == Items.BLAZE_ROD) {
+            return new ItemStack(Items.BLAZE_POWDER, 5);
         }
         if (item == Items.NETHER_QUARTZ_ORE) {
             return new ItemStack(Items.QUARTZ, 4);
+        }
+        if (item == Items.QUARTZ_BLOCK) {
+            return new ItemStack(Items.QUARTZ, 6);
         }
         // Modern: ancient debris → 2 dust (furnace → netherite scrap). Not in IC2 1.117.
         if (item == Items.ANCIENT_DEBRIS) {
@@ -132,10 +135,10 @@ public final class MachineRecipes {
             return new ItemStack(Items.SANDSTONE);
         }
         if (item == Items.SNOWBALL) {
-            return new ItemStack(Blocks.SNOW_BLOCK);
+            return new ItemStack(Blocks.ICE);
         }
-        if (item == Items.SNOW_BLOCK) {
-            return new ItemStack(Items.ICE);
+        if (item == Items.NETHERRACK) {
+            return new ItemStack(Blocks.NETHER_BRICKS);
         }
         if (item == Items.COPPER_INGOT) {
             return new ItemStack(ModItems.DENSE_COPPER_PLATE.get());
@@ -171,7 +174,7 @@ public final class MachineRecipes {
         if (type == MachineKind.Type.COMPRESSOR && item == Items.COPPER_INGOT) {
             return 8;
         }
-        if (type == MachineKind.Type.COMPRESSOR && item == Items.SNOW_BLOCK) {
+        if (type == MachineKind.Type.COMPRESSOR && item == Items.NETHERRACK) {
             return 3;
         }
         return 1;

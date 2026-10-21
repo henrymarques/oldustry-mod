@@ -1,5 +1,5 @@
 {
-  "parent": "oldustry:block/mining_pipe_column",
+  "parent": "minecraft:block/cube_all",
   "textures": {
     "all": "oldustry:block/mining_pipe_tip"
   }

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    "oldustry:coffee_mug_cold",
+    "oldustry:coffee_mug_dark",
     "minecraft:sugar",
     "minecraft:milk_bucket"
   ],

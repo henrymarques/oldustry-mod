@@ -212,12 +212,22 @@ tasks.register('pointExplosionCheck', JavaExec) {
     enableAssertions = true
 }
 
+tasks.register('ic2RayCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks IC2 ray absorption, drop threshold and anchor hits'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.explosion.Ic2RayCheck'
+    enableAssertions = true
+}
+
 tasks.named('test', Test).configure {
     failOnNoDiscoveredTests = false
     dependsOn tasks.named('rubberTapCheck')
     dependsOn tasks.named('energyCheck')
     dependsOn tasks.named('machineGuiCheck')
     dependsOn tasks.named('pointExplosionCheck')
+    dependsOn tasks.named('ic2RayCheck')
     dependsOn tasks.named('cfChargeCheck')
 }
 

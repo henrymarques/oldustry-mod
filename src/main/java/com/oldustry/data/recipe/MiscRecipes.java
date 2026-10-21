@@ -41,12 +41,18 @@ final class MiscRecipes extends RecipeProvider {
             .requires(Items.WATER_BUCKET)
             .unlockedBy("has_coffee_powder", has(ModItems.COFFEE_POWDER.get()))
             .save(output);
+        shapeless(RecipeCategory.MISC, ModItems.COFFEE_MUG_COLD.get())
+            .requires(ModItems.STONE_MUG.get())
+            .requires(ModItems.COFFEE_POWDER.get())
+            .requires(ModItems.WATER_CELL.get())
+            .unlockedBy("has_coffee_powder", has(ModItems.COFFEE_POWDER.get()))
+            .save(output, OldustryRecipeProvider.id("coffee_mug_cold_from_cell"));
 
         shapeless(RecipeCategory.MISC, ModItems.COFFEE_MUG.get())
-            .requires(ModItems.COFFEE_MUG_COLD.get())
+            .requires(ModItems.COFFEE_MUG_DARK.get())
             .requires(Items.SUGAR)
             .requires(Items.MILK_BUCKET)
-            .unlockedBy("has_coffee_mug_cold", has(ModItems.COFFEE_MUG_COLD.get()))
+            .unlockedBy("has_coffee_mug_dark", has(ModItems.COFFEE_MUG_DARK.get()))
             .save(output);
 
         shapeless(RecipeCategory.MISC, ModItems.FERTILIZER.get(), 2)
@@ -113,13 +119,20 @@ final class MiscRecipes extends RecipeProvider {
             .unlockedBy("has_furnace", has(Items.FURNACE))
             .save(output, OldustryRecipeProvider.id("improved_furnace_from_furnace"));
 
-        shapeless(RecipeCategory.MISC, ModItems.CF_PELLET.get(), 3)
+        shapeless(RecipeCategory.MISC, ModItems.CONSTRUCTION_FOAM.get(), 3)
             .requires(OldustryTags.Items.DUSTS_CLAY)
             .requires(Items.WATER_BUCKET)
             .requires(Items.REDSTONE)
             .requires(OldustryTags.Items.DUSTS_COAL)
             .unlockedBy("has_clay_dust", has(OldustryTags.Items.DUSTS_CLAY))
             .save(output);
+        shapeless(RecipeCategory.MISC, ModItems.CONSTRUCTION_FOAM.get(), 3)
+            .requires(OldustryTags.Items.DUSTS_CLAY)
+            .requires(ModItems.WATER_CELL.get())
+            .requires(Items.REDSTONE)
+            .requires(OldustryTags.Items.DUSTS_COAL)
+            .unlockedBy("has_clay_dust", has(OldustryTags.Items.DUSTS_CLAY))
+            .save(output, OldustryRecipeProvider.id("construction_foam_from_cell"));
 
         // JAR: cobble/cobble/empty, cobble/stick/empty, empty/empty/cobble. Result is an empty tank.
         shaped(RecipeCategory.TOOLS, new ItemStackTemplate(
@@ -158,6 +171,14 @@ final class MiscRecipes extends RecipeProvider {
             .pattern("GAG")
             .unlockedBy("has_alloy", has(ModItems.ADVANCED_ALLOY.get()))
             .save(output);
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModItems.REINFORCED_GLASS.get(), 7)
+            .define('G', Items.GLASS)
+            .define('A', ModItems.ADVANCED_ALLOY.get())
+            .pattern("GGG")
+            .pattern("AGA")
+            .pattern("GGG")
+            .unlockedBy("has_alloy", has(ModItems.ADVANCED_ALLOY.get()))
+            .save(output, OldustryRecipeProvider.id("reinforced_glass_rows"));
 
         shaped(RecipeCategory.DECORATIONS, ModItems.WOODEN_SCAFFOLD.get(), 16)
             .define('P', ItemTags.PLANKS)
@@ -241,6 +262,16 @@ final class MiscRecipes extends RecipeProvider {
             .pattern("RGR")
             .unlockedBy("has_electronic_circuit", has(ModItems.ELECTRONIC_CIRCUIT.get()))
             .save(output);
+        shaped(RecipeCategory.MISC, ModItems.ADVANCED_CIRCUIT.get())
+            .define('R', Items.REDSTONE)
+            .define('G', Items.GLOWSTONE_DUST)
+            .define('L', Items.LAPIS_LAZULI)
+            .define('C', ModItems.ELECTRONIC_CIRCUIT.get())
+            .pattern("RLR")
+            .pattern("GCG")
+            .pattern("RLR")
+            .unlockedBy("has_electronic_circuit", has(ModItems.ELECTRONIC_CIRCUIT.get()))
+            .save(output, OldustryRecipeProvider.id("advanced_circuit_alt"));
 
         shaped(RecipeCategory.MISC, ModItems.IRIDIUM_PLATE.get())
             .define('I', ModItems.IRIDIUM_ORE.get())
@@ -251,6 +282,15 @@ final class MiscRecipes extends RecipeProvider {
             .pattern("IAI")
             .unlockedBy("has_iridium_ore", has(ModItems.IRIDIUM_ORE.get()))
             .save(output);
+        shaped(RecipeCategory.MISC, ModItems.IRIDIUM_PLATE.get())
+            .define('I', ModItems.IRIDIUM_ORE.get())
+            .define('A', ModItems.ADVANCED_ALLOY.get())
+            .define('D', ModItems.INDUSTRIAL_DIAMOND.get())
+            .pattern("IAI")
+            .pattern("ADA")
+            .pattern("IAI")
+            .unlockedBy("has_iridium_ore", has(ModItems.IRIDIUM_ORE.get()))
+            .save(output, OldustryRecipeProvider.id("iridium_plate_from_industrial_diamond"));
 
         shaped(RecipeCategory.MISC, Items.BUCKET)
             .define('T', OldustryTags.Items.INGOTS_TIN)
@@ -282,5 +322,35 @@ final class MiscRecipes extends RecipeProvider {
             .pattern("B B")
             .unlockedBy("has_bronze", has(OldustryTags.Items.INGOTS_BRONZE))
             .save(output, OldustryRecipeProvider.id("rail_from_bronze"));
+
+        shaped(RecipeCategory.MISC, ModItems.ITNT.get(), 4)
+            .define('F', Items.FLINT)
+            .define('T', Items.TNT)
+            .pattern("FFF")
+            .pattern("TTT")
+            .pattern("FFF")
+            .unlockedBy("has_tnt", has(Items.TNT))
+            .save(output, OldustryRecipeProvider.id("itnt_rows"));
+        shaped(RecipeCategory.MISC, ModItems.ITNT.get(), 4)
+            .define('F', Items.FLINT)
+            .define('T', Items.TNT)
+            .pattern("FTF")
+            .pattern("FTF")
+            .pattern("FTF")
+            .unlockedBy("has_tnt", has(Items.TNT))
+            .save(output, OldustryRecipeProvider.id("itnt_columns"));
+        shapeless(RecipeCategory.MISC, ModItems.DYNAMITE.get(), 8)
+            .requires(ModItems.ITNT.get())
+            .requires(Items.STRING)
+            .unlockedBy("has_itnt", has(ModItems.ITNT.get()))
+            .save(output, OldustryRecipeProvider.id("dynamite_from_itnt"));
+        shaped(RecipeCategory.MISC, ModItems.STICKY_DYNAMITE.get(), 8)
+            .define('D', ModItems.DYNAMITE.get())
+            .define('R', ModItems.STICKY_RESIN.get())
+            .pattern("DDD")
+            .pattern("DRD")
+            .pattern("DDD")
+            .unlockedBy("has_dynamite", has(ModItems.DYNAMITE.get()))
+            .save(output);
     }
 }

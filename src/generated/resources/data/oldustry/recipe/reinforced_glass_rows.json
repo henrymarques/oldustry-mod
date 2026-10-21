@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": "oldustry:advanced_alloy",
+    "G": "minecraft:glass"
+  },
+  "pattern": [
+    "GGG",
+    "AGA",
+    "GGG"
+  ],
+  "result": {
+    "count": 7,
+    "id": "oldustry:reinforced_glass"
+  }
+}

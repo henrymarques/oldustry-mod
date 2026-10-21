@@ -1,12 +1,16 @@
 package com.oldustry.block;
 
+import com.oldustry.registry.ModBlocks;
+
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 /** Thin pipe column placed by the Miner as it descends. */
 public class MiningPipeBlock extends Block {
@@ -26,11 +30,17 @@ public class MiningPipeBlock extends Block {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
-        return SHAPE;
+        return isTip ? Shapes.block() : SHAPE;
     }
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
-        return Shapes.empty();
+        return isTip ? Shapes.block() : Shapes.empty();
+    }
+
+    @Override
+    protected ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
+        // JAR BlockMiningTip.idDropped + empty getSubBlocks: the tip is not an item.
+        return new ItemStack(isTip ? ModBlocks.MINING_PIPE.get() : this);
     }
 }

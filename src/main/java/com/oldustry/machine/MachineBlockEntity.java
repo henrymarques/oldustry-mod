@@ -456,9 +456,8 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
     private static final int MINE_FAIL_PERM = 3;
 
     private boolean tickMiner(ServerLevel level, BlockPos pos) {
-        dischargeSlot(3);
-        chargeSlot(0);
-        chargeSlot(1);
+        flushMinerBuffer(level, pos);
+        feedMinerPower();
 
         ItemStack drill = items.get(0);
         boolean hasDrill = drill.is(ModItems.MINING_DRILL.get()) || drill.is(ModItems.DIAMOND_DRILL.get());
@@ -516,9 +515,7 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
         BlockState at = level.getBlockState(tipPos);
         if (at.is(ModBlocks.MINING_PIPE_TIP.get()) || at.is(ModBlocks.MINING_PIPE.get())) {
             level.removeBlock(tipPos, false);
-            if (!addToMinerOutput(new ItemStack(ModItems.MINING_PIPE.get()))) {
-                Block.popResource(level, pos, new ItemStack(ModItems.MINING_PIPE.get()));
-            }
+            ejectDrop(level, pos, new ItemStack(ModItems.MINING_PIPE.get()));
         }
         return true;
     }
@@ -707,9 +704,7 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
         java.util.List<ItemStack> drops = Block.getDrops(state, level, target, level.getBlockEntity(target));
         level.removeBlock(target, false);
         for (ItemStack drop : drops) {
-            if (!addToMinerOutput(drop)) {
-                Block.popResource(level, minerPos, drop);
-            }
+            ejectDrop(level, minerPos, drop);
         }
         return true;
     }
@@ -729,22 +724,55 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
         return !drill.isEmpty() && drill.isCorrectToolForDrops(state);
     }
 
-    /** Try adding to miner output slots 4-6. */
-    private boolean addToMinerOutput(ItemStack stack) {
-        for (int i = 4; i <= 6; i++) {
-            ItemStack slot = items.get(i);
-            if (slot.isEmpty()) {
-                items.set(i, stack.copy());
-                stack.setCount(0);
-                return true;
+    /**
+     * JAR {@code chargeTools} after {@code InvSlotDischarge.discharge(room, ignoreLimit=true)}.
+     * Scanner first (tier 2, transfer 50), then drill (tier 1, transfer 100). The machine packet is not the cap.
+     */
+    private void feedMinerPower() {
+        ItemStack battery = items.get(3);
+        if (battery.getItem() instanceof ElectricItem electric) {
+            int room = capacity() - energy;
+            if (room > 0) {
+                energy += electric.dischargeIgnoreTransfer(battery, room, minerTier());
             }
-            if (ItemStack.isSameItemSameComponents(slot, stack) && slot.getCount() + stack.getCount() <= slot.getMaxStackSize()) {
-                slot.grow(stack.getCount());
-                stack.setCount(0);
-                return true;
+        } else {
+            dischargeSlot(3);
+        }
+        chargeMinerTool(1, 2);
+        chargeMinerTool(0, 1);
+    }
+
+    private void chargeMinerTool(int slot, int sourceTier) {
+        ItemStack stack = items.get(slot);
+        if (energy > 0 && stack.getItem() instanceof ElectricItem electric) {
+            energy -= electric.chargeAtTier(stack, energy, sourceTier, false);
+        }
+    }
+
+    /** Items left in the old hidden buffer (slots 4–6) from before drops were ejected. */
+    private void flushMinerBuffer(ServerLevel level, BlockPos pos) {
+        for (int slot = 4; slot <= 6; slot++) {
+            ItemStack stuck = items.get(slot);
+            if (!stuck.isEmpty()) {
+                ejectDrop(level, pos, stuck);
+                items.set(slot, ItemStack.EMPTY);
             }
         }
-        return false;
+    }
+
+    /** JAR {@code StackUtil.distributeDrop}: adjacent inventories, then an item entity at this block. */
+    private void ejectDrop(ServerLevel level, BlockPos pos, ItemStack stack) {
+        ItemStack left = stack.copy();
+        for (Direction dir : Direction.values()) {
+            if (left.isEmpty()) {
+                return;
+            }
+            int moved = insert(level, pos.relative(dir), dir.getOpposite(), left, left.getCount());
+            left.shrink(moved);
+        }
+        if (!left.isEmpty()) {
+            Block.popResource(level, pos, left);
+        }
     }
 
     public boolean canProvideLiquid() {
@@ -1861,7 +1889,7 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
     @Override
     public int[] getSlotsForFace(Direction face) {
         return switch (kind.type) {
-            case MINING -> new int[] { 0, 1, 2, 4, 5, 6 };
+            case MINING -> new int[] { 0, 1, 2 };
             case PUMPING -> new int[] { 0, 1 };
             case CANNING -> new int[] { 0, 1, 2 };
             case ELECTROLYZER -> new int[] { 0, 1 };

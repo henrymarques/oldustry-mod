@@ -65,6 +65,7 @@ public class OldustryClient {
     @SubscribeEvent
     static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.DYNAMITE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.PRIMED_ITNT.get(), net.minecraft.client.renderer.entity.TntRenderer::new);
     }
 
     @SubscribeEvent

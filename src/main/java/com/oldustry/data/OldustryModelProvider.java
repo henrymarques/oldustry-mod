@@ -1,5 +1,8 @@
 package com.oldustry.data;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.oldustry.Oldustry;
 import com.oldustry.block.CableBlock;
 import com.oldustry.block.MachineBlock;
@@ -81,14 +84,15 @@ public class OldustryModelProvider extends ModelProvider {
         cube(blockModels, ModBlocks.CONSTRUCTION_FOAM.get());
         casing(blockModels, ModBlocks.MACHINE_CASING.get());
         casing(blockModels, ModBlocks.ADVANCED_MACHINE.get());
-        miningPipe(blockModels, itemModels, ModBlocks.MINING_PIPE.get());
-        miningPipe(blockModels, itemModels, ModBlocks.MINING_PIPE_TIP.get());
+        miningPipe(blockModels, ModBlocks.MINING_PIPE.get(), true);
+        miningTip(blockModels, ModBlocks.MINING_PIPE_TIP.get());
+        cube(blockModels, ModBlocks.ITNT.get());
 
         for (var holder : ModBlocks.BLOCKS.getEntries()) {
             Block block = holder.value();
             if (block instanceof MachineBlock machine) {
                 if (machine.kind.type == MachineKind.Type.LUMINATOR) {
-                    luminator(blockModels, itemModels, machine);
+                    luminator(blockModels, machine);
                 } else {
                     machine(blockModels, machine);
                 }
@@ -147,30 +151,37 @@ public class OldustryModelProvider extends ModelProvider {
             .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, suffix + "_south"));
     }
 
-    private static void luminator(BlockModelGenerators gens, ItemModelGenerators itemModels, MachineBlock block) {
+    private static void luminator(BlockModelGenerators gens, MachineBlock block) {
+        Map<String, Identifier> models = new HashMap<>();
         PropertyDispatch<net.minecraft.client.data.models.MultiVariant> facing = PropertyDispatch.initial(MachineBlock.FACING, MachineBlock.ACTIVE, MachineBlock.COVER)
             .generate((dir, active, cover) -> {
-                // Floor plate is always the full sheet. JAR ignores fullCover when facing up.
+                // Floor plate is always the full sheet. JAR ignores fullCover when facing up,
+                // so cover true/false share one model and must be created only once.
                 boolean sheet = cover && dir != Direction.UP;
                 String shape = dir.getSerializedName() + (sheet ? "_cover" : "");
-                Identifier parent = Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "block/luminator_" + shape);
-                TextureMapping map = new TextureMapping().put(
-                    TextureSlot.ALL,
-                    active ? TextureMapping.getBlockTexture(block) : TextureMapping.getBlockTexture(block, "_dark")
-                );
-                ModelTemplate template = new ModelTemplate(
-                    java.util.Optional.of(parent),
-                    java.util.Optional.of("_" + shape + (active ? "_on" : "_off")),
-                    TextureSlot.ALL
-                );
-                return BlockModelGenerators.plainVariant(template.create(block, map, gens.modelOutput));
+                String suffix = "_" + shape + (active ? "_on" : "_off");
+                Identifier model = models.computeIfAbsent(suffix, key -> {
+                    Identifier parent = Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "block/luminator_" + shape);
+                    TextureMapping map = new TextureMapping().put(
+                        TextureSlot.ALL,
+                        active ? TextureMapping.getBlockTexture(block) : TextureMapping.getBlockTexture(block, "_dark")
+                    );
+                    ModelTemplate template = new ModelTemplate(
+                        java.util.Optional.of(parent),
+                        java.util.Optional.of(suffix),
+                        TextureSlot.ALL
+                    );
+                    return template.create(block, map, gens.modelOutput);
+                });
+                return BlockModelGenerators.plainVariant(model);
             });
         gens.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(facing));
-        // IC2 inventory icon (items/luminator.png), not the 3D plate mesh.
-        itemModels.generateFlatItem(block.asItem(), ModelTemplates.FLAT_ITEM);
+        // JAR RenderBlockLuminator.renderInventoryBlock: column x/z 0.375–0.625, full height,
+        // dark texture (Ic2Items.luminator is blockLuminatorDark).
+        gens.registerSimpleItemModel(block, Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "block/luminator_column"));
     }
 
-    private static void miningPipe(BlockModelGenerators gens, ItemModelGenerators itemModels, Block block) {
+    private static void miningPipe(BlockModelGenerators gens, Block block, boolean item) {
         ModelTemplate column = new ModelTemplate(
             java.util.Optional.of(Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "block/mining_pipe_column")),
             java.util.Optional.empty(),
@@ -178,8 +189,16 @@ public class OldustryModelProvider extends ModelProvider {
         );
         Identifier model = column.create(block, new TextureMapping().put(TextureSlot.ALL, TextureMapping.getBlockTexture(block)), gens.modelOutput);
         gens.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(model)));
-        // Flat item icon (textures/item/mining_pipe*.png), not the thin 3D column.
-        itemModels.generateFlatItem(block.asItem(), ModelTemplates.FLAT_ITEM);
+        // JAR RenderBlockMiningPipe.renderInventoryBlock is the same 4×16 column.
+        if (item) {
+            gens.registerSimpleItemModel(block, model);
+        }
+    }
+
+    /** JAR BlockMiningTip uses the default cube renderer (blockMiningTip), not the pipe column. */
+    private static void miningTip(BlockModelGenerators gens, Block block) {
+        Identifier model = ModelTemplates.CUBE_ALL.create(block, TextureMapping.cube(block), gens.modelOutput);
+        gens.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(model)));
     }
 
     private static void cable(BlockModelGenerators gens, ItemModelGenerators itemModels, CableBlock block) {

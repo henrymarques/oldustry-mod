@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "painter",
+  "ingredients": [
+    "oldustry:green_painter"
+  ],
+  "result": {
+    "id": "oldustry:painter"
+  }
+}

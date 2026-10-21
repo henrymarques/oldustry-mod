@@ -63,6 +63,14 @@ final class EnergyRecipes extends RecipeProvider {
             .pattern(" T ")
             .unlockedBy("has_tin", has(OldustryTags.Items.INGOTS_TIN))
             .save(output);
+        shaped(RecipeCategory.MISC, ModItems.COOLANT_CELL.get())
+            .define('T', OldustryTags.Items.INGOTS_TIN)
+            .define('W', ModItems.WATER_CELL.get())
+            .pattern(" T ")
+            .pattern("TWT")
+            .pattern(" T ")
+            .unlockedBy("has_tin", has(OldustryTags.Items.INGOTS_TIN))
+            .save(output, OldustryRecipeProvider.id("coolant_cell_from_cell"));
 
         shaped(RecipeCategory.TOOLS, ModItems.WRENCH.get())
             .define('B', OldustryTags.Items.INGOTS_BRONZE)
@@ -108,6 +116,15 @@ final class EnergyRecipes extends RecipeProvider {
             .pattern("CCC")
             .unlockedBy("has_insulated_copper", has(ModItems.INSULATED_COPPER_CABLE.get()))
             .save(output);
+        shaped(RecipeCategory.MISC, ModItems.ELECTRONIC_CIRCUIT.get())
+            .define('C', ModItems.INSULATED_COPPER_CABLE.get())
+            .define('R', Items.REDSTONE)
+            .define('I', OldustryTags.Items.INGOTS_REFINED_IRON)
+            .pattern("CRC")
+            .pattern("CIC")
+            .pattern("CRC")
+            .unlockedBy("has_insulated_copper", has(ModItems.INSULATED_COPPER_CABLE.get()))
+            .save(output, OldustryRecipeProvider.id("electronic_circuit_alt"));
 
         shaped(RecipeCategory.MISC, ModItems.RE_BATTERY.get())
             .define('C', ModItems.INSULATED_COPPER_CABLE.get())
@@ -138,6 +155,15 @@ final class EnergyRecipes extends RecipeProvider {
             .pattern("F")
             .unlockedBy("has_machine_casing", has(ModItems.MACHINE_CASING.get()))
             .save(output);
+        shaped(RecipeCategory.DECORATIONS, ModItems.GENERATOR.get())
+            .define('B', ModItems.RE_BATTERY.get())
+            .define('I', OldustryTags.Items.INGOTS_REFINED_IRON)
+            .define('F', ModItems.IMPROVED_FURNACE.get())
+            .pattern(" B ")
+            .pattern("III")
+            .pattern(" F ")
+            .unlockedBy("has_refined_iron", has(OldustryTags.Items.INGOTS_REFINED_IRON))
+            .save(output, OldustryRecipeProvider.id("generator_from_improved_furnace"));
 
         shaped(RecipeCategory.DECORATIONS, ModItems.MACERATOR.get())
             .define('F', Items.FLINT)
@@ -347,6 +373,33 @@ final class EnergyRecipes extends RecipeProvider {
             .pattern("D")
             .unlockedBy("has_coal_dust", has(OldustryTags.Items.DUSTS_COAL))
             .save(output);
+        shaped(RecipeCategory.MISC, ModItems.SU_BATTERY.get(), 5)
+            .define('C', ModItems.INSULATED_COPPER_CABLE.get())
+            .define('R', Items.REDSTONE)
+            .define('D', OldustryTags.Items.DUSTS_COAL)
+            .pattern("C")
+            .pattern("D")
+            .pattern("R")
+            .unlockedBy("has_coal_dust", has(OldustryTags.Items.DUSTS_COAL))
+            .save(output, OldustryRecipeProvider.id("su_battery_swapped"));
+        shaped(RecipeCategory.MISC, ModItems.SU_BATTERY.get(), 8)
+            .define('c', ModItems.INSULATED_COPPER_CABLE.get())
+            .define('C', ModItems.HYDRATED_COAL_DUST.get())
+            .define('R', Items.REDSTONE)
+            .pattern("c")
+            .pattern("C")
+            .pattern("R")
+            .unlockedBy("has_hydrated_coal_dust", has(ModItems.HYDRATED_COAL_DUST.get()))
+            .save(output, OldustryRecipeProvider.id("su_battery_from_hydrated_coal"));
+        shaped(RecipeCategory.MISC, ModItems.SU_BATTERY.get(), 8)
+            .define('c', ModItems.INSULATED_COPPER_CABLE.get())
+            .define('C', ModItems.HYDRATED_COAL_DUST.get())
+            .define('R', Items.REDSTONE)
+            .pattern("c")
+            .pattern("R")
+            .pattern("C")
+            .unlockedBy("has_hydrated_coal_dust", has(ModItems.HYDRATED_COAL_DUST.get()))
+            .save(output, OldustryRecipeProvider.id("su_battery_from_hydrated_coal_swapped"));
         shaped(RecipeCategory.MISC, ModItems.ENERGY_CRYSTAL.get())
             .define('R', Items.REDSTONE)
             .define('D', Items.DIAMOND)
@@ -355,6 +408,14 @@ final class EnergyRecipes extends RecipeProvider {
             .pattern("RRR")
             .unlockedBy("has_diamond", has(Items.DIAMOND))
             .save(output);
+        shaped(RecipeCategory.MISC, ModItems.ENERGY_CRYSTAL.get())
+            .define('R', Items.REDSTONE)
+            .define('D', ModItems.INDUSTRIAL_DIAMOND.get())
+            .pattern("RRR")
+            .pattern("RDR")
+            .pattern("RRR")
+            .unlockedBy("has_industrial_diamond", has(ModItems.INDUSTRIAL_DIAMOND.get()))
+            .save(output, OldustryRecipeProvider.id("energy_crystal_from_industrial_diamond"));
         shaped(RecipeCategory.MISC, ModItems.LAPOTRON_CRYSTAL.get())
             .define('L', Items.LAPIS_LAZULI)
             .define('C', ModItems.ELECTRONIC_CIRCUIT.get())
@@ -455,7 +516,7 @@ final class EnergyRecipes extends RecipeProvider {
             .define('D', ModItems.ELECTRONIC_CIRCUIT.get())
             .define('M', ModItems.MV_TRANSFORMER.get())
             .pattern(" C ")
-            .pattern("DEM")
+            .pattern("DME")
             .pattern(" C ")
             .unlockedBy("has_mv_transformer", has(ModItems.MV_TRANSFORMER.get()))
             .save(output);
@@ -545,6 +606,16 @@ final class EnergyRecipes extends RecipeProvider {
             .pattern("cSc")
             .unlockedBy("has_od_scanner", has(ModItems.OD_SCANNER.get()))
             .save(output);
+        shaped(RecipeCategory.TOOLS, ModItems.OV_SCANNER.get())
+            .define('G', Items.GLOWSTONE_DUST)
+            .define('C', ModItems.ADVANCED_CIRCUIT.get())
+            .define('S', DataComponentIngredient.of(false, ModDataComponents.ENERGY.get(), 10000, ModItems.RE_BATTERY.get()))
+            .define('c', ModItems.GOLD_CABLE_2X.get())
+            .pattern(" G ")
+            .pattern("GCG")
+            .pattern("cSc")
+            .unlockedBy("has_re_battery", has(ModItems.RE_BATTERY.get()))
+            .save(output, OldustryRecipeProvider.id("ov_scanner_from_charged_battery"));
         shaped(RecipeCategory.TOOLS, ModItems.ELECTRIC_WRENCH.get())
             .define('W', ModItems.WRENCH.get())
             .define('C', ModItems.ELECTRONIC_CIRCUIT.get())
@@ -610,6 +681,15 @@ final class EnergyRecipes extends RecipeProvider {
             .pattern("CCC")
             .unlockedBy("has_wool", has(ItemTags.WOOL))
             .save(output);
+        shaped(RecipeCategory.COMBAT, ModItems.STATIC_BOOTS.get())
+            .define('H', Items.IRON_BOOTS)
+            .define('S', ItemTags.WOOL)
+            .define('C', ModItems.INSULATED_COPPER_CABLE.get())
+            .pattern(" H ")
+            .pattern(" S ")
+            .pattern("CCC")
+            .unlockedBy("has_wool", has(ItemTags.WOOL))
+            .save(output, OldustryRecipeProvider.id("static_boots_from_iron_boots"));
         shaped(RecipeCategory.COMBAT, ModItems.FUEL_JETPACK.get())
             .define('I', OldustryTags.Items.INGOTS_REFINED_IRON)
             .define('C', ModItems.ELECTRONIC_CIRCUIT.get())
@@ -621,42 +701,37 @@ final class EnergyRecipes extends RecipeProvider {
             .unlockedBy("has_fuel_can", has(ModItems.FUEL_CAN.get()))
             .save(output);
 
-        // ── Mining pipe + tip ──
-        shaped(RecipeCategory.MISC, ModItems.MINING_PIPE.get(), 6)
-            .define('T', OldustryTags.Items.INGOTS_TIN)
-            .pattern("T T")
-            .pattern("T T")
-            .pattern("T T")
-            .unlockedBy("has_tin", has(OldustryTags.Items.INGOTS_TIN))
-            .save(output);
-        shaped(RecipeCategory.MISC, ModItems.MINING_PIPE_TIP.get())
-            .define('T', OldustryTags.Items.INGOTS_TIN)
-            .define('D', Items.DIAMOND)
-            .pattern("TDT")
-            .unlockedBy("has_diamond", has(Items.DIAMOND))
+        // ── Mining pipe (JAR: tip is not a craftable item) ──
+        shaped(RecipeCategory.MISC, ModItems.MINING_PIPE.get(), 8)
+            .define('I', OldustryTags.Items.INGOTS_REFINED_IRON)
+            .define('T', ModItems.TREETAP.get())
+            .pattern("I I")
+            .pattern("I I")
+            .pattern("ITI")
+            .unlockedBy("has_refined_iron", has(OldustryTags.Items.INGOTS_REFINED_IRON))
             .save(output);
 
         // ── Miner ──
         shaped(RecipeCategory.DECORATIONS, ModItems.MINER.get())
-            .define('I', OldustryTags.Items.INGOTS_REFINED_IRON)
             .define('C', ModItems.ELECTRONIC_CIRCUIT.get())
             .define('M', ModItems.MACHINE_CASING.get())
-            .define('P', ModItems.MINING_PIPE_TIP.get())
-            .pattern("ICI")
-            .pattern("PMP")
-            .pattern("ICI")
+            .define('P', ModItems.MINING_PIPE.get())
+            .pattern("CMC")
+            .pattern(" P ")
+            .pattern(" P ")
             .unlockedBy("has_machine_casing", has(ModItems.MACHINE_CASING.get()))
             .save(output);
 
         // ── Pump ──
         shaped(RecipeCategory.DECORATIONS, ModItems.PUMP.get())
-            .define('I', OldustryTags.Items.INGOTS_REFINED_IRON)
+            .define('c', ModItems.EMPTY_CELL.get())
             .define('C', ModItems.ELECTRONIC_CIRCUIT.get())
             .define('M', ModItems.MACHINE_CASING.get())
-            .define('E', ModItems.EMPTY_CELL.get())
-            .pattern("ECE")
-            .pattern("IMI")
-            .pattern("ECE")
+            .define('P', ModItems.MINING_PIPE.get())
+            .define('T', ModItems.TREETAP.get())
+            .pattern("cCc")
+            .pattern("cMc")
+            .pattern("PTP")
             .unlockedBy("has_machine_casing", has(ModItems.MACHINE_CASING.get()))
             .save(output);
 
@@ -667,7 +742,7 @@ final class EnergyRecipes extends RecipeProvider {
             .define('M', ModItems.MACHINE_CASING.get())
             .pattern("TCT")
             .pattern("TMT")
-            .pattern("TCT")
+            .pattern("TTT")
             .unlockedBy("has_machine_casing", has(ModItems.MACHINE_CASING.get()))
             .save(output);
 

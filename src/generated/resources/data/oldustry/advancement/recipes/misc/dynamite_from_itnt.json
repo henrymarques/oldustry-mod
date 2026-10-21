@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_itnt": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:itnt"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:dynamite_from_itnt"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_itnt"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:dynamite_from_itnt"
+    ]
+  }
+}

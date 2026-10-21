@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "#c:dusts/coal",
+    "minecraft:water_bucket"
+  ],
+  "result": {
+    "id": "oldustry:hydrated_coal_dust"
+  }
+}

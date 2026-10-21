@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "F": "minecraft:flint",
+    "T": "minecraft:tnt"
+  },
+  "pattern": [
+    "FTF",
+    "FTF",
+    "FTF"
+  ],
+  "result": {
+    "count": 4,
+    "id": "oldustry:itnt"
+  }
+}
