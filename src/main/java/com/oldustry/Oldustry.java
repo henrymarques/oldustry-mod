@@ -10,6 +10,7 @@ import com.oldustry.network.KeysPayload;
 import com.oldustry.registry.ModBlockEntities;
 import com.oldustry.registry.ModBlocks;
 import com.oldustry.registry.ModDataComponents;
+import com.oldustry.registry.ModEffects;
 import com.oldustry.registry.ModEntities;
 import com.oldustry.registry.ModCreativeTabs;
 import com.oldustry.registry.ModFeatures;
@@ -40,6 +41,7 @@ public class Oldustry {
     public static java.util.function.Consumer<net.minecraft.core.BlockPos> clientMachineLoopStop = pos -> {};
 
     public Oldustry(IEventBus modEventBus, ModContainer modContainer) {
+        ModEffects.register(modEventBus);
         ModDataComponents.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);

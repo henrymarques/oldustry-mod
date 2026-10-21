@@ -19,6 +19,8 @@ public final class OldustryConfig {
     public static final ModConfigSpec.BooleanValue SOUNDS_ENABLED;
     public static final ModConfigSpec.IntValue SOUND_SOURCE_LIMIT;
     public static final ModConfigSpec.BooleanValue CRAFT_ITNT;
+    public static final ModConfigSpec.BooleanValue CRAFT_NUKE;
+    public static final ModConfigSpec.DoubleValue NUKE_POWER;
 
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
@@ -34,12 +36,14 @@ public final class OldustryConfig {
         CRAFT_RAIL = b.define("enableCraftingRail", true);
         VALUABLE_ORES = b.define(
             "valuableOres",
-            "minecraft:coal_ore=1,minecraft:gold_ore=3,minecraft:lapis_ore=3,minecraft:redstone_ore=3,minecraft:diamond_ore=4,minecraft:emerald_ore=5,minecraft:nether_quartz_ore=5,oldustry:tin_ore=2,oldustry:uranium_ore=4"
+            "minecraft:coal_ore=1,minecraft:iron_ore=1,minecraft:copper_ore=2,minecraft:gold_ore=3,minecraft:lapis_ore=3,minecraft:redstone_ore=3,minecraft:diamond_ore=4,minecraft:emerald_ore=5,minecraft:nether_quartz_ore=5,oldustry:tin_ore=2,oldustry:uranium_ore=4"
         );
         MINER_LAPOTRON = b.comment("Allow tier-3 (lapotron) input on the Miner (default false = tier-1 RE battery)").define("enableMinerLapotron", false);
         SOUNDS_ENABLED = b.define("soundsEnabled", true);
         SOUND_SOURCE_LIMIT = b.defineInRange("soundSourceLimit", 32, 0, 256);
         CRAFT_ITNT = b.comment("Industrial TNT recipes (flint + TNT). Default on, same as the other enableCrafting* flags.").define("enableCraftingITnt", true);
+        CRAFT_NUKE = b.comment("Enable crafting of nukes. The re-enriched uranium cell is nuclear content, so the recipe stays unregistered until that item exists.").define("enableCraftingNuke", true);
+        NUKE_POWER = b.comment("Explosion power of a nuke, where TNT is 4").defineInRange("explosionPowerNuke", 35.0, 0.0, 100.0);
         SPEC = b.build();
     }
 

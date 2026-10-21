@@ -5,11 +5,13 @@ import java.util.function.UnaryOperator;
 
 import com.oldustry.Oldustry;
 import com.oldustry.block.CableBlock;
+import com.oldustry.block.DynamiteBlock;
 import com.oldustry.block.FoamBlock;
 import com.oldustry.block.IronFenceBlock;
 import com.oldustry.block.MachineBlock;
 import com.oldustry.block.MachineCasingBlock;
 import com.oldustry.block.ItntBlock;
+import com.oldustry.block.NukeBlock;
 import com.oldustry.block.MiningPipeBlock;
 import com.oldustry.block.ResinSheetBlock;
 import com.oldustry.block.RubberLogBlock;
@@ -141,10 +143,20 @@ public final class ModBlocks {
     public static final DeferredBlock<MachineBlock> ELECTROLYZER = machine(MachineKind.ELECTROLYZER);
     public static final DeferredBlock<MachineBlock> MAGNETIZER = machine(MachineKind.MAGNETIZER);
     public static final DeferredBlock<MachineBlock> INDUCTION = machine(MachineKind.INDUCTION);
+    public static final DeferredBlock<NukeBlock> NUKE = BLOCKS.registerBlock(
+        "nuke",
+        NukeBlock::new,
+        p -> p.mapColor(MapColor.FIRE).instabreak().sound(SoundType.GRASS)
+    );
     public static final DeferredBlock<ItntBlock> ITNT = BLOCKS.registerBlock(
         "itnt",
         ItntBlock::new,
         p -> p.mapColor(MapColor.FIRE).instabreak().sound(SoundType.GRASS)
+    );
+    public static final DeferredBlock<DynamiteBlock> DYNAMITE = BLOCKS.registerBlock(
+        "dynamite",
+        DynamiteBlock::new,
+        p -> p.mapColor(MapColor.FIRE).instabreak().sound(SoundType.GRASS).noCollision().noOcclusion().pushReaction(PushReaction.DESTROY)
     );
 
     public static final DeferredBlock<MiningPipeBlock> MINING_PIPE = BLOCKS.registerBlock(

@@ -8,6 +8,8 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementType;
+import net.minecraft.advancements.triggers.CriteriaTriggers;
+import net.minecraft.advancements.triggers.ImpossibleTrigger;
 import net.minecraft.advancements.triggers.InventoryChangeTrigger;
 import net.minecraft.advancements.triggers.RecipeCraftedTrigger;
 import net.minecraft.core.HolderLookup;
@@ -40,6 +42,20 @@ public final class OldustryAdvancements implements AdvancementSubProvider {
         item(output, "build_ddrill", ModItems.DIAMOND_DRILL.get(), "oldustry:build_drill", false);
         item(output, "build_chainsaw", ModItems.CHAINSAW.get(), "oldustry:build_generator", false);
         item(output, "build_mfe", ModItems.MFE.get(), "oldustry:build_batbox", false);
+        Advancement.Builder.advancement()
+            .parent(AdvancementSubProvider.createPlaceholder("oldustry:compress_uranium"))
+            .display(
+                ModItems.NUKE.get(),
+                Component.translatable("advancements.oldustry.die_from_own_nuke.title"),
+                Component.translatable("advancements.oldustry.die_from_own_nuke.description"),
+                null,
+                AdvancementType.CHALLENGE,
+                true,
+                true,
+                false
+            )
+            .addCriterion("nuked", CriteriaTriggers.IMPOSSIBLE.createCriterion(new ImpossibleTrigger.TriggerInstance()))
+            .save(output, "oldustry:die_from_own_nuke");
     }
 
     private static void item(Consumer<AdvancementHolder> output, String id, ItemLike icon, String parent, boolean orOres) {

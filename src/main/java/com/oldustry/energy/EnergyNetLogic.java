@@ -17,6 +17,15 @@ public final class EnergyNetLogic {
     /** JAR discover: {@code EnergyPath.loss = max(actual, 0.1)}. */
     public static final double PATH_LOSS_FLOOR = 0.1;
 
+    /**
+     * JAR {@code TileEntityBaseGenerator}: {@code output = min(production, storage)}.
+     * A short packet still leaves. Geo buffer 32 / packet 20 otherwise freezes at 13–19
+     * (no room for +20, and a full-packet gate never fires).
+     */
+    public static int generatorPacket(int stored, int production) {
+        return stored <= 0 ? 0 : Math.min(stored, production);
+    }
+
     public enum Role {
         SOURCE,
         SINK,

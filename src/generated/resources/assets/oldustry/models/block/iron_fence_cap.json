@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/template_bars_cap",
-  "textures": {
-    "bars": "oldustry:block/iron_fence",
-    "edge": "oldustry:block/iron_fence"
-  }
-}

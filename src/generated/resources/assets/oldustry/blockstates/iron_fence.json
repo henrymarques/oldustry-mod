@@ -2,69 +2,13 @@
   "multipart": [
     {
       "apply": {
-        "model": "oldustry:block/iron_fence_post_ends"
-      }
-    },
-    {
-      "apply": {
         "model": "oldustry:block/iron_fence_post"
-      },
-      "when": {
-        "east": "false",
-        "north": "false",
-        "south": "false",
-        "west": "false"
       }
     },
     {
       "apply": {
-        "model": "oldustry:block/iron_fence_cap"
-      },
-      "when": {
-        "east": "false",
-        "north": "true",
-        "south": "false",
-        "west": "false"
-      }
-    },
-    {
-      "apply": {
-        "model": "oldustry:block/iron_fence_cap",
-        "y": 90
-      },
-      "when": {
-        "east": "true",
-        "north": "false",
-        "south": "false",
-        "west": "false"
-      }
-    },
-    {
-      "apply": {
-        "model": "oldustry:block/iron_fence_cap_alt"
-      },
-      "when": {
-        "east": "false",
-        "north": "false",
-        "south": "true",
-        "west": "false"
-      }
-    },
-    {
-      "apply": {
-        "model": "oldustry:block/iron_fence_cap_alt",
-        "y": 90
-      },
-      "when": {
-        "east": "false",
-        "north": "false",
-        "south": "false",
-        "west": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "oldustry:block/iron_fence_side"
+        "model": "oldustry:block/iron_fence_side",
+        "uvlock": true
       },
       "when": {
         "north": "true"
@@ -73,6 +17,7 @@
     {
       "apply": {
         "model": "oldustry:block/iron_fence_side",
+        "uvlock": true,
         "y": 90
       },
       "when": {
@@ -81,7 +26,9 @@
     },
     {
       "apply": {
-        "model": "oldustry:block/iron_fence_side_alt"
+        "model": "oldustry:block/iron_fence_side",
+        "uvlock": true,
+        "y": 180
       },
       "when": {
         "south": "true"
@@ -89,8 +36,9 @@
     },
     {
       "apply": {
-        "model": "oldustry:block/iron_fence_side_alt",
-        "y": 90
+        "model": "oldustry:block/iron_fence_side",
+        "uvlock": true,
+        "y": 270
       },
       "when": {
         "west": "true"

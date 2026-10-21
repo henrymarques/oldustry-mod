@@ -9,6 +9,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityReference;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gamerules.GameRules;
@@ -55,12 +56,33 @@ public final class PrimedItnt extends PrimedTnt {
         return EntityReference.getLivingEntity(igniter, level());
     }
 
+    /** JAR {@code EntityIC2Explosive} keeps the default {@code canBePushed}. */
+    @Override
+    public boolean isPushable() {
+        return !this.isRemoved();
+    }
+
+    @Override
+    public void move(MoverType type, Vec3 delta) {
+        super.move(type, delta);
+        Vec3 stood = ExplosiveRest.restOn(level(), position());
+        if (stood.y != getY()) {
+            setPos(getX(), stood.y, getZ());
+            Vec3 motion = getDeltaMovement();
+            if (motion.y < 0.0) {
+                setDeltaMovement(motion.x, 0.0, motion.z);
+            }
+        }
+    }
+
     @Override
     protected void explode() {
         if (!(level() instanceof ServerLevel server) || !server.getGameRules().get(GameRules.TNT_EXPLODES)) {
             return;
         }
-        new Ic2Explosion(server, this, new Vec3(getX(), getY(0.5), getZ()), POWER, DROP_RATE).detonate();
+        // JAR explodes at posY, which is the box center (yOffset = height / 2), with the feet on the face.
+        double feet = ExplosiveRest.restOn(server, position()).y;
+        new OldustryExplosion(server, this, new Vec3(getX(), feet + getBbHeight() / 2.0, getZ()), POWER, DROP_RATE).detonate();
     }
 
     @Override

@@ -7,6 +7,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Position;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,6 +25,11 @@ import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
 public final class DynamiteProjectile extends ThrowableItemProjectile {
+    /** Break or redstone, from {@code BlockDynamite.removeBlockByPlayer}. */
+    public static final int LIT_FUSE = 40;
+    /** Explosion, or the last supporting cube disappeared. */
+    public static final int UNSEATED_FUSE = 5;
+
     private int fuse = 100;
     private @Nullable BlockPos stuckTo;
 
@@ -34,6 +43,25 @@ public final class DynamiteProjectile extends ThrowableItemProjectile {
 
     public DynamiteProjectile(Level level, Position position, ItemStack stack) {
         super(ModEntities.DYNAMITE.get(), position.x(), position.y(), position.z(), level, stack);
+    }
+
+    /** Falling stick after the placed block is lit or loses every support. */
+    public static boolean spawnPrimed(ServerLevel level, BlockPos pos, @Nullable LivingEntity owner, int fuse) {
+        if (!level.getGameRules().get(GameRules.TNT_EXPLODES)) {
+            return false;
+        }
+        DynamiteProjectile stick = new DynamiteProjectile(level, Vec3.atCenterOf(pos), new ItemStack(ModItems.DYNAMITE.get()));
+        stick.fuse = fuse;
+        stick.setDeltaMovement(Vec3.ZERO);
+        if (owner != null) {
+            stick.setOwner(owner);
+        }
+        if (!level.addFreshEntity(stick)) {
+            return false;
+        }
+        level.playSound(null, stick.getX(), stick.getY(), stick.getZ(), SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1.0F, 1.0F);
+        level.gameEvent(owner, GameEvent.PRIME_FUSE, pos);
+        return true;
     }
 
     @Override
@@ -60,7 +88,7 @@ public final class DynamiteProjectile extends ThrowableItemProjectile {
     public void tick() {
         if (fuse-- <= 0) {
             if (level() instanceof ServerLevel serverLevel) {
-                new PointExplosion(serverLevel, getOwner(), position()).detonate();
+                new PointExplosion(serverLevel, getOwner(), ExplosiveRest.restOn(serverLevel, position())).detonate();
             }
             discard();
             return;
@@ -85,6 +113,8 @@ public final class DynamiteProjectile extends ThrowableItemProjectile {
     @Override
     protected void onHitBlock(BlockHitResult hit) {
         super.onHitBlock(hit);
+        // Parent parks the point on the face. The next ray then starts inside the block and the cube drops a layer.
+        setPos(ExplosiveRest.backOff(hit.getLocation(), hit.getDirection().getUnitVec3()));
         if (getItem().is(ModItems.STICKY_DYNAMITE.get())) {
             stuckTo = hit.getBlockPos().immutable();
             setDeltaMovement(Vec3.ZERO);

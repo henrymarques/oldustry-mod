@@ -13,8 +13,8 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.Tags;
 
 public class ScannerItem extends ElectricItem {
     private final boolean valuable;
@@ -81,26 +81,11 @@ public class ScannerItem extends ElectricItem {
                 return Integer.parseInt(kv[1].trim());
             }
         }
-        Block block = state.getBlock();
-        String path = BuiltInRegistries.BLOCK.getKey(block).getPath();
-        if (path.contains("diamond_ore")) {
-            return 4;
+        int byPath = ValuableOre.pathValue(BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath());
+        if (byPath > 0) {
+            return byPath;
         }
-        if (path.contains("emerald_ore") || path.contains("quartz_ore")) {
-            return 5;
-        }
-        if (path.contains("gold_ore") || path.contains("lapis") || path.contains("redstone_ore")) {
-            return 3;
-        }
-        if (path.contains("coal_ore")) {
-            return 1;
-        }
-        if (path.contains("tin_ore")) {
-            return 2;
-        }
-        if (path.contains("uranium_ore")) {
-            return 4;
-        }
-        return 0;
+        // JAR registerOre: any other ore dictionary name starting with "ore" is value 1.
+        return state.is(Tags.Blocks.ORES) ? 1 : 0;
     }
 }

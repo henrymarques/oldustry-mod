@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "anchor=east,linked=false": {
+      "model": "oldustry:block/dynamite_wall",
+      "y": 180
+    },
+    "anchor=east,linked=true": {
+      "model": "oldustry:block/dynamite_linked_wall",
+      "y": 180
+    },
+    "anchor=floor,linked=false": {
+      "model": "oldustry:block/dynamite"
+    },
+    "anchor=floor,linked=true": {
+      "model": "oldustry:block/dynamite_linked"
+    },
+    "anchor=north,linked=false": {
+      "model": "oldustry:block/dynamite_wall",
+      "y": 90
+    },
+    "anchor=north,linked=true": {
+      "model": "oldustry:block/dynamite_linked_wall",
+      "y": 90
+    },
+    "anchor=south,linked=false": {
+      "model": "oldustry:block/dynamite_wall",
+      "y": 270
+    },
+    "anchor=south,linked=true": {
+      "model": "oldustry:block/dynamite_linked_wall",
+      "y": 270
+    },
+    "anchor=west,linked=false": {
+      "model": "oldustry:block/dynamite_wall"
+    },
+    "anchor=west,linked=true": {
+      "model": "oldustry:block/dynamite_linked_wall"
+    }
+  }
+}

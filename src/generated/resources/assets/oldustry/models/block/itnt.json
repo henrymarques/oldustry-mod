@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "all": "oldustry:block/itnt"
+    "bottom": "oldustry:block/itnt_bottom",
+    "side": "oldustry:block/itnt_side",
+    "top": "oldustry:block/itnt_top"
   }
 }

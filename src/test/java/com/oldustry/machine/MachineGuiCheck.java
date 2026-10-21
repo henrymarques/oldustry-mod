@@ -94,6 +94,21 @@ public final class MachineGuiCheck {
         int[] cannerEu = MachineGui.energyGauge(MachineGui.Overlay.CANNER);
         assert cannerEu[0] == 31 && cannerEu[1] == 27 && cannerEu[2] == 14;
 
+        // JAR getOperationHeight: first cell that is not a pipe. A broken pipe is that cell.
+        assert MinerColumn.head(10, 0, y -> y == 5 ? MinerColumn.TIP : MinerColumn.PIPE) == 5;
+        assert MinerColumn.head(10, 0, y -> switch (y) {
+            case 5 -> MinerColumn.TIP;
+            case 7 -> MinerColumn.AIR;
+            default -> y > 5 && y < 10 ? MinerColumn.PIPE : MinerColumn.OTHER;
+        }) == 7;
+        assert MinerColumn.head(10, 0, y -> y == 9 ? MinerColumn.AIR : MinerColumn.OTHER) == 9;
+        assert com.oldustry.item.ValuableOre.pathValue("iron_ore") == 1;
+        assert com.oldustry.item.ValuableOre.pathValue("deepslate_iron_ore") == 1;
+        assert com.oldustry.item.ValuableOre.pathValue("copper_ore") == 2;
+        assert com.oldustry.item.ValuableOre.pathValue("deepslate_copper_ore") == 2;
+        assert com.oldustry.item.ValuableOre.pathValue("coal_ore") == 1;
+        assert com.oldustry.item.ValuableOre.pathValue("diamond_ore") == 4;
+        assert com.oldustry.item.ValuableOre.pathValue("stone") == 0;
         System.out.println("MachineGuiCheck ok");
     }
 

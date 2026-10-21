@@ -3,6 +3,7 @@ package com.oldustry.registry;
 import com.oldustry.Oldustry;
 import com.oldustry.explosion.DynamiteProjectile;
 import com.oldustry.explosion.PrimedItnt;
+import com.oldustry.explosion.PrimedNuke;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -15,6 +16,10 @@ public final class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<DynamiteProjectile>> DYNAMITE = ENTITIES.registerEntityType(
         "dynamite", DynamiteProjectile::new, MobCategory.MISC,
         builder -> builder.sized(0.5F, 0.5F).clientTrackingRange(10).updateInterval(5)
+    );
+    public static final DeferredHolder<EntityType<?>, EntityType<PrimedNuke>> PRIMED_NUKE = ENTITIES.registerEntityType(
+        "primed_nuke", PrimedNuke::new, MobCategory.MISC,
+        builder -> builder.sized(0.98F, 0.98F).clientTrackingRange(160).updateInterval(5).fireImmune()
     );
     public static final DeferredHolder<EntityType<?>, EntityType<PrimedItnt>> PRIMED_ITNT = ENTITIES.registerEntityType(
         "primed_itnt", PrimedItnt::new, MobCategory.MISC,

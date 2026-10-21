@@ -195,6 +195,34 @@ public final class EnergyCheck {
         assert geoFull.burnTime() == 10 && geoFull.energy() == 32 && !geoFull.converting();
         FuelLogic.BurnTick geoRoom = FuelLogic.tickIfFits(10, 0, 20, 32);
         assert geoRoom.burnTime() == 9 && geoRoom.energy() == 20 && geoRoom.converting();
+        // Partial sink left 13 in a 32 buffer: cannot fit +20, must still offer 13 (world save was stuck here).
+        FuelLogic.BurnTick geoStuck = FuelLogic.tickIfFits(1000, 13, 20, 32);
+        assert geoStuck.energy() == 13 && !geoStuck.converting();
+        assert EnergyNetLogic.generatorPacket(13, 20) == 13;
+        assert EnergyNetLogic.generatorPacket(20, 20) == 20;
+        assert EnergyNetLogic.generatorPacket(0, 20) == 0;
+        assert EnergyNetLogic.generatorPacket(32, 20) == 20;
+        EnergyNetLogic.Node glass = new EnergyNetLogic.Node(
+            EnergyNetLogic.Role.WIRE, CableKind.GLASS.loss, CableKind.GLASS.meltAt, 0, Integer.MAX_VALUE, CableKind.GLASS.insulation
+        );
+        EnergyNetLogic.Node mfsu = new EnergyNetLogic.Node(EnergyNetLogic.Role.BOTH, 0, Integer.MAX_VALUE, 10_000_000, 512);
+        EnergyNetLogic.Result geoGlass = EnergyNetLogic.emit(
+            java.util.List.of(source, glass, mfsu),
+            java.util.List.of(new EnergyNetLogic.Edge(0, 1), new EnergyNetLogic.Edge(1, 2)),
+            0,
+            13
+        );
+        assert geoGlass.delivered()[2] == 13 : geoGlass.delivered()[2];
+        assert !geoGlass.melted()[1];
+        EnergyNetLogic.Node miner = new EnergyNetLogic.Node(EnergyNetLogic.Role.SINK, 0, Integer.MAX_VALUE, 1000, 32);
+        EnergyNetLogic.Result geoMiner = EnergyNetLogic.emit(
+            java.util.List.of(source, glass, miner),
+            java.util.List.of(new EnergyNetLogic.Edge(0, 1), new EnergyNetLogic.Edge(1, 2)),
+            0,
+            20
+        );
+        assert geoMiner.delivered()[2] == 20 : geoMiner.delivered()[2];
+        assert !geoMiner.exploded()[2] && !geoMiner.melted()[1];
 
         ElectricCharge.Spec re = new ElectricCharge.Spec(10000, 100, 1, true);
         assert ElectricCharge.charge(0, 50, re) == 50;

@@ -7,14 +7,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.oldustry.Oldustry;
+import com.oldustry.energy.OldustryDamage;
+import com.oldustry.registry.ModEffects;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.ServerExplosion;
@@ -28,7 +38,7 @@ import net.neoforged.neoforge.event.EventHooks;
 import org.jspecify.annotations.Nullable;
 
 /** IC2 {@code ExplosionIC2}: spherical rays, not a vanilla blast. */
-public final class Ic2Explosion extends ServerExplosion {
+public final class OldustryExplosion extends ServerExplosion {
     private static final Map<Block, Boolean> WHITELIST = new IdentityHashMap<>();
 
     static {
@@ -41,15 +51,21 @@ public final class Ic2Explosion extends ServerExplosion {
     private final Vec3 center;
     private final double power;
     private final float dropRate;
+    private final boolean nuclear;
     private final Random random = new Random();
 
-    public Ic2Explosion(ServerLevel level, @Nullable Entity source, Vec3 center, float power, float dropRate) {
+    public OldustryExplosion(ServerLevel level, @Nullable Entity source, Vec3 center, float power, float dropRate) {
+        this(level, source, center, power, dropRate, false);
+    }
+
+    public OldustryExplosion(ServerLevel level, @Nullable Entity source, Vec3 center, float power, float dropRate, boolean nuclear) {
         super(level, source, null, null, center, power, false, Explosion.BlockInteraction.DESTROY);
         this.level = level;
         this.source = source;
         this.center = center;
         this.power = power;
         this.dropRate = dropRate;
+        this.nuclear = nuclear;
     }
 
     public void detonate() {
@@ -59,7 +75,7 @@ public final class Ic2Explosion extends ServerExplosion {
         double maxDistance = power / 0.4;
         List<Target> targets = collectTargets(maxDistance);
         Map<BlockPos, Boolean> destroyed = new HashMap<>();
-        int steps = Ic2Ray.raySteps(power);
+        int steps = OldustryRay.raySteps(power);
         boolean hitEntities = !targets.isEmpty();
         for (int phiN = 0; phiN < 2 * steps; phiN++) {
             for (int thetaN = 0; thetaN < steps; thetaN++) {
@@ -70,6 +86,9 @@ public final class Ic2Explosion extends ServerExplosion {
             }
         }
         capMotion(targets);
+        if (nuclear) {
+            irradiate();
+        }
 
         List<BlockPos> blocks = new ArrayList<>(destroyed.keySet());
         List<Entity> entities = new ArrayList<>(targets.size());
@@ -109,20 +128,20 @@ public final class Ic2Explosion extends ServerExplosion {
         double x, double y, double z, double phi, double theta, double rayPower, boolean damage,
         List<Target> targets, Map<BlockPos, Boolean> destroyed
     ) {
-        double[] dir = Ic2Ray.direction(phi, theta);
+        double[] dir = OldustryRay.direction(phi, theta);
         int minY = level.getMinY();
         int maxY = level.getMaxY();
         for (int step = 0; ; step++) {
-            int blockY = Ic2Ray.floor(y);
+            int blockY = OldustryRay.floor(y);
             if (blockY < minY || blockY >= maxY) {
                 return;
             }
-            int blockX = Ic2Ray.floor(x);
-            int blockZ = Ic2Ray.floor(z);
+            int blockX = OldustryRay.floor(x);
+            int blockZ = OldustryRay.floor(z);
             BlockPos pos = new BlockPos(blockX, blockY, blockZ);
             BlockState state = level.getBlockState(pos);
             boolean solid = !state.isAir();
-            Ic2Ray.Hit hit = Ic2Ray.hit(
+            OldustryRay.Hit hit = OldustryRay.hit(
                 solid,
                 solid ? state.getExplosionResistance(level, pos, this) : 0.0,
                 solid && WHITELIST.containsKey(state.getBlock()),
@@ -132,7 +151,7 @@ public final class Ic2Explosion extends ServerExplosion {
                 return;
             }
             if (solid && !hit.passThrough()) {
-                Boolean mark = Ic2Ray.drop(rayPower, destroyed.containsKey(pos));
+                Boolean mark = OldustryRay.drop(rayPower, destroyed.containsKey(pos));
                 if (mark != null) {
                     destroyed.put(pos, mark);
                 }
@@ -165,7 +184,7 @@ public final class Ic2Explosion extends ServerExplosion {
         for (int i = 0; i < targets.size(); i++) {
             keys[i] = targets.get(i).distanceKey;
         }
-        int anchor = Ic2Ray.anchorIndex(step, keys);
+        int anchor = OldustryRay.anchorIndex(step, keys);
         int distanceMax = step * step + 25;
         for (int i = anchor; i < targets.size(); i++) {
             Target target = targets.get(anchor);
@@ -174,12 +193,46 @@ public final class Ic2Explosion extends ServerExplosion {
             }
             Entity entity = target.entity;
             if (entity.distanceToSqr(x, y, z) <= 25.0) {
-                entity.hurtServer(level, level.damageSources().explosion(this), Ic2Ray.entityDamage(rayPower));
+                entity.hurtServer(level, blastDamage(), OldustryRay.entityDamage(rayPower));
                 knockback(entity, rayPower);
+                if (nuclear && entity instanceof ServerPlayer player && player == igniter() && !player.isAlive()) {
+                    var holder = player.level().getServer().getAdvancements().get(
+                        Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "die_from_own_nuke"));
+                    if (holder != null) {
+                        player.getAdvancements().award(holder, "nuked");
+                    }
+                }
                 if (!entity.isAlive()) {
                     targets.remove(i);
                     i--;
                 }
+            }
+        }
+    }
+
+    private DamageSource blastDamage() {
+        if (!nuclear) {
+            return level.damageSources().explosion(this);
+        }
+        return OldustryDamage.nuke(level, source, igniter());
+    }
+
+    private @Nullable LivingEntity igniter() {
+        return source instanceof PrimedTnt primed ? primed.getOwner() : null;
+    }
+
+    /** Hunger out to 100 blocks, radiation out to 30. ponytail: a full hazmat suit would skip both; nobody is immune until that armor exists. */
+    private void irradiate() {
+        AABB box = new AABB(center.x - 100, center.y - 100, center.z - 100, center.x + 100, center.y + 100, center.z + 100);
+        for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, box)) {
+            double distance = Math.sqrt(entity.distanceToSqr(center.x, center.y, center.z));
+            int hunger = NukeFallout.hungerTicks(distance);
+            if (hunger >= 0) {
+                entity.addEffect(new MobEffectInstance(MobEffects.HUNGER, hunger, 0));
+            }
+            int radiation = NukeFallout.radiationTicks(distance);
+            if (radiation >= 0) {
+                entity.addEffect(new MobEffectInstance(ModEffects.RADIATION, radiation, 0));
             }
         }
     }
@@ -192,7 +245,7 @@ public final class Ic2Explosion extends ServerExplosion {
         if (distance == 0.0) {
             return;
         }
-        double scale = 0.7 * rayPower / Ic2Ray.DROP_POWER_LIMIT / distance;
+        double scale = 0.7 * rayPower / OldustryRay.DROP_POWER_LIMIT / distance;
         entity.setDeltaMovement(entity.getDeltaMovement().add(dx * scale, dy * scale, dz * scale));
     }
 
@@ -214,7 +267,7 @@ public final class Ic2Explosion extends ServerExplosion {
         List<Entity> found = level.getEntities(
             (Entity) null,
             box,
-            entity -> entity instanceof LivingEntity || entity instanceof ItemEntity
+            entity -> entity instanceof LivingEntity || entity instanceof ItemEntity || entity instanceof PrimedTnt
         );
         List<Target> targets = new ArrayList<>(found.size());
         for (Entity entity : found) {

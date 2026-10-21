@@ -352,5 +352,15 @@ final class MiscRecipes extends RecipeProvider {
             .pattern("DDD")
             .unlockedBy("has_dynamite", has(ModItems.DYNAMITE.get()))
             .save(output);
+        shaped(RecipeCategory.MISC, ModItems.REMOTE.get())
+            .define('c', ModItems.INSULATED_COPPER_CABLE.get())
+            .define('G', Items.GOLD_INGOT)
+            .define('C', ModItems.ELECTRONIC_CIRCUIT.get())
+            .define('T', Items.TNT)
+            .pattern(" c ")
+            .pattern("GCG")
+            .pattern("TTT")
+            .unlockedBy("has_electronic_circuit", has(ModItems.ELECTRONIC_CIRCUIT.get()))
+            .save(output, OldustryRecipeProvider.id("remote_from_tnt"));
     }
 }

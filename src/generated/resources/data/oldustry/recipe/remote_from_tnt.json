@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:electronic_circuit",
+    "G": "minecraft:gold_ingot",
+    "T": "minecraft:tnt",
+    "c": "oldustry:insulated_copper_cable"
+  },
+  "pattern": [
+    " c ",
+    "GCG",
+    "TTT"
+  ],
+  "result": {
+    "id": "oldustry:remote"
+  }
+}

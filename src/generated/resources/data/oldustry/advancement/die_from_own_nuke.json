@@ -1,0 +1,26 @@
+{
+  "parent": "oldustry:compress_uranium",
+  "criteria": {
+    "nuked": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.die_from_own_nuke.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "oldustry:nuke"
+    },
+    "title": {
+      "translate": "advancements.oldustry.die_from_own_nuke.title"
+    }
+  },
+  "requirements": [
+    [
+      "nuked"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

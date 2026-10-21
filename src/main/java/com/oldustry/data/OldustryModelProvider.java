@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.oldustry.Oldustry;
 import com.oldustry.block.CableBlock;
+import com.oldustry.block.DynamiteBlock;
 import com.oldustry.block.MachineBlock;
 import com.oldustry.block.MachineCasingBlock;
 import com.oldustry.block.RubberLogBlock;
@@ -74,7 +75,7 @@ public class OldustryModelProvider extends ModelProvider {
             )
         );
         blockModels.createDoor(ModBlocks.REINFORCED_DOOR.get());
-        blockModels.createBarsAndItem(ModBlocks.IRON_FENCE.get());
+        ironFence(blockModels);
 
         rubberLog(blockModels, ModBlocks.RUBBER_LOG.get());
         // Same inventory tint as oak leaves (1.5.2 foliage green).
@@ -86,7 +87,9 @@ public class OldustryModelProvider extends ModelProvider {
         casing(blockModels, ModBlocks.ADVANCED_MACHINE.get());
         miningPipe(blockModels, ModBlocks.MINING_PIPE.get(), true);
         miningTip(blockModels, ModBlocks.MINING_PIPE_TIP.get());
-        cube(blockModels, ModBlocks.ITNT.get());
+        itnt(blockModels, ModBlocks.ITNT.get());
+        itnt(blockModels, ModBlocks.NUKE.get());
+        dynamite(blockModels, ModBlocks.DYNAMITE.get());
 
         for (var holder : ModBlocks.BLOCKS.getEntries()) {
             Block block = holder.value();
@@ -116,6 +119,50 @@ public class OldustryModelProvider extends ModelProvider {
 
     private static void cube(BlockModelGenerators blockModels, Block block) {
         blockModels.createTrivialCube(block);
+    }
+
+    /** JAR cuboids: 4px post, rails at y 6–9 and 12–15. Same geometry as {@code fence_post} / {@code fence_side}. */
+    private static void ironFence(BlockModelGenerators blockModels) {
+        Block block = ModBlocks.IRON_FENCE.get();
+        TextureMapping mapping = TextureMapping.defaultTexture(block);
+        var post = BlockModelGenerators.plainVariant(ModelTemplates.FENCE_POST.create(block, mapping, blockModels.modelOutput));
+        var side = BlockModelGenerators.plainVariant(ModelTemplates.FENCE_SIDE.create(block, mapping, blockModels.modelOutput));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createFence(block, post, side));
+        Identifier inventory = ModelTemplates.FENCE_INVENTORY.create(block, mapping, blockModels.modelOutput);
+        blockModels.registerSimpleItemModel(block, inventory);
+    }
+
+    /** JAR {@code blockITNT.png} is 96×16. Facing south uses cells 0 bottom, 1 top, 2–5 the same side. */
+    private static void itnt(BlockModelGenerators gens, Block block) {
+        TextureMapping map = new TextureMapping()
+            .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(block, "_bottom"))
+            .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
+            .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"));
+        Identifier model = ModelTemplates.CUBE_BOTTOM_TOP.create(block, map, gens.modelOutput);
+        gens.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(model)));
+        gens.registerSimpleItemModel(block, model);
+    }
+
+    /** JAR render type 2 (torch). Wall model faces east when the support is west. Linked sticks use blockDynamiteRemote. */
+    private static void dynamite(BlockModelGenerators gens, DynamiteBlock block) {
+        TextureMapping plain = TextureMapping.torch(block);
+        TextureMapping linkedTex = new TextureMapping().put(TextureSlot.TORCH, TextureMapping.getBlockTexture(block, "_remote"));
+        var standing = BlockModelGenerators.plainVariant(ModelTemplates.TORCH.create(block, plain, gens.modelOutput));
+        Identifier wallId = ModelTemplates.WALL_TORCH.createWithSuffix(block, "_wall", plain, gens.modelOutput);
+        var standingLinked = BlockModelGenerators.plainVariant(ModelTemplates.TORCH.createWithSuffix(block, "_linked", linkedTex, gens.modelOutput));
+        Identifier wallLinked = ModelTemplates.WALL_TORCH.createWithSuffix(block, "_linked_wall", linkedTex, gens.modelOutput);
+        gens.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(
+            PropertyDispatch.initial(DynamiteBlock.ANCHOR, DynamiteBlock.LINKED).generate((anchor, isLinked) -> {
+                Identifier wall = isLinked ? wallLinked : wallId;
+                return switch (anchor) {
+                    case FLOOR -> isLinked ? standingLinked : standing;
+                    case WEST -> BlockModelGenerators.plainVariant(wall);
+                    case NORTH -> BlockModelGenerators.plainVariant(wall).with(BlockModelGenerators.Y_ROT_90);
+                    case EAST -> BlockModelGenerators.plainVariant(wall).with(BlockModelGenerators.Y_ROT_180);
+                    case SOUTH -> BlockModelGenerators.plainVariant(wall).with(BlockModelGenerators.Y_ROT_270);
+                };
+            })
+        ));
     }
 
     private static void casing(BlockModelGenerators gens, Block block) {
@@ -345,6 +392,7 @@ public class OldustryModelProvider extends ModelProvider {
             || path.equals("electric_treetap")
             || path.equals("cf_sprayer")
             || path.equals("od_scanner")
-            || path.equals("ov_scanner");
+            || path.equals("ov_scanner")
+            || path.equals("remote");
     }
 }

@@ -1,26 +1,49 @@
 package com.oldustry.block;
 
+import com.mojang.serialization.MapCodec;
 import com.oldustry.compat.CuriosWearables;
 import com.oldustry.registry.OldustryTags;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.IronBarsBlock;
+import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
-/** IC2 BlockPoleFence: magnetizer stores charge 0–15 in metadata; metal shoes → lift. */
-public class IronFenceBlock extends IronBarsBlock {
+/** IC2 BlockPoleFence: post + two rails. Magnetizer stores charge 0–15; metal shoes → lift. */
+public class IronFenceBlock extends FenceBlock {
+    public static final MapCodec<IronFenceBlock> CODEC = simpleCodec(IronFenceBlock::new);
     public static final IntegerProperty CHARGE = IntegerProperty.create("charge", 0, 15);
 
     public IronFenceBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState().setValue(CHARGE, 0));
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public MapCodec<FenceBlock> codec() {
+        return (MapCodec<FenceBlock>) (MapCodec<?>) CODEC;
+    }
+
+    /** JAR {@code RenderBlockFence}: rails to iron fence or wooden fence, not solid blocks. */
+    @Override
+    public boolean connectsTo(BlockState state, boolean faceSolid, Direction direction) {
+        return state.is(BlockTags.WOODEN_FENCES);
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        return InteractionResult.PASS;
     }
 
     @Override

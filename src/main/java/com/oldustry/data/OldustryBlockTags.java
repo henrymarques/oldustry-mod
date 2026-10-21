@@ -53,6 +53,8 @@ public class OldustryBlockTags extends BlockTagsProvider {
         tag(BlockTags.DOORS).add(ModBlocks.REINFORCED_DOOR.getKey());
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.IRON_FENCE.getKey());
+        // Block tag only: oak fences share the wood class and draw their rail. Item is not fuel.
+        tag(BlockTags.WOODEN_FENCES).add(ModBlocks.IRON_FENCE.getKey());
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.IRON_SCAFFOLD.getKey());
         tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.WOODEN_SCAFFOLD.getKey());
         // Climb is JAR entityInside (forward boost), not ladder CLIMBABLE.

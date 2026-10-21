@@ -52,6 +52,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
@@ -482,15 +483,19 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
         return result == MINE_WORKING;
     }
 
-    /** First non-pipe Y below the miner (tip or solid/air). */
     private int minerOperationHeight(ServerLevel level, BlockPos pos) {
-        for (int y = pos.getY() - 1; y >= level.getMinY(); y--) {
-            BlockState state = level.getBlockState(new BlockPos(pos.getX(), y, pos.getZ()));
-            if (!state.is(ModBlocks.MINING_PIPE.get())) {
-                return y;
-            }
+        return MinerColumn.head(pos.getY(), level.getMinY(), y -> minerColumnCell(level, pos, y));
+    }
+
+    private static int minerColumnCell(ServerLevel level, BlockPos pos, int y) {
+        BlockState state = level.getBlockState(new BlockPos(pos.getX(), y, pos.getZ()));
+        if (state.is(ModBlocks.MINING_PIPE.get())) {
+            return MinerColumn.PIPE;
         }
-        return level.getMinY() - 1;
+        if (state.is(ModBlocks.MINING_PIPE_TIP.get())) {
+            return MinerColumn.TIP;
+        }
+        return state.isAir() ? MinerColumn.AIR : MinerColumn.OTHER;
     }
 
     private boolean minerWithdraw(ServerLevel level, BlockPos pos, int y) {
@@ -836,7 +841,8 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
             return false;
         }
 
-        level.removeBlock(fluidPos, false);
+        // JAR clearLastBlock is setBlockToAir. Level.removeBlock puts the fluid's own block back.
+        level.setBlock(fluidPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
         if (linkedMiner != null) {
             linkedMiner.canProvideLiquid = false;
         }
@@ -1731,6 +1737,13 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
             : kind.packet;
         if (kind.type == MachineKind.Type.WIND) {
             return energy > 0 ? Math.min(energy, WindLogic.MAX_OUTPUT) : 0;
+        }
+        // Storage/transformer stay full-packet (JAR energy >= output). Generators emit the short remainder.
+        if (kind.type == MachineKind.Type.GENERATOR
+            || kind.type == MachineKind.Type.GEO
+            || kind.type == MachineKind.Type.SOLAR
+            || kind.type == MachineKind.Type.WATER) {
+            return EnergyNetLogic.generatorPacket(energy, packet);
         }
         return energy >= packet ? packet : 0;
     }

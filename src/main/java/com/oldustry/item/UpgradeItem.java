@@ -50,23 +50,23 @@ public class UpgradeItem extends Item {
         int n = stack.getCount();
         switch (kind) {
             case OVERCLOCKER -> {
-                builder.accept(Component.translatable("ic2.tooltip.upgrade.overclocker.time", String.format("%.2f", 100 * Math.pow(0.7, n))));
-                builder.accept(Component.translatable("ic2.tooltip.upgrade.overclocker.power", String.format("%.2f", 100 * Math.pow(1.6, n))));
+                builder.accept(Component.translatable("oldustry.tooltip.upgrade.overclocker.time", String.format("%.2f", 100 * Math.pow(0.7, n))));
+                builder.accept(Component.translatable("oldustry.tooltip.upgrade.overclocker.power", String.format("%.2f", 100 * Math.pow(1.6, n))));
             }
-            case TRANSFORMER -> builder.accept(Component.translatable("ic2.tooltip.upgrade.transformer", n));
-            case STORAGE -> builder.accept(Component.translatable("ic2.tooltip.upgrade.storage", 10000 * n));
+            case TRANSFORMER -> builder.accept(Component.translatable("oldustry.tooltip.upgrade.transformer", n));
+            case STORAGE -> builder.accept(Component.translatable("oldustry.tooltip.upgrade.storage", 10000 * n));
             case EJECTOR -> {
                 int dir = stack.getOrDefault(ModDataComponents.EJECTOR_DIR.get(), 0);
                 String side = switch (dir) {
-                    case 1 -> "ic2.dir.west";
-                    case 2 -> "ic2.dir.east";
-                    case 3 -> "ic2.dir.bottom";
-                    case 4 -> "ic2.dir.top";
-                    case 5 -> "ic2.dir.north";
-                    case 6 -> "ic2.dir.south";
-                    default -> "ic2.tooltip.upgrade.ejector.anyside";
+                    case 1 -> "oldustry.dir.west";
+                    case 2 -> "oldustry.dir.east";
+                    case 3 -> "oldustry.dir.bottom";
+                    case 4 -> "oldustry.dir.top";
+                    case 5 -> "oldustry.dir.north";
+                    case 6 -> "oldustry.dir.south";
+                    default -> "oldustry.tooltip.upgrade.ejector.anyside";
                 };
-                builder.accept(Component.translatable("ic2.tooltip.upgrade.ejector", Component.translatable(side)));
+                builder.accept(Component.translatable("oldustry.tooltip.upgrade.ejector", Component.translatable(side)));
             }
         }
     }

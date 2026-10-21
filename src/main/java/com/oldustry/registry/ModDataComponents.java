@@ -3,12 +3,15 @@ package com.oldustry.registry;
 import java.util.List;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.oldustry.Oldustry;
+import com.oldustry.item.RemoteLink;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -74,6 +77,29 @@ public final class ModDataComponents {
         () -> DataComponentType.<List<ItemStack>>builder()
             .persistent(ItemStack.OPTIONAL_CODEC.listOf())
             .networkSynchronized(ItemStack.OPTIONAL_STREAM_CODEC.apply(ByteBufCodecs.list()))
+            .build()
+    );
+
+    private static final Codec<RemoteLink> LINK_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        Codec.STRING.fieldOf("dimension").forGetter(RemoteLink::dimension),
+        Codec.INT.fieldOf("x").forGetter(RemoteLink::x),
+        Codec.INT.fieldOf("y").forGetter(RemoteLink::y),
+        Codec.INT.fieldOf("z").forGetter(RemoteLink::z)
+    ).apply(instance, RemoteLink::new));
+    private static final StreamCodec<io.netty.buffer.ByteBuf, RemoteLink> LINK_STREAM = StreamCodec.composite(
+        ByteBufCodecs.STRING_UTF8, RemoteLink::dimension,
+        ByteBufCodecs.VAR_INT, RemoteLink::x,
+        ByteBufCodecs.VAR_INT, RemoteLink::y,
+        ByteBufCodecs.VAR_INT, RemoteLink::z,
+        RemoteLink::new
+    );
+
+    /** Dynamite-O-Mote links. Dimension id plus block, so the Nether does not share overworld coords. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<RemoteLink>>> REMOTE_LINKS = COMPONENTS.register(
+        "remote_links",
+        () -> DataComponentType.<List<RemoteLink>>builder()
+            .persistent(LINK_CODEC.listOf())
+            .networkSynchronized(LINK_STREAM.apply(ByteBufCodecs.list()))
             .build()
     );
 

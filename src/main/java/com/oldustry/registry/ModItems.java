@@ -7,6 +7,7 @@ import com.oldustry.item.CoffeeMugItem;
 import com.oldustry.item.CutterItem;
 import com.oldustry.item.DebugItem;
 import com.oldustry.item.DynamiteItem;
+import com.oldustry.item.RemoteItem;
 import com.oldustry.item.ChainsawItem;
 import com.oldustry.item.ChainsawStats;
 import com.oldustry.item.DrillStats;
@@ -96,6 +97,7 @@ public final class ModItems {
     public static final DeferredItem<BlockItem> MAGNETIZER = ITEMS.registerSimpleBlockItem(ModBlocks.MAGNETIZER);
     public static final DeferredItem<BlockItem> INDUCTION = ITEMS.registerSimpleBlockItem(ModBlocks.INDUCTION);
     public static final DeferredItem<BlockItem> MINING_PIPE = ITEMS.registerSimpleBlockItem(ModBlocks.MINING_PIPE);
+    public static final DeferredItem<BlockItem> NUKE = ITEMS.registerSimpleBlockItem(ModBlocks.NUKE);
     public static final DeferredItem<BlockItem> ITNT = ITEMS.registerSimpleBlockItem(ModBlocks.ITNT);
     public static final DeferredItem<BlockItem> INSULATED_COPPER_CABLE = ITEMS.registerSimpleBlockItem(ModBlocks.INSULATED_COPPER_CABLE);
     public static final DeferredItem<BlockItem> COPPER_CABLE = ITEMS.registerSimpleBlockItem(ModBlocks.COPPER_CABLE);
@@ -215,8 +217,9 @@ public final class ModItems {
     public static final DeferredItem<Item> HOPS = item("hops");
     public static final DeferredItem<Item> BARREL = item("barrel");
     public static final DeferredItem<Item> DEBUG_ITEM = ITEMS.registerItem("debug_item", DebugItem::new);
-    public static final DeferredItem<Item> DYNAMITE = ITEMS.registerItem("dynamite", DynamiteItem::new);
-    public static final DeferredItem<Item> STICKY_DYNAMITE = ITEMS.registerItem("sticky_dynamite", DynamiteItem::new);
+    public static final DeferredItem<Item> DYNAMITE = ITEMS.registerItem("dynamite", props -> new DynamiteItem(props, false));
+    public static final DeferredItem<Item> STICKY_DYNAMITE = ITEMS.registerItem("sticky_dynamite", props -> new DynamiteItem(props, true));
+    public static final DeferredItem<Item> REMOTE = ITEMS.registerItem("remote", RemoteItem::new);
 
     public static final DeferredItem<Item> WRENCH = ITEMS.registerItem("wrench", props -> new WrenchItem(props.stacksTo(1).durability(160)));
     public static final DeferredItem<Item> CUTTER = ITEMS.registerItem("cutter", props -> new CutterItem(props.stacksTo(1).durability(60)));

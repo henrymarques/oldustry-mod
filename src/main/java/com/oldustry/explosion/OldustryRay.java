@@ -4,13 +4,13 @@ package com.oldustry.explosion;
  * Ray decisions from IC2 1.117 {@code ExplosionIC2.shootRay}.
  * Entity damage in the JAR is {@code (int) (32 * power / 8)}, not the constructor's damage argument.
  */
-public final class Ic2Ray {
+public final class OldustryRay {
     public static final double DROP_POWER_LIMIT = 8.0;
     public static final double PASS_THROUGH = 1000.0;
 
     public record Hit(double absorption, boolean passThrough, boolean stop) {}
 
-    private Ic2Ray() {}
+    private OldustryRay() {}
 
     public static Hit hit(boolean solid, double resistance, boolean whitelisted, double power) {
         double absorption = 0.5;

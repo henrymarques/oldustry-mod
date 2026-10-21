@@ -4,6 +4,12 @@ plugins {
     id 'net.neoforged.gradle.userdev' version '7.1.38'
 }
 
+tasks.withType(Test).configureEach {
+    forkEvery = 100
+    reports.html.required = false
+    reports.junitXml.required = false
+}
+
 tasks.named('wrapper', Wrapper).configure {
     // Define wrapper values here so as to not have to always do so when updating gradlew.properties.
     // Switching this to Wrapper.DistributionType.ALL will download the full gradle sources that comes with
@@ -205,19 +211,37 @@ tasks.register('cfChargeCheck', JavaExec) {
 
 tasks.register('pointExplosionCheck', JavaExec) {
     group = 'verification'
-    description = 'Checks the IC2 point-explosion cube with assertions'
+    description = 'Checks the Oldustry point-explosion cube with assertions'
     dependsOn tasks.named('compileTestJava')
     classpath = sourceSets.test.runtimeClasspath
     mainClass = 'com.oldustry.explosion.PointExplosionCheck'
     enableAssertions = true
 }
 
-tasks.register('ic2RayCheck', JavaExec) {
+tasks.register('oldustryRayCheck', JavaExec) {
     group = 'verification'
-    description = 'Checks IC2 ray absorption, drop threshold and anchor hits'
+    description = 'Checks Oldustry ray absorption, drop threshold and anchor hits'
     dependsOn tasks.named('compileTestJava')
     classpath = sourceSets.test.runtimeClasspath
-    mainClass = 'com.oldustry.explosion.Ic2RayCheck'
+    mainClass = 'com.oldustry.explosion.OldustryRayCheck'
+    enableAssertions = true
+}
+
+tasks.register('dynamiteAnchorCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks placed-dynamite support priority'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.block.DynamiteAnchorCheck'
+    enableAssertions = true
+}
+
+tasks.register('remoteLinksCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks Dynamite-O-Mote coord list'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.item.RemoteLinksCheck'
     enableAssertions = true
 }
 
@@ -227,8 +251,10 @@ tasks.named('test', Test).configure {
     dependsOn tasks.named('energyCheck')
     dependsOn tasks.named('machineGuiCheck')
     dependsOn tasks.named('pointExplosionCheck')
-    dependsOn tasks.named('ic2RayCheck')
+    dependsOn tasks.named('oldustryRayCheck')
     dependsOn tasks.named('cfChargeCheck')
+    dependsOn tasks.named('dynamiteAnchorCheck')
+    dependsOn tasks.named('remoteLinksCheck')
 }
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.

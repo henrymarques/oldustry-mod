@@ -21,5 +21,6 @@
   "pump": { "sounds": ["oldustry:machines/pump"] },
   "electrolyzer": { "sounds": ["oldustry:machines/electrolyzer"] },
   "magnetizer": { "sounds": ["oldustry:machines/magnetizer"] },
-  "induction": { "sounds": ["oldustry:machines/induction"] }
+  "induction": { "sounds": ["oldustry:machines/induction"] },
+  "dynamite_remote": { "sounds": ["oldustry:tools/dynamiteomote"] }
 }
