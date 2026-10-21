@@ -1,12 +1,14 @@
 package com.oldustry.machine;
 
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class MachineScreen extends AbstractContainerScreen<MachineMenu> {
     // ARGB — GuiGraphicsExtractor skips text when alpha == 0 (0x404040 alone is invisible).
@@ -21,6 +23,14 @@ public class MachineScreen extends AbstractContainerScreen<MachineMenu> {
     protected void init() {
         super.init();
         titleLabelX = (imageWidth - font.width(title)) / 2;
+        if (menu.kind().type == MachineKind.Type.STORAGE) {
+            // JAR GuiElectricBlock: 20×20 redstone button at 152,4 cycles the six modes.
+            addRenderableWidget(new RedstoneButton(leftPos + 152, topPos + 4, button -> {
+                if (minecraft.player != null && minecraft.gameMode != null && menu.clickMenuButton(minecraft.player, 0)) {
+                    minecraft.gameMode.handleInventoryButtonClick(menu.containerId, 0);
+                }
+            }));
+        }
     }
 
     @Override
@@ -214,16 +224,18 @@ public class MachineScreen extends AbstractContainerScreen<MachineMenu> {
         graphics.blit(RenderPipelines.GUI_TEXTURED, texture, leftPos + x, topPos + y, u, v, w, h, 256, 256);
     }
 
-    @Override
-    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-        if (menu.kind().type == MachineKind.Type.STORAGE) {
-            double x = event.x() - (leftPos + 152);
-            double y = event.y() - (topPos + 4);
-            if (x >= 0 && y >= 0 && x < 20 && y < 20 && menu.clickMenuButton(minecraft.player, 0)) {
-                minecraft.gameMode.handleInventoryButtonClick(menu.containerId, 0);
-                return true;
-            }
+    /** JAR GuiIconButton: widget chrome plus a redstone dust icon. */
+    private static final class RedstoneButton extends Button.Plain {
+        private static final ItemStack ICON = new ItemStack(Items.REDSTONE);
+
+        private RedstoneButton(int x, int y, OnPress onPress) {
+            super(x, y, 20, 20, Component.empty(), onPress, DEFAULT_NARRATION);
         }
-        return super.mouseClicked(event, doubleClick);
+
+        @Override
+        protected void extractContents(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
+            extractDefaultSprite(graphics);
+            graphics.item(ICON, getX() + 2, getY() + 1);
+        }
     }
 }

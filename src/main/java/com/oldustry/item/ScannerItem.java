@@ -64,9 +64,8 @@ public class ScannerItem extends ElectricItem {
                 }
             }
             int result = scanned > 0 ? (int) (1000.0 * score / scanned) : 0;
-            player.sendSystemMessage(
-                Component.literal(valuable ? "SCAN RESULT: Ore value in this area is " + result : "SCAN RESULT: Ore density in this area is " + result)
-            );
+            player.sendSystemMessage(Component.translatable(
+                valuable ? "info.oldustry.scan.value" : "info.oldustry.scan.density", result));
         } else {
             ModSounds.play(level, player, player.blockPosition(), ModSounds.SCANNER.get(), SoundSource.PLAYERS, 1f, 1f);
         }

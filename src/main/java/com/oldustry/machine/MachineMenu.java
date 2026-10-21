@@ -183,7 +183,9 @@ public class MachineMenu extends AbstractContainerMenu {
     @Override
     public boolean clickMenuButton(Player player, int id) {
         if (id == 0 && kind.type == MachineKind.Type.STORAGE && container instanceof MachineBlockEntity machine) {
-            machine.cycleMode(player);
+            if (!player.level().isClientSide()) {
+                machine.cycleMode(player);
+            }
             return true;
         }
         return false;
