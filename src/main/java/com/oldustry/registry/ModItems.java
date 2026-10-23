@@ -13,6 +13,7 @@ import com.oldustry.item.ChainsawStats;
 import com.oldustry.item.DrillStats;
 import com.oldustry.item.MachineBlockItem;
 import com.oldustry.item.ElectricArmorItem;
+import com.oldustry.item.ElectricJetpackItem;
 import com.oldustry.item.ElectricItem;
 import com.oldustry.item.ElectricToolItem;
 import com.oldustry.item.ElectricTreetapItem;
@@ -20,6 +21,9 @@ import com.oldustry.item.ElectricWrenchItem;
 import com.oldustry.item.EuReaderItem;
 import com.oldustry.item.FilledTinCanItem;
 import com.oldustry.item.FuelJetpackItem;
+import com.oldustry.item.NanoSaberItem;
+import com.oldustry.item.NanoSuitItem;
+import com.oldustry.item.NightvisionGogglesItem;
 import com.oldustry.item.OldustryMaterials;
 import com.oldustry.item.PainterItem;
 import com.oldustry.item.ReBatteryItem;
@@ -36,6 +40,7 @@ import com.oldustry.item.UpgradeItem;
 import com.oldustry.item.WrenchItem;
 
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -96,6 +101,10 @@ public final class ModItems {
     public static final DeferredItem<BlockItem> ELECTROLYZER = ITEMS.registerSimpleBlockItem(ModBlocks.ELECTROLYZER);
     public static final DeferredItem<BlockItem> MAGNETIZER = ITEMS.registerSimpleBlockItem(ModBlocks.MAGNETIZER);
     public static final DeferredItem<BlockItem> INDUCTION = ITEMS.registerSimpleBlockItem(ModBlocks.INDUCTION);
+    public static final DeferredItem<BlockItem> PERSONAL_SAFE = ITEMS.registerItem(
+        "personal_safe",
+        props -> new BlockItem(ModBlocks.PERSONAL_SAFE.get(), props.useBlockDescriptionPrefix().rarity(Rarity.UNCOMMON))
+    );
     public static final DeferredItem<BlockItem> MINING_PIPE = ITEMS.registerSimpleBlockItem(ModBlocks.MINING_PIPE);
     public static final DeferredItem<BlockItem> NUKE = ITEMS.registerSimpleBlockItem(ModBlocks.NUKE);
     public static final DeferredItem<BlockItem> ITNT = ITEMS.registerSimpleBlockItem(ModBlocks.ITNT);
@@ -252,10 +261,27 @@ public final class ModItems {
     public static final DeferredItem<Item> LAPPACK = ITEMS.registerItem("lappack", props -> new ElectricArmorItem(new ElectricCharge.Spec(300000, 250, 2, true), OldustryMaterials.utilityArmor(props, OldustryMaterials.LAPPACK_EQUIPMENT, ArmorType.CHESTPLATE)));
     // JAR ItemArmorUtility: 0 defense / no enchantable component.
     public static final DeferredItem<Item> SOLAR_HELMET = ITEMS.registerItem("solar_helmet", props -> new SolarHelmetItem(OldustryMaterials.utilityArmor(props, OldustryMaterials.SOLAR_EQUIPMENT, ArmorType.HELMET)));
+    // JAR 20k/200/T1. Desvio: NV only at eye light <= 7, no blindness. Recipe waits on D5 heat switch.
+    public static final DeferredItem<Item> NIGHTVISION_GOGGLES = ITEMS.registerItem("nightvision_goggles", props -> new NightvisionGogglesItem(OldustryMaterials.utilityEquip(
+        props,
+        OldustryMaterials.NIGHTVISION_EQUIPMENT,
+        ArmorType.HELMET)));
+    // JAR 100k/160/T2, 0 vanilla armor — absorption is the EU ratio.
+    public static final DeferredItem<Item> NANO_HELMET = ITEMS.registerItem("nano_helmet", props -> new NanoSuitItem(OldustryMaterials.utilityEquip(props.rarity(Rarity.UNCOMMON), OldustryMaterials.NANO_EQUIPMENT, ArmorType.HELMET)));
+    public static final DeferredItem<Item> NANO_CHESTPLATE = ITEMS.registerItem("nano_chestplate", props -> new NanoSuitItem(OldustryMaterials.utilityEquip(props.rarity(Rarity.UNCOMMON), OldustryMaterials.NANO_EQUIPMENT, ArmorType.CHESTPLATE)));
+    public static final DeferredItem<Item> NANO_LEGGINGS = ITEMS.registerItem("nano_leggings", props -> new NanoSuitItem(OldustryMaterials.utilityEquip(props.rarity(Rarity.UNCOMMON), OldustryMaterials.NANO_EQUIPMENT, ArmorType.LEGGINGS)));
+    public static final DeferredItem<Item> NANO_BOOTS = ITEMS.registerItem("nano_boots", props -> new NanoSuitItem(OldustryMaterials.utilityEquip(props.rarity(Rarity.UNCOMMON), OldustryMaterials.NANO_EQUIPMENT, ArmorType.BOOTS)));
+    public static final DeferredItem<Item> NANO_SABER = ITEMS.registerItem("nano_saber", props -> new NanoSaberItem(
+        props.sword(OldustryMaterials.NANO_SABER, 3, -2.4f).rarity(Rarity.UNCOMMON)));
     public static final DeferredItem<Item> STATIC_BOOTS = ITEMS.registerItem("static_boots", props -> new StaticBootsItem(props.humanoidArmor(OldustryMaterials.pack(OldustryMaterials.RUBBER_EQUIPMENT), ArmorType.BOOTS)));
     // Tank = FUEL component (desvio). No armor durability: JAR damageArmor is empty.
     public static final DeferredItem<Item> FUEL_JETPACK = ITEMS.registerItem("fuel_jetpack", props -> new FuelJetpackItem(OldustryMaterials.utilityEquip(
         props.stacksTo(1).component(ModDataComponents.FUEL.get(), 0),
+        OldustryMaterials.JETPACK_EQUIPMENT,
+        ArmorType.CHESTPLATE)));
+    // JAR ItemArmorJetpackElectric: 30k / 60 / T1, canProvide false. Same worn texture as the fuel pack.
+    public static final DeferredItem<Item> ELECTRIC_JETPACK = ITEMS.registerItem("electric_jetpack", props -> new ElectricJetpackItem(OldustryMaterials.utilityEquip(
+        props,
         OldustryMaterials.JETPACK_EQUIPMENT,
         ArmorType.CHESTPLATE)));
 

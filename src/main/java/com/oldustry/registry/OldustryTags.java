@@ -13,6 +13,11 @@ public final class OldustryTags {
     public static final class Blocks {
         public static final TagKey<Block> ORES_TIN = block("ores/tin");
         public static final TagKey<Block> ORES_URANIUM = block("ores/uranium");
+        public static final TagKey<Block> ORES_SILVER = block("ores/silver");
+        public static final TagKey<Block> ORES_RUBY = block("ores/ruby");
+        public static final TagKey<Block> ORES_SAPPHIRE = block("ores/sapphire");
+        public static final TagKey<Block> ORES_GREEN_SAPPHIRE = block("ores/green_sapphire");
+        public static final TagKey<Block> ORES_TUNGSTEN = block("ores/tungsten");
         public static final TagKey<Block> STORAGE_BLOCKS_TIN = block("storage_blocks/tin");
         public static final TagKey<Block> STORAGE_BLOCKS_BRONZE = block("storage_blocks/bronze");
         public static final TagKey<Block> STORAGE_BLOCKS_URANIUM = block("storage_blocks/uranium");

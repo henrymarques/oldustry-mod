@@ -1,6 +1,7 @@
 package com.oldustry.compat;
 
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -8,7 +9,9 @@ import org.jspecify.annotations.Nullable;
 import com.oldustry.Oldustry;
 import com.oldustry.item.ElectricArmorItem;
 import com.oldustry.item.ElectricItem;
+import com.oldustry.item.ElectricJetpackItem;
 import com.oldustry.item.FuelJetpackItem;
+import com.oldustry.item.NightvisionGogglesItem;
 import com.oldustry.item.SolarHelmetItem;
 import com.oldustry.item.StaticBootsItem;
 import com.oldustry.network.KeysPayload;
@@ -51,15 +54,29 @@ public final class CuriosWearables {
         if (curios == null) {
             return;
         }
+        boolean chestJetpack = isJetpack(player.getItemBySlot(EquipmentSlot.CHEST));
+        boolean curiosJetpack = false;
+        boolean headGoggles = player.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof NightvisionGogglesItem;
+        boolean curiosGoggles = false;
         for (int i = 0; i < curios.getSlots(); i++) {
             ItemStack stack = curios.getStackInSlot(i);
             if (stack.getItem() instanceof SolarHelmetItem && player.level() instanceof ServerLevel server) {
                 SolarHelmetItem.tickCharge(server, player);
             } else if (stack.getItem() instanceof StaticBootsItem) {
                 StaticBootsItem.chargeFromWalk(player, stack);
-            } else if (stack.getItem() instanceof FuelJetpackItem
-                && !(player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof FuelJetpackItem)) {
-                FuelJetpackItem.tickFlight(player, stack, KeysPayload.jump(player), KeysPayload.forward(player), true);
+            } else if (!chestJetpack && !curiosJetpack && isJetpack(stack)) {
+                curiosJetpack = true;
+                boolean jump = KeysPayload.jump(player);
+                boolean forward = KeysPayload.forward(player);
+                if (stack.getItem() instanceof FuelJetpackItem) {
+                    FuelJetpackItem.tickFlight(player, stack, jump, forward, true);
+                } else if (stack.getItem() instanceof ElectricJetpackItem) {
+                    ElectricJetpackItem.tickFlight(player, stack, jump, forward, true);
+                }
+            } else if (!headGoggles && !curiosGoggles && stack.getItem() instanceof NightvisionGogglesItem
+                && player.level() instanceof ServerLevel server) {
+                curiosGoggles = true;
+                NightvisionGogglesItem.tick(server, player, stack);
             }
         }
     }
@@ -82,6 +99,47 @@ public final class CuriosWearables {
             }
         }
         return false;
+    }
+
+    public static boolean any(Player player, Predicate<ItemStack> test) {
+        if (!ModList.get().isLoaded("curios")) {
+            return false;
+        }
+        IItemHandler curios = player.getCapability(CURIOS_ITEMS);
+        if (curios == null) {
+            return false;
+        }
+        for (int i = 0; i < curios.getSlots(); i++) {
+            if (test.test(curios.getStackInSlot(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isJetpack(ItemStack stack) {
+        return stack.getItem() instanceof FuelJetpackItem || stack.getItem() instanceof ElectricJetpackItem;
+    }
+
+    /** Chest jetpack wins. Otherwise the first jetpack in a Curios slot. */
+    public static ItemStack wornJetpack(Player player) {
+        ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
+        if (isJetpack(chest)) {
+            return chest;
+        }
+        if (!ModList.get().isLoaded("curios")) {
+            return ItemStack.EMPTY;
+        }
+        IItemHandler curios = player.getCapability(CURIOS_ITEMS);
+        if (curios != null) {
+            for (int i = 0; i < curios.getSlots(); i++) {
+                ItemStack stack = curios.getStackInSlot(i);
+                if (isJetpack(stack)) {
+                    return stack;
+                }
+            }
+        }
+        return ItemStack.EMPTY;
     }
 
     public static ItemStack chestOrCurios(Player player, Item item) {

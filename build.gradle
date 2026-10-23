@@ -236,6 +236,15 @@ tasks.register('dynamiteAnchorCheck', JavaExec) {
     enableAssertions = true
 }
 
+tasks.register('personalSafeCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks Personal Safe owner and wrench rules'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.block.PersonalSafeAccessCheck'
+    enableAssertions = true
+}
+
 tasks.register('remoteLinksCheck', JavaExec) {
     group = 'verification'
     description = 'Checks Dynamite-O-Mote coord list'
@@ -255,6 +264,7 @@ tasks.named('test', Test).configure {
     dependsOn tasks.named('cfChargeCheck')
     dependsOn tasks.named('dynamiteAnchorCheck')
     dependsOn tasks.named('remoteLinksCheck')
+    dependsOn tasks.named('personalSafeCheck')
 }
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.

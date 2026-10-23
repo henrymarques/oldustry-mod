@@ -95,7 +95,7 @@ public final class MachineGui {
             case MINING -> switch (slot) {
                 case 0 -> Role.INPUT;   // drill
                 case 1 -> Role.INPUT;   // scanner
-                case 2 -> Role.INPUT;   // pipe supply
+                case 2 -> Role.INPUT;   // mining pipe, or a block placed when the column retracts
                 case 3 -> Role.DISCHARGE;
                 default -> Role.HIDDEN;
             };

@@ -12,6 +12,7 @@ import com.oldustry.block.MachineBlock;
 import com.oldustry.block.MachineCasingBlock;
 import com.oldustry.block.ItntBlock;
 import com.oldustry.block.NukeBlock;
+import com.oldustry.block.PersonalSafeBlock;
 import com.oldustry.block.MiningPipeBlock;
 import com.oldustry.block.ResinSheetBlock;
 import com.oldustry.block.RubberLogBlock;
@@ -143,6 +144,11 @@ public final class ModBlocks {
     public static final DeferredBlock<MachineBlock> ELECTROLYZER = machine(MachineKind.ELECTROLYZER);
     public static final DeferredBlock<MachineBlock> MAGNETIZER = machine(MachineKind.MAGNETIZER);
     public static final DeferredBlock<MachineBlock> INDUCTION = machine(MachineKind.INDUCTION);
+    public static final DeferredBlock<PersonalSafeBlock> PERSONAL_SAFE = BLOCKS.registerBlock(
+        "personal_safe",
+        PersonalSafeBlock::new,
+        p -> p.mapColor(MapColor.METAL).strength(6_000_000.0F, 30_000_000.0F).sound(SoundType.STONE).requiresCorrectToolForDrops().noOcclusion()
+    );
     public static final DeferredBlock<NukeBlock> NUKE = BLOCKS.registerBlock(
         "nuke",
         NukeBlock::new,

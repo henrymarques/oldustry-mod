@@ -54,6 +54,16 @@ public final class OldustryMaterials {
         DrillStats.DIAMOND_ENCHANT,
         Tags.Items.GEMS_DIAMOND
     );
+    /** Idle nano saber is a 4-damage sword. Active adds {@link NanoSaber#ACTIVE_BONUS}. */
+    public static final ToolMaterial NANO_SABER = new ToolMaterial(
+        BlockTags.INCORRECT_FOR_IRON_TOOL,
+        Integer.MAX_VALUE,
+        1f,
+        0f,
+        NanoSaber.ENCHANT,
+        OldustryTags.Items.INGOTS_REFINED_IRON
+    );
+
     // JAR EnumToolMaterial.IRON + efficiency 12; desvio speed 15. Durability unused (EU).
     public static final ToolMaterial CHAINSAW = new ToolMaterial(
         BlockTags.INCORRECT_FOR_IRON_TOOL,
@@ -116,6 +126,14 @@ public final class OldustryMaterials {
     public static final ResourceKey<EquipmentAsset> JETPACK_EQUIPMENT = ResourceKey.create(
         EquipmentAssets.ROOT_ID,
         Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "jetpack")
+    );
+    public static final ResourceKey<EquipmentAsset> NANO_EQUIPMENT = ResourceKey.create(
+        EquipmentAssets.ROOT_ID,
+        Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "nano")
+    );
+    public static final ResourceKey<EquipmentAsset> NIGHTVISION_EQUIPMENT = ResourceKey.create(
+        EquipmentAssets.ROOT_ID,
+        Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "nightvision")
     );
     public static final ResourceKey<EquipmentAsset> SOLAR_EQUIPMENT = ResourceKey.create(
         EquipmentAssets.ROOT_ID,

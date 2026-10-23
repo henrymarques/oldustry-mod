@@ -4,6 +4,7 @@
   "package": "com.oldustry.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "CraftingChargeMixin",
     "LivingEntityEquipmentMixin"
   ],
   "injectors": {

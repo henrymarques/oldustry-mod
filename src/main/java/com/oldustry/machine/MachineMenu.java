@@ -1,7 +1,6 @@
 package com.oldustry.machine;
 
 import com.oldustry.item.ElectricItem;
-import com.oldustry.item.ScannerItem;
 import com.oldustry.item.UpgradeItem;
 import com.oldustry.registry.ModItems;
 import com.oldustry.registry.ModMenus;
@@ -96,9 +95,7 @@ public class MachineMenu extends AbstractContainerMenu {
             case OUTPUT -> false;
             case UPGRADE -> stack.getItem() instanceof UpgradeItem;
             case CHARGE -> stack.getItem() instanceof ElectricItem;
-            case DISCHARGE -> stack.getItem() instanceof ElectricItem
-                || stack.is(ModItems.SU_BATTERY.get())
-                || stack.is(Items.REDSTONE);
+            case DISCHARGE -> MinerAccess.acceptsDischarge(stack);
             case HIDDEN -> false;
             case INPUT -> mayPlaceInput(slot, stack);
         };
@@ -115,12 +112,7 @@ public class MachineMenu extends AbstractContainerMenu {
 
     private boolean mayPlaceInput(int slot, ItemStack stack) {
         return switch (kind.type) {
-            case MINING -> switch (slot) {
-                case 0 -> stack.is(ModItems.MINING_DRILL.get()) || stack.is(ModItems.DIAMOND_DRILL.get());
-                case 1 -> stack.getItem() instanceof ScannerItem;
-                case 2 -> stack.is(ModItems.MINING_PIPE.get());
-                default -> false;
-            };
+            case MINING -> MinerAccess.accepts(slot, stack);
             case PUMPING -> stack.is(ModItems.EMPTY_CELL.get()) || stack.is(Items.BUCKET);
             case CANNING -> switch (slot) {
                 case 0 -> stack.has(net.minecraft.core.component.DataComponents.FOOD)

@@ -100,6 +100,48 @@ final class EquipmentRecipes extends RecipeProvider {
             .unlockedBy("has_" + painter.getId().getPath(), has(painter.get()))
             .save(output, OldustryRecipeProvider.id("painter_from_" + painter.getId().getPath())));
 
+        shaped(RecipeCategory.COMBAT, ModItems.NANO_HELMET.get())
+            .define('C', ModItems.CARBON_PLATE.get())
+            .define('c', ModItems.ENERGY_CRYSTAL.get())
+            .define('G', Items.GLASS)
+            .pattern("CcC")
+            .pattern("CGC")
+            .unlockedBy("has_carbon_plate", has(ModItems.CARBON_PLATE.get()))
+            .save(output);
+        shaped(RecipeCategory.COMBAT, ModItems.NANO_CHESTPLATE.get())
+            .define('C', ModItems.CARBON_PLATE.get())
+            .define('c', ModItems.ENERGY_CRYSTAL.get())
+            .pattern("C C")
+            .pattern("CcC")
+            .pattern("CCC")
+            .unlockedBy("has_carbon_plate", has(ModItems.CARBON_PLATE.get()))
+            .save(output);
+        shaped(RecipeCategory.COMBAT, ModItems.NANO_LEGGINGS.get())
+            .define('C', ModItems.CARBON_PLATE.get())
+            .define('c', ModItems.ENERGY_CRYSTAL.get())
+            .pattern("CcC")
+            .pattern("C C")
+            .pattern("C C")
+            .unlockedBy("has_carbon_plate", has(ModItems.CARBON_PLATE.get()))
+            .save(output);
+        shaped(RecipeCategory.COMBAT, ModItems.NANO_BOOTS.get())
+            .define('C', ModItems.CARBON_PLATE.get())
+            .define('c', ModItems.ENERGY_CRYSTAL.get())
+            .pattern("C C")
+            .pattern("CcC")
+            .unlockedBy("has_carbon_plate", has(ModItems.CARBON_PLATE.get()))
+            .save(output);
+        shaped(RecipeCategory.COMBAT, ModItems.NANO_SABER.get())
+            .define('G', Items.GLOWSTONE_DUST)
+            .define('A', ModItems.ADVANCED_ALLOY.get())
+            .define('C', ModItems.CARBON_PLATE.get())
+            .define('c', ModItems.ENERGY_CRYSTAL.get())
+            .pattern("GA ")
+            .pattern("GA ")
+            .pattern("CcC")
+            .unlockedBy("has_carbon_plate", has(ModItems.CARBON_PLATE.get()))
+            .save(output);
+
         shaped(RecipeCategory.TOOLS, ModItems.TOOLBOX.get())
             .define('I', OldustryTags.Items.INGOTS_REFINED_IRON)
             .define('C', Tags.Items.CHESTS_WOODEN)

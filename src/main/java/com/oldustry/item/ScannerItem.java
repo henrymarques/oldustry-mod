@@ -1,11 +1,9 @@
 package com.oldustry.item;
 
-import com.oldustry.OldustryConfig;
 import com.oldustry.energy.ElectricCharge;
 import com.oldustry.registry.ModSounds;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -14,7 +12,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.Tags;
 
 public class ScannerItem extends ElectricItem {
     private final boolean valuable;
@@ -73,19 +70,6 @@ public class ScannerItem extends ElectricItem {
     }
 
     static int value(BlockState state) {
-        String id = BuiltInRegistries.BLOCK.getKey(state.getBlock()).toString();
-        String cfg = OldustryConfig.VALUABLE_ORES.get();
-        for (String part : cfg.split(",")) {
-            String[] kv = part.split("=");
-            if (kv.length == 2 && kv[0].trim().equals(id)) {
-                return Integer.parseInt(kv[1].trim());
-            }
-        }
-        int byPath = ValuableOre.pathValue(BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath());
-        if (byPath > 0) {
-            return byPath;
-        }
-        // JAR registerOre: any other ore dictionary name starting with "ore" is value 1.
-        return state.is(Tags.Blocks.ORES) ? 1 : 0;
+        return ValuableOre.value(state);
     }
 }

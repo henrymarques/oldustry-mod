@@ -1,6 +1,7 @@
 package com.oldustry.registry;
 
 import com.oldustry.Oldustry;
+import com.oldustry.block.PersonalSafeMenu;
 import com.oldustry.furnace.ImprovedFurnaceMenu;
 import com.oldustry.machine.MachineMenu;
 
@@ -20,6 +21,9 @@ public final class ModMenus {
 
     public static final DeferredHolder<MenuType<?>, MenuType<MachineMenu>> MACHINE =
         MENUS.register("machine", () -> IMenuTypeExtension.create(MachineMenu::fromClient));
+
+    public static final DeferredHolder<MenuType<?>, MenuType<PersonalSafeMenu>> PERSONAL_SAFE =
+        MENUS.register("personal_safe", () -> IMenuTypeExtension.create(PersonalSafeMenu::fromClient));
 
     public static void register(IEventBus bus) {
         MENUS.register(bus);

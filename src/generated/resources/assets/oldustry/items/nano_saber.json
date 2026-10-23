@@ -1,0 +1,28 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "component": "oldustry:saber_active",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "oldustry:item/nano_saber"
+    },
+    "on_true": {
+      "type": "minecraft:range_dispatch",
+      "entries": [
+        {
+          "model": {
+            "type": "minecraft:model",
+            "model": "oldustry:item/nano_saber_active_alt"
+          },
+          "threshold": 0.5
+        }
+      ],
+      "fallback": {
+        "type": "minecraft:model",
+        "model": "oldustry:item/nano_saber_active"
+      },
+      "property": "oldustry:saber_flicker"
+    },
+    "property": "minecraft:has_component"
+  }
+}

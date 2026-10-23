@@ -1,5 +1,13 @@
 package com.oldustry.machine;
 
+import java.util.function.IntPredicate;
+
+import com.oldustry.item.ValuableOre;
+import com.oldustry.registry.OldustryTags;
+
+import net.minecraft.core.Direction;
+import net.neoforged.neoforge.common.Tags;
+
 public final class MachineGuiCheck {
     public static void main(String[] args) {
         assert !MachineKind.GENERATOR.verticalFacing();
@@ -102,13 +110,44 @@ public final class MachineGuiCheck {
             default -> y > 5 && y < 10 ? MinerColumn.PIPE : MinerColumn.OTHER;
         }) == 7;
         assert MinerColumn.head(10, 0, y -> y == 9 ? MinerColumn.AIR : MinerColumn.OTHER) == 9;
-        assert com.oldustry.item.ValuableOre.pathValue("iron_ore") == 1;
-        assert com.oldustry.item.ValuableOre.pathValue("deepslate_iron_ore") == 1;
-        assert com.oldustry.item.ValuableOre.pathValue("copper_ore") == 2;
-        assert com.oldustry.item.ValuableOre.pathValue("deepslate_copper_ore") == 2;
-        assert com.oldustry.item.ValuableOre.pathValue("coal_ore") == 1;
-        assert com.oldustry.item.ValuableOre.pathValue("diamond_ore") == 4;
-        assert com.oldustry.item.ValuableOre.pathValue("stone") == 0;
+        assert ValuableOre.valueOf(Tags.Blocks.ORES_COPPER) == 2;
+        assert ValuableOre.valueOf(OldustryTags.Blocks.ORES_TIN) == 2;
+        assert ValuableOre.valueOf(Tags.Blocks.ORES_GOLD) == 3;
+        assert ValuableOre.valueOf(Tags.Blocks.ORES_LAPIS) == 3;
+        assert ValuableOre.valueOf(Tags.Blocks.ORES_REDSTONE) == 3;
+        assert ValuableOre.valueOf(OldustryTags.Blocks.ORES_SILVER) == 3;
+        assert ValuableOre.valueOf(Tags.Blocks.ORES_DIAMOND) == 4;
+        assert ValuableOre.valueOf(OldustryTags.Blocks.ORES_URANIUM) == 4;
+        assert ValuableOre.valueOf(OldustryTags.Blocks.ORES_RUBY) == 4;
+        assert ValuableOre.valueOf(OldustryTags.Blocks.ORES_SAPPHIRE) == 4;
+        assert ValuableOre.valueOf(OldustryTags.Blocks.ORES_GREEN_SAPPHIRE) == 4;
+        assert ValuableOre.valueOf(Tags.Blocks.ORES_EMERALD) == 5;
+        assert ValuableOre.valueOf(Tags.Blocks.ORES_QUARTZ) == 5;
+        assert ValuableOre.valueOf(OldustryTags.Blocks.ORES_TUNGSTEN) == 5;
+        assert ValuableOre.valueOf(Tags.Blocks.ORES) == 1;
+        assert ValuableOre.valueOf(Tags.Blocks.STORAGE_BLOCKS) == 0;
+        assert ValuableOre.specificBeforeCatchAll();
+        IntPredicate block = slot -> slot == MinerAccess.PIPE;
+        IntPredicate drill = slot -> slot == MinerAccess.DRILL || slot == MinerAccess.BATTERY;
+        IntPredicate battery = slot -> slot == MinerAccess.BATTERY;
+        assert MinerAccess.insert(MinerAccess.PIPE, Direction.NORTH, block);
+        assert MinerAccess.insert(MinerAccess.PIPE, Direction.UP, block);
+        assert !MinerAccess.insert(MinerAccess.DRILL, Direction.UP, block);
+        assert MinerAccess.insert(MinerAccess.DRILL, Direction.UP, drill);
+        assert MinerAccess.insert(MinerAccess.DRILL, Direction.NORTH, drill);
+        assert !MinerAccess.insert(MinerAccess.BATTERY, Direction.UP, drill);
+        assert MinerAccess.insert(MinerAccess.BATTERY, Direction.NORTH, drill);
+        assert MinerAccess.insert(MinerAccess.BATTERY, Direction.UP, battery);
+        assert MinerAccess.insert(MinerAccess.BATTERY, Direction.DOWN, battery);
+        assert MinerAccess.canExtract(MinerAccess.DRILL, Direction.UP);
+        assert !MinerAccess.canExtract(MinerAccess.DRILL, Direction.DOWN);
+        assert MinerAccess.canExtract(MinerAccess.SCANNER, Direction.DOWN);
+        assert !MinerAccess.canExtract(MinerAccess.SCANNER, Direction.NORTH);
+        assert MinerAccess.canExtract(MinerAccess.PIPE, Direction.WEST);
+        assert !MinerAccess.canExtract(MinerAccess.PIPE, Direction.UP);
+        assert !MinerAccess.canExtract(MinerAccess.BATTERY, Direction.UP);
+        assert !MinerAccess.canExtract(MinerAccess.BATTERY, Direction.DOWN);
+        assert !MinerAccess.canExtract(MinerAccess.BATTERY, Direction.SOUTH);
         System.out.println("MachineGuiCheck ok");
     }
 

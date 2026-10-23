@@ -41,6 +41,8 @@ public final class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> MAGNETIZER = sound("magnetizer");
     public static final DeferredHolder<SoundEvent, SoundEvent> INDUCTION = sound("induction");
     public static final DeferredHolder<SoundEvent, SoundEvent> DYNAMITE_REMOTE = sound("dynamite_remote");
+    public static final DeferredHolder<SoundEvent, SoundEvent> NANO_SABER_SWING = sound("nano_saber_swing");
+    public static final DeferredHolder<SoundEvent, SoundEvent> NANO_SABER_POWER = sound("nano_saber_power");
 
     private static DeferredHolder<SoundEvent, SoundEvent> sound(String name) {
         Identifier id = Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, name);

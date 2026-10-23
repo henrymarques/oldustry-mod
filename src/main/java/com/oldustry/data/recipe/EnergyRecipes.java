@@ -700,6 +700,16 @@ final class EnergyRecipes extends RecipeProvider {
             .pattern("R R")
             .unlockedBy("has_fuel_can", has(ModItems.FUEL_CAN.get()))
             .save(output);
+        shaped(RecipeCategory.COMBAT, ModItems.ELECTRIC_JETPACK.get())
+            .define('I', OldustryTags.Items.INGOTS_REFINED_IRON)
+            .define('C', ModItems.ADVANCED_CIRCUIT.get())
+            .define('B', ModItems.BATBOX.get())
+            .define('G', Items.GLOWSTONE_DUST)
+            .pattern("ICI")
+            .pattern("IBI")
+            .pattern("G G")
+            .unlockedBy("has_batbox", has(ModItems.BATBOX.get()))
+            .save(output);
 
         // ── Mining pipe (JAR: tip is not a craftable item) ──
         shaped(RecipeCategory.MISC, ModItems.MINING_PIPE.get(), 8)
@@ -778,6 +788,17 @@ final class EnergyRecipes extends RecipeProvider {
             .pattern("CFC")
             .pattern("CMC")
             .unlockedBy("has_advanced_machine", has(ModItems.ADVANCED_MACHINE.get()))
+            .save(output);
+
+        // Personal Safe (JAR column: circuit / machine / chest). The chest is the vanilla block, same field as the toolbox.
+        shaped(RecipeCategory.DECORATIONS, ModItems.PERSONAL_SAFE.get())
+            .define('c', ModItems.ELECTRONIC_CIRCUIT.get())
+            .define('M', ModItems.MACHINE_CASING.get())
+            .define('C', Items.CHEST)
+            .pattern("c")
+            .pattern("M")
+            .pattern("C")
+            .unlockedBy("has_machine", has(ModItems.MACHINE_CASING.get()))
             .save(output);
 
         // JAR: empty sprayer / circuit / empty sprayer, fuel can / tin / fuel can, fuel can / empty / fuel can.

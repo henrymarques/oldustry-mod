@@ -2,15 +2,22 @@ package com.oldustry;
 
 import com.oldustry.block.CableBlock;
 import com.oldustry.client.JetpackLoopSound;
+import com.oldustry.client.SaberFlicker;
+import com.oldustry.client.PersonalSafeRenderer;
+import com.oldustry.client.PersonalSafeScreen;
 import com.oldustry.client.MachineLoopSound;
 import com.oldustry.client.OldustryKeys;
 import com.oldustry.compat.CuriosWearables;
 import com.oldustry.furnace.ImprovedFurnaceScreen;
+import com.oldustry.item.ElectricJetpackItem;
 import com.oldustry.item.FuelJetpackItem;
 import com.oldustry.machine.MachineScreen;
+import com.oldustry.registry.ModBlockEntities;
 import com.oldustry.registry.ModBlocks;
 import com.oldustry.registry.ModEntities;
 import com.oldustry.registry.ModMenus;
+
+import net.minecraft.resources.Identifier;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
@@ -32,6 +39,8 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RegisterRangeSelectItemModelPropertyEvent;
+import net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
@@ -52,6 +61,11 @@ public class OldustryClient {
     }
 
     @SubscribeEvent
+    static void registerSaberFlicker(RegisterRangeSelectItemModelPropertyEvent event) {
+        event.register(Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "saber_flicker"), SaberFlicker.CODEC);
+    }
+
+    @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
         Oldustry.LOGGER.info("Oldustry client setup");
     }
@@ -60,6 +74,7 @@ public class OldustryClient {
     static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(ModMenus.IMPROVED_FURNACE.get(), ImprovedFurnaceScreen::new);
         event.register(ModMenus.MACHINE.get(), MachineScreen::new);
+        event.register(ModMenus.PERSONAL_SAFE.get(), PersonalSafeScreen::new);
     }
 
     @SubscribeEvent
@@ -67,6 +82,12 @@ public class OldustryClient {
         event.registerEntityRenderer(ModEntities.DYNAMITE.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.PRIMED_ITNT.get(), net.minecraft.client.renderer.entity.TntRenderer::new);
         event.registerEntityRenderer(ModEntities.PRIMED_NUKE.get(), net.minecraft.client.renderer.entity.TntRenderer::new);
+        event.registerBlockEntityRenderer(ModBlockEntities.PERSONAL_SAFE.get(), PersonalSafeRenderer::new);
+    }
+
+    @SubscribeEvent
+    static void specialModels(RegisterSpecialModelRendererEvent event) {
+        event.register(Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "personal_safe"), PersonalSafeRenderer.Unbaked.MAP_CODEC);
     }
 
     @SubscribeEvent
@@ -99,16 +120,14 @@ public class OldustryClient {
         if (mc.options == null) {
             return;
         }
-        ItemStack chest = CuriosWearables.chestOrCurios(player, com.oldustry.registry.ModItems.FUEL_JETPACK.get());
+        ItemStack chest = CuriosWearables.wornJetpack(player);
         boolean thrusting = false;
+        boolean jump = mc.options.keyJump.isDown();
+        boolean forward = mc.options.keyUp.isDown();
         if (chest.getItem() instanceof FuelJetpackItem) {
-            thrusting = FuelJetpackItem.tickFlight(
-                player,
-                chest,
-                mc.options.keyJump.isDown(),
-                mc.options.keyUp.isDown(),
-                false
-            );
+            thrusting = FuelJetpackItem.tickFlight(player, chest, jump, forward, false);
+        } else if (chest.getItem() instanceof ElectricJetpackItem) {
+            thrusting = ElectricJetpackItem.tickFlight(player, chest, jump, forward, false);
         }
         JetpackLoopSound.sync(thrusting);
     }

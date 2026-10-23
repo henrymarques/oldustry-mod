@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "oldustry:block/personal_safe"
+    },
+    "facing=north": {
+      "model": "oldustry:block/personal_safe"
+    },
+    "facing=south": {
+      "model": "oldustry:block/personal_safe"
+    },
+    "facing=west": {
+      "model": "oldustry:block/personal_safe"
+    }
+  }
+}

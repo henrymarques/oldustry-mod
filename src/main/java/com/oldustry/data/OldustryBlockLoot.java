@@ -43,6 +43,7 @@ public class OldustryBlockLoot extends BlockLootSubProvider {
         add(ModBlocks.ITNT.get(), noDrop());
         add(ModBlocks.NUKE.get(), noDrop());
         add(ModBlocks.DYNAMITE.get(), noDrop());
+        dropSelf(ModBlocks.PERSONAL_SAFE.get());
         dropSelf(ModBlocks.MACHINE_CASING.get());
         dropSelf(ModBlocks.ADVANCED_MACHINE.get());
         dropSelf(ModBlocks.MINING_PIPE.get());

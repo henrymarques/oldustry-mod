@@ -42,6 +42,11 @@ public final class ModDataComponents {
         () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT).build()
     );
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> SABER_ACTIVE = COMPONENTS.register(
+        "saber_active",
+        () -> DataComponentType.<Boolean>builder().persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL).build()
+    );
+
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> HOVER = COMPONENTS.register(
         "hover",
         () -> DataComponentType.<Boolean>builder().persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL).build()

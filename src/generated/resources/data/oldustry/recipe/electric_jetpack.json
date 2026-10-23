@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "oldustry:batbox",
+    "C": "oldustry:advanced_circuit",
+    "G": "minecraft:glowstone_dust",
+    "I": "#c:ingots/refined_iron"
+  },
+  "pattern": [
+    "ICI",
+    "IBI",
+    "G G"
+  ],
+  "result": {
+    "id": "oldustry:electric_jetpack"
+  }
+}

@@ -2,6 +2,7 @@ package com.oldustry.registry;
 
 import com.oldustry.Oldustry;
 import com.oldustry.block.CableBlockEntity;
+import com.oldustry.block.PersonalSafeBlockEntity;
 import com.oldustry.furnace.ImprovedFurnaceBlockEntity;
 import com.oldustry.machine.MachineBlockEntity;
 
@@ -25,6 +26,12 @@ public final class ModBlockEntities {
         BLOCK_ENTITIES.register("machine", () -> new BlockEntityType<>(
             MachineBlockEntity::new,
             ModBlocks.machines()
+        ));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PersonalSafeBlockEntity>> PERSONAL_SAFE =
+        BLOCK_ENTITIES.register("personal_safe", () -> new BlockEntityType<>(
+            PersonalSafeBlockEntity::new,
+            java.util.Set.of(ModBlocks.PERSONAL_SAFE.get())
         ));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CableBlockEntity>> CABLE =

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "oldustry:advanced_alloy",
+    "C": "oldustry:carbon_plate",
+    "G": "minecraft:glowstone_dust",
+    "c": "oldustry:energy_crystal"
+  },
+  "pattern": [
+    "GA ",
+    "GA ",
+    "CcC"
+  ],
+  "result": {
+    "id": "oldustry:nano_saber"
+  }
+}

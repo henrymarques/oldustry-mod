@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.oldustry.Oldustry;
 import com.oldustry.block.CableBlock;
+import com.oldustry.block.PersonalSafeBlock;
+import com.oldustry.client.PersonalSafeRenderer;
 import com.oldustry.block.DynamiteBlock;
 import com.oldustry.block.MachineBlock;
 import com.oldustry.block.MachineCasingBlock;
@@ -26,6 +28,7 @@ import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
@@ -87,6 +90,7 @@ public class OldustryModelProvider extends ModelProvider {
         casing(blockModels, ModBlocks.ADVANCED_MACHINE.get());
         miningPipe(blockModels, ModBlocks.MINING_PIPE.get(), true);
         miningTip(blockModels, ModBlocks.MINING_PIPE_TIP.get());
+        personalSafe(blockModels);
         itnt(blockModels, ModBlocks.ITNT.get());
         itnt(blockModels, ModBlocks.NUKE.get());
         dynamite(blockModels, ModBlocks.DYNAMITE.get());
@@ -109,12 +113,29 @@ public class OldustryModelProvider extends ModelProvider {
                 continue;
             }
             String path = item.getId().getPath();
+            if (path.equals("nano_saber")) {
+                nanoSaber(itemModels, item.get());
+                continue;
+            }
             if (handheldItem(path)) {
                 itemModels.generateFlatItem(item.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
             } else {
                 itemModels.generateFlatItem(item.get(), ModelTemplates.FLAT_ITEM);
             }
         }
+    }
+
+    /** Particle blockstate per facing. The world mesh is the block-entity renderer; the item uses the same closed model. */
+    private static void personalSafe(BlockModelGenerators blockModels) {
+        var block = ModBlocks.PERSONAL_SAFE.get();
+        var particle = blockModels.createParticleOnlyBlockModel(block, block);
+        blockModels.blockStateOutput.accept(
+            MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(PersonalSafeBlock.FACING).generate(facing -> particle))
+        );
+        Identifier base = ModelTemplates.CHEST_INVENTORY.create(
+            block.asItem(), TextureMapping.particle(block), blockModels.modelOutput
+        );
+        blockModels.itemModelOutput.accept(block.asItem(), ItemModelUtils.specialModel(base, new PersonalSafeRenderer.Unbaked()));
     }
 
     private static void cube(BlockModelGenerators blockModels, Block block) {
@@ -374,6 +395,15 @@ public class OldustryModelProvider extends ModelProvider {
                 }))
                 .with(BlockModelGenerators.createRotatedPillar())
         );
+    }
+
+    /** Off model. Active picks the cyan or magenta blade each draw, like the JAR icon. */
+    private static void nanoSaber(ItemModelGenerators itemModels, Item item) {
+        var off = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, ModelTemplates.FLAT_HANDHELD_ITEM));
+        var blue = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_active", ModelTemplates.FLAT_HANDHELD_ITEM));
+        var red = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_active_alt", ModelTemplates.FLAT_HANDHELD_ITEM));
+        var lit = ItemModelUtils.rangeSelect(new com.oldustry.client.SaberFlicker(), blue, ItemModelUtils.override(red, 0.5F));
+        itemModels.generateBooleanDispatch(item, ItemModelUtils.hasComponent(com.oldustry.registry.ModDataComponents.SABER_ACTIVE.get()), lit, off);
     }
 
     /** Tools held like vanilla pickaxe/sword (not inventory-flat `generated`). */

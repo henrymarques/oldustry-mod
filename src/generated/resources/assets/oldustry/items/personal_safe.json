@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "oldustry:item/personal_safe",
+    "model": {
+      "type": "oldustry:personal_safe"
+    }
+  }
+}

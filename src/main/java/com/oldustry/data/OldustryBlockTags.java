@@ -71,6 +71,8 @@ public class OldustryBlockTags extends BlockTagsProvider {
         tag(Tags.Blocks.PLAYER_WORKSTATIONS_FURNACES).add(ModBlocks.IMPROVED_FURNACE.getKey());
         tag(OldustryTags.Blocks.FURNACES_IRON).add(ModBlocks.IMPROVED_FURNACE.getKey());
         tag(OldustryTags.Blocks.FURNACES).addTag(OldustryTags.Blocks.FURNACES_IRON);
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.PERSONAL_SAFE.getKey());
+        tag(BlockTags.DRAGON_IMMUNE).add(ModBlocks.PERSONAL_SAFE.getKey());
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.MACHINE_CASING.getKey());
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ADVANCED_MACHINE.getKey());
         for (var holder : ModBlocks.BLOCKS.getEntries()) {

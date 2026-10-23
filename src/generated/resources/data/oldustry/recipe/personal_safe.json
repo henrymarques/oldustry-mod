@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "minecraft:chest",
+    "M": "oldustry:machine_casing",
+    "c": "oldustry:electronic_circuit"
+  },
+  "pattern": [
+    "c",
+    "M",
+    "C"
+  ],
+  "result": {
+    "id": "oldustry:personal_safe"
+  }
+}

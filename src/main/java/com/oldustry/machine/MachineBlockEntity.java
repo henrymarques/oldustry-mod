@@ -521,6 +521,8 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
         if (at.is(ModBlocks.MINING_PIPE_TIP.get()) || at.is(ModBlocks.MINING_PIPE.get())) {
             level.removeBlock(tipPos, false);
             ejectDrop(level, pos, new ItemStack(ModItems.MINING_PIPE.get()));
+            // JAR removePipe: a non-pipe block in the pipe slot is placed in the hole.
+            placeMinerFiller(level, tipPos);
         }
         return true;
     }
@@ -763,6 +765,20 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
                 items.set(slot, ItemStack.EMPTY);
             }
         }
+    }
+
+    /** JAR {@code removePipe}: consume one filler block and place it where the pipe was. */
+    private void placeMinerFiller(ServerLevel level, BlockPos hole) {
+        ItemStack filler = items.get(MinerAccess.PIPE);
+        if (filler.isEmpty() || filler.is(ModItems.MINING_PIPE.get()) || !(filler.getItem() instanceof net.minecraft.world.item.BlockItem blockItem)) {
+            return;
+        }
+        ItemStack one = filler.copyWithCount(1);
+        filler.shrink(1);
+        if (filler.isEmpty()) {
+            items.set(MinerAccess.PIPE, ItemStack.EMPTY);
+        }
+        blockItem.place(new net.minecraft.world.item.context.DirectionalPlaceContext(level, hole, Direction.DOWN, one, Direction.DOWN));
     }
 
     /** JAR {@code StackUtil.distributeDrop}: adjacent inventories, then an item entity at this block. */
@@ -1522,22 +1538,18 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
             energy += electric.discharge(stack, Math.min(room, kind.packet), stats().tier());
             return;
         }
-        if (stack.is(ModItems.SU_BATTERY.get())) {
-            // JAR ItemInfo.getEnergyValue(suBattery) = 1200 in discharge slot (hand dump stays 1000).
-            // Don't eat the cell unless the buffer can take the full dump.
-            int gained = ElectricCharge.consumeOnce(room, 1200);
-            if (gained > 0) {
-                energy += gained;
-                stack.shrink(1);
-            }
+        // SU battery is 1200, redstone is 800. Eat one only when the free buffer holds that whole value.
+        // On macerator-family machines the single-use also waits for a storage upgrade.
+        int once = stack.getItem() == ModItems.SU_BATTERY.get() ? 1200 : stack.getItem() == Items.REDSTONE ? 800 : 0;
+        boolean storageGate = once == 1200 && kind.suNeedsStorageUpgrade();
+        int gained = ElectricCharge.consumeOnce(room, once, storageGate, upgrades(UpgradeItem.Kind.STORAGE));
+        if (gained <= 0) {
             return;
         }
-        if (stack.is(Items.REDSTONE)) {
-            int gained = ElectricCharge.consumeOnce(room, 800);
-            if (gained > 0) {
-                energy += gained;
-                stack.shrink(1);
-            }
+        energy += gained;
+        stack.shrink(1);
+        if (stack.isEmpty()) {
+            items.set(slot, ItemStack.EMPTY);
         }
     }
 
@@ -1902,20 +1914,26 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
     @Override
     public int[] getSlotsForFace(Direction face) {
         return switch (kind.type) {
-            case MINING -> new int[] { 0, 1, 2 };
-            case PUMPING -> new int[] { 0, 1 };
-            case CANNING -> new int[] { 0, 1, 2 };
+            case MINING -> MinerAccess.FACES;
+            case PUMPING -> new int[] { 0, 1, 2 };
+            case CANNING -> new int[] { 0, 1, 2, 3 };
             case ELECTROLYZER -> new int[] { 0, 1 };
-            case INDUCTION -> new int[] { 0, 1, 3, 4 };
-            default -> new int[] { 0, 1 };
+            case INDUCTION -> new int[] { 0, 1, 2, 3, 4 };
+            default -> new int[] { 0, 1, 6 };
         };
     }
 
     @Override
     public boolean canPlaceItemThroughFace(int slot, ItemStack stack, Direction face) {
+        if (kind.type == MachineKind.Type.MINING) {
+            return MinerAccess.canInsert(slot, stack, face);
+        }
         MachineGui.Role role = MachineGui.role(kind, slot);
         if (role == MachineGui.Role.FUEL) {
             return true;
+        }
+        if (role == MachineGui.Role.DISCHARGE) {
+            return MinerAccess.acceptsDischarge(stack);
         }
         if (role != MachineGui.Role.INPUT) {
             return false;
@@ -1928,12 +1946,6 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
             case RECYCLER -> !MachineRecipes.recyclerBlacklist(stack.getItem());
             case FURNACE, INDUCTION -> level != null
                 && level.recipeAccess().propertySet(net.minecraft.world.item.crafting.RecipePropertySet.FURNACE_INPUT).test(stack);
-            case MINING -> switch (slot) {
-                case 0 -> stack.is(ModItems.MINING_DRILL.get()) || stack.is(ModItems.DIAMOND_DRILL.get());
-                case 1 -> stack.getItem() instanceof ScannerItem;
-                case 2 -> stack.is(ModItems.MINING_PIPE.get());
-                default -> false;
-            };
             case PUMPING -> stack.is(ModItems.EMPTY_CELL.get());
             case CANNING -> switch (slot) {
                 case 0 -> stack.has(DataComponents.FOOD)
@@ -1956,6 +1968,9 @@ public class MachineBlockEntity extends BlockEntity implements EnergyTile, World
 
     @Override
     public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction face) {
+        if (kind.type == MachineKind.Type.MINING) {
+            return MinerAccess.canExtract(slot, face);
+        }
         // Electrolyzer both slots are IO (JAR InvSlot.Access.IO).
         if (kind.type == MachineKind.Type.ELECTROLYZER) {
             return slot == 0 || slot == 1;

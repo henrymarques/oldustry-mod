@@ -22,5 +22,7 @@
   "electrolyzer": { "sounds": ["oldustry:machines/electrolyzer"] },
   "magnetizer": { "sounds": ["oldustry:machines/magnetizer"] },
   "induction": { "sounds": ["oldustry:machines/induction"] },
-  "dynamite_remote": { "sounds": ["oldustry:tools/dynamiteomote"] }
+  "dynamite_remote": { "sounds": ["oldustry:tools/dynamiteomote"] },
+  "nano_saber_swing": { "sounds": ["oldustry:tools/nano_saber_swing1", "oldustry:tools/nano_saber_swing2", "oldustry:tools/nano_saber_swing3"] },
+  "nano_saber_power": { "sounds": ["oldustry:tools/nano_saber_power"] }
 }

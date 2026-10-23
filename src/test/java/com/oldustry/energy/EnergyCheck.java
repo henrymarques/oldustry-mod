@@ -278,6 +278,22 @@ public final class EnergyCheck {
         assert ElectricCharge.consumeOnce(1200, 1200) == 1200;
         assert ElectricCharge.consumeOnce(1199, 1200) == 0 : "one-shot needs full room";
         assert ElectricCharge.consumeOnce(800, 800) == 800;
+        // Stock macerator is 800 + 32 − 1. Single-use waits for a storage upgrade; redstone fits.
+        UpgradeLogic.Stats stockMac = UpgradeLogic.apply(new UpgradeLogic.Stats(2, 400, 800, 1), 0, 0, 0);
+        assert stockMac.capacity() == 831 : stockMac.capacity();
+        assert MachineKind.MACERATOR.suNeedsStorageUpgrade();
+        assert ElectricCharge.consumeOnce(stockMac.capacity(), 1200, true, 0) == 0;
+        assert ElectricCharge.consumeOnce(stockMac.capacity(), 800, false, 0) == 800;
+        // Two transformers clear 1200 EU of room and still do not eat the single-use.
+        UpgradeLogic.Stats tfMac = UpgradeLogic.apply(new UpgradeLogic.Stats(2, 400, 800, 1), 0, 2, 0);
+        assert tfMac.capacity() == 800 + 512 - 1 : tfMac.capacity();
+        assert ElectricCharge.consumeOnce(tfMac.capacity(), 1200, true, 0) == 0;
+        UpgradeLogic.Stats storedMac = UpgradeLogic.apply(new UpgradeLogic.Stats(2, 400, 800, 1), 0, 0, 1);
+        assert ElectricCharge.consumeOnce(storedMac.capacity(), 1200, true, 1) == 1200;
+        assert ElectricCharge.consumeOnce(1199, 1200, true, 1) == 0;
+        // Batbox already holds 1200 and has no upgrade slot.
+        assert !MachineKind.BATBOX.suNeedsStorageUpgrade();
+        assert ElectricCharge.consumeOnce(40000, 1200, false, 0) == 1200;
 
         UpgradeLogic.Stats stats = UpgradeLogic.apply(new UpgradeLogic.Stats(2, 400, 800, 1), 1, 0, 1);
         assert stats.duration() == 280 : stats.duration();
@@ -346,6 +362,56 @@ public final class EnergyCheck {
         assert com.oldustry.item.JetpackFuel.afterUse(10, 9) == 0;
         assert com.oldustry.item.JetpackFuel.afterCanner(0, 6 * 2548) == 15286;
         assert com.oldustry.item.JetpackFuel.afterCanner(15286, 6 * 2548) == 17998;
+        // Electric jetpack: JAR power 0.7, ceiling worldHeight/1.28, consume 9-2 / 6-2, partial drain.
+        assert pin(com.oldustry.item.JetpackFlight.ELECTRIC.power()) == 0.7f;
+        assert com.oldustry.item.JetpackFlight.ceiling(256, false) == 256;
+        assert com.oldustry.item.JetpackFlight.ceiling(256, true) == 200;
+        assert com.oldustry.item.JetpackFlight.scaledPower(0.7f, 30000, 30000, 0.05f) == 0.7f;
+        assert com.oldustry.item.JetpackFlight.scaledPower(1f, 17998, 17998, 0.2f) == 1f;
+        assert com.oldustry.item.JetpackFlight.electricDrain(30000, false) == 7;
+        assert com.oldustry.item.JetpackFlight.electricDrain(30000, true) == 4;
+        assert com.oldustry.item.JetpackFlight.electricDrain(3, false) == 3;
+        assert new ElectricCharge.Spec(30000, 60, 1, false).max() == 30000;
+        assert pin(com.oldustry.item.Nightvision.DARK) == 7;
+        assert pin(com.oldustry.item.Nightvision.DURATION) == 250;
+        assert com.oldustry.item.Nightvision.darkEnough(7);
+        assert !com.oldustry.item.Nightvision.darkEnough(8);
+        assert com.oldustry.item.Nightvision.fromGoggles(250, 0);
+        assert com.oldustry.item.Nightvision.fromGoggles(1, 0);
+        assert !com.oldustry.item.Nightvision.fromGoggles(251, 0);
+        assert !com.oldustry.item.Nightvision.fromGoggles(250, 1);
+        assert com.oldustry.item.Nightvision.SPEC.max() == 20000;
+        assert com.oldustry.item.Nightvision.SPEC.transfer() == 200;
+        assert com.oldustry.item.Nightvision.SPEC.tier() == 1;
+        var nanoSet = com.oldustry.item.NanoArmor.absorb(10f, 100000, 100000, 100000, 100000, false);
+        assert Math.abs(nanoSet.remaining() - 1f) < 0.001f : nanoSet.remaining();
+        assert nanoSet.boots() + nanoSet.legs() + nanoSet.chest() + nanoSet.helmet() == 7200;
+        var chestOnly = com.oldustry.item.NanoArmor.absorb(10f, 0, 0, 100000, 0, false);
+        assert Math.abs(chestOnly.remaining() - 6.4f) < 0.001f;
+        assert chestOnly.chest() == 2880;
+        assert com.oldustry.item.NanoArmor.absorb(10f, 0, 0, 0, 0, false).remaining() == 10f;
+        assert com.oldustry.item.NanoArmor.fallCancelEu(10) == 5600;
+        assert com.oldustry.item.NanoArmor.fallCancelEu(11) == -1;
+        assert com.oldustry.item.NanoArmor.fallCancelEu(6) == 2400;
+        assert com.oldustry.item.NanoArmor.display(3, 800) == 3;
+        assert com.oldustry.item.NanoArmor.display(2, 800) == 7;
+        assert com.oldustry.item.NanoArmor.display(1, 800) == 5;
+        assert com.oldustry.item.NanoArmor.display(0, 800) == 3;
+        assert com.oldustry.item.NanoArmor.display(2, 799) == 0;
+        assert ElectricCharge.carriedCharge(10_000, 10_000) == 10_000;
+        assert ElectricCharge.carriedCharge(10_000, 2_500) == 2_500;
+        assert ElectricCharge.carriedCharge(100_000, 100_000) == 100_000;
+        assert ElectricCharge.carriedCharge(1_000_000, 100_000) == 100_000;
+        assert ElectricCharge.carriedCharge(10_000, 50_000) == 10_000;
+        assert ElectricCharge.carriedCharge(100_000, 60_000L + 60_000L) == 100_000;
+        assert ElectricCharge.carriedCharge(10_000, 0) == 0;
+        assert com.oldustry.item.NanoSaber.MAX == 100000;
+        assert com.oldustry.item.NanoSaber.HIT_EU == 160;
+        assert com.oldustry.item.NanoSaber.ACTIVE_BONUS == 16;
+        assert com.oldustry.item.NanoSaber.upkeep(true, 16) == 512;
+        assert com.oldustry.item.NanoSaber.upkeep(false, 16) == 0;
+        assert com.oldustry.item.NanoSaber.upkeep(false, 64) == 128;
+        assert com.oldustry.item.NanoSaber.upkeep(true, 64) == 512;
         assert pin(DrillStats.MINING_ENCHANT) == 14;
         assert pin(DrillStats.DIAMOND_ENCHANT) == 10;
         // Chainsaw: JAR efficiency 12 / EU 100; desvio speed 15

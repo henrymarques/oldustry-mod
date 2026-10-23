@@ -1,0 +1,6 @@
+{
+  "layers": {
+    "humanoid": [ { "texture": "oldustry:nightvision" } ],
+    "humanoid_baby": [ { "texture": "oldustry:nightvision" } ]
+  }
+}

@@ -7,6 +7,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.oldustry.item.ChargeComponents;
+import com.oldustry.item.ElectricItem;
+import com.oldustry.item.NanoArmor;
+import com.oldustry.item.NanoSuitItem;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,9 +23,19 @@ import net.minecraft.world.item.ItemStack;
 public class LivingEntityEquipmentMixin {
     @Inject(method = "equipmentHasChanged", at = @At("HEAD"), cancellable = true)
     private void oldustry$ignoreChargeComponents(ItemStack previous, ItemStack current, CallbackInfoReturnable<Boolean> cir) {
-        if (ChargeComponents.onlyChargeDiffers(previous, current)) {
+        if (ChargeComponents.onlyChargeDiffers(previous, current) && !nanoIconsCrossed(previous, current)) {
             cir.setReturnValue(false);
         }
+    }
+
+    /** The armor bar is the ARMOR modifier, applied only while charge covers one point. */
+    private static boolean nanoIconsCrossed(ItemStack previous, ItemStack current) {
+        if (!(previous.getItem() instanceof NanoSuitItem) || !(current.getItem() instanceof NanoSuitItem)) {
+            return false;
+        }
+        boolean was = ElectricItem.energy(previous) >= NanoArmor.EU_PER_DAMAGE;
+        boolean now = ElectricItem.energy(current) >= NanoArmor.EU_PER_DAMAGE;
+        return was != now;
     }
 
     /** Creative/container sync can call setItemSlot with a copy that only differs in ENERGY. */

@@ -14,7 +14,6 @@ public final class OldustryConfig {
     public static final ModConfigSpec.BooleanValue CRAFT_GLOWSTONE;
     public static final ModConfigSpec.BooleanValue CRAFT_GUNPOWDER;
     public static final ModConfigSpec.BooleanValue CRAFT_RAIL;
-    public static final ModConfigSpec.ConfigValue<String> VALUABLE_ORES;
     public static final ModConfigSpec.BooleanValue MINER_LAPOTRON;
     public static final ModConfigSpec.BooleanValue SOUNDS_ENABLED;
     public static final ModConfigSpec.IntValue SOUND_SOURCE_LIMIT;
@@ -34,10 +33,6 @@ public final class OldustryConfig {
         CRAFT_GLOWSTONE = b.define("enableCraftingGlowstoneDust", true);
         CRAFT_GUNPOWDER = b.define("enableCraftingGunpowder", true);
         CRAFT_RAIL = b.define("enableCraftingRail", true);
-        VALUABLE_ORES = b.define(
-            "valuableOres",
-            "minecraft:coal_ore=1,minecraft:iron_ore=1,minecraft:copper_ore=2,minecraft:gold_ore=3,minecraft:lapis_ore=3,minecraft:redstone_ore=3,minecraft:diamond_ore=4,minecraft:emerald_ore=5,minecraft:nether_quartz_ore=5,oldustry:tin_ore=2,oldustry:uranium_ore=4"
-        );
         MINER_LAPOTRON = b.comment("Allow tier-3 (lapotron) input on the Miner (default false = tier-1 RE battery)").define("enableMinerLapotron", false);
         SOUNDS_ENABLED = b.define("soundsEnabled", true);
         SOUND_SOURCE_LIMIT = b.defineInRange("soundSourceLimit", 32, 0, 256);

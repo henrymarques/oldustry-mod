@@ -96,6 +96,14 @@ public enum MachineKind implements StringRepresentable {
         };
     }
 
+    /** Macerator-family GUIs have upgrade slots. A single-use battery waits for a storage upgrade there. */
+    public boolean suNeedsStorageUpgrade() {
+        return switch (type) {
+            case MACERATOR, EXTRACTOR, COMPRESSOR, RECYCLER, FURNACE -> true;
+            default -> false;
+        };
+    }
+
     public int highPacket() {
         return switch (this) {
             case LV_TRANSFORMER -> 128;

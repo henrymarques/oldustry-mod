@@ -47,7 +47,7 @@ public final class WrenchHandler {
         if (wrenchable != null && wrenchable.canSetFacing(state, face)) {
             return Result.ROTATE;
         }
-        if (wrenchable != null && wrenchable.canRemove()) {
+        if (wrenchable != null && wrenchable.canRemove(player)) {
             return Result.REMOVE;
         }
         BlockState rotated = state.rotate(level, pos, Rotation.CLOCKWISE_90);
@@ -77,7 +77,7 @@ public final class WrenchHandler {
             }
             return Result.ROTATE;
         }
-        if (intended == Result.REMOVE && wrenchable != null && wrenchable.canRemove()) {
+        if (intended == Result.REMOVE && wrenchable != null && wrenchable.canRemove(player)) {
             if (!level.isClientSide()) {
                 float roll = lossless ? 0f : level.getRandom().nextFloat();
                 boolean keep = lossless || WrenchLogic.dismantle(wrenchable.wrenchDropRate(), roll) == WrenchLogic.Drop.KEEP;

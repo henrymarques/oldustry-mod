@@ -13,6 +13,18 @@ public final class ElectricCharge {
         return moved;
     }
 
+    /**
+     * JAR {@code AdvRecipe}: electric inputs dump into an empty electric result.
+     * Transfer and tier do not apply. Anything past {@code resultMax} is lost.
+     */
+    public static int carriedCharge(int resultMax, long inputCharge) {
+        if (inputCharge <= 0 || resultMax <= 0) {
+            return 0;
+        }
+        int amount = inputCharge > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) inputCharge;
+        return chargeIgnoreTransfer(0, amount, new Spec(resultMax, 0, 0, false));
+    }
+
     /** JAR {@code ignoreTransferLimit=true}: only capacity room caps the move. */
     public static int chargeIgnoreTransfer(int energy, int amount, Spec spec) {
         if (amount <= 0) {
@@ -78,6 +90,17 @@ public final class ElectricCharge {
             return 0;
         }
         return energyValue;
+    }
+
+    /**
+     * Single-use on a process machine also waits for an energy storage upgrade.
+     * Transformers can push the buffer past 1200; that still does not eat the cell.
+     */
+    public static int consumeOnce(int room, int energyValue, boolean storageGate, int storageUpgrades) {
+        if (storageGate && storageUpgrades <= 0) {
+            return 0;
+        }
+        return consumeOnce(room, energyValue);
     }
 
     private ElectricCharge() {}

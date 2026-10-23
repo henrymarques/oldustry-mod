@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "oldustry:solar_helmet"
+    "oldustry:solar_helmet",
+    "oldustry:nightvision_goggles"
   ]
 }
