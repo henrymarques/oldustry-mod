@@ -446,6 +446,22 @@ public final class EnergyCheck {
         assert MachineKind.INDUCTION.duration() == 4000 && MachineKind.INDUCTION.euPerTick() == 15;
         assert !MachineGui.hasGui(MachineKind.MAGNETIZER);
 
+        int[] rolls = { 2, 4, 9 };
+        int[] cursor = { 0 };
+        assert com.oldustry.world.RubberTreeSpawn.weight(true, true, true, bound -> rolls[cursor[0]++]) == 21;
+        assert com.oldustry.world.RubberTreeSpawn.weight(true, false, false, bound -> 0) == 0;
+        assert com.oldustry.world.RubberTreeSpawn.weight(true, false, false, bound -> 2) == 2;
+        assert com.oldustry.world.RubberTreeSpawn.weight(false, true, false, bound -> 0) == 1;
+        assert com.oldustry.world.RubberTreeSpawn.weight(false, true, false, bound -> 4) == 5;
+        assert com.oldustry.world.RubberTreeSpawn.weight(false, false, true, bound -> 0) == 5;
+        assert com.oldustry.world.RubberTreeSpawn.weight(false, false, true, bound -> 9) == 14;
+        assert !com.oldustry.world.RubberTreeSpawn.opens(0, bound -> 0);
+        assert com.oldustry.world.RubberTreeSpawn.opens(14, bound -> 27);
+        assert !com.oldustry.world.RubberTreeSpawn.opens(14, bound -> 28);
+        assert com.oldustry.world.RubberTreeSpawn.tries(false, false, true, bound -> bound == 10 ? 0 : 9) == 5;
+        assert com.oldustry.world.RubberTreeSpawn.tries(false, false, true, bound -> bound == 10 ? 0 : 10) == 0;
+        assert com.oldustry.world.RubberTreeSpawn.tries(true, false, false, bound -> 0) == 0;
+
         System.out.println("EnergyCheck ok");
     }
 

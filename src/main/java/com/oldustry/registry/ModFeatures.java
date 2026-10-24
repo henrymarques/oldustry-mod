@@ -3,6 +3,7 @@ package com.oldustry.registry;
 import com.oldustry.Oldustry;
 import com.oldustry.world.ConfigGatePlacement;
 import com.oldustry.world.RubberTreeFeature;
+import com.oldustry.world.RubberTreePlacement;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -20,6 +21,8 @@ public final class ModFeatures {
         FEATURES.register("rubber_tree", RubberTreeFeature::new);
     public static final DeferredHolder<PlacementModifierType<?>, PlacementModifierType<ConfigGatePlacement>> CONFIG_GATE =
         PLACEMENTS.register("config_gate", () -> () -> ConfigGatePlacement.CODEC);
+    public static final DeferredHolder<PlacementModifierType<?>, PlacementModifierType<RubberTreePlacement>> RUBBER_COUNT =
+        PLACEMENTS.register("rubber_count", () -> () -> RubberTreePlacement.CODEC);
 
     public static void register(IEventBus bus) {
         FEATURES.register(bus);

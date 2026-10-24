@@ -14,6 +14,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.grower.TreeGrower;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -22,13 +23,11 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
 import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
+import net.minecraft.world.level.levelgen.placement.HeightmapPlacement;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
-import net.minecraft.world.level.levelgen.placement.RarityFilter;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.placement.HeightmapPlacement;
 
 public final class OldustryWorldgen {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_TIN = configured("ore_tin");
@@ -66,9 +65,10 @@ public final class OldustryWorldgen {
         HolderGetter<ConfiguredFeature<?, ?>> features = context.lookup(Registries.CONFIGURED_FEATURE);
         context.register(ORE_TIN_PLACED, new PlacedFeature(features.getOrThrow(ORE_TIN), orePlacement("tin", 10, -16, 48)));
         context.register(ORE_URANIUM_PLACED, new PlacedFeature(features.getOrThrow(ORE_URANIUM), orePlacement("uranium", 5, -64, 32)));
-        context.register(RUBBER_TREE_SWAMP, new PlacedFeature(features.getOrThrow(RUBBER_TREE), treePlacement(8, 5)));
-        context.register(RUBBER_TREE_FOREST, new PlacedFeature(features.getOrThrow(RUBBER_TREE), treePlacement(3, 16)));
-        context.register(RUBBER_TREE_TAIGA, new PlacedFeature(features.getOrThrow(RUBBER_TREE), treePlacement(1, 50)));
+        var tree = features.getOrThrow(RUBBER_TREE);
+        context.register(RUBBER_TREE_SWAMP, new PlacedFeature(tree, rubberPlacement(RubberTreePlacement.swamp())));
+        context.register(RUBBER_TREE_FOREST, new PlacedFeature(tree, rubberPlacement(RubberTreePlacement.forest())));
+        context.register(RUBBER_TREE_TAIGA, new PlacedFeature(tree, rubberPlacement(RubberTreePlacement.taiga())));
     }
 
     public static void bootstrapBiomeModifiers(net.minecraft.data.worldgen.BootstrapContext<net.neoforged.neoforge.common.world.BiomeModifier> context) {
@@ -85,7 +85,7 @@ public final class OldustryWorldgen {
             net.minecraft.core.HolderSet.direct(placed.getOrThrow(ORE_URANIUM_PLACED)),
             net.minecraft.world.level.levelgen.GenerationStep.Decoration.UNDERGROUND_ORES
         ));
-        // 26.2: tags de bioma (mais biomas que 1.5.2). Não voltar ao match por nome do IC2.java ~1135.
+        // 26.2: uma placed feature por tag. Não voltar ao match por nome do IC2.java ~1135.
         context.register(biomeModifier("rubber_tree_swamp"), new net.neoforged.neoforge.common.world.BiomeModifiers.AddFeaturesBiomeModifier(
             new net.neoforged.neoforge.registries.holdersets.AndHolderSet<>(overworld, biomes.getOrThrow(net.neoforged.neoforge.common.Tags.Biomes.IS_SWAMP)),
             net.minecraft.core.HolderSet.direct(placed.getOrThrow(RUBBER_TREE_SWAMP)),
@@ -103,23 +103,22 @@ public final class OldustryWorldgen {
         ));
     }
 
+    private static List<PlacementModifier> rubberPlacement(RubberTreePlacement count) {
+        return List.of(
+            ConfigGatePlacement.rubber(),
+            count,
+            InSquarePlacement.spread(),
+            HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+            BiomeFilter.biome()
+        );
+    }
+
     private static List<PlacementModifier> orePlacement(String flag, int count, int minY, int maxY) {
         return List.of(
             new ConfigGatePlacement(flag),
             CountPlacement.of(count),
             InSquarePlacement.spread(),
             HeightRangePlacement.uniform(VerticalAnchor.absolute(minY), VerticalAnchor.absolute(maxY)),
-            BiomeFilter.biome()
-        );
-    }
-
-    private static List<PlacementModifier> treePlacement(int count, int rarity) {
-        return List.of(
-            ConfigGatePlacement.rubber(),
-            RarityFilter.onAverageOnceEvery(rarity),
-            CountPlacement.of(count),
-            InSquarePlacement.spread(),
-            HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
             BiomeFilter.biome()
         );
     }

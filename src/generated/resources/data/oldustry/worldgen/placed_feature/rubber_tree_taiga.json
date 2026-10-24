@@ -6,12 +6,8 @@
       "flag": "rubber"
     },
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 50
-    },
-    {
-      "type": "minecraft:count",
-      "count": 1
+      "type": "oldustry:rubber_count",
+      "group": "taiga"
     },
     {
       "type": "minecraft:in_square"
