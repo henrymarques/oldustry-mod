@@ -4,7 +4,7 @@ import com.oldustry.energy.CableKind;
 import com.oldustry.energy.EnergyNet;
 import com.oldustry.energy.EnergyNetLogic;
 import com.oldustry.energy.EnergyTile;
-import com.oldustry.registry.ModBlockEntities;
+import com.oldustry.registry.OldustryBlockEntities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -31,7 +31,7 @@ public class CableBlockEntity extends BlockEntity implements EnergyTile {
     }
 
     public CableBlockEntity(CableKind kind, BlockPos pos, BlockState state) {
-        super(ModBlockEntities.CABLE.get(), pos, state);
+        super(OldustryBlockEntities.CABLE.get(), pos, state);
         this.kind = kind;
     }
 

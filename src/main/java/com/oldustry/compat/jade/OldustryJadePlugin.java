@@ -4,7 +4,7 @@ import org.jspecify.annotations.NonNull;
 
 import com.oldustry.Oldustry;
 import com.oldustry.block.MachineBlock;
-import com.oldustry.machine.MachineBlockEntity;
+import com.oldustry.machine.OldustryMachineBlockEntity;
 
 import snownee.jade.api.IWailaClientRegistration;
 import snownee.jade.api.IWailaCommonRegistration;
@@ -15,7 +15,7 @@ import snownee.jade.api.WailaPlugin;
 public final class OldustryJadePlugin implements IWailaPlugin {
     @Override
     public void register(@NonNull IWailaCommonRegistration registration) {
-        registration.registerBlockDataProvider(MachineEnergyProvider.INSTANCE, MachineBlockEntity.class);
+        registration.registerBlockDataProvider(MachineEnergyProvider.INSTANCE, OldustryMachineBlockEntity.class);
     }
 
     @Override

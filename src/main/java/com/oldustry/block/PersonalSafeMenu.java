@@ -1,6 +1,6 @@
 package com.oldustry.block;
 
-import com.oldustry.registry.ModMenus;
+import com.oldustry.registry.OldustryMenus;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -26,7 +26,7 @@ public class PersonalSafeMenu extends AbstractContainerMenu {
     }
 
     public PersonalSafeMenu(int id, Inventory inventory, Container contents) {
-        super(ModMenus.PERSONAL_SAFE.get(), id);
+        super(OldustryMenus.PERSONAL_SAFE.get(), id);
         this.contents = contents;
         checkContainerSize(contents, PersonalSafeBlockEntity.SLOTS);
         for (int row = 0; row < ROWS; row++) {

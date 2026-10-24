@@ -5,15 +5,15 @@ import java.util.Map;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.oldustry.energy.CableKind;
-import com.oldustry.item.CutterItem;
-import com.oldustry.item.CfPackItem;
-import com.oldustry.item.PainterItem;
-import com.oldustry.item.SprayerItem;
+import com.oldustry.item.construction.CutterItem;
+import com.oldustry.item.equipment.CfPackItem;
+import com.oldustry.item.construction.PainterItem;
+import com.oldustry.item.construction.SprayerItem;
 import com.oldustry.compat.CuriosWearables;
-import com.oldustry.registry.ModBlockEntities;
-import com.oldustry.registry.ModBlocks;
-import com.oldustry.registry.ModItems;
-import com.oldustry.registry.ModSounds;
+import com.oldustry.registry.OldustryBlockEntities;
+import com.oldustry.registry.OldustryBlocks;
+import com.oldustry.registry.OldustryItems;
+import com.oldustry.registry.OldustrySounds;
 import com.oldustry.wrench.Wrenchable;
 
 import net.minecraft.core.BlockPos;
@@ -218,7 +218,7 @@ public class CableBlock extends BaseEntityBlock implements Wrenchable, SimpleWat
     @Override
     public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level instanceof ServerLevel server
-            ? createTickerHelper(type, ModBlockEntities.CABLE.get(), (l, pos, s, be) -> CableBlockEntity.serverTick(server, pos, s, be))
+            ? createTickerHelper(type, OldustryBlockEntities.CABLE.get(), (l, pos, s, be) -> CableBlockEntity.serverTick(server, pos, s, be))
             : null;
     }
 
@@ -237,7 +237,7 @@ public class CableBlock extends BaseEntityBlock implements Wrenchable, SimpleWat
                 level.setBlock(pos, state.setValue(FOAM, 0), Block.UPDATE_ALL);
                 if (stack.getItem() instanceof CutterItem) {
                     stack.hurtAndBreak(1, player, hand);
-                    ModSounds.play(level, null, pos, ModSounds.CUTTER.get(), SoundSource.BLOCKS, 1f, 1f);
+                    OldustrySounds.play(level, null, pos, OldustrySounds.CUTTER.get(), SoundSource.BLOCKS, 1f, 1f);
                 }
             }
             return InteractionResult.SUCCESS;
@@ -245,16 +245,16 @@ public class CableBlock extends BaseEntityBlock implements Wrenchable, SimpleWat
         // JAR ItemToolCutter.cutInsulationFrom: strip 1 layer + drop rubber + damage 3.
         if (stack.getItem() instanceof CutterItem && kind.strip() != kind) {
             if (!level.isClientSide()) {
-                level.setBlock(pos, copyVisual(ModBlocks.cableBlock(kind.strip()).defaultBlockState(), state), Block.UPDATE_ALL);
-                Block.popResource(level, pos, new ItemStack(ModItems.RUBBER.get()));
+                level.setBlock(pos, copyVisual(OldustryBlocks.cableBlock(kind.strip()).defaultBlockState(), state), Block.UPDATE_ALL);
+                Block.popResource(level, pos, new ItemStack(OldustryItems.RUBBER.get()));
                 stack.hurtAndBreak(3, player, hand);
-                ModSounds.play(level, null, pos, ModSounds.CUTTER.get(), SoundSource.BLOCKS, 1f, 1f);
+                OldustrySounds.play(level, null, pos, OldustrySounds.CUTTER.get(), SoundSource.BLOCKS, 1f, 1f);
             }
             return InteractionResult.SUCCESS;
         }
-        if (stack.is(ModItems.RUBBER.get()) && kind.insulate() != kind) {
+        if (stack.is(OldustryItems.RUBBER.get()) && kind.insulate() != kind) {
             if (!level.isClientSide()) {
-                level.setBlock(pos, copyVisual(ModBlocks.cableBlock(kind.insulate()).defaultBlockState(), state), Block.UPDATE_ALL);
+                level.setBlock(pos, copyVisual(OldustryBlocks.cableBlock(kind.insulate()).defaultBlockState(), state), Block.UPDATE_ALL);
                 stack.shrink(1);
             }
             return InteractionResult.SUCCESS;
@@ -265,7 +265,7 @@ public class CableBlock extends BaseEntityBlock implements Wrenchable, SimpleWat
                 if (!level.isClientSide()) {
                     level.setBlock(pos, state.setValue(COLOR, color), Block.UPDATE_ALL);
                     stack.hurtAndBreak(1, player, hand);
-                    ModSounds.play(level, null, pos, ModSounds.PAINTER.get(), SoundSource.BLOCKS, 1f, 1f);
+                    OldustrySounds.play(level, null, pos, OldustrySounds.PAINTER.get(), SoundSource.BLOCKS, 1f, 1f);
                 }
                 return InteractionResult.SUCCESS;
             }
@@ -273,7 +273,7 @@ public class CableBlock extends BaseEntityBlock implements Wrenchable, SimpleWat
         if (stack.getItem() instanceof SprayerItem && state.getValue(FOAM) == 0) {
             if (!level.isClientSide()) {
                 boolean fromPack = CfPackItem.consumePellet(
-                    CuriosWearables.chestOrCurios(player, ModItems.CF_PACK.get()));
+                    CuriosWearables.chestOrCurios(player, OldustryItems.CF_PACK.get()));
                 int charge = SprayerItem.charge(stack);
                 if (!fromPack && !SprayerItem.canSprayFromSelf(charge)) {
                     return InteractionResult.FAIL;

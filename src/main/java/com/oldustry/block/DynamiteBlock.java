@@ -2,7 +2,7 @@ package com.oldustry.block;
 
 import com.mojang.serialization.MapCodec;
 import com.oldustry.explosion.DynamiteProjectile;
-import com.oldustry.registry.ModItems;
+import com.oldustry.registry.OldustryItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -126,7 +126,7 @@ public class DynamiteBlock extends Block {
     @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide() && !prime(level, pos, player) && !player.getAbilities().instabuild) {
-            popResource(level, pos, new ItemStack(ModItems.DYNAMITE.get()));
+            popResource(level, pos, new ItemStack(OldustryItems.DYNAMITE.get()));
         }
         return super.playerWillDestroy(level, pos, state, player);
     }

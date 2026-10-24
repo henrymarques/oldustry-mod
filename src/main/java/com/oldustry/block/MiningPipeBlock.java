@@ -1,6 +1,6 @@
 package com.oldustry.block;
 
-import com.oldustry.registry.ModBlocks;
+import com.oldustry.registry.OldustryBlocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
@@ -41,6 +41,6 @@ public class MiningPipeBlock extends Block {
     @Override
     protected ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
         // JAR BlockMiningTip.idDropped + empty getSubBlocks: the tip is not an item.
-        return new ItemStack(isTip ? ModBlocks.MINING_PIPE.get() : this);
+        return new ItemStack(isTip ? OldustryBlocks.MINING_PIPE.get() : this);
     }
 }

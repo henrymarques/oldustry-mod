@@ -6,7 +6,7 @@ import org.jspecify.annotations.Nullable;
 
 import com.oldustry.compat.CuriosWearables;
 import com.oldustry.energy.ElectricCharge;
-import com.oldustry.registry.ModDataComponents;
+import com.oldustry.registry.OldustryDataComponents;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -22,7 +22,7 @@ public class ElectricItem extends Item {
     private final ElectricCharge.Spec spec;
 
     public ElectricItem(ElectricCharge.Spec spec, Properties properties) {
-        super(properties.stacksTo(1).component(ModDataComponents.ENERGY.get(), 0));
+        super(properties.stacksTo(1).component(OldustryDataComponents.ENERGY.get(), 0));
         this.spec = spec;
     }
 
@@ -31,7 +31,7 @@ public class ElectricItem extends Item {
     }
 
     public static int energy(ItemStack stack) {
-        return stack.getOrDefault(ModDataComponents.ENERGY.get(), 0);
+        return stack.getOrDefault(OldustryDataComponents.ENERGY.get(), 0);
     }
 
     public static void setEnergy(ItemStack stack, int energy) {
@@ -40,7 +40,7 @@ public class ElectricItem extends Item {
         if (energy(stack) == next) {
             return;
         }
-        stack.set(ModDataComponents.ENERGY.get(), next);
+        stack.set(OldustryDataComponents.ENERGY.get(), next);
     }
 
     public int charge(ItemStack stack, int amount) {

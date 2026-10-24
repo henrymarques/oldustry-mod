@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import com.oldustry.registry.ModDataComponents;
+import com.oldustry.registry.OldustryDataComponents;
 
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.item.ItemStack;
@@ -39,10 +39,10 @@ public final class ChargeComponents {
     }
 
     public static boolean isCharge(DataComponentType<?> type) {
-        return type == ModDataComponents.ENERGY.get()
-            || type == ModDataComponents.FUEL.get()
-            || type == ModDataComponents.HOVER.get()
-            || type == ModDataComponents.WALK_X.get()
-            || type == ModDataComponents.WALK_Z.get();
+        return type == OldustryDataComponents.ENERGY.get()
+            || type == OldustryDataComponents.FUEL.get()
+            || type == OldustryDataComponents.HOVER.get()
+            || type == OldustryDataComponents.WALK_X.get()
+            || type == OldustryDataComponents.WALK_Z.get();
     }
 }

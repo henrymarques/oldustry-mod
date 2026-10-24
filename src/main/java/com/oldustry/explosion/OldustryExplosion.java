@@ -9,7 +9,7 @@ import java.util.Random;
 
 import com.oldustry.Oldustry;
 import com.oldustry.energy.OldustryDamage;
-import com.oldustry.registry.ModEffects;
+import com.oldustry.registry.OldustryEffects;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -232,7 +232,7 @@ public final class OldustryExplosion extends ServerExplosion {
             }
             int radiation = NukeFallout.radiationTicks(distance);
             if (radiation >= 0) {
-                entity.addEffect(new MobEffectInstance(ModEffects.RADIATION, radiation, 0));
+                entity.addEffect(new MobEffectInstance(OldustryEffects.RADIATION, radiation, 0));
             }
         }
     }

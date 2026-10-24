@@ -2,8 +2,8 @@ package com.oldustry.block;
 
 import java.util.UUID;
 
-import com.oldustry.registry.ModBlockEntities;
-import com.oldustry.registry.ModBlocks;
+import com.oldustry.registry.OldustryBlockEntities;
+import com.oldustry.registry.OldustryBlocks;
 import com.oldustry.wrench.Wrenchable;
 
 import net.minecraft.core.BlockPos;
@@ -45,7 +45,7 @@ public class PersonalSafeBlockEntity extends BlockEntity implements MenuProvider
     private String ownerName = "";
 
     public PersonalSafeBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.PERSONAL_SAFE.get(), pos, state);
+        super(OldustryBlockEntities.PERSONAL_SAFE.get(), pos, state);
     }
 
     public Container contents() {
@@ -123,7 +123,7 @@ public class PersonalSafeBlockEntity extends BlockEntity implements MenuProvider
 
     @Override
     public ItemStack wrenchKeepDrop(BlockState state) {
-        return new ItemStack(ModBlocks.PERSONAL_SAFE.get());
+        return new ItemStack(OldustryBlocks.PERSONAL_SAFE.get());
     }
 
     @Override
@@ -168,7 +168,7 @@ public class PersonalSafeBlockEntity extends BlockEntity implements MenuProvider
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable(ModBlocks.PERSONAL_SAFE.get().getDescriptionId());
+        return Component.translatable(OldustryBlocks.PERSONAL_SAFE.get().getDescriptionId());
     }
 
     @Override

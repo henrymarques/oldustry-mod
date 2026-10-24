@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.oldustry.item.ChargeComponents;
 import com.oldustry.item.ElectricItem;
-import com.oldustry.item.NanoArmor;
-import com.oldustry.item.NanoSuitItem;
+import com.oldustry.item.equipment.NanoArmor;
+import com.oldustry.item.equipment.NanoSuitItem;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;

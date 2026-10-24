@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.oldustry.OldustryConfig;
-import com.oldustry.registry.ModFeatures;
+import com.oldustry.registry.OldustryFeatures;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -62,6 +62,6 @@ public class ConfigGatePlacement extends PlacementModifier {
 
     @Override
     public PlacementModifierType<?> type() {
-        return ModFeatures.CONFIG_GATE.get();
+        return OldustryFeatures.CONFIG_GATE.get();
     }
 }

@@ -1,5 +1,8 @@
 package com.oldustry.item;
 
+import com.oldustry.item.explosive.RemoteLink;
+import com.oldustry.item.explosive.RemoteLinks;
+
 import java.util.List;
 
 public final class RemoteLinksCheck {

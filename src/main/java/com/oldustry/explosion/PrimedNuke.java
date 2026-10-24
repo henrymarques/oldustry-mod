@@ -1,10 +1,10 @@
 package com.oldustry.explosion;
 
 import com.oldustry.OldustryConfig;
-import com.oldustry.item.ElectricWrenchItem;
-import com.oldustry.item.WrenchItem;
-import com.oldustry.registry.ModBlocks;
-import com.oldustry.registry.ModEntities;
+import com.oldustry.item.tool.ElectricWrenchItem;
+import com.oldustry.item.tool.WrenchItem;
+import com.oldustry.registry.OldustryBlocks;
+import com.oldustry.registry.OldustryEntities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -39,7 +39,7 @@ public final class PrimedNuke extends PrimedTnt {
     }
 
     public PrimedNuke(ServerLevel level, BlockPos pos, @Nullable LivingEntity igniter, int fuse) {
-        this(ModEntities.PRIMED_NUKE.get(), level);
+        this(OldustryEntities.PRIMED_NUKE.get(), level);
         double x = pos.getX() + 0.5;
         double y = pos.getY() + 0.5 - getBbHeight() / 2.0;
         double z = pos.getZ() + 0.5;
@@ -51,7 +51,7 @@ public final class PrimedNuke extends PrimedTnt {
             -Mth.cos(angle * (float) Math.PI / 180.0F) * 0.02
         );
         setFuse(fuse);
-        setBlockState(ModBlocks.NUKE.get().defaultBlockState());
+        setBlockState(OldustryBlocks.NUKE.get().defaultBlockState());
         xo = x;
         yo = y;
         zo = z;

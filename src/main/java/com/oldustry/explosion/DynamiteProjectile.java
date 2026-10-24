@@ -1,7 +1,7 @@
 package com.oldustry.explosion;
 
-import com.oldustry.registry.ModEntities;
-import com.oldustry.registry.ModItems;
+import com.oldustry.registry.OldustryEntities;
+import com.oldustry.registry.OldustryItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Position;
@@ -38,11 +38,11 @@ public final class DynamiteProjectile extends ThrowableItemProjectile {
     }
 
     public DynamiteProjectile(ServerLevel level, LivingEntity owner, ItemStack stack) {
-        super(ModEntities.DYNAMITE.get(), owner, level, stack);
+        super(OldustryEntities.DYNAMITE.get(), owner, level, stack);
     }
 
     public DynamiteProjectile(Level level, Position position, ItemStack stack) {
-        super(ModEntities.DYNAMITE.get(), position.x(), position.y(), position.z(), level, stack);
+        super(OldustryEntities.DYNAMITE.get(), position.x(), position.y(), position.z(), level, stack);
     }
 
     /** Falling stick after the placed block is lit or loses every support. */
@@ -50,7 +50,7 @@ public final class DynamiteProjectile extends ThrowableItemProjectile {
         if (!level.getGameRules().get(GameRules.TNT_EXPLODES)) {
             return false;
         }
-        DynamiteProjectile stick = new DynamiteProjectile(level, Vec3.atCenterOf(pos), new ItemStack(ModItems.DYNAMITE.get()));
+        DynamiteProjectile stick = new DynamiteProjectile(level, Vec3.atCenterOf(pos), new ItemStack(OldustryItems.DYNAMITE.get()));
         stick.fuse = fuse;
         stick.setDeltaMovement(Vec3.ZERO);
         if (owner != null) {
@@ -66,7 +66,7 @@ public final class DynamiteProjectile extends ThrowableItemProjectile {
 
     @Override
     protected Item getDefaultItem() {
-        return ModItems.DYNAMITE.get();
+        return OldustryItems.DYNAMITE.get();
     }
 
     @Override
@@ -115,7 +115,7 @@ public final class DynamiteProjectile extends ThrowableItemProjectile {
         super.onHitBlock(hit);
         // Parent parks the point on the face. The next ray then starts inside the block and the cube drops a layer.
         setPos(ExplosiveRest.backOff(hit.getLocation(), hit.getDirection().getUnitVec3()));
-        if (getItem().is(ModItems.STICKY_DYNAMITE.get())) {
+        if (getItem().is(OldustryItems.STICKY_DYNAMITE.get())) {
             stuckTo = hit.getBlockPos().immutable();
             setDeltaMovement(Vec3.ZERO);
         } else {

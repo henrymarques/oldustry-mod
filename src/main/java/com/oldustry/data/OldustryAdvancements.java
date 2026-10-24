@@ -2,7 +2,7 @@ package com.oldustry.data;
 
 import java.util.function.Consumer;
 
-import com.oldustry.registry.ModItems;
+import com.oldustry.registry.OldustryItems;
 
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
@@ -24,28 +24,28 @@ import net.minecraft.world.level.ItemLike;
 public final class OldustryAdvancements implements AdvancementSubProvider {
     @Override
     public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> output) {
-        item(output, "mine_ore", ModItems.TIN_ORE.get(), "minecraft:story/mine_stone", true);
-        item(output, "acquire_resin", ModItems.STICKY_RESIN.get(), "minecraft:story/mine_stone", false);
-        item(output, "acquire_refined_iron", ModItems.REFINED_IRON_INGOT.get(), "minecraft:story/smelt_iron", false);
-        item(output, "build_improved_furnace", ModItems.IMPROVED_FURNACE.get(), "oldustry:acquire_refined_iron", false);
-        item(output, "build_cable", ModItems.INSULATED_COPPER_CABLE.get(), "oldustry:acquire_refined_iron", false);
-        item(output, "build_generator", ModItems.GENERATOR.get(), "oldustry:build_cable", false);
-        item(output, "build_macerator", ModItems.MACERATOR.get(), "oldustry:build_generator", false);
-        item(output, "build_coal_diamond", ModItems.COAL_CHUNK.get(), "oldustry:build_macerator", false);
-        item(output, "build_elec_furnace", ModItems.ELECTRIC_FURNACE.get(), "oldustry:build_improved_furnace", false);
-        item(output, "build_ind_furnace", ModItems.INDUCTION.get(), "oldustry:build_elec_furnace", false);
-        item(output, "build_compressor", ModItems.COMPRESSOR.get(), "oldustry:build_generator", false);
-        item(output, "compress_uranium", ModItems.URANIUM_INGOT.get(), "oldustry:build_compressor", false);
-        item(output, "build_extractor", ModItems.EXTRACTOR.get(), "oldustry:build_generator", false);
-        item(output, "build_batbox", ModItems.BATBOX.get(), "oldustry:build_generator", false);
-        item(output, "build_drill", ModItems.MINING_DRILL.get(), "oldustry:build_generator", false);
-        item(output, "build_ddrill", ModItems.DIAMOND_DRILL.get(), "oldustry:build_drill", false);
-        item(output, "build_chainsaw", ModItems.CHAINSAW.get(), "oldustry:build_generator", false);
-        item(output, "build_mfe", ModItems.MFE.get(), "oldustry:build_batbox", false);
+        item(output, "mine_ore", OldustryItems.TIN_ORE.get(), "minecraft:story/mine_stone", true);
+        item(output, "acquire_resin", OldustryItems.STICKY_RESIN.get(), "minecraft:story/mine_stone", false);
+        item(output, "acquire_refined_iron", OldustryItems.REFINED_IRON_INGOT.get(), "minecraft:story/smelt_iron", false);
+        item(output, "build_improved_furnace", OldustryItems.IMPROVED_FURNACE.get(), "oldustry:acquire_refined_iron", false);
+        item(output, "build_cable", OldustryItems.INSULATED_COPPER_CABLE.get(), "oldustry:acquire_refined_iron", false);
+        item(output, "build_generator", OldustryItems.GENERATOR.get(), "oldustry:build_cable", false);
+        item(output, "build_macerator", OldustryItems.MACERATOR.get(), "oldustry:build_generator", false);
+        item(output, "build_coal_diamond", OldustryItems.COAL_CHUNK.get(), "oldustry:build_macerator", false);
+        item(output, "build_elec_furnace", OldustryItems.ELECTRIC_FURNACE.get(), "oldustry:build_improved_furnace", false);
+        item(output, "build_ind_furnace", OldustryItems.INDUCTION.get(), "oldustry:build_elec_furnace", false);
+        item(output, "build_compressor", OldustryItems.COMPRESSOR.get(), "oldustry:build_generator", false);
+        item(output, "compress_uranium", OldustryItems.URANIUM_INGOT.get(), "oldustry:build_compressor", false);
+        item(output, "build_extractor", OldustryItems.EXTRACTOR.get(), "oldustry:build_generator", false);
+        item(output, "build_batbox", OldustryItems.BATBOX.get(), "oldustry:build_generator", false);
+        item(output, "build_drill", OldustryItems.MINING_DRILL.get(), "oldustry:build_generator", false);
+        item(output, "build_ddrill", OldustryItems.DIAMOND_DRILL.get(), "oldustry:build_drill", false);
+        item(output, "build_chainsaw", OldustryItems.CHAINSAW.get(), "oldustry:build_generator", false);
+        item(output, "build_mfe", OldustryItems.MFE.get(), "oldustry:build_batbox", false);
         Advancement.Builder.advancement()
             .parent(AdvancementSubProvider.createPlaceholder("oldustry:compress_uranium"))
             .display(
-                ModItems.NUKE.get(),
+                OldustryItems.NUKE.get(),
                 Component.translatable("advancements.oldustry.die_from_own_nuke.title"),
                 Component.translatable("advancements.oldustry.die_from_own_nuke.description"),
                 null,
@@ -78,9 +78,9 @@ public final class OldustryAdvancements implements AdvancementSubProvider {
             builder.addCriterion("has", InventoryChangeTrigger.TriggerInstance.hasItems(icon));
         }
         if (orOres) {
-            builder.addCriterion("raw_tin", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.RAW_TIN.get()))
-                .addCriterion("uranium_drop", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.URANIUM_DROP.get()))
-                .addCriterion("uranium_ore", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.URANIUM_ORE.get()))
+            builder.addCriterion("raw_tin", InventoryChangeTrigger.TriggerInstance.hasItems(OldustryItems.RAW_TIN.get()))
+                .addCriterion("uranium_drop", InventoryChangeTrigger.TriggerInstance.hasItems(OldustryItems.URANIUM_DROP.get()))
+                .addCriterion("uranium_ore", InventoryChangeTrigger.TriggerInstance.hasItems(OldustryItems.URANIUM_ORE.get()))
                 .requirements(AdvancementRequirements.Strategy.OR);
         }
         builder.save(output, "oldustry:" + id);

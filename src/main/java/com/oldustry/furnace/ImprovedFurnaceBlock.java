@@ -1,7 +1,7 @@
 package com.oldustry.furnace;
 
 import com.mojang.serialization.MapCodec;
-import com.oldustry.registry.ModBlockEntities;
+import com.oldustry.registry.OldustryBlockEntities;
 import com.oldustry.wrench.Wrenchable;
 
 import net.minecraft.core.BlockPos;
@@ -41,7 +41,7 @@ public class ImprovedFurnaceBlock extends AbstractFurnaceBlock implements Wrench
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level instanceof net.minecraft.server.level.ServerLevel server
-            ? createTickerHelper(type, ModBlockEntities.IMPROVED_FURNACE.get(), (inner, pos, blockState, furnace) -> ImprovedFurnaceBlockEntity.serverTick(server, pos, blockState, furnace))
+            ? createTickerHelper(type, OldustryBlockEntities.IMPROVED_FURNACE.get(), (inner, pos, blockState, furnace) -> ImprovedFurnaceBlockEntity.serverTick(server, pos, blockState, furnace))
             : null;
     }
 

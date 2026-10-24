@@ -4,19 +4,19 @@ import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 import com.oldustry.data.OldustryData;
-import com.oldustry.item.CfSprayerChargeRecipe;
-import com.oldustry.item.ScrapBoxItem;
+import com.oldustry.item.construction.CfSprayerChargeRecipe;
+import com.oldustry.item.utility.ScrapBoxItem;
 import com.oldustry.network.KeysPayload;
-import com.oldustry.registry.ModBlockEntities;
-import com.oldustry.registry.ModBlocks;
-import com.oldustry.registry.ModDataComponents;
-import com.oldustry.registry.ModEffects;
-import com.oldustry.registry.ModEntities;
-import com.oldustry.registry.ModCreativeTabs;
-import com.oldustry.registry.ModFeatures;
-import com.oldustry.registry.ModItems;
-import com.oldustry.registry.ModMenus;
-import com.oldustry.registry.ModSounds;
+import com.oldustry.registry.OldustryBlockEntities;
+import com.oldustry.registry.OldustryBlocks;
+import com.oldustry.registry.OldustryDataComponents;
+import com.oldustry.registry.OldustryEffects;
+import com.oldustry.registry.OldustryEntities;
+import com.oldustry.registry.OldustryCreativeTabs;
+import com.oldustry.registry.OldustryFeatures;
+import com.oldustry.registry.OldustryItems;
+import com.oldustry.registry.OldustryMenus;
+import com.oldustry.registry.OldustrySounds;
 
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.BlockSource;
@@ -35,22 +35,22 @@ public class Oldustry {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     /** Client fills this to play stoppable machine loop sounds (JAR AudioSource). */
-    public static java.util.function.BiConsumer<net.minecraft.core.BlockPos, com.oldustry.machine.MachineKind> clientMachineLoop =
+    public static java.util.function.BiConsumer<net.minecraft.core.BlockPos, com.oldustry.machine.OldustryMachineKind> clientMachineLoop =
         (pos, kind) -> {};
     /** Client fills this to stop a machine loop when ACTIVE clears or block is gone. */
     public static java.util.function.Consumer<net.minecraft.core.BlockPos> clientMachineLoopStop = pos -> {};
 
     public Oldustry(IEventBus modEventBus, ModContainer modContainer) {
-        ModEffects.register(modEventBus);
-        ModDataComponents.register(modEventBus);
-        ModBlocks.register(modEventBus);
-        ModItems.register(modEventBus);
-        ModEntities.register(modEventBus);
-        ModBlockEntities.register(modEventBus);
-        ModMenus.register(modEventBus);
-        ModFeatures.register(modEventBus);
-        ModSounds.register(modEventBus);
-        ModCreativeTabs.register(modEventBus);
+        OldustryEffects.register(modEventBus);
+        OldustryDataComponents.register(modEventBus);
+        OldustryBlocks.register(modEventBus);
+        OldustryItems.register(modEventBus);
+        OldustryEntities.register(modEventBus);
+        OldustryBlockEntities.register(modEventBus);
+        OldustryMenus.register(modEventBus);
+        OldustryFeatures.register(modEventBus);
+        OldustrySounds.register(modEventBus);
+        OldustryCreativeTabs.register(modEventBus);
         CfSprayerChargeRecipe.register(modEventBus);
         modContainer.registerConfig(ModConfig.Type.COMMON, OldustryConfig.SPEC);
         modEventBus.addListener(OldustryData::gatherClient);
@@ -60,7 +60,7 @@ public class Oldustry {
     }
 
     private static void setup(FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> DispenserBlock.registerBehavior(ModItems.SCRAP_BOX.get(), new DefaultDispenseItemBehavior() {
+        event.enqueueWork(() -> DispenserBlock.registerBehavior(OldustryItems.SCRAP_BOX.get(), new DefaultDispenseItemBehavior() {
             @Override
             protected ItemStack execute(BlockSource source, ItemStack stack) {
                 ItemStack drop = ScrapBoxItem.roll(source.level().getRandom());

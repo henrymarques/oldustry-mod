@@ -9,11 +9,11 @@ import org.jspecify.annotations.Nullable;
 import com.oldustry.Oldustry;
 import com.oldustry.item.ElectricArmorItem;
 import com.oldustry.item.ElectricItem;
-import com.oldustry.item.ElectricJetpackItem;
-import com.oldustry.item.FuelJetpackItem;
-import com.oldustry.item.NightvisionGogglesItem;
-import com.oldustry.item.SolarHelmetItem;
-import com.oldustry.item.StaticBootsItem;
+import com.oldustry.item.equipment.ElectricJetpackItem;
+import com.oldustry.item.equipment.FuelJetpackItem;
+import com.oldustry.item.equipment.NightvisionGogglesItem;
+import com.oldustry.item.equipment.SolarHelmetItem;
+import com.oldustry.item.equipment.StaticBootsItem;
 import com.oldustry.network.KeysPayload;
 
 import net.minecraft.resources.Identifier;

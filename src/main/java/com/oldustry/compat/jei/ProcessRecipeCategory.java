@@ -2,7 +2,7 @@ package com.oldustry.compat.jei;
 
 import org.jspecify.annotations.NonNull;
 
-import com.oldustry.machine.MachineRecipes;
+import com.oldustry.machine.OldustryProcessingRecipes;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -15,22 +15,22 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
-final class ProcessRecipeCategory implements IRecipeCategory<MachineRecipes.@NonNull Listed> {
+final class ProcessRecipeCategory implements IRecipeCategory<OldustryProcessingRecipes.@NonNull Listed> {
     private static final int WIDTH = 82;
     private static final int HEIGHT = 34;
 
-    private final @NonNull IRecipeType<MachineRecipes.@NonNull Listed> type;
+    private final @NonNull IRecipeType<OldustryProcessingRecipes.@NonNull Listed> type;
     private final @NonNull Component title;
     private final IDrawable icon;
 
-    ProcessRecipeCategory(IGuiHelper gui, @NonNull IRecipeType<MachineRecipes.@NonNull Listed> type, @NonNull ItemLike catalyst, @NonNull String titleKey) {
+    ProcessRecipeCategory(IGuiHelper gui, @NonNull IRecipeType<OldustryProcessingRecipes.@NonNull Listed> type, @NonNull ItemLike catalyst, @NonNull String titleKey) {
         this.type = type;
         this.title = Component.translatable(titleKey);
         this.icon = gui.createDrawableItemStack(new ItemStack(catalyst));
     }
 
     @Override
-    public @NonNull IRecipeType<MachineRecipes.@NonNull Listed> getRecipeType() {
+    public @NonNull IRecipeType<OldustryProcessingRecipes.@NonNull Listed> getRecipeType() {
         return type;
     }
 
@@ -55,13 +55,13 @@ final class ProcessRecipeCategory implements IRecipeCategory<MachineRecipes.@Non
     }
 
     @Override
-    public void setRecipe(@NonNull IRecipeLayoutBuilder builder, MachineRecipes.@NonNull Listed recipe, @NonNull IFocusGroup focuses) {
+    public void setRecipe(@NonNull IRecipeLayoutBuilder builder, OldustryProcessingRecipes.@NonNull Listed recipe, @NonNull IFocusGroup focuses) {
         builder.addInputSlot(1, 9).setStandardSlotBackground().add(recipe.input());
         builder.addOutputSlot(61, 9).setOutputSlotBackground().add(recipe.output());
     }
 
     @Override
-    public void createRecipeExtras(@NonNull IRecipeExtrasBuilder builder, MachineRecipes.@NonNull Listed recipe, @NonNull IFocusGroup focuses) {
+    public void createRecipeExtras(@NonNull IRecipeExtrasBuilder builder, OldustryProcessingRecipes.@NonNull Listed recipe, @NonNull IFocusGroup focuses) {
         builder.addAnimatedRecipeArrowWidget(40).setPosition(26, 9);
     }
 }

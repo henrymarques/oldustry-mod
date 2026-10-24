@@ -1,5 +1,7 @@
 package com.oldustry.network;
 
+import com.oldustry.item.ModeSwitch;
+
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;

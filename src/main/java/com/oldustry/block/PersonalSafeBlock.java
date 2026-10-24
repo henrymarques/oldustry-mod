@@ -1,7 +1,7 @@
 package com.oldustry.block;
 
 import com.mojang.serialization.MapCodec;
-import com.oldustry.registry.ModBlockEntities;
+import com.oldustry.registry.OldustryBlockEntities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -56,7 +56,7 @@ public class PersonalSafeBlock extends BaseEntityBlock {
 
     @Override
     public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type, ModBlockEntities.PERSONAL_SAFE.get(), PersonalSafeBlockEntity::tick);
+        return createTickerHelper(type, OldustryBlockEntities.PERSONAL_SAFE.get(), PersonalSafeBlockEntity::tick);
     }
 
     @Override

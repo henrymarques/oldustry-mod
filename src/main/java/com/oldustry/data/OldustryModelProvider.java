@@ -1,21 +1,26 @@
 package com.oldustry.data;
 
+import com.oldustry.client.render.SaberFlicker;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import com.oldustry.Oldustry;
+import com.oldustry.data.model.OldustryCableModels;
+import com.oldustry.data.model.OldustryMachineModels;
 import com.oldustry.block.CableBlock;
 import com.oldustry.block.PersonalSafeBlock;
-import com.oldustry.client.PersonalSafeRenderer;
+import com.oldustry.client.render.PersonalSafeRenderer;
 import com.oldustry.block.DynamiteBlock;
 import com.oldustry.block.MachineBlock;
+import com.oldustry.block.OldustryLuminatorBlock;
 import com.oldustry.block.MachineCasingBlock;
 import com.oldustry.block.RubberLogBlock;
 import com.oldustry.block.ScaffoldBlock;
 import com.oldustry.energy.CableKind;
-import com.oldustry.machine.MachineKind;
-import com.oldustry.registry.ModBlocks;
-import com.oldustry.registry.ModItems;
+import com.oldustry.machine.OldustryMachineKind;
+import com.oldustry.registry.OldustryBlocks;
+import com.oldustry.registry.OldustryItems;
 
 import net.minecraft.core.Direction;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -45,70 +50,68 @@ public class OldustryModelProvider extends ModelProvider {
 
     @Override
     protected java.util.stream.Stream<? extends net.minecraft.core.Holder<Block>> getKnownBlocks() {
-        return super.getKnownBlocks().filter(holder -> holder.value() != ModBlocks.REINFORCED_GLASS.get());
+        return super.getKnownBlocks().filter(holder -> holder.value() != OldustryBlocks.REINFORCED_GLASS.get());
     }
 
     @Override
     protected java.util.stream.Stream<? extends net.minecraft.core.Holder<Item>> getKnownItems() {
-        return super.getKnownItems().filter(holder -> holder.value() != ModItems.REINFORCED_GLASS.get());
+        return super.getKnownItems().filter(holder -> holder.value() != OldustryItems.REINFORCED_GLASS.get());
     }
 
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-        cube(blockModels, ModBlocks.TIN_ORE.get());
-        cube(blockModels, ModBlocks.URANIUM_ORE.get());
-        cube(blockModels, ModBlocks.TIN_BLOCK.get());
-        cube(blockModels, ModBlocks.BRONZE_BLOCK.get());
-        cube(blockModels, ModBlocks.URANIUM_BLOCK.get());
-        cube(blockModels, ModBlocks.REINFORCED_STONE.get());
-        scaffold(blockModels, ModBlocks.WOODEN_SCAFFOLD.get());
-        scaffold(blockModels, ModBlocks.IRON_SCAFFOLD.get());
+        cube(blockModels, OldustryBlocks.TIN_ORE.get());
+        cube(blockModels, OldustryBlocks.URANIUM_ORE.get());
+        cube(blockModels, OldustryBlocks.TIN_BLOCK.get());
+        cube(blockModels, OldustryBlocks.BRONZE_BLOCK.get());
+        cube(blockModels, OldustryBlocks.URANIUM_BLOCK.get());
+        cube(blockModels, OldustryBlocks.REINFORCED_STONE.get());
+        scaffold(blockModels, OldustryBlocks.WOODEN_SCAFFOLD.get());
+        scaffold(blockModels, OldustryBlocks.IRON_SCAFFOLD.get());
         blockModels.createTrivialBlock(
-            ModBlocks.RUBBER_SHEET.get(),
+            OldustryBlocks.RUBBER_SHEET.get(),
             TexturedModel.createDefault(
                 TextureMapping::defaultTexture,
                 ModelTemplates.create("snow_height2", TextureSlot.TEXTURE, TextureSlot.PARTICLE)
             )
         );
         blockModels.createTrivialBlock(
-            ModBlocks.RESIN_SHEET.get(),
+            OldustryBlocks.RESIN_SHEET.get(),
             TexturedModel.createDefault(
                 TextureMapping::defaultTexture,
                 ModelTemplates.create("snow_height2", TextureSlot.TEXTURE, TextureSlot.PARTICLE)
             )
         );
-        blockModels.createDoor(ModBlocks.REINFORCED_DOOR.get());
+        blockModels.createDoor(OldustryBlocks.REINFORCED_DOOR.get());
         ironFence(blockModels);
 
-        rubberLog(blockModels, ModBlocks.RUBBER_LOG.get());
+        rubberLog(blockModels, OldustryBlocks.RUBBER_LOG.get());
         // Same inventory tint as oak leaves (1.5.2 foliage green).
-        blockModels.createTintedLeaves(ModBlocks.RUBBER_LEAVES.get(), TexturedModel.LEAVES, -12012264);
-        blockModels.createCrossBlockWithDefaultItem(ModBlocks.RUBBER_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createFurnace(ModBlocks.IMPROVED_FURNACE.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
-        cube(blockModels, ModBlocks.CONSTRUCTION_FOAM.get());
-        casing(blockModels, ModBlocks.MACHINE_CASING.get());
-        casing(blockModels, ModBlocks.ADVANCED_MACHINE.get());
-        miningPipe(blockModels, ModBlocks.MINING_PIPE.get(), true);
-        miningTip(blockModels, ModBlocks.MINING_PIPE_TIP.get());
+        blockModels.createTintedLeaves(OldustryBlocks.RUBBER_LEAVES.get(), TexturedModel.LEAVES, -12012264);
+        blockModels.createCrossBlockWithDefaultItem(OldustryBlocks.RUBBER_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createFurnace(OldustryBlocks.IMPROVED_FURNACE.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
+        cube(blockModels, OldustryBlocks.CONSTRUCTION_FOAM.get());
+        OldustryMachineModels.casing(blockModels, OldustryBlocks.MACHINE_CASING.get());
+        OldustryMachineModels.casing(blockModels, OldustryBlocks.ADVANCED_MACHINE.get());
+        OldustryMachineModels.miningPipe(blockModels, OldustryBlocks.MINING_PIPE.get(), true);
+        OldustryMachineModels.miningTip(blockModels, OldustryBlocks.MINING_PIPE_TIP.get());
         personalSafe(blockModels);
-        itnt(blockModels, ModBlocks.ITNT.get());
-        itnt(blockModels, ModBlocks.NUKE.get());
-        dynamite(blockModels, ModBlocks.DYNAMITE.get());
+        itnt(blockModels, OldustryBlocks.ITNT.get());
+        itnt(blockModels, OldustryBlocks.NUKE.get());
+        dynamite(blockModels, OldustryBlocks.DYNAMITE.get());
 
-        for (var holder : ModBlocks.BLOCKS.getEntries()) {
+        for (var holder : OldustryBlocks.BLOCKS.getEntries()) {
             Block block = holder.value();
-            if (block instanceof MachineBlock machine) {
-                if (machine.kind.type == MachineKind.Type.LUMINATOR) {
-                    luminator(blockModels, machine);
-                } else {
-                    machine(blockModels, machine);
-                }
+            if (block instanceof OldustryLuminatorBlock luminator) {
+                OldustryMachineModels.luminator(blockModels, luminator);
+            } else if (block instanceof MachineBlock machine) {
+                OldustryMachineModels.machine(blockModels, machine);
             } else if (block instanceof CableBlock cable) {
-                cable(blockModels, itemModels, cable);
+                OldustryCableModels.cable(blockModels, itemModels, cable);
             }
         }
 
-        for (DeferredHolder<Item, ? extends Item> item : ModItems.ITEMS.getEntries()) {
+        for (DeferredHolder<Item, ? extends Item> item : OldustryItems.ITEMS.getEntries()) {
             if (item.get() instanceof BlockItem) {
                 continue;
             }
@@ -127,7 +130,7 @@ public class OldustryModelProvider extends ModelProvider {
 
     /** Particle blockstate per facing. The world mesh is the block-entity renderer; the item uses the same closed model. */
     private static void personalSafe(BlockModelGenerators blockModels) {
-        var block = ModBlocks.PERSONAL_SAFE.get();
+        var block = OldustryBlocks.PERSONAL_SAFE.get();
         var particle = blockModels.createParticleOnlyBlockModel(block, block);
         blockModels.blockStateOutput.accept(
             MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(PersonalSafeBlock.FACING).generate(facing -> particle))
@@ -144,7 +147,7 @@ public class OldustryModelProvider extends ModelProvider {
 
     /** JAR cuboids: 4px post, rails at y 6–9 and 12–15. Same geometry as {@code fence_post} / {@code fence_side}. */
     private static void ironFence(BlockModelGenerators blockModels) {
-        Block block = ModBlocks.IRON_FENCE.get();
+        Block block = OldustryBlocks.IRON_FENCE.get();
         TextureMapping mapping = TextureMapping.defaultTexture(block);
         var post = BlockModelGenerators.plainVariant(ModelTemplates.FENCE_POST.create(block, mapping, blockModels.modelOutput));
         var side = BlockModelGenerators.plainVariant(ModelTemplates.FENCE_SIDE.create(block, mapping, blockModels.modelOutput));
@@ -184,170 +187,6 @@ public class OldustryModelProvider extends ModelProvider {
                 };
             })
         ));
-    }
-
-    private static void casing(BlockModelGenerators gens, Block block) {
-        Identifier model = ModelTemplates.CUBE.create(block, cubeMap(block, ""), gens.modelOutput);
-        gens.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(model)));
-        gens.registerSimpleItemModel(block, model);
-    }
-
-    private static void machine(BlockModelGenerators gens, MachineBlock block) {
-        Identifier off = ModelTemplates.CUBE.create(block, cubeMap(block, ""), gens.modelOutput);
-        Identifier on = ModelTemplates.CUBE.createWithSuffix(block, "_on", cubeMap(block, "_on"), gens.modelOutput);
-        gens.blockStateOutput.accept(
-            MultiVariantGenerator.dispatch(block)
-                .with(BlockModelGenerators.createBooleanModelDispatch(
-                    MachineBlock.ACTIVE,
-                    BlockModelGenerators.plainVariant(on),
-                    BlockModelGenerators.plainVariant(off)
-                ))
-                .with(BlockModelGenerators.ROTATION_FACING)
-        );
-        gens.registerSimpleItemModel(block, off);
-    }
-
-    private static TextureMapping cubeMap(Block block, String suffix) {
-        // IC2 atlas tile 3 (south/front) maps to model NORTH so furnace Y-rot matches FACING.
-        return new TextureMapping()
-            .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(block, suffix + "_down"))
-            .put(TextureSlot.UP, TextureMapping.getBlockTexture(block, suffix + "_up"))
-            .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(block, suffix + "_south"))
-            .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(block, suffix + "_north"))
-            .put(TextureSlot.WEST, TextureMapping.getBlockTexture(block, suffix + "_east"))
-            .put(TextureSlot.EAST, TextureMapping.getBlockTexture(block, suffix + "_west"))
-            .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, suffix + "_south"));
-    }
-
-    private static void luminator(BlockModelGenerators gens, MachineBlock block) {
-        Map<String, Identifier> models = new HashMap<>();
-        PropertyDispatch<net.minecraft.client.data.models.MultiVariant> facing = PropertyDispatch.initial(MachineBlock.FACING, MachineBlock.ACTIVE, MachineBlock.COVER)
-            .generate((dir, active, cover) -> {
-                // Floor plate is always the full sheet. JAR ignores fullCover when facing up,
-                // so cover true/false share one model and must be created only once.
-                boolean sheet = cover && dir != Direction.UP;
-                String shape = dir.getSerializedName() + (sheet ? "_cover" : "");
-                String suffix = "_" + shape + (active ? "_on" : "_off");
-                Identifier model = models.computeIfAbsent(suffix, key -> {
-                    Identifier parent = Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "block/luminator_" + shape);
-                    TextureMapping map = new TextureMapping().put(
-                        TextureSlot.ALL,
-                        active ? TextureMapping.getBlockTexture(block) : TextureMapping.getBlockTexture(block, "_dark")
-                    );
-                    ModelTemplate template = new ModelTemplate(
-                        java.util.Optional.of(parent),
-                        java.util.Optional.of(suffix),
-                        TextureSlot.ALL
-                    );
-                    return template.create(block, map, gens.modelOutput);
-                });
-                return BlockModelGenerators.plainVariant(model);
-            });
-        gens.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(facing));
-        // JAR RenderBlockLuminator.renderInventoryBlock: column x/z 0.375–0.625, full height,
-        // dark texture (Ic2Items.luminator is blockLuminatorDark).
-        gens.registerSimpleItemModel(block, Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "block/luminator_column"));
-    }
-
-    private static void miningPipe(BlockModelGenerators gens, Block block, boolean item) {
-        ModelTemplate column = new ModelTemplate(
-            java.util.Optional.of(Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "block/mining_pipe_column")),
-            java.util.Optional.empty(),
-            TextureSlot.ALL
-        );
-        Identifier model = column.create(block, new TextureMapping().put(TextureSlot.ALL, TextureMapping.getBlockTexture(block)), gens.modelOutput);
-        gens.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(model)));
-        // JAR RenderBlockMiningPipe.renderInventoryBlock is the same 4×16 column.
-        if (item) {
-            gens.registerSimpleItemModel(block, model);
-        }
-    }
-
-    /** JAR BlockMiningTip uses the default cube renderer (blockMiningTip), not the pipe column. */
-    private static void miningTip(BlockModelGenerators gens, Block block) {
-        Identifier model = ModelTemplates.CUBE_ALL.create(block, TextureMapping.cube(block), gens.modelOutput);
-        gens.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(model)));
-    }
-
-    private static void cable(BlockModelGenerators gens, ItemModelGenerators itemModels, CableBlock block) {
-        int t = block.kind.thickness;
-        boolean stateful = block.kind == CableKind.DETECTOR || block.kind == CableKind.SPLITTER;
-        ModelTemplate coreT = new ModelTemplate(
-            java.util.Optional.of(Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "block/cable_core_" + t)),
-            java.util.Optional.of("_core"),
-            TextureSlot.ALL
-        );
-        ModelTemplate armT = new ModelTemplate(
-            java.util.Optional.of(Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "block/cable_arm_" + t)),
-            java.util.Optional.of("_arm"),
-            TextureSlot.ALL
-        );
-        ModelTemplate coreOnT = new ModelTemplate(
-            java.util.Optional.of(Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "block/cable_core_" + t)),
-            java.util.Optional.of("_core_on"),
-            TextureSlot.ALL
-        );
-        ModelTemplate armOnT = new ModelTemplate(
-            java.util.Optional.of(Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "block/cable_arm_" + t)),
-            java.util.Optional.of("_arm_on"),
-            TextureSlot.ALL
-        );
-        TextureMapping map = new TextureMapping().put(TextureSlot.ALL, TextureMapping.getBlockTexture(block));
-        Identifier core = coreT.create(block, map, gens.modelOutput);
-        Identifier arm = armT.create(block, map, gens.modelOutput);
-        Identifier foam = ModelTemplates.CUBE_ALL.createWithSuffix(
-            block,
-            "_foam",
-            TextureMapping.cube(ModBlocks.CONSTRUCTION_FOAM.get()),
-            gens.modelOutput
-        );
-        Identifier hardened = ModelTemplates.CUBE_ALL.createWithSuffix(
-            block,
-            "_hard",
-            TextureMapping.cube(Blocks.CONCRETE.pick(net.minecraft.world.item.DyeColor.LIGHT_GRAY)),
-            gens.modelOutput
-        );
-        var coreV = BlockModelGenerators.plainVariant(core);
-        var armV = BlockModelGenerators.plainVariant(arm);
-        MultiPartGenerator multipart = MultiPartGenerator.multiPart(block);
-        if (stateful) {
-            TextureMapping onMap = new TextureMapping().put(TextureSlot.ALL, TextureMapping.getBlockTexture(block, "_on"));
-            Identifier coreOn = coreOnT.create(block, onMap, gens.modelOutput);
-            Identifier armOn = armOnT.create(block, onMap, gens.modelOutput);
-            var coreOnV = BlockModelGenerators.plainVariant(coreOn);
-            var armOnV = BlockModelGenerators.plainVariant(armOn);
-            // JAR 32x16 sheet: left=inactive, right=active (BlockTextureStitched count==2).
-            multipart
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.ACTIVE, false), coreV)
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.ACTIVE, true), coreOnV)
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.ACTIVE, false).term(CableBlock.NORTH, true), armV)
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.ACTIVE, true).term(CableBlock.NORTH, true), armOnV)
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.ACTIVE, false).term(CableBlock.SOUTH, true), armV.with(BlockModelGenerators.Y_ROT_180))
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.ACTIVE, true).term(CableBlock.SOUTH, true), armOnV.with(BlockModelGenerators.Y_ROT_180))
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.ACTIVE, false).term(CableBlock.EAST, true), armV.with(BlockModelGenerators.Y_ROT_90))
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.ACTIVE, true).term(CableBlock.EAST, true), armOnV.with(BlockModelGenerators.Y_ROT_90))
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.ACTIVE, false).term(CableBlock.WEST, true), armV.with(BlockModelGenerators.Y_ROT_270))
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.ACTIVE, true).term(CableBlock.WEST, true), armOnV.with(BlockModelGenerators.Y_ROT_270))
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.ACTIVE, false).term(CableBlock.UP, true), armV.with(BlockModelGenerators.X_ROT_270))
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.ACTIVE, true).term(CableBlock.UP, true), armOnV.with(BlockModelGenerators.X_ROT_270))
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.ACTIVE, false).term(CableBlock.DOWN, true), armV.with(BlockModelGenerators.X_ROT_90))
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.ACTIVE, true).term(CableBlock.DOWN, true), armOnV.with(BlockModelGenerators.X_ROT_90));
-        } else {
-            multipart
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0), coreV)
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.NORTH, true), armV)
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.SOUTH, true), armV.with(BlockModelGenerators.Y_ROT_180))
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.EAST, true), armV.with(BlockModelGenerators.Y_ROT_90))
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.WEST, true), armV.with(BlockModelGenerators.Y_ROT_270))
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.UP, true), armV.with(BlockModelGenerators.X_ROT_270))
-                .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 0).term(CableBlock.DOWN, true), armV.with(BlockModelGenerators.X_ROT_90));
-        }
-        multipart
-            .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 1), BlockModelGenerators.plainVariant(foam))
-            .with(BlockModelGenerators.condition().term(CableBlock.FOAM, 2), BlockModelGenerators.plainVariant(hardened));
-        gens.blockStateOutput.accept(multipart);
-        // 1.5.2 used flat itemCable* icons in inventory, not the thin 3D core.
-        itemModels.generateFlatItem(block.asItem(), ModelTemplates.FLAT_ITEM);
     }
 
     private static void scaffold(BlockModelGenerators gens, ScaffoldBlock block) {
@@ -402,8 +241,8 @@ public class OldustryModelProvider extends ModelProvider {
         var off = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, ModelTemplates.FLAT_HANDHELD_ITEM));
         var blue = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_active", ModelTemplates.FLAT_HANDHELD_ITEM));
         var red = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_active_alt", ModelTemplates.FLAT_HANDHELD_ITEM));
-        var lit = ItemModelUtils.rangeSelect(new com.oldustry.client.SaberFlicker(), blue, ItemModelUtils.override(red, 0.5F));
-        itemModels.generateBooleanDispatch(item, ItemModelUtils.hasComponent(com.oldustry.registry.ModDataComponents.SABER_ACTIVE.get()), lit, off);
+        var lit = ItemModelUtils.rangeSelect(new com.oldustry.client.render.SaberFlicker(), blue, ItemModelUtils.override(red, 0.5F));
+        itemModels.generateBooleanDispatch(item, ItemModelUtils.hasComponent(com.oldustry.registry.OldustryDataComponents.SABER_ACTIVE.get()), lit, off);
     }
 
     /** Tools held like vanilla pickaxe/sword (not inventory-flat `generated`). */

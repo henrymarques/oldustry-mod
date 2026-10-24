@@ -2,7 +2,7 @@ package com.oldustry.item;
 
 import java.util.function.Consumer;
 
-import com.oldustry.registry.ModDataComponents;
+import com.oldustry.registry.OldustryDataComponents;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
@@ -38,8 +38,8 @@ public class UpgradeItem extends Item {
         }
         int dir = 1 + (context.getClickedFace().get3DDataValue() + 2) % 6;
         ItemStack stack = context.getItemInHand();
-        if (stack.getOrDefault(ModDataComponents.EJECTOR_DIR.get(), 0) != dir) {
-            stack.set(ModDataComponents.EJECTOR_DIR.get(), dir);
+        if (stack.getOrDefault(OldustryDataComponents.EJECTOR_DIR.get(), 0) != dir) {
+            stack.set(OldustryDataComponents.EJECTOR_DIR.get(), dir);
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
@@ -56,7 +56,7 @@ public class UpgradeItem extends Item {
             case TRANSFORMER -> builder.accept(Component.translatable("oldustry.tooltip.upgrade.transformer", n));
             case STORAGE -> builder.accept(Component.translatable("oldustry.tooltip.upgrade.storage", 10000 * n));
             case EJECTOR -> {
-                int dir = stack.getOrDefault(ModDataComponents.EJECTOR_DIR.get(), 0);
+                int dir = stack.getOrDefault(OldustryDataComponents.EJECTOR_DIR.get(), 0);
                 String side = switch (dir) {
                     case 1 -> "oldustry.dir.west";
                     case 2 -> "oldustry.dir.east";

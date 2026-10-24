@@ -3,7 +3,7 @@ package com.oldustry.block;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.oldustry.registry.ModItems;
+import com.oldustry.registry.OldustryItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -113,7 +113,7 @@ public class ScaffoldBlock extends Block {
             return InteractionResult.SUCCESS;
         }
         boolean woodReinforce = !iron && stack.is(Items.STICK) && stack.getCount() >= 2;
-        boolean ironReinforce = iron && stack.is(ModItems.IRON_FENCE.get());
+        boolean ironReinforce = iron && stack.is(OldustryItems.IRON_FENCE.get());
         if (!woodReinforce && !ironReinforce) {
             return InteractionResult.PASS;
         }
@@ -156,7 +156,7 @@ public class ScaffoldBlock extends Block {
         if (own >= reinforcedStrength()) {
             if (!isPillar(level, pos)) {
                 own = strengthFrom(level, pos);
-                ItemStack extra = iron ? new ItemStack(ModItems.IRON_FENCE.get()) : new ItemStack(Items.STICK, 2);
+                ItemStack extra = iron ? new ItemStack(OldustryItems.IRON_FENCE.get()) : new ItemStack(Items.STICK, 2);
                 popResource(level, pos, extra);
             }
         } else {
@@ -174,7 +174,7 @@ public class ScaffoldBlock extends Block {
     protected java.util.List<ItemStack> getDrops(BlockState state, net.minecraft.world.level.storage.loot.LootParams.Builder builder) {
         var drops = new java.util.ArrayList<>(super.getDrops(state, builder));
         if (state.getValue(STRENGTH) >= reinforcedStrength()) {
-            drops.add(iron ? new ItemStack(ModItems.IRON_FENCE.get()) : new ItemStack(Items.STICK, 2));
+            drops.add(iron ? new ItemStack(OldustryItems.IRON_FENCE.get()) : new ItemStack(Items.STICK, 2));
         }
         return drops;
     }

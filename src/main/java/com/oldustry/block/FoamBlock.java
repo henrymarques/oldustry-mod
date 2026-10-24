@@ -1,7 +1,7 @@
 package com.oldustry.block;
 
 import com.mojang.serialization.MapCodec;
-import com.oldustry.registry.ModBlocks;
+import com.oldustry.registry.OldustryBlocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -101,6 +101,6 @@ public class FoamBlock extends Block {
 
     public static boolean canFoamAt(Level level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
-        return state.canBeReplaced() || state.is(ModBlocks.WOODEN_SCAFFOLD.get());
+        return state.canBeReplaced() || state.is(OldustryBlocks.WOODEN_SCAFFOLD.get());
     }
 }

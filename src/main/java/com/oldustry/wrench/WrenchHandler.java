@@ -1,7 +1,7 @@
 package com.oldustry.wrench;
 
 import com.oldustry.network.KeysPayload;
-import com.oldustry.registry.ModSounds;
+import com.oldustry.registry.OldustrySounds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -121,7 +121,7 @@ public final class WrenchHandler {
     }
 
     private static void play(Level level, BlockPos pos) {
-        ModSounds.play(level, null, pos, ModSounds.WRENCH.get(), SoundSource.BLOCKS, 1f, 1f);
+        OldustrySounds.play(level, null, pos, OldustrySounds.WRENCH.get(), SoundSource.BLOCKS, 1f, 1f);
     }
 
     private static Wrenchable resolve(BlockState state, BlockEntity be) {

@@ -2,7 +2,7 @@ package com.oldustry.world;
 
 import com.mojang.serialization.MapCodec;
 import com.oldustry.block.RubberLogBlock;
-import com.oldustry.registry.ModBlocks;
+import com.oldustry.registry.OldustryBlocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -37,8 +37,8 @@ public class RubberTreeFeature extends Feature<NoneFeatureConfiguration> {
         int height = space / 2;
         height += random.nextInt(space - height + 1);
         int[] holeChance = { 25 };
-        BlockState log = ModBlocks.RUBBER_LOG.get().defaultBlockState();
-        BlockState leaves = ModBlocks.RUBBER_LEAVES.get().defaultBlockState().setValue(LeavesBlock.DISTANCE, 1);
+        BlockState log = OldustryBlocks.RUBBER_LOG.get().defaultBlockState();
+        BlockState leaves = OldustryBlocks.RUBBER_LEAVES.get().defaultBlockState().setValue(LeavesBlock.DISTANCE, 1);
         for (int i = 0; i < height; i++) {
             BlockPos trunk = origin.above(i);
             setBlock(level, trunk, RubberLogBlock.withRandomTap(log, random, holeChance));
@@ -85,7 +85,7 @@ public class RubberTreeFeature extends Feature<NoneFeatureConfiguration> {
             return 0;
         }
         BlockState here = level.getBlockState(origin);
-        if (!here.isAir() && !here.is(ModBlocks.RUBBER_SAPLING.get())) {
+        if (!here.isAir() && !here.is(OldustryBlocks.RUBBER_SAPLING.get())) {
             return 0;
         }
         int height = 1;

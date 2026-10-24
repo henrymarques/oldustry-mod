@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.oldustry.Oldustry;
-import com.oldustry.registry.ModBlocks;
-import com.oldustry.registry.ModFeatures;
+import com.oldustry.registry.OldustryBlocks;
+import com.oldustry.registry.OldustryFeatures;
 
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -51,14 +51,14 @@ public final class OldustryWorldgen {
         var stone = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
         var deepslate = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
         context.register(ORE_TIN, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(List.of(
-            OreConfiguration.target(stone, ModBlocks.TIN_ORE.get().defaultBlockState()),
-            OreConfiguration.target(deepslate, ModBlocks.TIN_ORE.get().defaultBlockState())
+            OreConfiguration.target(stone, OldustryBlocks.TIN_ORE.get().defaultBlockState()),
+            OreConfiguration.target(deepslate, OldustryBlocks.TIN_ORE.get().defaultBlockState())
         ), 6)));
         context.register(ORE_URANIUM, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(List.of(
-            OreConfiguration.target(stone, ModBlocks.URANIUM_ORE.get().defaultBlockState()),
-            OreConfiguration.target(deepslate, ModBlocks.URANIUM_ORE.get().defaultBlockState())
+            OreConfiguration.target(stone, OldustryBlocks.URANIUM_ORE.get().defaultBlockState()),
+            OreConfiguration.target(deepslate, OldustryBlocks.URANIUM_ORE.get().defaultBlockState())
         ), 3)));
-        context.register(RUBBER_TREE, new ConfiguredFeature<>(ModFeatures.RUBBER_TREE.get(), NoneFeatureConfiguration.INSTANCE));
+        context.register(RUBBER_TREE, new ConfiguredFeature<>(OldustryFeatures.RUBBER_TREE.get(), NoneFeatureConfiguration.INSTANCE));
     }
 
     public static void bootstrapPlaced(BootstrapContext<PlacedFeature> context) {

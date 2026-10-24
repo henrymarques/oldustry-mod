@@ -3,8 +3,8 @@ package com.oldustry.block;
 import java.util.Random;
 
 import com.mojang.serialization.MapCodec;
-import com.oldustry.registry.ModItems;
-import com.oldustry.registry.ModSounds;
+import com.oldustry.registry.OldustryItems;
+import com.oldustry.registry.OldustrySounds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -68,7 +68,7 @@ public class RubberLogBlock extends RotatedPillarBlock {
     protected InteractionResult useItemOn(
         ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit
     ) {
-        if (!stack.is(ModItems.TREETAP.get())) {
+        if (!stack.is(OldustryItems.TREETAP.get())) {
             return InteractionResult.TRY_WITH_EMPTY_HAND;
         }
         Direction face = hit.getDirection();
@@ -84,7 +84,7 @@ public class RubberLogBlock extends RotatedPillarBlock {
             level.setBlock(pos, next, Block.UPDATE_ALL_IMMEDIATE);
             scheduleRefill(level, pos, next);
             stack.hurtAndBreak(1, player, hand);
-            ModSounds.play(level, null, pos, ModSounds.TREETAP.get(), SoundSource.BLOCKS, 1f, 1f);
+            OldustrySounds.play(level, null, pos, OldustrySounds.TREETAP.get(), SoundSource.BLOCKS, 1f, 1f);
         }
         return InteractionResult.SUCCESS;
     }
@@ -94,7 +94,7 @@ public class RubberLogBlock extends RotatedPillarBlock {
         double y = pos.getY() + 0.5;
         double z = pos.getZ() + 0.5 + face.getStepZ() * 0.3;
         for (int i = 0; i < quantity; i++) {
-            ItemEntity entity = new ItemEntity(level, x, y, z, new ItemStack(ModItems.STICKY_RESIN.get()));
+            ItemEntity entity = new ItemEntity(level, x, y, z, new ItemStack(OldustryItems.STICKY_RESIN.get()));
             entity.setDefaultPickUpDelay();
             level.addFreshEntity(entity);
         }
@@ -147,7 +147,7 @@ public class RubberLogBlock extends RotatedPillarBlock {
         var drops = new java.util.ArrayList<>(super.getDrops(state, builder));
         RandomSource random = builder.getLevel().getRandom();
         if (RubberTapLogic.extraResinOnBreak(new Random(random.nextLong()))) {
-            drops.add(new ItemStack(ModItems.STICKY_RESIN.get()));
+            drops.add(new ItemStack(OldustryItems.STICKY_RESIN.get()));
         }
         return drops;
     }

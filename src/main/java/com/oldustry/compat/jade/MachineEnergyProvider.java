@@ -4,7 +4,7 @@ import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import com.oldustry.Oldustry;
-import com.oldustry.machine.MachineBlockEntity;
+import com.oldustry.machine.OldustryMachineBlockEntity;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -35,7 +35,7 @@ public enum MachineEnergyProvider implements StreamServerDataProvider<BlockAcces
 
     @Override
     public @Nullable Data streamData(BlockAccessor accessor) {
-        if (!(accessor.getBlockEntity() instanceof MachineBlockEntity machine)) {
+        if (!(accessor.getBlockEntity() instanceof OldustryMachineBlockEntity machine)) {
             return null;
         }
         return new Data(

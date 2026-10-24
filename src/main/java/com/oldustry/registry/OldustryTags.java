@@ -57,7 +57,7 @@ public final class OldustryTags {
             Registries.ITEM,
             Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "advanced_alloy")
         );
-        /** Magnetizer lift boots: iron/gold/chain + bronze (deviation). */
+        /** Magnetizer lift boots: iron/gold/chain + copper and bronze (deviation). */
         public static final TagKey<Item> METAL_SHOES = TagKey.create(
             Registries.ITEM,
             Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "metal_shoes")

@@ -3,7 +3,7 @@ package com.oldustry.item;
 import java.util.function.Consumer;
 
 import com.oldustry.block.MachineBlock;
-import com.oldustry.machine.MachineKind;
+import com.oldustry.machine.OldustryMachineKind;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -29,7 +29,7 @@ public class MachineBlockItem extends BlockItem {
         }
     }
 
-    private static Component generatorTooltip(MachineKind kind) {
+    private static Component generatorTooltip(OldustryMachineKind kind) {
         return switch (kind.type) {
             case GENERATOR -> Component.translatable("info.oldustry.generator.output", 10).withStyle(ChatFormatting.GRAY);
             case GEO -> Component.translatable("info.oldustry.generator.output", 20).withStyle(ChatFormatting.GRAY);

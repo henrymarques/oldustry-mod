@@ -3,7 +3,7 @@ package com.oldustry.data;
 import java.util.concurrent.CompletableFuture;
 
 import com.oldustry.Oldustry;
-import com.oldustry.registry.ModBlocks;
+import com.oldustry.registry.OldustryBlocks;
 import com.oldustry.registry.OldustryTags;
 
 import net.minecraft.core.HolderLookup;
@@ -20,62 +20,62 @@ public class OldustryBlockTags extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.TIN_ORE.getKey());
-        tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.TIN_ORE.getKey());
-        tag(OldustryTags.Blocks.ORES_TIN).add(ModBlocks.TIN_ORE.getKey());
-        tag(Tags.Blocks.ORES).add(ModBlocks.TIN_ORE.getKey());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(OldustryBlocks.TIN_ORE.getKey());
+        tag(BlockTags.NEEDS_STONE_TOOL).add(OldustryBlocks.TIN_ORE.getKey());
+        tag(OldustryTags.Blocks.ORES_TIN).add(OldustryBlocks.TIN_ORE.getKey());
+        tag(Tags.Blocks.ORES).add(OldustryBlocks.TIN_ORE.getKey());
 
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.URANIUM_ORE.getKey());
-        tag(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.URANIUM_ORE.getKey());
-        tag(OldustryTags.Blocks.ORES_URANIUM).add(ModBlocks.URANIUM_ORE.getKey());
-        tag(Tags.Blocks.ORES).add(ModBlocks.URANIUM_ORE.getKey());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(OldustryBlocks.URANIUM_ORE.getKey());
+        tag(BlockTags.NEEDS_IRON_TOOL).add(OldustryBlocks.URANIUM_ORE.getKey());
+        tag(OldustryTags.Blocks.ORES_URANIUM).add(OldustryBlocks.URANIUM_ORE.getKey());
+        tag(Tags.Blocks.ORES).add(OldustryBlocks.URANIUM_ORE.getKey());
 
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.TIN_BLOCK.getKey());
-        tag(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.TIN_BLOCK.getKey());
-        tag(OldustryTags.Blocks.STORAGE_BLOCKS_TIN).add(ModBlocks.TIN_BLOCK.getKey());
-        tag(Tags.Blocks.STORAGE_BLOCKS).add(ModBlocks.TIN_BLOCK.getKey());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(OldustryBlocks.TIN_BLOCK.getKey());
+        tag(BlockTags.NEEDS_STONE_TOOL).add(OldustryBlocks.TIN_BLOCK.getKey());
+        tag(OldustryTags.Blocks.STORAGE_BLOCKS_TIN).add(OldustryBlocks.TIN_BLOCK.getKey());
+        tag(Tags.Blocks.STORAGE_BLOCKS).add(OldustryBlocks.TIN_BLOCK.getKey());
 
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.BRONZE_BLOCK.getKey());
-        tag(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.BRONZE_BLOCK.getKey());
-        tag(BlockTags.BEACON_BASE_BLOCKS).add(ModBlocks.BRONZE_BLOCK.getKey());
-        tag(OldustryTags.Blocks.STORAGE_BLOCKS_BRONZE).add(ModBlocks.BRONZE_BLOCK.getKey());
-        tag(Tags.Blocks.STORAGE_BLOCKS).add(ModBlocks.BRONZE_BLOCK.getKey());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(OldustryBlocks.BRONZE_BLOCK.getKey());
+        tag(BlockTags.NEEDS_IRON_TOOL).add(OldustryBlocks.BRONZE_BLOCK.getKey());
+        tag(BlockTags.BEACON_BASE_BLOCKS).add(OldustryBlocks.BRONZE_BLOCK.getKey());
+        tag(OldustryTags.Blocks.STORAGE_BLOCKS_BRONZE).add(OldustryBlocks.BRONZE_BLOCK.getKey());
+        tag(Tags.Blocks.STORAGE_BLOCKS).add(OldustryBlocks.BRONZE_BLOCK.getKey());
 
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.URANIUM_BLOCK.getKey());
-        tag(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.URANIUM_BLOCK.getKey());
-        tag(BlockTags.BEACON_BASE_BLOCKS).add(ModBlocks.URANIUM_BLOCK.getKey());
-        tag(OldustryTags.Blocks.STORAGE_BLOCKS_URANIUM).add(ModBlocks.URANIUM_BLOCK.getKey());
-        tag(Tags.Blocks.STORAGE_BLOCKS).add(ModBlocks.URANIUM_BLOCK.getKey());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(OldustryBlocks.URANIUM_BLOCK.getKey());
+        tag(BlockTags.NEEDS_IRON_TOOL).add(OldustryBlocks.URANIUM_BLOCK.getKey());
+        tag(BlockTags.BEACON_BASE_BLOCKS).add(OldustryBlocks.URANIUM_BLOCK.getKey());
+        tag(OldustryTags.Blocks.STORAGE_BLOCKS_URANIUM).add(OldustryBlocks.URANIUM_BLOCK.getKey());
+        tag(Tags.Blocks.STORAGE_BLOCKS).add(OldustryBlocks.URANIUM_BLOCK.getKey());
 
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.REINFORCED_STONE.getKey());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.REINFORCED_GLASS.getKey());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.REINFORCED_DOOR.getKey());
-        tag(BlockTags.DOORS).add(ModBlocks.REINFORCED_DOOR.getKey());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(OldustryBlocks.REINFORCED_STONE.getKey());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(OldustryBlocks.REINFORCED_GLASS.getKey());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(OldustryBlocks.REINFORCED_DOOR.getKey());
+        tag(BlockTags.DOORS).add(OldustryBlocks.REINFORCED_DOOR.getKey());
 
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.IRON_FENCE.getKey());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(OldustryBlocks.IRON_FENCE.getKey());
         // Block tag only: oak fences share the wood class and draw their rail. Item is not fuel.
-        tag(BlockTags.WOODEN_FENCES).add(ModBlocks.IRON_FENCE.getKey());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.IRON_SCAFFOLD.getKey());
-        tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.WOODEN_SCAFFOLD.getKey());
+        tag(BlockTags.WOODEN_FENCES).add(OldustryBlocks.IRON_FENCE.getKey());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(OldustryBlocks.IRON_SCAFFOLD.getKey());
+        tag(BlockTags.MINEABLE_WITH_AXE).add(OldustryBlocks.WOODEN_SCAFFOLD.getKey());
         // Climb is JAR entityInside (forward boost), not ladder CLIMBABLE.
 
-        tag(BlockTags.LOGS).add(ModBlocks.RUBBER_LOG.getKey());
-        tag(BlockItemTags.LOGS_THAT_BURN.block()).add(ModBlocks.RUBBER_LOG.getKey());
-        tag(BlockTags.OVERWORLD_NATURAL_LOGS).add(ModBlocks.RUBBER_LOG.getKey());
-        tag(BlockTags.LEAVES).add(ModBlocks.RUBBER_LEAVES.getKey());
-        tag(BlockItemTags.SAPLINGS.block()).add(ModBlocks.RUBBER_SAPLING.getKey());
-        tag(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.RUBBER_LOG.getKey());
-        tag(BlockTags.MINEABLE_WITH_HOE).add(ModBlocks.RUBBER_LEAVES.getKey());
+        tag(BlockTags.LOGS).add(OldustryBlocks.RUBBER_LOG.getKey());
+        tag(BlockItemTags.LOGS_THAT_BURN.block()).add(OldustryBlocks.RUBBER_LOG.getKey());
+        tag(BlockTags.OVERWORLD_NATURAL_LOGS).add(OldustryBlocks.RUBBER_LOG.getKey());
+        tag(BlockTags.LEAVES).add(OldustryBlocks.RUBBER_LEAVES.getKey());
+        tag(BlockItemTags.SAPLINGS.block()).add(OldustryBlocks.RUBBER_SAPLING.getKey());
+        tag(BlockTags.MINEABLE_WITH_AXE).add(OldustryBlocks.RUBBER_LOG.getKey());
+        tag(BlockTags.MINEABLE_WITH_HOE).add(OldustryBlocks.RUBBER_LEAVES.getKey());
 
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.IMPROVED_FURNACE.getKey());
-        tag(Tags.Blocks.PLAYER_WORKSTATIONS_FURNACES).add(ModBlocks.IMPROVED_FURNACE.getKey());
-        tag(OldustryTags.Blocks.FURNACES_IRON).add(ModBlocks.IMPROVED_FURNACE.getKey());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(OldustryBlocks.IMPROVED_FURNACE.getKey());
+        tag(Tags.Blocks.PLAYER_WORKSTATIONS_FURNACES).add(OldustryBlocks.IMPROVED_FURNACE.getKey());
+        tag(OldustryTags.Blocks.FURNACES_IRON).add(OldustryBlocks.IMPROVED_FURNACE.getKey());
         tag(OldustryTags.Blocks.FURNACES).addTag(OldustryTags.Blocks.FURNACES_IRON);
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.PERSONAL_SAFE.getKey());
-        tag(BlockTags.DRAGON_IMMUNE).add(ModBlocks.PERSONAL_SAFE.getKey());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.MACHINE_CASING.getKey());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ADVANCED_MACHINE.getKey());
-        for (var holder : ModBlocks.BLOCKS.getEntries()) {
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(OldustryBlocks.PERSONAL_SAFE.getKey());
+        tag(BlockTags.DRAGON_IMMUNE).add(OldustryBlocks.PERSONAL_SAFE.getKey());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(OldustryBlocks.MACHINE_CASING.getKey());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(OldustryBlocks.ADVANCED_MACHINE.getKey());
+        for (var holder : OldustryBlocks.BLOCKS.getEntries()) {
             if (holder.value() instanceof com.oldustry.block.MachineBlock || holder.value() instanceof com.oldustry.block.CableBlock) {
                 tag(BlockTags.MINEABLE_WITH_PICKAXE).add(holder.getKey());
             }

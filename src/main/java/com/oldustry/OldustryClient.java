@@ -1,21 +1,21 @@
 package com.oldustry;
 
 import com.oldustry.block.CableBlock;
-import com.oldustry.client.JetpackLoopSound;
-import com.oldustry.client.SaberFlicker;
-import com.oldustry.client.PersonalSafeRenderer;
-import com.oldustry.client.PersonalSafeScreen;
-import com.oldustry.client.MachineLoopSound;
+import com.oldustry.client.sound.JetpackLoopSound;
+import com.oldustry.client.render.SaberFlicker;
+import com.oldustry.client.render.PersonalSafeRenderer;
+import com.oldustry.client.screen.PersonalSafeScreen;
+import com.oldustry.client.sound.MachineLoopSound;
 import com.oldustry.client.OldustryKeys;
 import com.oldustry.compat.CuriosWearables;
 import com.oldustry.furnace.ImprovedFurnaceScreen;
-import com.oldustry.item.ElectricJetpackItem;
-import com.oldustry.item.FuelJetpackItem;
-import com.oldustry.machine.MachineScreen;
-import com.oldustry.registry.ModBlockEntities;
-import com.oldustry.registry.ModBlocks;
-import com.oldustry.registry.ModEntities;
-import com.oldustry.registry.ModMenus;
+import com.oldustry.item.equipment.ElectricJetpackItem;
+import com.oldustry.item.equipment.FuelJetpackItem;
+import com.oldustry.client.screen.OldustryMachineScreen;
+import com.oldustry.registry.OldustryBlockEntities;
+import com.oldustry.registry.OldustryBlocks;
+import com.oldustry.registry.OldustryEntities;
+import com.oldustry.registry.OldustryMenus;
 
 import net.minecraft.resources.Identifier;
 
@@ -72,17 +72,17 @@ public class OldustryClient {
 
     @SubscribeEvent
     static void registerScreens(RegisterMenuScreensEvent event) {
-        event.register(ModMenus.IMPROVED_FURNACE.get(), ImprovedFurnaceScreen::new);
-        event.register(ModMenus.MACHINE.get(), MachineScreen::new);
-        event.register(ModMenus.PERSONAL_SAFE.get(), PersonalSafeScreen::new);
+        event.register(OldustryMenus.IMPROVED_FURNACE.get(), ImprovedFurnaceScreen::new);
+        event.register(OldustryMenus.MACHINE.get(), OldustryMachineScreen::create);
+        event.register(OldustryMenus.PERSONAL_SAFE.get(), PersonalSafeScreen::new);
     }
 
     @SubscribeEvent
     static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntities.DYNAMITE.get(), ThrownItemRenderer::new);
-        event.registerEntityRenderer(ModEntities.PRIMED_ITNT.get(), net.minecraft.client.renderer.entity.TntRenderer::new);
-        event.registerEntityRenderer(ModEntities.PRIMED_NUKE.get(), net.minecraft.client.renderer.entity.TntRenderer::new);
-        event.registerBlockEntityRenderer(ModBlockEntities.PERSONAL_SAFE.get(), PersonalSafeRenderer::new);
+        event.registerEntityRenderer(OldustryEntities.DYNAMITE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(OldustryEntities.PRIMED_ITNT.get(), net.minecraft.client.renderer.entity.TntRenderer::new);
+        event.registerEntityRenderer(OldustryEntities.PRIMED_NUKE.get(), net.minecraft.client.renderer.entity.TntRenderer::new);
+        event.registerBlockEntityRenderer(OldustryBlockEntities.PERSONAL_SAFE.get(), PersonalSafeRenderer::new);
     }
 
     @SubscribeEvent
@@ -100,9 +100,9 @@ public class OldustryClient {
 
     @SubscribeEvent
     static void colors(RegisterColorHandlersEvent.BlockTintSources event) {
-        Block[] cables = ModBlocks.cables().toArray(Block[]::new);
+        Block[] cables = OldustryBlocks.cables().toArray(Block[]::new);
         event.register(java.util.List.of(new CableTint()), cables);
-        event.register(java.util.List.of(BlockTintSources.foliage()), ModBlocks.RUBBER_LEAVES.get());
+        event.register(java.util.List.of(BlockTintSources.foliage()), OldustryBlocks.RUBBER_LEAVES.get());
     }
 
     static void clientTick(ClientTickEvent.Post event) {

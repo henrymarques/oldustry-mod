@@ -1,6 +1,6 @@
 package com.oldustry.furnace;
 
-import com.oldustry.registry.ModBlockEntities;
+import com.oldustry.registry.OldustryBlockEntities;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -16,7 +16,7 @@ public class ImprovedFurnaceBlockEntity extends AbstractFurnaceBlockEntity {
     public static final int COOK_TIME = 160;
 
     public ImprovedFurnaceBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.IMPROVED_FURNACE.get(), pos, state, RecipeType.SMELTING);
+        super(OldustryBlockEntities.IMPROVED_FURNACE.get(), pos, state, RecipeType.SMELTING);
     }
 
     public static void serverTick(ServerLevel level, BlockPos pos, BlockState state, ImprovedFurnaceBlockEntity furnace) {

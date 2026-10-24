@@ -191,12 +191,30 @@ tasks.register('energyCheck', JavaExec) {
     enableAssertions = true
 }
 
+tasks.register('oldustryEquipmentCheck', JavaExec) {
+    group = 'verification'
+    description = 'Runs OldustryEquipmentCheck with assertions'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.energy.OldustryEquipmentCheck'
+    enableAssertions = true
+}
+
 tasks.register('machineGuiCheck', JavaExec) {
     group = 'verification'
     description = 'Runs MachineGuiCheck with assertions'
     dependsOn tasks.named('compileTestJava')
     classpath = sourceSets.test.runtimeClasspath
     mainClass = 'com.oldustry.machine.MachineGuiCheck'
+    enableAssertions = true
+}
+
+tasks.register('oldustryMinerCheck', JavaExec) {
+    group = 'verification'
+    description = 'Runs OldustryMinerCheck with assertions'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.machine.OldustryMinerCheck'
     enableAssertions = true
 }
 
@@ -258,7 +276,9 @@ tasks.named('test', Test).configure {
     failOnNoDiscoveredTests = false
     dependsOn tasks.named('rubberTapCheck')
     dependsOn tasks.named('energyCheck')
+    dependsOn tasks.named('oldustryEquipmentCheck')
     dependsOn tasks.named('machineGuiCheck')
+    dependsOn tasks.named('oldustryMinerCheck')
     dependsOn tasks.named('pointExplosionCheck')
     dependsOn tasks.named('oldustryRayCheck')
     dependsOn tasks.named('cfChargeCheck')

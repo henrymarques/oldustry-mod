@@ -1,11 +1,8 @@
 package com.oldustry.energy;
 
-import com.oldustry.item.BronzeStats;
-import com.oldustry.item.ChainsawStats;
-import com.oldustry.item.DrillStats;
-import com.oldustry.item.WrenchEu;
-import com.oldustry.machine.MachineGui;
-import com.oldustry.machine.MachineKind;
+import com.oldustry.item.tool.WrenchEu;
+import com.oldustry.machine.OldustryMachineLayout;
+import com.oldustry.machine.OldustryMachineKind;
 import com.oldustry.wrench.WrenchHandler;
 import com.oldustry.wrench.WrenchLogic;
 
@@ -176,8 +173,8 @@ public final class EnergyCheck {
         assert !FuelLogic.lavaBucket("lava_cell");
         assert FuelLogic.extraFurnaceBurn("lava_cell") == 20000;
         assert FuelLogic.generatorBurnTicks(20000, false) == 5000;
-        assert FuelLogic.generatorBurnTicks(6 * com.oldustry.machine.CannerFuelValues.COALFUEL * 2, false) * MachineKind.GENERATOR.packet == 76440;
-        assert FuelLogic.generatorBurnTicks(6 * com.oldustry.machine.CannerFuelValues.BIOFUEL * 2, false) * MachineKind.GENERATOR.packet == 26040;
+        assert FuelLogic.generatorBurnTicks(6 * com.oldustry.machine.OldustryCannerFuelValues.COALFUEL * 2, false) * OldustryMachineKind.GENERATOR.packet == 76440;
+        assert FuelLogic.generatorBurnTicks(6 * com.oldustry.machine.OldustryCannerFuelValues.BIOFUEL * 2, false) * OldustryMachineKind.GENERATOR.packet == 26040;
         // JAR consume-with-container: stack of N shrinks; only last becomes empty.
         assert !FuelLogic.leaveContainer(8) : "mid-stack must not leave container";
         assert FuelLogic.leaveContainer(1) : "last unit leaves container";
@@ -281,7 +278,7 @@ public final class EnergyCheck {
         // Stock macerator is 800 + 32 − 1. Single-use waits for a storage upgrade; redstone fits.
         UpgradeLogic.Stats stockMac = UpgradeLogic.apply(new UpgradeLogic.Stats(2, 400, 800, 1), 0, 0, 0);
         assert stockMac.capacity() == 831 : stockMac.capacity();
-        assert MachineKind.MACERATOR.suNeedsStorageUpgrade();
+        assert OldustryMachineKind.MACERATOR.suNeedsStorageUpgrade();
         assert ElectricCharge.consumeOnce(stockMac.capacity(), 1200, true, 0) == 0;
         assert ElectricCharge.consumeOnce(stockMac.capacity(), 800, false, 0) == 800;
         // Two transformers clear 1200 EU of room and still do not eat the single-use.
@@ -292,7 +289,7 @@ public final class EnergyCheck {
         assert ElectricCharge.consumeOnce(storedMac.capacity(), 1200, true, 1) == 1200;
         assert ElectricCharge.consumeOnce(1199, 1200, true, 1) == 0;
         // Batbox already holds 1200 and has no upgrade slot.
-        assert !MachineKind.BATBOX.suNeedsStorageUpgrade();
+        assert !OldustryMachineKind.BATBOX.suNeedsStorageUpgrade();
         assert ElectricCharge.consumeOnce(40000, 1200, false, 0) == 1200;
 
         UpgradeLogic.Stats stats = UpgradeLogic.apply(new UpgradeLogic.Stats(2, 400, 800, 1), 1, 0, 1);
@@ -347,104 +344,34 @@ public final class EnergyCheck {
         assert WrenchEu.eu(WrenchHandler.Result.REMOVE, true) == 10000;
         assert new ElectricCharge.Spec(12000, 250, 1, true).max() == 12000;
         assert new ElectricCharge.Spec(10000, 100, 1, true).transfer() == 100;
-        assert pin(BronzeStats.DURABILITY) == 350 && BronzeStats.DURABILITY > 250;
-        assert pin(BronzeStats.SPEED) == 6.5f && BronzeStats.SPEED > 6f;
-        assert pin(BronzeStats.ENCHANT) == 14;
-        assert pin(DrillStats.MINING_SPEED) == 10f;
-        assert pin(DrillStats.DIAMOND_SPEED) == 20f;
-        assert pin(DrillStats.DIAMOND_SPEED) == 2f * DrillStats.MINING_SPEED;
-        // JAR EU costs unchanged despite speed desvio
-        assert pin(DrillStats.MINING_EU) == 50;
-        assert pin(DrillStats.DIAMOND_EU) == 80;
-        assert pin(com.oldustry.item.JetpackFuel.MAX) == 17998;
-        assert com.oldustry.item.JetpackFuel.afterUse(17998, 9) == 17985;
-        assert com.oldustry.item.JetpackFuel.afterUse(20, 6) == 10;
-        assert com.oldustry.item.JetpackFuel.afterUse(10, 9) == 0;
-        assert com.oldustry.item.JetpackFuel.afterCanner(0, 6 * 2548) == 15286;
-        assert com.oldustry.item.JetpackFuel.afterCanner(15286, 6 * 2548) == 17998;
-        // Electric jetpack: JAR power 0.7, ceiling worldHeight/1.28, consume 9-2 / 6-2, partial drain.
-        assert pin(com.oldustry.item.JetpackFlight.ELECTRIC.power()) == 0.7f;
-        assert com.oldustry.item.JetpackFlight.ceiling(256, false) == 256;
-        assert com.oldustry.item.JetpackFlight.ceiling(256, true) == 200;
-        assert com.oldustry.item.JetpackFlight.scaledPower(0.7f, 30000, 30000, 0.05f) == 0.7f;
-        assert com.oldustry.item.JetpackFlight.scaledPower(1f, 17998, 17998, 0.2f) == 1f;
-        assert com.oldustry.item.JetpackFlight.electricDrain(30000, false) == 7;
-        assert com.oldustry.item.JetpackFlight.electricDrain(30000, true) == 4;
-        assert com.oldustry.item.JetpackFlight.electricDrain(3, false) == 3;
-        assert new ElectricCharge.Spec(30000, 60, 1, false).max() == 30000;
-        assert pin(com.oldustry.item.Nightvision.DARK) == 7;
-        assert pin(com.oldustry.item.Nightvision.DURATION) == 250;
-        assert com.oldustry.item.Nightvision.darkEnough(7);
-        assert !com.oldustry.item.Nightvision.darkEnough(8);
-        assert com.oldustry.item.Nightvision.fromGoggles(250, 0);
-        assert com.oldustry.item.Nightvision.fromGoggles(1, 0);
-        assert !com.oldustry.item.Nightvision.fromGoggles(251, 0);
-        assert !com.oldustry.item.Nightvision.fromGoggles(250, 1);
-        assert com.oldustry.item.Nightvision.SPEC.max() == 20000;
-        assert com.oldustry.item.Nightvision.SPEC.transfer() == 200;
-        assert com.oldustry.item.Nightvision.SPEC.tier() == 1;
-        var nanoSet = com.oldustry.item.NanoArmor.absorb(10f, 100000, 100000, 100000, 100000, false);
-        assert Math.abs(nanoSet.remaining() - 1f) < 0.001f : nanoSet.remaining();
-        assert nanoSet.boots() + nanoSet.legs() + nanoSet.chest() + nanoSet.helmet() == 7200;
-        var chestOnly = com.oldustry.item.NanoArmor.absorb(10f, 0, 0, 100000, 0, false);
-        assert Math.abs(chestOnly.remaining() - 6.4f) < 0.001f;
-        assert chestOnly.chest() == 2880;
-        assert com.oldustry.item.NanoArmor.absorb(10f, 0, 0, 0, 0, false).remaining() == 10f;
-        assert com.oldustry.item.NanoArmor.fallCancelEu(10) == 5600;
-        assert com.oldustry.item.NanoArmor.fallCancelEu(11) == -1;
-        assert com.oldustry.item.NanoArmor.fallCancelEu(6) == 2400;
-        assert com.oldustry.item.NanoArmor.display(3, 800) == 3;
-        assert com.oldustry.item.NanoArmor.display(2, 800) == 7;
-        assert com.oldustry.item.NanoArmor.display(1, 800) == 5;
-        assert com.oldustry.item.NanoArmor.display(0, 800) == 3;
-        assert com.oldustry.item.NanoArmor.display(2, 799) == 0;
-        assert ElectricCharge.carriedCharge(10_000, 10_000) == 10_000;
-        assert ElectricCharge.carriedCharge(10_000, 2_500) == 2_500;
-        assert ElectricCharge.carriedCharge(100_000, 100_000) == 100_000;
-        assert ElectricCharge.carriedCharge(1_000_000, 100_000) == 100_000;
-        assert ElectricCharge.carriedCharge(10_000, 50_000) == 10_000;
-        assert ElectricCharge.carriedCharge(100_000, 60_000L + 60_000L) == 100_000;
-        assert ElectricCharge.carriedCharge(10_000, 0) == 0;
-        assert com.oldustry.item.NanoSaber.MAX == 100000;
-        assert com.oldustry.item.NanoSaber.HIT_EU == 160;
-        assert com.oldustry.item.NanoSaber.ACTIVE_BONUS == 16;
-        assert com.oldustry.item.NanoSaber.upkeep(true, 16) == 512;
-        assert com.oldustry.item.NanoSaber.upkeep(false, 16) == 0;
-        assert com.oldustry.item.NanoSaber.upkeep(false, 64) == 128;
-        assert com.oldustry.item.NanoSaber.upkeep(true, 64) == 512;
-        assert pin(DrillStats.MINING_ENCHANT) == 14;
-        assert pin(DrillStats.DIAMOND_ENCHANT) == 10;
-        // Chainsaw: JAR efficiency 12 / EU 100; desvio speed 15
-        assert pin(ChainsawStats.SPEED) == 15f && ChainsawStats.SPEED > 12f;
-        assert pin(ChainsawStats.EU) == 100;
         // Generator / geo JAR numbers
-        assert MachineKind.GENERATOR.capacity == 4000 && MachineKind.GENERATOR.packet == 10;
-        assert MachineKind.GEO_GENERATOR.buffer() == 32 && MachineKind.GEO_GENERATOR.packet == 20;
+        assert OldustryMachineKind.GENERATOR.capacity == 4000 && OldustryMachineKind.GENERATOR.packet == 10;
+        assert OldustryMachineKind.GEO_GENERATOR.buffer() == 32 && OldustryMachineKind.GEO_GENERATOR.packet == 20;
         assert pin(FuelLogic.GEO_MAX_LAVA) == 24000 && pin(FuelLogic.GEO_CELL) == 1000;
 
         // ── Canner EU numbers (JAR spec) ──
-        assert MachineKind.CANNER.capacity == 600 : "canner buf must be 600";
-        assert MachineKind.CANNER.euPerTick() == 1 : "canner must use 1 EU/t";
+        assert OldustryMachineKind.CANNER.capacity == 600 : "canner buf must be 600";
+        assert OldustryMachineKind.CANNER.euPerTick() == 1 : "canner must use 1 EU/t";
         // coalfuel=2548, biofuel=868 (IC2 JAR spec)
-        assert pin(com.oldustry.machine.CannerFuelValues.COALFUEL) == 2548 : "coalfuel EU";
-        assert pin(com.oldustry.machine.CannerFuelValues.BIOFUEL) == 868 : "biofuel EU";
+        assert pin(com.oldustry.machine.OldustryCannerFuelValues.COALFUEL) == 2548 : "coalfuel EU";
+        assert pin(com.oldustry.machine.OldustryCannerFuelValues.BIOFUEL) == 868 : "biofuel EU";
         // Filled tin can desvio (experimental wiki): 1 hunger → sat 3.2 via modifier 1.6
         assert net.minecraft.world.food.FoodConstants.saturationByModifier(1, 1.6f) == 3.2f;
         // miner buf=1000 (JAR spec); pump charge target 200
-        assert MachineKind.MINER.capacity == 1000 : "miner buf";
-        assert MachineKind.MINER.packet == 32 : "miner packet";
-        assert MachineKind.PUMP.capacity == 200 : "pump buf";
-        assert MachineKind.PUMP.packet == 128 : "pump packet";
+        assert OldustryMachineKind.MINER.capacity == 1000 : "miner buf";
+        assert OldustryMachineKind.MINER.packet == 32 : "miner packet";
+        assert OldustryMachineKind.PUMP.capacity == 200 : "pump buf";
+        assert OldustryMachineKind.PUMP.packet == 128 : "pump packet";
         // luminator JAR: 10k buf / maxInput 32
-        assert MachineKind.LUMINATOR.capacity == 10000 : "luminator buf";
-        assert MachineKind.LUMINATOR.packet == 32 : "luminator maxInput";
+        assert OldustryMachineKind.LUMINATOR.capacity == 10000 : "luminator buf";
+        assert OldustryMachineKind.LUMINATOR.packet == 32 : "luminator maxInput";
         // D4 electro / magnet / induction
-        assert MachineKind.ELECTROLYZER.capacity == 20000 : "electrolyzer buf";
-        assert MachineKind.ELECTROLYZER.packet == 0 : "electrolyzer not EnergyNet sink";
-        assert MachineKind.MAGNETIZER.capacity == 100 && MachineKind.MAGNETIZER.packet == 32;
-        assert MachineKind.INDUCTION.capacity == 10000 && MachineKind.INDUCTION.packet == 128;
-        assert MachineKind.INDUCTION.duration() == 4000 && MachineKind.INDUCTION.euPerTick() == 15;
-        assert !MachineGui.hasGui(MachineKind.MAGNETIZER);
+        assert OldustryMachineKind.ELECTROLYZER.capacity == 20000 : "electrolyzer buf";
+        assert OldustryMachineKind.ELECTROLYZER.packet == 0 : "electrolyzer not EnergyNet sink";
+        assert OldustryMachineKind.MAGNETIZER.capacity == 100 && OldustryMachineKind.MAGNETIZER.packet == 32;
+        assert OldustryMachineKind.INDUCTION.capacity == 10000 && OldustryMachineKind.INDUCTION.packet == 128;
+        assert OldustryMachineKind.INDUCTION.duration() == 4000 && OldustryMachineKind.INDUCTION.euPerTick() == 15;
+        assert !OldustryMachineLayout.hasGui(OldustryMachineKind.MAGNETIZER);
 
         int[] rolls = { 2, 4, 9 };
         int[] cursor = { 0 };

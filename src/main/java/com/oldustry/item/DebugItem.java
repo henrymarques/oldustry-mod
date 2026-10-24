@@ -1,7 +1,7 @@
 package com.oldustry.item;
 
 import com.oldustry.energy.EnergyTile;
-import com.oldustry.machine.MachineBlockEntity;
+import com.oldustry.machine.OldustryMachineBlockEntity;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
@@ -37,7 +37,7 @@ public class DebugItem extends Item {
                 + " maxIn=" + tile.maxSafeInput()
                 + " emitted=" + tile.totalEmitted() + " sunken=" + tile.totalSunken();
         }
-        if (be instanceof MachineBlockEntity machine) {
+        if (be instanceof OldustryMachineBlockEntity machine) {
             msg += " energy=" + machine.energy() + "/" + machine.energyCapacity();
         }
         player.sendSystemMessage(Component.literal(msg));

@@ -16,10 +16,14 @@ public class OldustryRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes() {
-        new MaterialRecipes(registries, output).buildRecipes();
-        new EquipmentRecipes(registries, output).buildRecipes();
-        new MiscRecipes(registries, output).buildRecipes();
-        new EnergyRecipes(registries, output).buildRecipes();
+        new OldustryMaterialRecipes(registries, output).buildRecipes();
+        new OldustryEquipmentRecipes(registries, output).buildRecipes();
+        new OldustryMiscRecipes(registries, output).buildRecipes();
+        new OldustryConstructionRecipes(registries, output).buildRecipes();
+        new OldustryMachineRecipes(registries, output).buildRecipes();
+        new OldustryCableRecipes(registries, output).buildRecipes();
+        new OldustryElectricEquipmentRecipes(registries, output).buildRecipes();
+        new OldustryEnergyRecipes(registries, output).buildRecipes();
     }
 
     static String id(String path) {

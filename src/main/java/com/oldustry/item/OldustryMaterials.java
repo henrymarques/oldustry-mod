@@ -1,5 +1,9 @@
 package com.oldustry.item;
 
+import com.oldustry.item.tool.ChainsawStats;
+import com.oldustry.item.tool.DrillStats;
+import com.oldustry.item.tool.NanoSaber;
+
 import java.util.EnumMap;
 
 import com.oldustry.Oldustry;

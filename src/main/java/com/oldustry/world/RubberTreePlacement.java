@@ -2,7 +2,7 @@ package com.oldustry.world;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import com.oldustry.registry.ModFeatures;
+import com.oldustry.registry.OldustryFeatures;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -40,6 +40,6 @@ public class RubberTreePlacement extends RepeatingPlacement {
 
     @Override
     public PlacementModifierType<?> type() {
-        return ModFeatures.RUBBER_COUNT.get();
+        return OldustryFeatures.RUBBER_COUNT.get();
     }
 }
