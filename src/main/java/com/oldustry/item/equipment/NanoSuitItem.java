@@ -67,6 +67,10 @@ public class NanoSuitItem extends ElectricItem {
         if (!(event.getEntity() instanceof LivingEntity entity) || entity.level().isClientSide()) {
             return;
         }
+        // Hazmat owns the shared ISpecialArmor pass so a mixed set is not charged twice.
+        if (OldustryHazmatItem.wearing(entity)) {
+            return;
+        }
         var container = event.getContainer();
         // 26.2 tags minecraft:fall as bypassing armor. The JAR still absorbs that hit on the boots.
         boolean fall = container.getSource().is(DamageTypes.FALL);

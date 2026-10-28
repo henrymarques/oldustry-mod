@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "R": "#c:rubber",
+    "W": "#minecraft:wool"
+  },
+  "pattern": [
+    "R R",
+    "R R",
+    "RWR"
+  ],
+  "result": {
+    "id": "oldustry:hazmat_boots"
+  }
+}

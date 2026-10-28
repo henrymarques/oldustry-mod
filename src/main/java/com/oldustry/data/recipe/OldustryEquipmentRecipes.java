@@ -8,6 +8,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.ColorCollection;
@@ -140,6 +141,43 @@ final class OldustryEquipmentRecipes extends RecipeProvider {
             .pattern("GA ")
             .pattern("CcC")
             .unlockedBy("has_carbon_plate", has(OldustryItems.CARBON_PLATE.get()))
+            .save(output);
+
+        // Recipies 310–313. O = orange dye (meta 14). G and # are blocks.
+        // AdvRecipe turns a Block into meta 32767, so W is any wool, not only white.
+        shaped(RecipeCategory.COMBAT, OldustryItems.HAZMAT_HELMET.get())
+            .define('R', OldustryTags.Items.RUBBER)
+            .define('O', Items.DYE.pick(DyeColor.ORANGE))
+            .define('G', Items.GLASS)
+            .define('#', Items.IRON_BARS)
+            .pattern(" O ")
+            .pattern("RGR")
+            .pattern("R#R")
+            .unlockedBy("has_rubber", has(OldustryTags.Items.RUBBER))
+            .save(output);
+        shaped(RecipeCategory.COMBAT, OldustryItems.HAZMAT_CHESTPLATE.get())
+            .define('R', OldustryTags.Items.RUBBER)
+            .define('O', Items.DYE.pick(DyeColor.ORANGE))
+            .pattern("R R")
+            .pattern("ROR")
+            .pattern("ROR")
+            .unlockedBy("has_rubber", has(OldustryTags.Items.RUBBER))
+            .save(output);
+        shaped(RecipeCategory.COMBAT, OldustryItems.HAZMAT_LEGGINGS.get())
+            .define('R', OldustryTags.Items.RUBBER)
+            .define('O', Items.DYE.pick(DyeColor.ORANGE))
+            .pattern("ROR")
+            .pattern("R R")
+            .pattern("R R")
+            .unlockedBy("has_rubber", has(OldustryTags.Items.RUBBER))
+            .save(output);
+        shaped(RecipeCategory.COMBAT, OldustryItems.HAZMAT_BOOTS.get())
+            .define('R', OldustryTags.Items.RUBBER)
+            .define('W', ItemTags.WOOL)
+            .pattern("R R")
+            .pattern("R R")
+            .pattern("RWR")
+            .unlockedBy("has_wool", has(ItemTags.WOOL))
             .save(output);
 
         shaped(RecipeCategory.TOOLS, OldustryItems.TOOLBOX.get())

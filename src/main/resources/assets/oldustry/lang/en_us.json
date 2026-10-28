@@ -209,6 +209,10 @@
   "item.oldustry.nano_boots": "NanoSuit Boots",
   "item.oldustry.nano_saber": "Nano Saber",
   "item.oldustry.static_boots": "Static Boots",
+  "item.oldustry.hazmat_helmet": "Scuba Helmet",
+  "item.oldustry.hazmat_chestplate": "Hazmat Suit",
+  "item.oldustry.hazmat_leggings": "Hazmat Suit Leggings",
+  "item.oldustry.hazmat_boots": "Rubber Boots",
   "item.oldustry.fuel_jetpack": "Jetpack",
   "item.oldustry.electric_jetpack": "Electric Jetpack",
 

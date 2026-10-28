@@ -52,6 +52,11 @@ public final class OldustryEquipmentCheck {
         assert com.oldustry.item.equipment.NanoArmor.fallCancelEu(10) == 5600;
         assert com.oldustry.item.equipment.NanoArmor.fallCancelEu(11) == -1;
         assert com.oldustry.item.equipment.NanoArmor.fallCancelEu(6) == 2400;
+        var fallHit = com.oldustry.item.equipment.NanoArmor.absorb(10f, 100000, 100000, 100000, 100000, true);
+        assert fallHit.boots() == 7000 && fallHit.legs() == 0 && fallHit.chest() == 0 && fallHit.helmet() == 0;
+        assert Math.abs(fallHit.remaining() - 1.25f) < 0.001f;
+        var shortFall = com.oldustry.item.equipment.NanoArmor.absorb(7f, 100000, 100000, 100000, 100000, true);
+        assert shortFall.boots() == 5600 && shortFall.legs() == 0 && shortFall.chest() == 0 && shortFall.helmet() == 0;
         assert com.oldustry.item.equipment.NanoArmor.display(3, 800) == 3;
         assert com.oldustry.item.equipment.NanoArmor.display(2, 800) == 7;
         assert com.oldustry.item.equipment.NanoArmor.display(1, 800) == 5;

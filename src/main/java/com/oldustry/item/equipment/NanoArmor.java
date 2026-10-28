@@ -37,21 +37,24 @@ public final class NanoArmor {
     private NanoArmor() {}
 
     /**
-     * @param fall boots go first at 100% (damage &lt; 8) or 87.5%, then the other pieces
-     *             take their normal share of what is left
+     * @param fall only the boots. Fall is unblockable, so helmet, chest and legs
+     *             come back from {@code ItemArmorElectric.getProperties} at ratio 0.
+     *             Boots take 100% below 8 and 87.5% from 8 up.
      */
     public static Hit absorb(float damage, int boots, int legs, int chest, int helmet, boolean fall) {
         int[] charge = { boots, legs, chest, helmet };
         double[] ratio = { BOOTS, LEGS, CHEST, HELMET };
         if (fall) {
             ratio[0] = damage < FALL_CANCEL_BELOW ? 1.0 : BOOTS_FALL;
+            ratio[1] = 0;
+            ratio[2] = 0;
+            ratio[3] = 0;
         }
         int[] eu = new int[4];
         double left = damage;
         for (int i = 0; i < 4; i++) {
-            double basis = fall && i != 0 ? left : damage;
             double cap = charge[i] / (double) EU_PER_DAMAGE;
-            double take = Math.min(basis * ratio[i], cap);
+            double take = Math.min(damage * ratio[i], cap);
             take = Math.min(take, left);
             if (take <= 0) {
                 continue;
@@ -78,6 +81,22 @@ public final class NanoArmor {
             default -> 0;
         };
         return (int) Math.round(20.0 * ratio);
+    }
+
+    /** 1.5.2 {@code armorType}: 0 helmet, 1 chest, 2 legs, 3 boots. Already includes the 0.9 factor. */
+    static double typedRatio(int armorType) {
+        return switch (armorType) {
+            case 0 -> HELMET;
+            case 1 -> CHEST;
+            case 2 -> LEGS;
+            case 3 -> BOOTS;
+            default -> 0;
+        };
+    }
+
+    /** Boots on a fall. 100% below {@link #FALL_CANCEL_BELOW}, otherwise 87.5%. */
+    static double bootsFallRatio(double damage) {
+        return damage < FALL_CANCEL_BELOW ? 1.0 : BOOTS_FALL;
     }
 
     /** EU the boots must hold to cancel this many points of fall damage. {@code -1} means the fall lands. */

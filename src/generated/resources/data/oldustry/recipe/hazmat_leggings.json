@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "O": "minecraft:orange_dye",
+    "R": "#c:rubber"
+  },
+  "pattern": [
+    "ROR",
+    "R R",
+    "R R"
+  ],
+  "result": {
+    "id": "oldustry:hazmat_leggings"
+  }
+}

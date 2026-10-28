@@ -9,6 +9,7 @@ import java.util.Random;
 
 import com.oldustry.Oldustry;
 import com.oldustry.energy.OldustryDamage;
+import com.oldustry.item.equipment.OldustryHazmatItem;
 import com.oldustry.registry.OldustryEffects;
 
 import net.minecraft.core.BlockPos;
@@ -221,10 +222,13 @@ public final class OldustryExplosion extends ServerExplosion {
         return source instanceof PrimedTnt primed ? primed.getOwner() : null;
     }
 
-    /** Hunger out to 100 blocks, radiation out to 30. ponytail: a full hazmat suit would skip both; nobody is immune until that armor exists. */
+    /** Hunger out to 100 blocks, radiation out to 30. A full hazmat suit skips both; the blast itself still lands. */
     private void irradiate() {
         AABB box = new AABB(center.x - 100, center.y - 100, center.z - 100, center.x + 100, center.y + 100, center.z + 100);
         for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, box)) {
+            if (OldustryHazmatItem.blocksFallout(entity)) {
+                continue;
+            }
             double distance = Math.sqrt(entity.distanceToSqr(center.x, center.y, center.z));
             int hunger = NukeFallout.hungerTicks(distance);
             if (hunger >= 0) {

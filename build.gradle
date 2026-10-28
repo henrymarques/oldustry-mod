@@ -272,6 +272,15 @@ tasks.register('remoteLinksCheck', JavaExec) {
     enableAssertions = true
 }
 
+tasks.register('oldustryHazmatCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks hazmat absorption, air and fall rules'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.item.equipment.OldustryHazmatCheck'
+    enableAssertions = true
+}
+
 tasks.named('test', Test).configure {
     failOnNoDiscoveredTests = false
     dependsOn tasks.named('rubberTapCheck')
@@ -285,6 +294,7 @@ tasks.named('test', Test).configure {
     dependsOn tasks.named('dynamiteAnchorCheck')
     dependsOn tasks.named('remoteLinksCheck')
     dependsOn tasks.named('personalSafeCheck')
+    dependsOn tasks.named('oldustryHazmatCheck')
 }
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.

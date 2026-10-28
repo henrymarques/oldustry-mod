@@ -25,6 +25,8 @@ import com.oldustry.item.utility.FilledTinCanItem;
 import com.oldustry.item.equipment.FuelJetpackItem;
 import com.oldustry.item.tool.NanoSaberItem;
 import com.oldustry.item.equipment.NanoSuitItem;
+import com.oldustry.item.equipment.OldustryHazmatArmor;
+import com.oldustry.item.equipment.OldustryHazmatItem;
 import com.oldustry.item.equipment.NightvisionGogglesItem;
 import com.oldustry.item.OldustryMaterials;
 import com.oldustry.item.construction.PainterItem;
@@ -276,6 +278,11 @@ public final class OldustryItems {
     public static final DeferredItem<Item> NANO_SABER = ITEMS.registerItem("nano_saber", props -> new NanoSaberItem(
         props.sword(OldustryMaterials.NANO_SABER, 3, -2.4f).rarity(Rarity.UNCOMMON)));
     public static final DeferredItem<Item> STATIC_BOOTS = ITEMS.registerItem("static_boots", props -> new StaticBootsItem(props.humanoidArmor(OldustryMaterials.pack(OldustryMaterials.RUBBER_EQUIPMENT), ArmorType.BOOTS)));
+    // JAR ItemArmorHazmat: durability 64 on every piece, including rubber boots. No iron repair.
+    public static final DeferredItem<Item> HAZMAT_HELMET = ITEMS.registerItem("hazmat_helmet", props -> new OldustryHazmatItem(hazmat(props, ArmorType.HELMET), OldustryHazmatItem.HELMET));
+    public static final DeferredItem<Item> HAZMAT_CHESTPLATE = ITEMS.registerItem("hazmat_chestplate", props -> new OldustryHazmatItem(hazmat(props, ArmorType.CHESTPLATE), OldustryHazmatItem.CHEST));
+    public static final DeferredItem<Item> HAZMAT_LEGGINGS = ITEMS.registerItem("hazmat_leggings", props -> new OldustryHazmatItem(hazmat(props, ArmorType.LEGGINGS), OldustryHazmatItem.LEGS));
+    public static final DeferredItem<Item> HAZMAT_BOOTS = ITEMS.registerItem("hazmat_boots", props -> new OldustryHazmatItem(hazmat(props, ArmorType.BOOTS), OldustryHazmatItem.BOOTS));
     // Tank = FUEL component (desvio). No armor durability: JAR damageArmor is empty.
     public static final DeferredItem<Item> FUEL_JETPACK = ITEMS.registerItem("fuel_jetpack", props -> new FuelJetpackItem(OldustryMaterials.utilityEquip(
         props.stacksTo(1).component(OldustryDataComponents.FUEL.get(), 0),
@@ -286,6 +293,14 @@ public final class OldustryItems {
         props,
         OldustryMaterials.JETPACK_EQUIPMENT,
         ArmorType.CHESTPLATE)));
+
+    private static Item.Properties hazmat(Item.Properties props, ArmorType type) {
+        return OldustryMaterials.utilityEquip(
+            props.stacksTo(1).durability(OldustryHazmatArmor.MAX_DAMAGE),
+            OldustryMaterials.HAZMAT_EQUIPMENT,
+            type
+        );
+    }
 
     private static DeferredItem<Item> item(String name) {
         return ITEMS.registerSimpleItem(name);
