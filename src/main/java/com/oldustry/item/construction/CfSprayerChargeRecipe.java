@@ -29,6 +29,7 @@ public class CfSprayerChargeRecipe extends CustomRecipe {
 
     public static void register(IEventBus bus) {
         ObsidianCellsRecipe.bootstrap();
+        com.oldustry.reactor.OldustryCondensatorChargeRecipe.bootstrap();
         SERIALIZERS.register(bus);
     }
 

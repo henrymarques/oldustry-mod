@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:insulated_copper_cable",
+    "F": "oldustry:frequency_transmitter",
+    "L": "minecraft:lapis_lazuli",
+    "T": "#c:ingots/tin"
+  },
+  "pattern": [
+    " C ",
+    "TLT",
+    " F "
+  ],
+  "result": {
+    "id": "oldustry:remote"
+  }
+}

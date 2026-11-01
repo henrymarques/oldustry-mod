@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "oldustry:reactor_plating",
+    "oldustry:dense_copper_plate",
+    "oldustry:dense_copper_plate"
+  ],
+  "result": {
+    "id": "oldustry:heat_reactor_plating"
+  }
+}

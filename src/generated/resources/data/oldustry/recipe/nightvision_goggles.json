@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "@": "oldustry:nano_helmet",
+    "C": "oldustry:advanced_circuit",
+    "G": "oldustry:reinforced_glass",
+    "L": "oldustry:luminator",
+    "R": "oldustry:rubber",
+    "X": "oldustry:advanced_heat_exchanger"
+  },
+  "pattern": [
+    "X@X",
+    "LGL",
+    "RCR"
+  ],
+  "result": {
+    "id": "oldustry:nightvision_goggles"
+  }
+}

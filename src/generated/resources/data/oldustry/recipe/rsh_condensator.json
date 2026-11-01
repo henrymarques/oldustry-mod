@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "R": "minecraft:redstone",
+    "S": "oldustry:heat_exchanger",
+    "V": "oldustry:heat_vent"
+  },
+  "pattern": [
+    "RRR",
+    "RVR",
+    "RSR"
+  ],
+  "result": {
+    "id": "oldustry:rsh_condensator"
+  }
+}

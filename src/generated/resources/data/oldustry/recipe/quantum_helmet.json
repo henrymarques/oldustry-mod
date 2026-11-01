@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "oldustry:advanced_circuit",
+    "G": "oldustry:reinforced_glass",
+    "I": "oldustry:iridium_plate",
+    "L": "oldustry:lapotron_crystal",
+    "n": "oldustry:nano_helmet"
+  },
+  "pattern": [
+    " n ",
+    "ILI",
+    "CGC"
+  ],
+  "result": {
+    "id": "oldustry:quantum_helmet"
+  }
+}

@@ -272,12 +272,102 @@ tasks.register('remoteLinksCheck', JavaExec) {
     enableAssertions = true
 }
 
+tasks.register('oldustryBoatCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks boat crash, rubber split and electric EU gate'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.entity.OldustryBoatCheck'
+    enableAssertions = true
+}
+
+tasks.register('chainsawKillCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks the chainsaw creeper-kill advancement gate'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.item.tool.ChainsawKillCheck'
+    enableAssertions = true
+}
+
 tasks.register('oldustryHazmatCheck', JavaExec) {
     group = 'verification'
     description = 'Checks hazmat absorption, air and fall rules'
     dependsOn tasks.named('compileTestJava')
     classpath = sourceSets.test.runtimeClasspath
     mainClass = 'com.oldustry.item.equipment.OldustryHazmatCheck'
+    enableAssertions = true
+}
+
+tasks.register('teslaCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks Tesla shock cost, period and range'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.machine.TeslaCheck'
+    enableAssertions = true
+}
+
+tasks.register('teleporterCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks teleporter cost, drain and frequency link'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.machine.TeleporterCheck'
+    enableAssertions = true
+}
+
+tasks.register('quantumCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks quantum absorb, fall cancel, cleanse and leg ticks'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.item.equipment.QuantumCheck'
+    enableAssertions = true
+}
+
+tasks.register('laserCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks mining laser costs, aim and beam drain'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.item.tool.LaserCheck'
+    enableAssertions = true
+}
+
+tasks.register('reactorCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks reactor fuel, heat, blast and Geiger numbers'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.reactor.ReactorCheck'
+    enableAssertions = true
+}
+
+tasks.register('matterCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks mass fabricator inject, progress and UU threshold'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.machine.MatterCheck'
+    enableAssertions = true
+}
+
+tasks.register('terraformerCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks terraformer scan range, EU spend and ground walk'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.machine.TerraformerCheck'
+    enableAssertions = true
+}
+
+tasks.register('obscuratorCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks obscurator scan, print and EU numbers'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.item.tool.ObscuratorCheck'
     enableAssertions = true
 }
 
@@ -295,6 +385,16 @@ tasks.named('test', Test).configure {
     dependsOn tasks.named('remoteLinksCheck')
     dependsOn tasks.named('personalSafeCheck')
     dependsOn tasks.named('oldustryHazmatCheck')
+    dependsOn tasks.named('chainsawKillCheck')
+    dependsOn tasks.named('oldustryBoatCheck')
+    dependsOn tasks.named('obscuratorCheck')
+    dependsOn tasks.named('teslaCheck')
+    dependsOn tasks.named('teleporterCheck')
+    dependsOn tasks.named('terraformerCheck')
+    dependsOn tasks.named('matterCheck')
+    dependsOn tasks.named('reactorCheck')
+    dependsOn tasks.named('laserCheck')
+    dependsOn tasks.named('quantumCheck')
 }
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.

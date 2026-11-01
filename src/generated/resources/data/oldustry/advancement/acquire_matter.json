@@ -1,0 +1,32 @@
+{
+  "parent": "oldustry:build_mass_fab",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:uu_matter"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.acquire_matter.description"
+    },
+    "icon": {
+      "id": "oldustry:uu_matter"
+    },
+    "title": {
+      "translate": "advancements.oldustry.acquire_matter.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

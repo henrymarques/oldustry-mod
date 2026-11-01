@@ -389,6 +389,22 @@ public final class EnergyCheck {
         assert com.oldustry.world.RubberTreeSpawn.tries(false, false, true, bound -> bound == 10 ? 0 : 10) == 0;
         assert com.oldustry.world.RubberTreeSpawn.tries(true, false, false, bound -> 0) == 0;
 
+        // JAR ItemBattery icons: damage from charge, maxDamage 27. RE 10k bands.
+        assert com.oldustry.item.OldustryBatteryIcon.frame(0, 10000) == 0;
+        assert com.oldustry.item.OldustryBatteryIcon.frame(1, 10000) == 1;
+        assert com.oldustry.item.OldustryBatteryIcon.frame(3200, 10000) == 1;
+        assert com.oldustry.item.OldustryBatteryIcon.frame(3201, 10000) == 2;
+        assert com.oldustry.item.OldustryBatteryIcon.frame(6400, 10000) == 2;
+        assert com.oldustry.item.OldustryBatteryIcon.frame(6401, 10000) == 3;
+        assert com.oldustry.item.OldustryBatteryIcon.frame(9600, 10000) == 3;
+        assert com.oldustry.item.OldustryBatteryIcon.frame(9601, 10000) == 4;
+        assert com.oldustry.item.OldustryBatteryIcon.frame(10000, 10000) == 4;
+        assert com.oldustry.item.OldustryBatteryIcon.frame(32000, 100000) == 1;
+        assert com.oldustry.item.OldustryBatteryIcon.frame(32001, 100000) == 2;
+        assert com.oldustry.item.OldustryBatteryIcon.frame(0, 1000000) == 0;
+        assert com.oldustry.item.OldustryBatteryIcon.frame(1, 1000000) == 1;
+        assert com.oldustry.item.OldustryBatteryIcon.frame(960001, 1000000) == 4;
+
         System.out.println("EnergyCheck ok");
     }
 

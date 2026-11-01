@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_programmed_tfbp": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:tfbp_desertification"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:tfbp_from_desertification"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_programmed_tfbp"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:tfbp_from_desertification"
+    ]
+  }
+}

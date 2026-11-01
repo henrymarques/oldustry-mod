@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": "oldustry:tfbp",
+    "S": "minecraft:wheat_seeds"
+  },
+  "pattern": [
+    " S ",
+    "S#S",
+    " S "
+  ],
+  "result": {
+    "id": "oldustry:tfbp_cultivation"
+  }
+}

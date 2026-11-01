@@ -1,0 +1,32 @@
+{
+  "parent": "oldustry:build_mfe",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:mfsu"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_mfsu.description"
+    },
+    "icon": {
+      "id": "oldustry:mfsu"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_mfsu.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

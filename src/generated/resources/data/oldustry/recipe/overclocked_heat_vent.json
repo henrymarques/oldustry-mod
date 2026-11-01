@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "V": "oldustry:reactor_heat_vent"
+  },
+  "pattern": [
+    "G",
+    "V",
+    "G"
+  ],
+  "result": {
+    "id": "oldustry:overclocked_heat_vent"
+  }
+}

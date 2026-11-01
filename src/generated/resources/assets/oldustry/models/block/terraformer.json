@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/terraformer_down",
+    "east": "oldustry:block/terraformer_west",
+    "north": "oldustry:block/terraformer_south",
+    "particle": "oldustry:block/terraformer_south",
+    "south": "oldustry:block/terraformer_north",
+    "up": "oldustry:block/terraformer_up",
+    "west": "oldustry:block/terraformer_east"
+  }
+}

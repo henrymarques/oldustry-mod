@@ -41,21 +41,59 @@ public final class OldustryAdvancements implements AdvancementSubProvider {
         item(output, "build_drill", OldustryItems.MINING_DRILL.get(), "oldustry:build_generator", false);
         item(output, "build_ddrill", OldustryItems.DIAMOND_DRILL.get(), "oldustry:build_drill", false);
         item(output, "build_chainsaw", OldustryItems.CHAINSAW.get(), "oldustry:build_generator", false);
+        challenge(output, "kill_creeper_chainsaw", OldustryItems.CHAINSAW.get(), "oldustry:build_chainsaw", "killed");
         item(output, "build_mfe", OldustryItems.MFE.get(), "oldustry:build_batbox", false);
+        item(output, "build_mining_laser", OldustryItems.MINING_LASER.get(), "oldustry:build_mfe", false);
+        challenge(output, "kill_dragon_mining_laser", OldustryItems.MINING_LASER.get(), "oldustry:build_mining_laser", "killed");
+        item(output, "build_mfsu", OldustryItems.MFSU.get(), "oldustry:build_mfe", false);
+        item(output, "build_teleporter", OldustryItems.TELEPORTER.get(), "oldustry:build_mfsu", false);
+        challenge(output, "teleport_far_away", OldustryItems.TELEPORTER.get(), "oldustry:build_teleporter", "far");
+        item(output, "build_terraformer", OldustryItems.TERRAFORMER.get(), "oldustry:build_mfsu", false);
+        challenge(output, "terraform_end_cultivation", OldustryItems.TFBP_CULTIVATION.get(), "oldustry:build_terraformer", "end");
+        item(output, "build_mass_fab", OldustryItems.MASS_FABRICATOR.get(), "oldustry:build_batbox", false);
+        item(output, "acquire_matter", OldustryItems.UU_MATTER.get(), "oldustry:build_mass_fab", false);
+        quantum(output);
+        challenge(output, "starve_with_q_helmet", OldustryItems.FILLED_TIN_CAN.get(), "oldustry:build_q_armor", "starved");
+        challenge(output, "die_from_own_nuke", OldustryItems.NUKE.get(), "oldustry:compress_uranium", "nuked");
+    }
+
+    /** Any quantum piece. JAR {@code buildQArmor} checks the four ids. */
+    private static void quantum(Consumer<AdvancementHolder> output) {
         Advancement.Builder.advancement()
-            .parent(AdvancementSubProvider.createPlaceholder("oldustry:compress_uranium"))
+            .parent(AdvancementSubProvider.createPlaceholder("oldustry:acquire_matter"))
             .display(
-                OldustryItems.NUKE.get(),
-                Component.translatable("advancements.oldustry.die_from_own_nuke.title"),
-                Component.translatable("advancements.oldustry.die_from_own_nuke.description"),
+                OldustryItems.QUANTUM_CHESTPLATE.get(),
+                Component.translatable("advancements.oldustry.build_q_armor.title"),
+                Component.translatable("advancements.oldustry.build_q_armor.description"),
+                null,
+                AdvancementType.TASK,
+                true,
+                true,
+                false
+            )
+            .addCriterion("helmet", InventoryChangeTrigger.TriggerInstance.hasItems(OldustryItems.QUANTUM_HELMET.get()))
+            .addCriterion("chest", InventoryChangeTrigger.TriggerInstance.hasItems(OldustryItems.QUANTUM_CHESTPLATE.get()))
+            .addCriterion("legs", InventoryChangeTrigger.TriggerInstance.hasItems(OldustryItems.QUANTUM_LEGGINGS.get()))
+            .addCriterion("boots", InventoryChangeTrigger.TriggerInstance.hasItems(OldustryItems.QUANTUM_BOOTS.get()))
+            .requirements(AdvancementRequirements.Strategy.OR)
+            .save(output, "oldustry:build_q_armor");
+    }
+
+    private static void challenge(Consumer<AdvancementHolder> output, String id, ItemLike icon, String parent, String criterion) {
+        Advancement.Builder.advancement()
+            .parent(AdvancementSubProvider.createPlaceholder(parent))
+            .display(
+                icon,
+                Component.translatable("advancements.oldustry." + id + ".title"),
+                Component.translatable("advancements.oldustry." + id + ".description"),
                 null,
                 AdvancementType.CHALLENGE,
                 true,
                 true,
                 false
             )
-            .addCriterion("nuked", CriteriaTriggers.IMPOSSIBLE.createCriterion(new ImpossibleTrigger.TriggerInstance()))
-            .save(output, "oldustry:die_from_own_nuke");
+            .addCriterion(criterion, CriteriaTriggers.IMPOSSIBLE.createCriterion(new ImpossibleTrigger.TriggerInstance()))
+            .save(output, "oldustry:" + id);
     }
 
     private static void item(Consumer<AdvancementHolder> output, String id, ItemLike icon, String parent, boolean orOres) {

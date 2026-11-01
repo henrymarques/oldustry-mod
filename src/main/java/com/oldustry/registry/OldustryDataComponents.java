@@ -6,6 +6,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.oldustry.Oldustry;
 import com.oldustry.item.explosive.RemoteLink;
+import com.oldustry.item.tool.ObscuratorSample;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
@@ -29,6 +30,24 @@ public final class OldustryDataComponents {
     /** Remaining construction foam. Sprayer max 1600, pack max 260. Both crafted at 0. */
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> FOAM = COMPONENTS.register(
         "foam",
+        () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT).build()
+    );
+
+    /** Heat sitting in a coolant cell, exchanger or vent. Absent means 0. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> REACTOR_HEAT = COMPONENTS.register(
+        "reactor_heat",
+        () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT).build()
+    );
+
+    /** Mining laser mode 0–6. Absent means Mining. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> LASER_MODE = COMPONENTS.register(
+        "laser_mode",
+        () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT).build()
+    );
+
+    /** Pulses left on a reflector, or heat swallowed by a condensator. Absent means 0. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> REACTOR_WEAR = COMPONENTS.register(
+        "reactor_wear",
         () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT).build()
     );
 
@@ -60,6 +79,16 @@ public final class OldustryDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> MEASURE_POS = COMPONENTS.register(
         "measure_pos",
         () -> DataComponentType.<BlockPos>builder().persistent(BlockPos.CODEC).networkSynchronized(BlockPos.STREAM_CODEC).build()
+    );
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> FREQUENCY_TARGET = COMPONENTS.register(
+        "frequency_target",
+        () -> DataComponentType.<BlockPos>builder().persistent(BlockPos.CODEC).networkSynchronized(BlockPos.STREAM_CODEC).build()
+    );
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> FREQUENCY_LATCHED = COMPONENTS.register(
+        "frequency_latched",
+        () -> DataComponentType.<Boolean>builder().persistent(Codec.BOOL).networkSynchronized(ByteBufCodecs.BOOL).build()
     );
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> MEASURE_TICK = COMPONENTS.register(
@@ -116,6 +145,15 @@ public final class OldustryDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> WALK_Z = COMPONENTS.register(
         "walk_z",
         () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT).build()
+    );
+
+    /** Obscurator copy. Block state plus the face whose texture was read. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ObscuratorSample>> OBSCURATOR = COMPONENTS.register(
+        "obscurator",
+        () -> DataComponentType.<ObscuratorSample>builder()
+            .persistent(ObscuratorSample.CODEC)
+            .networkSynchronized(ObscuratorSample.STREAM)
+            .build()
     );
 
     public static void register(IEventBus bus) {

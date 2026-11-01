@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:dense_copper_plate",
+    "U": "oldustry:uranium_cell"
+  },
+  "pattern": [
+    "UCU"
+  ],
+  "result": {
+    "id": "oldustry:dual_uranium_cell"
+  }
+}

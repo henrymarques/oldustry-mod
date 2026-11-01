@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:reactor_chamber",
+    "G": "oldustry:generator",
+    "c": "oldustry:advanced_circuit"
+  },
+  "pattern": [
+    " c ",
+    "CCC",
+    " G "
+  ],
+  "result": {
+    "id": "oldustry:nuclear_reactor"
+  }
+}

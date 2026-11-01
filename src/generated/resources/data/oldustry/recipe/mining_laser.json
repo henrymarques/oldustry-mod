@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "oldustry:advanced_alloy",
+    "C": "oldustry:advanced_circuit",
+    "R": "minecraft:redstone",
+    "c": "oldustry:energy_crystal"
+  },
+  "pattern": [
+    "Rcc",
+    "AAC",
+    " AA"
+  ],
+  "result": {
+    "id": "oldustry:mining_laser"
+  }
+}

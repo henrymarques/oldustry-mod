@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": "oldustry:tfbp",
+    "D": "minecraft:dirt"
+  },
+  "pattern": [
+    " D ",
+    "D#D",
+    " D "
+  ],
+  "result": {
+    "id": "oldustry:tfbp_flatification"
+  }
+}

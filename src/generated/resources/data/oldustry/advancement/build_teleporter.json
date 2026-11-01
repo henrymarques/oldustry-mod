@@ -1,0 +1,32 @@
+{
+  "parent": "oldustry:build_mfsu",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:teleporter"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_teleporter.description"
+    },
+    "icon": {
+      "id": "oldustry:teleporter"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_teleporter.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

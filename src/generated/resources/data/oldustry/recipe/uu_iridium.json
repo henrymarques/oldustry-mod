@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": "oldustry:uu_matter"
+  },
+  "pattern": [
+    "MMM",
+    " M ",
+    "MMM"
+  ],
+  "result": {
+    "id": "oldustry:iridium_ore"
+  }
+}

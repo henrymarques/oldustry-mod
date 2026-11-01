@@ -1,0 +1,26 @@
+{
+  "parent": "oldustry:build_q_armor",
+  "criteria": {
+    "starved": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.starve_with_q_helmet.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "oldustry:filled_tin_can"
+    },
+    "title": {
+      "translate": "advancements.oldustry.starve_with_q_helmet.title"
+    }
+  },
+  "requirements": [
+    [
+      "starved"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

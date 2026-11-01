@@ -1,0 +1,26 @@
+{
+  "parent": "oldustry:build_mining_laser",
+  "criteria": {
+    "killed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.kill_dragon_mining_laser.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "oldustry:mining_laser"
+    },
+    "title": {
+      "translate": "advancements.oldustry.kill_dragon_mining_laser.title"
+    }
+  },
+  "requirements": [
+    [
+      "killed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

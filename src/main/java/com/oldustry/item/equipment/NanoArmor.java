@@ -2,8 +2,8 @@ package com.oldustry.item.equipment;
 
 /**
  * JAR {@code ItemArmorElectric} ratios times {@code ItemArmorNanoSuit} 0.9.
- * Forge's {@code * 25} on the damage and on {@code AbsorbMax} cancel, so one
- * damage point costs {@link #EU_PER_DAMAGE} and a full set keeps 10%.
+ * Forge's {@code * 25} cancels on the cap and on the hit points absorbed. The EU
+ * is {@link QuantumArmor#billedPoints} times {@link #EU_PER_DAMAGE}. A full set keeps 10%.
  */
 public final class NanoArmor {
     public static final int MAX = 100_000;
@@ -59,7 +59,7 @@ public final class NanoArmor {
             if (take <= 0) {
                 continue;
             }
-            eu[i] = Math.min((int) Math.round(take * EU_PER_DAMAGE), charge[i]);
+            eu[i] = Math.min(QuantumArmor.billedPoints(take) * EU_PER_DAMAGE, charge[i]);
             left -= take;
         }
         return new Hit((float) left, eu[0], eu[1], eu[2], eu[3]);

@@ -1,0 +1,32 @@
+{
+  "parent": "oldustry:build_batbox",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:mass_fabricator"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_mass_fab.description"
+    },
+    "icon": {
+      "id": "oldustry:mass_fabricator"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_mass_fab.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

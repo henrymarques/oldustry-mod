@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "oldustry:reactor_plating",
+    "oldustry:advanced_alloy",
+    "oldustry:advanced_alloy"
+  ],
+  "result": {
+    "id": "oldustry:containment_reactor_plating"
+  }
+}

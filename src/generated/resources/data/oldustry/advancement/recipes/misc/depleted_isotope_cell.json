@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_near_depleted": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:near_depleted_uranium_cell"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:depleted_isotope_cell"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_near_depleted"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:depleted_isotope_cell"
+    ]
+  }
+}

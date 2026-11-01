@@ -135,6 +135,10 @@ public final class OldustryMaterials {
         EquipmentAssets.ROOT_ID,
         Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "nano")
     );
+    public static final ResourceKey<EquipmentAsset> QUANTUM_EQUIPMENT = ResourceKey.create(
+        EquipmentAssets.ROOT_ID,
+        Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "quantum")
+    );
     public static final ResourceKey<EquipmentAsset> HAZMAT_EQUIPMENT = ResourceKey.create(
         EquipmentAssets.ROOT_ID,
         Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "hazmat")

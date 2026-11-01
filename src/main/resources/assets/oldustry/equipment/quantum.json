@@ -1,0 +1,7 @@
+{
+  "layers": {
+    "humanoid": [ { "texture": "oldustry:quantum" } ],
+    "humanoid_baby": [ { "texture": "oldustry:quantum" } ],
+    "humanoid_leggings": [ { "texture": "oldustry:quantum" } ]
+  }
+}

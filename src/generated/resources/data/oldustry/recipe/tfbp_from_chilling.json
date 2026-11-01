@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "oldustry:tfbp_chilling"
+  ],
+  "result": {
+    "id": "oldustry:tfbp"
+  }
+}

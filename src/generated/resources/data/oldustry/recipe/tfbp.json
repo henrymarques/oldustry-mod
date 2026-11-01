@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": "oldustry:advanced_circuit",
+    "C": "oldustry:electronic_circuit",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    " C ",
+    " A ",
+    "R R"
+  ],
+  "result": {
+    "id": "oldustry:tfbp"
+  }
+}

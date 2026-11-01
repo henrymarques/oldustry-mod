@@ -1,0 +1,50 @@
+{
+  "variants": {
+    "active=false,facing=down": {
+      "model": "oldustry:block/mass_fabricator",
+      "x": 90
+    },
+    "active=false,facing=east": {
+      "model": "oldustry:block/mass_fabricator",
+      "y": 90
+    },
+    "active=false,facing=north": {
+      "model": "oldustry:block/mass_fabricator"
+    },
+    "active=false,facing=south": {
+      "model": "oldustry:block/mass_fabricator",
+      "y": 180
+    },
+    "active=false,facing=up": {
+      "model": "oldustry:block/mass_fabricator",
+      "x": 270
+    },
+    "active=false,facing=west": {
+      "model": "oldustry:block/mass_fabricator",
+      "y": 270
+    },
+    "active=true,facing=down": {
+      "model": "oldustry:block/mass_fabricator_on",
+      "x": 90
+    },
+    "active=true,facing=east": {
+      "model": "oldustry:block/mass_fabricator_on",
+      "y": 90
+    },
+    "active=true,facing=north": {
+      "model": "oldustry:block/mass_fabricator_on"
+    },
+    "active=true,facing=south": {
+      "model": "oldustry:block/mass_fabricator_on",
+      "y": 180
+    },
+    "active=true,facing=up": {
+      "model": "oldustry:block/mass_fabricator_on",
+      "x": 270
+    },
+    "active=true,facing=west": {
+      "model": "oldustry:block/mass_fabricator_on",
+      "y": 270
+    }
+  }
+}

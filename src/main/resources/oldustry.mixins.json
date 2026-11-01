@@ -7,6 +7,9 @@
     "CraftingChargeMixin",
     "LivingEntityEquipmentMixin"
   ],
+  "client": [
+    "LocalPlayerSprintMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

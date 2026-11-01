@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": "oldustry:uu_matter"
+  },
+  "pattern": [
+    "   ",
+    " M ",
+    " M "
+  ],
+  "result": {
+    "id": "minecraft:water_bucket"
+  }
+}

@@ -1,5 +1,6 @@
 package com.oldustry.data;
 
+import com.oldustry.client.render.BatteryFill;
 import com.oldustry.client.render.SaberFlicker;
 
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import com.oldustry.data.model.OldustryCableModels;
 import com.oldustry.data.model.OldustryMachineModels;
 import com.oldustry.block.CableBlock;
 import com.oldustry.block.PersonalSafeBlock;
+import com.oldustry.client.render.ObscuratorRenderer;
 import com.oldustry.client.render.PersonalSafeRenderer;
 import com.oldustry.block.DynamiteBlock;
 import com.oldustry.block.MachineBlock;
@@ -100,12 +102,20 @@ public class OldustryModelProvider extends ModelProvider {
         itnt(blockModels, OldustryBlocks.NUKE.get());
         dynamite(blockModels, OldustryBlocks.DYNAMITE.get());
 
+        OldustryMachineModels.facingActive(blockModels, OldustryBlocks.NUCLEAR_REACTOR.get());
+        OldustryMachineModels.staticFaces(blockModels, OldustryBlocks.REACTOR_CHAMBER.get());
+
         for (var holder : OldustryBlocks.BLOCKS.getEntries()) {
             Block block = holder.value();
             if (block instanceof OldustryLuminatorBlock luminator) {
                 OldustryMachineModels.luminator(blockModels, luminator);
             } else if (block instanceof MachineBlock machine) {
-                OldustryMachineModels.machine(blockModels, machine);
+                // blockTesla.png is 16×16: every side, on or off, is that one tile.
+                if (machine.kind == OldustryMachineKind.TESLA) {
+                    OldustryMachineModels.uniform(blockModels, machine);
+                } else {
+                    OldustryMachineModels.machine(blockModels, machine);
+                }
             } else if (block instanceof CableBlock cable) {
                 OldustryCableModels.cable(blockModels, itemModels, cable);
             }
@@ -118,6 +128,14 @@ public class OldustryModelProvider extends ModelProvider {
             String path = item.getId().getPath();
             if (path.equals("nano_saber")) {
                 nanoSaber(itemModels, item.get());
+                continue;
+            }
+            if (path.equals("re_battery") || path.equals("energy_crystal") || path.equals("lapotron_crystal")) {
+                batteryCell(itemModels, item.get());
+                continue;
+            }
+            if (path.equals("obscurator")) {
+                obscurator(itemModels, item.get());
                 continue;
             }
             if (handheldItem(path)) {
@@ -236,6 +254,23 @@ public class OldustryModelProvider extends ModelProvider {
         );
     }
 
+    /** JAR {@code itemBat*.0}–{@code .4}. Fallback is the empty frame; thresholds are the fill steps. */
+    private static void batteryCell(ItemModelGenerators itemModels, Item item) {
+        var empty = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_0", ModelTemplates.FLAT_ITEM));
+        var step1 = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_1", ModelTemplates.FLAT_ITEM));
+        var step2 = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_2", ModelTemplates.FLAT_ITEM));
+        var step3 = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_3", ModelTemplates.FLAT_ITEM));
+        var full = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_4", ModelTemplates.FLAT_ITEM));
+        itemModels.itemModelOutput.accept(item, ItemModelUtils.rangeSelect(
+            new BatteryFill(),
+            empty,
+            ItemModelUtils.override(step1, 1f),
+            ItemModelUtils.override(step2, 2f),
+            ItemModelUtils.override(step3, 3f),
+            ItemModelUtils.override(full, 4f)
+        ));
+    }
+
     /** Off model. Active picks the cyan or magenta blade each draw, like the JAR icon. */
     private static void nanoSaber(ItemModelGenerators itemModels, Item item) {
         var off = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, ModelTemplates.FLAT_HANDHELD_ITEM));
@@ -243,6 +278,15 @@ public class OldustryModelProvider extends ModelProvider {
         var red = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, "_active_alt", ModelTemplates.FLAT_HANDHELD_ITEM));
         var lit = ItemModelUtils.rangeSelect(new com.oldustry.client.render.SaberFlicker(), blue, ItemModelUtils.override(red, 0.5F));
         itemModels.generateBooleanDispatch(item, ItemModelUtils.hasComponent(com.oldustry.registry.OldustryDataComponents.SABER_ACTIVE.get()), lit, off);
+    }
+
+    /** Base icon plus the copied block face ({@code RenderObscurator} inset). */
+    private static void obscurator(ItemModelGenerators itemModels, Item item) {
+        Identifier flat = itemModels.createFlatItemModel(item, ModelTemplates.FLAT_ITEM);
+        itemModels.itemModelOutput.accept(item, ItemModelUtils.composite(
+            ItemModelUtils.plainModel(flat),
+            ItemModelUtils.specialModel(flat, new ObscuratorRenderer.Unbaked())
+        ));
     }
 
     /** Tools held like vanilla pickaxe/sword (not inventory-flat `generated`). */

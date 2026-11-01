@@ -70,6 +70,17 @@ final class OldustryElectricEquipmentRecipes extends RecipeProvider {
             .unlockedBy("has_re_battery", has(OldustryItems.RE_BATTERY.get()))
             .save(output);
 
+        shaped(RecipeCategory.TOOLS, OldustryItems.MINING_LASER.get())
+            .define('R', Items.REDSTONE)
+            .define('c', OldustryItems.ENERGY_CRYSTAL.get())
+            .define('A', OldustryItems.ADVANCED_ALLOY.get())
+            .define('C', OldustryItems.ADVANCED_CIRCUIT.get())
+            .pattern("Rcc")
+            .pattern("AAC")
+            .pattern(" AA")
+            .unlockedBy("has_energy_crystal", has(OldustryItems.ENERGY_CRYSTAL.get()))
+            .save(output);
+
         shaped(RecipeCategory.TOOLS, OldustryItems.CHAINSAW.get())
             .define('I', OldustryTags.Items.INGOTS_REFINED_IRON)
             .define('C', OldustryItems.ELECTRONIC_CIRCUIT.get())
@@ -222,6 +233,18 @@ final class OldustryElectricEquipmentRecipes extends RecipeProvider {
             .pattern("IBI")
             .pattern("G G")
             .unlockedBy("has_batbox", has(OldustryItems.BATBOX.get()))
+            .save(output);
+
+        // JAR Recipies: rEr / CAC / rrr — redstone, energy crystal, 2x insulated gold cable, advanced circuit.
+        shaped(RecipeCategory.TOOLS, OldustryItems.OBSCURATOR.get())
+            .define('r', Items.REDSTONE)
+            .define('E', OldustryItems.ENERGY_CRYSTAL.get())
+            .define('C', OldustryItems.GOLD_CABLE_2X.get())
+            .define('A', OldustryItems.ADVANCED_CIRCUIT.get())
+            .pattern("rEr")
+            .pattern("CAC")
+            .pattern("rrr")
+            .unlockedBy("has_energy_crystal", has(OldustryItems.ENERGY_CRYSTAL.get()))
             .save(output);
 
         // JAR: empty sprayer / circuit / empty sprayer, fuel can / tin / fuel can, fuel can / empty / fuel can.

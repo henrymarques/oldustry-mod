@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "oldustry:iridium_plate",
+    "L": "oldustry:lapotron_crystal",
+    "R": "oldustry:hazmat_boots",
+    "n": "oldustry:nano_boots"
+  },
+  "pattern": [
+    "InI",
+    "RLR"
+  ],
+  "result": {
+    "id": "oldustry:quantum_boots"
+  }
+}

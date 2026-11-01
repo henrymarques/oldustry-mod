@@ -68,6 +68,13 @@ public final class OldustryMachineSlots {
                 case 3, 4 -> Role.OUTPUT;
                 default -> Role.HIDDEN;
             };
+            case TERRAFORMER -> slot == 0 ? Role.INPUT : Role.HIDDEN;
+            case MASS -> switch (slot) {
+                case 0 -> Role.INPUT;
+                case 1 -> Role.OUTPUT;
+                case 2 -> Role.DISCHARGE;
+                default -> Role.HIDDEN;
+            };
             default -> Role.HIDDEN;
         };
     }
@@ -119,6 +126,8 @@ public final class OldustryMachineSlots {
             case COMPRESSOR -> !OldustryProcessingRecipes.compressor(stack.getItem()).isEmpty();
             case RECYCLER -> !OldustryProcessingRecipes.recyclerBlacklist(stack.getItem());
             case FURNACE, INDUCTION -> level != null && canSmelt(level, stack);
+            case TERRAFORMER -> stack.getItem() instanceof com.oldustry.item.TfbpItem;
+            case MASS -> stack.is(OldustryItems.SCRAP.get()) || stack.is(OldustryItems.SCRAP_BOX.get());
             default -> true;
         };
     }
@@ -136,6 +145,9 @@ public final class OldustryMachineSlots {
             case CANNING -> new int[] { 0, 1, 2, 3 };
             case ELECTROLYZER -> new int[] { 0, 1 };
             case INDUCTION -> new int[] { 0, 1, 2, 3, 4 };
+            case TELEPORTER -> new int[0];
+            case TERRAFORMER -> new int[] { 0 };
+            case MASS -> new int[] { 0, 1, 2 };
             default -> new int[] { 0, 1, 6 };
         };
     }

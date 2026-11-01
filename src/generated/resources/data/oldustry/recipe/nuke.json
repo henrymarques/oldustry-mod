@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:advanced_circuit",
+    "M": "oldustry:advanced_machine",
+    "R": "oldustry:re_enriched_uranium_cell",
+    "U": "oldustry:uranium_block"
+  },
+  "pattern": [
+    "RCR",
+    "UMU",
+    "RCR"
+  ],
+  "result": {
+    "id": "oldustry:nuke"
+  }
+}

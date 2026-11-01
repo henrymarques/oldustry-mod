@@ -1,0 +1,65 @@
+{
+  "parent": "oldustry:acquire_matter",
+  "criteria": {
+    "boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:quantum_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:quantum_chestplate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "helmet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:quantum_helmet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "legs": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:quantum_leggings"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_q_armor.description"
+    },
+    "icon": {
+      "id": "oldustry:quantum_chestplate"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_q_armor.title"
+    }
+  },
+  "requirements": [
+    [
+      "helmet",
+      "chest",
+      "legs",
+      "boots"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

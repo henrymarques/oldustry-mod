@@ -6,10 +6,24 @@ import com.oldustry.Oldustry;
 import com.oldustry.energy.ElectricCharge;
 import com.oldustry.item.equipment.CfPackItem;
 import com.oldustry.item.utility.CoffeeMugItem;
+import com.oldustry.reactor.OldustryCondensatorItem;
+import com.oldustry.reactor.OldustryHeatpackItem;
+import com.oldustry.reactor.OldustryHeatStorageItem;
+import com.oldustry.reactor.OldustryHeatSwitchItem;
+import com.oldustry.reactor.OldustryHeatVentItem;
+import com.oldustry.reactor.OldustryIsotopeCellItem;
+import com.oldustry.reactor.OldustryPlatingItem;
+import com.oldustry.reactor.OldustryReactor;
+import com.oldustry.reactor.OldustryReflectorItem;
+import com.oldustry.reactor.OldustryUraniumCellItem;
+import com.oldustry.reactor.OldustryVentSpreadItem;
 import com.oldustry.item.construction.CutterItem;
 import com.oldustry.item.DebugItem;
 import com.oldustry.item.explosive.DynamiteItem;
 import com.oldustry.item.explosive.RemoteItem;
+import com.oldustry.item.FrequencyTransmitterItem;
+import com.oldustry.item.TfbpItem;
+import com.oldustry.item.tool.MiningLaserItem;
 import com.oldustry.item.tool.ChainsawItem;
 import com.oldustry.item.tool.ChainsawStats;
 import com.oldustry.item.tool.DrillStats;
@@ -21,10 +35,12 @@ import com.oldustry.item.ElectricToolItem;
 import com.oldustry.item.tool.ElectricTreetapItem;
 import com.oldustry.item.tool.ElectricWrenchItem;
 import com.oldustry.item.tool.EuReaderItem;
+import com.oldustry.item.tool.ObscuratorItem;
 import com.oldustry.item.utility.FilledTinCanItem;
 import com.oldustry.item.equipment.FuelJetpackItem;
 import com.oldustry.item.tool.NanoSaberItem;
 import com.oldustry.item.equipment.NanoSuitItem;
+import com.oldustry.item.equipment.QuantumSuitItem;
 import com.oldustry.item.equipment.OldustryHazmatArmor;
 import com.oldustry.item.equipment.OldustryHazmatItem;
 import com.oldustry.item.equipment.NightvisionGogglesItem;
@@ -105,6 +121,21 @@ public final class OldustryItems {
     public static final DeferredItem<BlockItem> ELECTROLYZER = ITEMS.registerSimpleBlockItem(OldustryBlocks.ELECTROLYZER);
     public static final DeferredItem<BlockItem> MAGNETIZER = ITEMS.registerSimpleBlockItem(OldustryBlocks.MAGNETIZER);
     public static final DeferredItem<BlockItem> INDUCTION = ITEMS.registerSimpleBlockItem(OldustryBlocks.INDUCTION);
+    public static final DeferredItem<BlockItem> TESLA = ITEMS.registerSimpleBlockItem(OldustryBlocks.TESLA);
+    public static final DeferredItem<BlockItem> TELEPORTER = ITEMS.registerItem(
+        "teleporter",
+        props -> new BlockItem(OldustryBlocks.TELEPORTER.get(), props.useBlockDescriptionPrefix().rarity(Rarity.RARE))
+    );
+    public static final DeferredItem<BlockItem> TERRAFORMER = ITEMS.registerSimpleBlockItem(OldustryBlocks.TERRAFORMER);
+    public static final DeferredItem<BlockItem> MASS_FABRICATOR = ITEMS.registerSimpleBlockItem(OldustryBlocks.MASS_FABRICATOR);
+    public static final DeferredItem<Item> NUCLEAR_REACTOR = ITEMS.registerItem(
+        "nuclear_reactor",
+        props -> new BlockItem(OldustryBlocks.NUCLEAR_REACTOR.get(), props.useBlockDescriptionPrefix().rarity(Rarity.UNCOMMON))
+    );
+    public static final DeferredItem<Item> REACTOR_CHAMBER = ITEMS.registerItem(
+        "reactor_chamber",
+        props -> new BlockItem(OldustryBlocks.REACTOR_CHAMBER.get(), props.useBlockDescriptionPrefix().rarity(Rarity.UNCOMMON))
+    );
     public static final DeferredItem<BlockItem> PERSONAL_SAFE = ITEMS.registerItem(
         "personal_safe",
         props -> new BlockItem(OldustryBlocks.PERSONAL_SAFE.get(), props.useBlockDescriptionPrefix().rarity(Rarity.UNCOMMON))
@@ -221,8 +252,81 @@ public final class OldustryItems {
 
     public static final DeferredItem<Item> FUEL_CAN = item("fuel_can");
     public static final DeferredItem<Item> FILLED_FUEL_CAN = item("filled_fuel_can");
-    /** JAR reactorCoolantSimple (10k Coolant Cell). Fluid itemCoolant is D5. */
-    public static final DeferredItem<Item> COOLANT_CELL = item("coolant_cell");
+    /** JAR reactorCoolantSimple. The liquid-dictionary itemCoolant has no tank API here; tin + water fills this cell. */
+    public static final DeferredItem<Item> COOLANT_CELL = ITEMS.registerItem(
+        "coolant_cell", props -> new OldustryHeatStorageItem(10_000, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> COOLANT_CELL_30K = ITEMS.registerItem(
+        "coolant_cell_30k", props -> new OldustryHeatStorageItem(30_000, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> COOLANT_CELL_60K = ITEMS.registerItem(
+        "coolant_cell_60k", props -> new OldustryHeatStorageItem(60_000, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> REACTOR_PLATING = ITEMS.registerItem(
+        "reactor_plating", props -> new OldustryPlatingItem(1000, 0.95f, props)
+    );
+    public static final DeferredItem<Item> HEAT_REACTOR_PLATING = ITEMS.registerItem(
+        "heat_reactor_plating", props -> new OldustryPlatingItem(2000, 0.99f, props)
+    );
+    public static final DeferredItem<Item> CONTAINMENT_REACTOR_PLATING = ITEMS.registerItem(
+        "containment_reactor_plating", props -> new OldustryPlatingItem(500, 0.9f, props)
+    );
+    public static final DeferredItem<Item> HEAT_EXCHANGER = ITEMS.registerItem(
+        "heat_exchanger", props -> new OldustryHeatSwitchItem(2500, 12, 4, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> REACTOR_HEAT_EXCHANGER = ITEMS.registerItem(
+        "reactor_heat_exchanger", props -> new OldustryHeatSwitchItem(5000, 0, 72, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> COMPONENT_HEAT_EXCHANGER = ITEMS.registerItem(
+        "component_heat_exchanger", props -> new OldustryHeatSwitchItem(5000, 36, 0, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> ADVANCED_HEAT_EXCHANGER = ITEMS.registerItem(
+        "advanced_heat_exchanger", props -> new OldustryHeatSwitchItem(10000, 24, 8, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> HEAT_VENT = ITEMS.registerItem(
+        "heat_vent", props -> new OldustryHeatVentItem(1000, 6, 0, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> REACTOR_HEAT_VENT = ITEMS.registerItem(
+        "reactor_heat_vent", props -> new OldustryHeatVentItem(1000, 5, 5, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> OVERCLOCKED_HEAT_VENT = ITEMS.registerItem(
+        "overclocked_heat_vent", props -> new OldustryHeatVentItem(1000, 20, 36, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> COMPONENT_HEAT_VENT = ITEMS.registerItem(
+        "component_heat_vent", props -> new OldustryVentSpreadItem(4, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> ADVANCED_HEAT_VENT = ITEMS.registerItem(
+        "advanced_heat_vent", props -> new OldustryHeatVentItem(1000, 12, 0, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> HEATING_CELL = ITEMS.registerItem(
+        "heating_cell", props -> new OldustryHeatpackItem(1000, 1, props)
+    );
+    public static final DeferredItem<Item> NEUTRON_REFLECTOR = ITEMS.registerItem(
+        "neutron_reflector", props -> new OldustryReflectorItem(10_000, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> THICK_NEUTRON_REFLECTOR = ITEMS.registerItem(
+        "thick_neutron_reflector", props -> new OldustryReflectorItem(40_000, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> RSH_CONDENSATOR = ITEMS.registerItem(
+        "rsh_condensator", props -> new OldustryCondensatorItem(20_000, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> LZH_CONDENSATOR = ITEMS.registerItem(
+        "lzh_condensator", props -> new OldustryCondensatorItem(100_000, props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> URANIUM_CELL = ITEMS.registerItem(
+        "uranium_cell", props -> new OldustryUraniumCellItem(1, props.stacksTo(1).durability(OldustryReactor.FUEL_LIFE))
+    );
+    public static final DeferredItem<Item> DUAL_URANIUM_CELL = ITEMS.registerItem(
+        "dual_uranium_cell", props -> new OldustryUraniumCellItem(2, props.stacksTo(1).durability(OldustryReactor.FUEL_LIFE))
+    );
+    public static final DeferredItem<Item> QUAD_URANIUM_CELL = ITEMS.registerItem(
+        "quad_uranium_cell", props -> new OldustryUraniumCellItem(4, props.stacksTo(1).durability(OldustryReactor.FUEL_LIFE))
+    );
+    public static final DeferredItem<Item> NEAR_DEPLETED_URANIUM_CELL = item("near_depleted_uranium_cell");
+    public static final DeferredItem<Item> RE_ENRICHED_URANIUM_CELL = item("re_enriched_uranium_cell");
+    public static final DeferredItem<Item> DEPLETED_ISOTOPE_CELL = ITEMS.registerItem(
+        "depleted_isotope_cell", props -> new OldustryIsotopeCellItem(props.stacksTo(1).durability(OldustryReactor.FUEL_LIFE))
+    );
     public static final DeferredItem<Item> FERTILIZER = item("fertilizer");
     public static final DeferredItem<Item> WEED_EX = item("weed_ex");
     public static final DeferredItem<Item> GRIN_POWDER = item("grin_powder");
@@ -233,8 +337,26 @@ public final class OldustryItems {
     public static final DeferredItem<Item> DYNAMITE = ITEMS.registerItem("dynamite", props -> new DynamiteItem(props, false));
     public static final DeferredItem<Item> STICKY_DYNAMITE = ITEMS.registerItem("sticky_dynamite", props -> new DynamiteItem(props, true));
     public static final DeferredItem<Item> REMOTE = ITEMS.registerItem("remote", RemoteItem::new);
+    public static final DeferredItem<Item> RUBBER_DINGHY = ITEMS.registerItem(
+        "rubber_dinghy", props -> new net.minecraft.world.item.BoatItem(OldustryEntities.RUBBER_DINGHY.get(), props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> DAMAGED_RUBBER_DINGHY = item("damaged_rubber_dinghy");
+    public static final DeferredItem<Item> CARBON_BOAT = ITEMS.registerItem(
+        "carbon_boat", props -> new net.minecraft.world.item.BoatItem(OldustryEntities.CARBON_BOAT.get(), props.stacksTo(1))
+    );
+    public static final DeferredItem<Item> ELECTRIC_BOAT = ITEMS.registerItem(
+        "electric_boat", props -> new net.minecraft.world.item.BoatItem(OldustryEntities.ELECTRIC_BOAT.get(), props.stacksTo(1))
+    );
 
     public static final DeferredItem<Item> WRENCH = ITEMS.registerItem("wrench", props -> new WrenchItem(props.stacksTo(1).durability(160)));
+    public static final DeferredItem<Item> FREQUENCY_TRANSMITTER = ITEMS.registerItem("frequency_transmitter", FrequencyTransmitterItem::new);
+    public static final DeferredItem<Item> TFBP = ITEMS.registerItem("tfbp", props -> new Item(props.stacksTo(1)));
+    public static final DeferredItem<Item> TFBP_CULTIVATION = tfbp("tfbp_cultivation", com.oldustry.machine.OldustryTfbp.CULTIVATION);
+    public static final DeferredItem<Item> TFBP_IRRIGATION = tfbp("tfbp_irrigation", com.oldustry.machine.OldustryTfbp.IRRIGATION);
+    public static final DeferredItem<Item> TFBP_CHILLING = tfbp("tfbp_chilling", com.oldustry.machine.OldustryTfbp.CHILLING);
+    public static final DeferredItem<Item> TFBP_DESERTIFICATION = tfbp("tfbp_desertification", com.oldustry.machine.OldustryTfbp.DESERTIFICATION);
+    public static final DeferredItem<Item> TFBP_FLATIFICATION = tfbp("tfbp_flatification", com.oldustry.machine.OldustryTfbp.FLATIFICATION);
+    public static final DeferredItem<Item> TFBP_MUSHROOM = tfbp("tfbp_mushroom", com.oldustry.machine.OldustryTfbp.MUSHROOM);
     public static final DeferredItem<Item> CUTTER = ITEMS.registerItem("cutter", props -> new CutterItem(props.stacksTo(1).durability(60)));
     public static final DeferredItem<Item> EU_READER = ITEMS.registerItem("eu_reader", props -> new EuReaderItem(props.stacksTo(1)));
     public static final DeferredItem<Item> SU_BATTERY = ITEMS.registerItem("su_battery", SuBatteryItem::new);
@@ -255,12 +377,16 @@ public final class OldustryItems {
         new ElectricCharge.Spec(10000, 100, 1, true), DrillStats.DIAMOND_EU, DrillStats.DIAMOND_SPEED,
         DrillStats.properties(props, OldustryMaterials.DIAMOND_DRILL, 1, -2.8f).enchantable(DrillStats.DIAMOND_ENCHANT)));
     // Speed desvio 15 (JAR 12); EU JAR 100; axe + shears (JAR IShearable / leaves).
+    public static final DeferredItem<Item> MINING_LASER = ITEMS.registerItem(
+        "mining_laser", props -> new MiningLaserItem(props.rarity(Rarity.UNCOMMON))
+    );
     public static final DeferredItem<Item> CHAINSAW = ITEMS.registerItem("chainsaw", props -> new ChainsawItem(
         new ElectricCharge.Spec(10000, 100, 1, true),
         ChainsawStats.properties(props, OldustryMaterials.CHAINSAW)));
     public static final DeferredItem<Item> ELECTRIC_HOE = ITEMS.registerItem("electric_hoe", props -> new ElectricToolItem(new ElectricCharge.Spec(10000, 100, 1, true), 50, props.hoe(OldustryMaterials.BRONZE, -2, -1f)));
     public static final DeferredItem<Item> OD_SCANNER = ITEMS.registerItem("od_scanner", props -> new ScannerItem(new ElectricCharge.Spec(10000, 50, 1, true), false, props));
     public static final DeferredItem<Item> OV_SCANNER = ITEMS.registerItem("ov_scanner", props -> new ScannerItem(new ElectricCharge.Spec(10000, 50, 2, true), true, props));
+    public static final DeferredItem<Item> OBSCURATOR = ITEMS.registerItem("obscurator", ObscuratorItem::new);
     public static final DeferredItem<Item> BATPACK = ITEMS.registerItem("batpack", props -> new ElectricArmorItem(new ElectricCharge.Spec(60000, 100, 1, true), OldustryMaterials.utilityArmor(props, OldustryMaterials.BATPACK_EQUIPMENT, ArmorType.CHESTPLATE)));
     public static final DeferredItem<Item> LAPPACK = ITEMS.registerItem("lappack", props -> new ElectricArmorItem(new ElectricCharge.Spec(300000, 250, 2, true), OldustryMaterials.utilityArmor(props, OldustryMaterials.LAPPACK_EQUIPMENT, ArmorType.CHESTPLATE)));
     // JAR ItemArmorUtility: 0 defense / no enchantable component.
@@ -275,6 +401,10 @@ public final class OldustryItems {
     public static final DeferredItem<Item> NANO_CHESTPLATE = ITEMS.registerItem("nano_chestplate", props -> new NanoSuitItem(OldustryMaterials.utilityEquip(props.rarity(Rarity.UNCOMMON), OldustryMaterials.NANO_EQUIPMENT, ArmorType.CHESTPLATE)));
     public static final DeferredItem<Item> NANO_LEGGINGS = ITEMS.registerItem("nano_leggings", props -> new NanoSuitItem(OldustryMaterials.utilityEquip(props.rarity(Rarity.UNCOMMON), OldustryMaterials.NANO_EQUIPMENT, ArmorType.LEGGINGS)));
     public static final DeferredItem<Item> NANO_BOOTS = ITEMS.registerItem("nano_boots", props -> new NanoSuitItem(OldustryMaterials.utilityEquip(props.rarity(Rarity.UNCOMMON), OldustryMaterials.NANO_EQUIPMENT, ArmorType.BOOTS)));
+    public static final DeferredItem<Item> QUANTUM_HELMET = ITEMS.registerItem("quantum_helmet", props -> new QuantumSuitItem(OldustryMaterials.utilityEquip(props.rarity(Rarity.RARE), OldustryMaterials.QUANTUM_EQUIPMENT, ArmorType.HELMET), QuantumSuitItem.HELMET));
+    public static final DeferredItem<Item> QUANTUM_CHESTPLATE = ITEMS.registerItem("quantum_chestplate", props -> new QuantumSuitItem(OldustryMaterials.utilityEquip(props.rarity(Rarity.RARE), OldustryMaterials.QUANTUM_EQUIPMENT, ArmorType.CHESTPLATE), QuantumSuitItem.CHEST));
+    public static final DeferredItem<Item> QUANTUM_LEGGINGS = ITEMS.registerItem("quantum_leggings", props -> new QuantumSuitItem(OldustryMaterials.utilityEquip(props.rarity(Rarity.RARE), OldustryMaterials.QUANTUM_EQUIPMENT, ArmorType.LEGGINGS), QuantumSuitItem.LEGS));
+    public static final DeferredItem<Item> QUANTUM_BOOTS = ITEMS.registerItem("quantum_boots", props -> new QuantumSuitItem(OldustryMaterials.utilityEquip(props.rarity(Rarity.RARE), OldustryMaterials.QUANTUM_EQUIPMENT, ArmorType.BOOTS), QuantumSuitItem.BOOTS));
     public static final DeferredItem<Item> NANO_SABER = ITEMS.registerItem("nano_saber", props -> new NanoSaberItem(
         props.sword(OldustryMaterials.NANO_SABER, 3, -2.4f).rarity(Rarity.UNCOMMON)));
     public static final DeferredItem<Item> STATIC_BOOTS = ITEMS.registerItem("static_boots", props -> new StaticBootsItem(props.humanoidArmor(OldustryMaterials.pack(OldustryMaterials.RUBBER_EQUIPMENT), ArmorType.BOOTS)));
@@ -304,6 +434,10 @@ public final class OldustryItems {
 
     private static DeferredItem<Item> item(String name) {
         return ITEMS.registerSimpleItem(name);
+    }
+
+    private static DeferredItem<Item> tfbp(String name, com.oldustry.machine.OldustryTfbp kind) {
+        return ITEMS.registerItem(name, props -> new TfbpItem(kind, props));
     }
 
     private static DeferredItem<Item> coloredPainter(String name) {

@@ -67,8 +67,8 @@ public class NanoSuitItem extends ElectricItem {
         if (!(event.getEntity() instanceof LivingEntity entity) || entity.level().isClientSide()) {
             return;
         }
-        // Hazmat owns the shared ISpecialArmor pass so a mixed set is not charged twice.
-        if (OldustryHazmatItem.wearing(entity)) {
+        // Hazmat owns the shared pass. A quantum piece owns the mixed nano pass so the ratios share one group.
+        if (OldustryHazmatItem.wearing(entity) || QuantumSuitItem.wearing(entity)) {
             return;
         }
         var container = event.getContainer();
@@ -77,43 +77,47 @@ public class NanoSuitItem extends ElectricItem {
         if (!fall && container.getSource().is(DamageTypeTags.BYPASSES_ARMOR)) {
             return;
         }
-        float damage = container.getNewDamage();
-        if (damage <= 0) {
+        if (container.getNewDamage() <= 0) {
             return;
         }
-        ItemStack[] stacks = new ItemStack[4];
-        int[] charge = new int[4];
-        boolean any = false;
-        for (int i = 0; i < 4; i++) {
-            stacks[i] = entity.getItemBySlot(SLOTS[i]);
-            if (stacks[i].getItem() instanceof NanoSuitItem) {
-                charge[i] = energy(stacks[i]);
-                any = true;
+        // Same cooldown as the quantum suit: pay only inside the armor reduction actuallyHurt applies.
+        container.addModifier(net.neoforged.neoforge.common.damagesource.DamageContainer.Reduction.ARMOR, (c, vanilla) -> {
+            float base = c.getNewDamage();
+            if (base <= 0f) {
+                return vanilla;
             }
-        }
-        if (!any) {
-            return;
-        }
-        NanoArmor.Hit hit = NanoArmor.absorb(damage, charge[0], charge[1], charge[2], charge[3], fall);
-        int shown = 0;
-        for (int i = 0; i < 4; i++) {
-            int eu = hit.eu(i);
-            if (eu > 0) {
-                setEnergy(stacks[i], charge[i] - eu);
+            ItemStack[] stacks = new ItemStack[4];
+            int[] charge = new int[4];
+            boolean any = false;
+            for (int i = 0; i < 4; i++) {
+                stacks[i] = entity.getItemBySlot(SLOTS[i]);
+                if (stacks[i].getItem() instanceof NanoSuitItem) {
+                    charge[i] = energy(stacks[i]);
+                    any = true;
+                }
             }
-            shown += NanoArmor.display(i, charge[i]);
-        }
-        container.setNewDamage(hit.remaining());
-        // The bar reads ARMOR. Put that reduction back to every piece that is not this display.
-        if (shown > 0) {
-            int icons = shown;
-            container.addModifier(net.neoforged.neoforge.common.damagesource.DamageContainer.Reduction.ARMOR, (c, vanilla) -> {
-                float realArmor = Math.max(0, entity.getArmorValue() - icons);
-                float toughness = (float) entity.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
-                float wanted = CombatRules.getDamageAfterAbsorb(entity, c.getNewDamage(), c.getSource(), realArmor, toughness);
-                return Math.max(0f, c.getNewDamage() - wanted);
-            });
-        }
+            if (!any) {
+                return vanilla;
+            }
+            NanoArmor.Hit hit = NanoArmor.absorb(base, charge[0], charge[1], charge[2], charge[3], fall);
+            int shown = 0;
+            int paid = 0;
+            for (int i = 0; i < 4; i++) {
+                int eu = hit.eu(i);
+                paid += eu;
+                if (eu > 0) {
+                    setEnergy(stacks[i], charge[i] - eu);
+                }
+                shown += NanoArmor.display(i, charge[i]);
+            }
+            if (paid == 0 && shown == 0) {
+                return vanilla;
+            }
+            float armor = shown > 0 ? Math.max(0, entity.getArmorValue() - shown) : entity.getArmorValue();
+            float toughness = (float) entity.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
+            float wanted = CombatRules.getDamageAfterAbsorb(entity, hit.remaining(), c.getSource(), armor, toughness);
+            return Math.max(0f, base - wanted);
+        });
     }
 
     /** HUD icons and the vanilla "+N Armor" line. Absent below {@link NanoArmor#EU_PER_DAMAGE}. */
@@ -149,7 +153,7 @@ public class NanoSuitItem extends ElectricItem {
         );
     }
 
-    /** Active nano saber. Removes the piece when the discharge leaves it empty. Quantum waits for D5. */
+    /** Active nano saber. Removes the piece when the discharge leaves it empty. */
     public static void shred(LivingEntity target, EquipmentSlot slot) {
         ItemStack stack = target.getItemBySlot(slot);
         if (!(stack.getItem() instanceof NanoSuitItem)) {

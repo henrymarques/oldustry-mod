@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:dense_copper_plate",
+    "G": "oldustry:glass_fibre_cable",
+    "S": "oldustry:heat_exchanger",
+    "c": "oldustry:electronic_circuit"
+  },
+  "pattern": [
+    "GcG",
+    "SCS",
+    "GcG"
+  ],
+  "result": {
+    "id": "oldustry:advanced_heat_exchanger"
+  }
+}

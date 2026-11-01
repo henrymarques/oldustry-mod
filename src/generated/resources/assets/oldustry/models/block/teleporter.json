@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/teleporter_down",
+    "east": "oldustry:block/teleporter_west",
+    "north": "oldustry:block/teleporter_south",
+    "particle": "oldustry:block/teleporter_south",
+    "south": "oldustry:block/teleporter_north",
+    "up": "oldustry:block/teleporter_up",
+    "west": "oldustry:block/teleporter_east"
+  }
+}

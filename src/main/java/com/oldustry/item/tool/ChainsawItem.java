@@ -1,5 +1,6 @@
 package com.oldustry.item.tool;
 
+import com.oldustry.Oldustry;
 import com.oldustry.item.ElectricToolItem;
 
 import java.util.List;
@@ -9,12 +10,14 @@ import com.oldustry.registry.OldustrySounds;
 
 import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemInstance;
 import net.minecraft.world.item.ItemStack;
@@ -104,8 +107,17 @@ public class ChainsawItem extends ElectricToolItem {
     @Override
     public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         super.postHurtEnemy(stack, target, attacker);
-        if (!attacker.level().isClientSide()) {
-            OldustrySounds.play(attacker.level(), null, target.blockPosition(), OldustrySounds.CHAINSAW_USE.get(), SoundSource.PLAYERS, 1f, 1f);
+        if (attacker.level().isClientSide()) {
+            return;
+        }
+        OldustrySounds.play(attacker.level(), null, target.blockPosition(), OldustrySounds.CHAINSAW_USE.get(), SoundSource.PLAYERS, 1f, 1f);
+        if (ChainsawStats.killedCreeper(attacker instanceof ServerPlayer, target instanceof Creeper, target.getHealth())
+            && attacker instanceof ServerPlayer player) {
+            var holder = player.level().getServer().getAdvancements().get(
+                Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "kill_creeper_chainsaw"));
+            if (holder != null) {
+                player.getAdvancements().award(holder, "killed");
+            }
         }
     }
 }

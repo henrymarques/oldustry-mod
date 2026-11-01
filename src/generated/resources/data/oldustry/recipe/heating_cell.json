@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:dense_copper_plate",
+    "L": "oldustry:lava_cell",
+    "c": "oldustry:electronic_circuit"
+  },
+  "pattern": [
+    "c",
+    "L",
+    "C"
+  ],
+  "result": {
+    "id": "oldustry:heating_cell"
+  }
+}

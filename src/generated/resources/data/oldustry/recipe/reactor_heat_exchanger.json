@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:dense_copper_plate",
+    "S": "oldustry:heat_exchanger"
+  },
+  "pattern": [
+    "C",
+    "S",
+    "C"
+  ],
+  "result": {
+    "id": "oldustry:reactor_heat_exchanger"
+  }
+}

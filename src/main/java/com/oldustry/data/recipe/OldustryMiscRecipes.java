@@ -260,5 +260,96 @@ final class OldustryMiscRecipes extends RecipeProvider {
             .pattern("TTT")
             .unlockedBy("has_electronic_circuit", has(OldustryItems.ELECTRONIC_CIRCUIT.get()))
             .save(output, OldustryRecipeProvider.id("remote_from_tnt"));
+
+        shaped(RecipeCategory.MISC, OldustryItems.REMOTE.get())
+            .define('C', OldustryItems.INSULATED_COPPER_CABLE.get())
+            .define('T', OldustryTags.Items.INGOTS_TIN)
+            .define('L', Items.LAPIS_LAZULI)
+            .define('F', OldustryItems.FREQUENCY_TRANSMITTER.get())
+            .pattern(" C ")
+            .pattern("TLT")
+            .pattern(" F ")
+            .unlockedBy("has_frequency_transmitter", has(OldustryItems.FREQUENCY_TRANSMITTER.get()))
+            .save(output, OldustryRecipeProvider.id("remote_from_transmitter"));
+
+        shapeless(RecipeCategory.TOOLS, OldustryItems.FREQUENCY_TRANSMITTER.get())
+            .requires(OldustryItems.ELECTRONIC_CIRCUIT.get())
+            .requires(OldustryItems.INSULATED_COPPER_CABLE.get())
+            .unlockedBy("has_electronic_circuit", has(OldustryItems.ELECTRONIC_CIRCUIT.get()))
+            .save(output);
+
+        shaped(RecipeCategory.TRANSPORTATION, OldustryItems.CARBON_BOAT.get())
+            .define('X', OldustryItems.CARBON_PLATE.get())
+            .pattern("X X")
+            .pattern("XXX")
+            .unlockedBy("has_carbon_plate", has(OldustryItems.CARBON_PLATE.get()))
+            .save(output);
+        shaped(RecipeCategory.TRANSPORTATION, OldustryItems.RUBBER_DINGHY.get())
+            .define('X', OldustryTags.Items.RUBBER)
+            .pattern("X X")
+            .pattern("XXX")
+            .unlockedBy("has_rubber", has(OldustryTags.Items.RUBBER))
+            .save(output);
+        shapeless(RecipeCategory.TRANSPORTATION, OldustryItems.RUBBER_DINGHY.get())
+            .requires(OldustryItems.DAMAGED_RUBBER_DINGHY.get())
+            .requires(OldustryTags.Items.RUBBER)
+            .unlockedBy("has_damaged_dinghy", has(OldustryItems.DAMAGED_RUBBER_DINGHY.get()))
+            .save(output, OldustryRecipeProvider.id("rubber_dinghy_from_damaged"));
+        shaped(RecipeCategory.TRANSPORTATION, OldustryItems.ELECTRIC_BOAT.get())
+            .define('C', OldustryItems.INSULATED_COPPER_CABLE.get())
+            .define('X', OldustryTags.Items.INGOTS_REFINED_IRON)
+            .define('@', OldustryItems.WATER_MILL.get())
+            .pattern("CCC")
+            .pattern("X@X")
+            .pattern("XXX")
+            .unlockedBy("has_water_mill", has(OldustryItems.WATER_MILL.get()))
+            .save(output);
+
+        shaped(RecipeCategory.MISC, OldustryItems.TFBP.get())
+            .define('C', OldustryItems.ELECTRONIC_CIRCUIT.get())
+            .define('A', OldustryItems.ADVANCED_CIRCUIT.get())
+            .define('R', Items.REDSTONE)
+            .pattern(" C ")
+            .pattern(" A ")
+            .pattern("R R")
+            .unlockedBy("has_advanced_circuit", has(OldustryItems.ADVANCED_CIRCUIT.get()))
+            .save(output);
+        around(OldustryItems.TFBP_CULTIVATION.get(), Items.WHEAT_SEEDS, 'S');
+        around(OldustryItems.TFBP_DESERTIFICATION.get(), Items.SAND, 'S');
+        around(OldustryItems.TFBP_IRRIGATION.get(), Items.WATER_BUCKET, 'W');
+        around(OldustryItems.TFBP_CHILLING.get(), Items.SNOWBALL, 'S');
+        around(OldustryItems.TFBP_FLATIFICATION.get(), Items.DIRT, 'D');
+        shaped(RecipeCategory.MISC, OldustryItems.TFBP_MUSHROOM.get())
+            .define('#', OldustryItems.TFBP.get())
+            .define('M', Items.BROWN_MUSHROOM)
+            .define('m', Items.MYCELIUM)
+            .pattern("mMm")
+            .pattern("M#M")
+            .pattern("mMm")
+            .unlockedBy("has_tfbp", has(OldustryItems.TFBP.get()))
+            .save(output);
+        blank(OldustryItems.TFBP_CULTIVATION.get(), "tfbp_from_cultivation");
+        blank(OldustryItems.TFBP_IRRIGATION.get(), "tfbp_from_irrigation");
+        blank(OldustryItems.TFBP_CHILLING.get(), "tfbp_from_chilling");
+        blank(OldustryItems.TFBP_DESERTIFICATION.get(), "tfbp_from_desertification");
+        blank(OldustryItems.TFBP_FLATIFICATION.get(), "tfbp_from_flatification");
+    }
+
+    private void around(net.minecraft.world.level.ItemLike result, net.minecraft.world.level.ItemLike ring, char symbol) {
+        shaped(RecipeCategory.MISC, result)
+            .define('#', OldustryItems.TFBP.get())
+            .define(symbol, ring)
+            .pattern(" " + symbol + " ")
+            .pattern(symbol + "#" + symbol)
+            .pattern(" " + symbol + " ")
+            .unlockedBy("has_tfbp", has(OldustryItems.TFBP.get()))
+            .save(output);
+    }
+
+    private void blank(net.minecraft.world.level.ItemLike programmed, String id) {
+        shapeless(RecipeCategory.MISC, OldustryItems.TFBP.get())
+            .requires(programmed)
+            .unlockedBy("has_programmed_tfbp", has(programmed))
+            .save(output, OldustryRecipeProvider.id(id));
     }
 }

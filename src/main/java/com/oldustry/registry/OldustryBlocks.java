@@ -12,6 +12,8 @@ import com.oldustry.block.MachineBlock;
 import com.oldustry.block.MachineCasingBlock;
 import com.oldustry.block.ItntBlock;
 import com.oldustry.block.NukeBlock;
+import com.oldustry.block.OldustryReactorBlock;
+import com.oldustry.block.OldustryReactorChamberBlock;
 import com.oldustry.block.PersonalSafeBlock;
 import com.oldustry.block.MiningPipeBlock;
 import com.oldustry.block.ResinSheetBlock;
@@ -144,6 +146,20 @@ public final class OldustryBlocks {
     public static final DeferredBlock<MachineBlock> ELECTROLYZER = machine(OldustryMachineKind.ELECTROLYZER);
     public static final DeferredBlock<MachineBlock> MAGNETIZER = machine(OldustryMachineKind.MAGNETIZER);
     public static final DeferredBlock<MachineBlock> INDUCTION = machine(OldustryMachineKind.INDUCTION);
+    public static final DeferredBlock<MachineBlock> TESLA = machine(OldustryMachineKind.TESLA);
+    public static final DeferredBlock<MachineBlock> TELEPORTER = machine(OldustryMachineKind.TELEPORTER);
+    public static final DeferredBlock<MachineBlock> TERRAFORMER = machine(OldustryMachineKind.TERRAFORMER);
+    public static final DeferredBlock<MachineBlock> MASS_FABRICATOR = machine(OldustryMachineKind.MASS_FABRICATOR);
+    public static final DeferredBlock<OldustryReactorBlock> NUCLEAR_REACTOR = BLOCKS.registerBlock(
+        "nuclear_reactor",
+        OldustryReactorBlock::new,
+        p -> p.mapColor(MapColor.METAL).strength(3, 10).requiresCorrectToolForDrops().sound(SoundType.METAL)
+    );
+    public static final DeferredBlock<OldustryReactorChamberBlock> REACTOR_CHAMBER = BLOCKS.registerBlock(
+        "reactor_chamber",
+        OldustryReactorChamberBlock::new,
+        p -> p.mapColor(MapColor.METAL).strength(2, 10).requiresCorrectToolForDrops().sound(SoundType.METAL)
+    );
     public static final DeferredBlock<PersonalSafeBlock> PERSONAL_SAFE = BLOCKS.registerBlock(
         "personal_safe",
         PersonalSafeBlock::new,
@@ -247,7 +263,8 @@ public final class OldustryBlocks {
             BATBOX.get(), MFE.get(), MFSU.get(), LV_TRANSFORMER.get(), MV_TRANSFORMER.get(), HV_TRANSFORMER.get(),
             MACERATOR.get(), EXTRACTOR.get(), COMPRESSOR.get(), RECYCLER.get(), ELECTRIC_FURNACE.get(), LUMINATOR.get(),
             MINER.get(), PUMP.get(), CANNER.get(),
-            ELECTROLYZER.get(), MAGNETIZER.get(), INDUCTION.get()
+            ELECTROLYZER.get(), MAGNETIZER.get(), INDUCTION.get(), TESLA.get(), TELEPORTER.get(), TERRAFORMER.get(),
+            MASS_FABRICATOR.get()
         );
     }
 

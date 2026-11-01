@@ -2,6 +2,7 @@ package com.oldustry.item.tool;
 
 import com.oldustry.item.ElectricItem;
 import com.oldustry.item.equipment.NanoSuitItem;
+import com.oldustry.item.equipment.QuantumSuitItem;
 
 import org.jspecify.annotations.Nullable;
 
@@ -141,10 +142,14 @@ public class NanoSaberItem extends ElectricItem {
             if (slot.getType() != EquipmentSlot.Type.HUMANOID_ARMOR) {
                 continue;
             }
-            if (!(target.getItemBySlot(slot).getItem() instanceof NanoSuitItem)) {
+            ItemStack worn = target.getItemBySlot(slot);
+            if (worn.getItem() instanceof NanoSuitItem) {
+                NanoSuitItem.shred(target, slot);
+            } else if (worn.getItem() instanceof QuantumSuitItem) {
+                QuantumSuitItem.shred(target, slot);
+            } else {
                 continue;
             }
-            NanoSuitItem.shred(target, slot);
             if (!pay(stack, NanoSaber.SHRED_EU, attacker)) {
                 setActive(stack, false, attacker instanceof Player player ? player : null);
             }

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "oldustry:re_enriched_uranium_cell",
+    "oldustry:coal_dust"
+  ],
+  "result": {
+    "id": "oldustry:uranium_cell"
+  }
+}

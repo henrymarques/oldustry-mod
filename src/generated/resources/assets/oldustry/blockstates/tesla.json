@@ -1,0 +1,50 @@
+{
+  "variants": {
+    "active=false,facing=down": {
+      "model": "oldustry:block/tesla",
+      "x": 90
+    },
+    "active=false,facing=east": {
+      "model": "oldustry:block/tesla",
+      "y": 90
+    },
+    "active=false,facing=north": {
+      "model": "oldustry:block/tesla"
+    },
+    "active=false,facing=south": {
+      "model": "oldustry:block/tesla",
+      "y": 180
+    },
+    "active=false,facing=up": {
+      "model": "oldustry:block/tesla",
+      "x": 270
+    },
+    "active=false,facing=west": {
+      "model": "oldustry:block/tesla",
+      "y": 270
+    },
+    "active=true,facing=down": {
+      "model": "oldustry:block/tesla",
+      "x": 90
+    },
+    "active=true,facing=east": {
+      "model": "oldustry:block/tesla",
+      "y": 90
+    },
+    "active=true,facing=north": {
+      "model": "oldustry:block/tesla"
+    },
+    "active=true,facing=south": {
+      "model": "oldustry:block/tesla",
+      "y": 180
+    },
+    "active=true,facing=up": {
+      "model": "oldustry:block/tesla",
+      "x": 270
+    },
+    "active=true,facing=west": {
+      "model": "oldustry:block/tesla",
+      "y": 270
+    }
+  }
+}

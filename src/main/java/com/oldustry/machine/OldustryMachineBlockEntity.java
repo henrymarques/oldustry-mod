@@ -61,7 +61,8 @@ public abstract class OldustryMachineBlockEntity extends BlockEntity implements 
                 case OldustryMachineMenu.DATA_GAUGE_MAX_OR_MINER_MODE -> kind.type == OldustryMachineKind.Type.MINING ? ((OldustryMinerBlockEntity) OldustryMachineBlockEntity.this).mineMode() : fuelGaugeMax();
                 case OldustryMachineMenu.DATA_EXTRA_OR_MINER_ACTIVE -> kind.type == OldustryMachineKind.Type.MINING
                     ? (getBlockState().getValue(MachineBlock.ACTIVE) ? 1 : 0)
-                    : kind.type == OldustryMachineKind.Type.SOLAR ? ((OldustryGeneratorBlockEntity) OldustryMachineBlockEntity.this).sun() : 0;
+                    : kind.type == OldustryMachineKind.Type.SOLAR ? ((OldustryGeneratorBlockEntity) OldustryMachineBlockEntity.this).sun()
+                    : kind.type == OldustryMachineKind.Type.MASS ? ((OldustryMassFabricatorBlockEntity) OldustryMachineBlockEntity.this).scrap() : 0;
                 default -> 0;
             };
         }
@@ -92,6 +93,10 @@ public abstract class OldustryMachineBlockEntity extends BlockEntity implements 
             case ELECTROLYZER -> new OldustryElectrolyzerBlockEntity(pos, state);
             case MAGNETIZER -> new OldustryMagnetizerBlockEntity(pos, state);
             case INDUCTION -> new OldustryInductionBlockEntity(pos, state);
+            case TESLA -> new OldustryTeslaBlockEntity(pos, state);
+            case TELEPORTER -> new OldustryTeleporterBlockEntity(pos, state);
+            case TERRAFORMER -> new OldustryTerraformerBlockEntity(pos, state);
+            case MASS_FABRICATOR -> new OldustryMassFabricatorBlockEntity(pos, state);
             case BATBOX, MFE, MFSU -> new OldustryStorageBlockEntity(kindOf(state), pos, state);
             case GENERATOR, GEO_GENERATOR, SOLAR_PANEL, WATER_MILL, WIND_MILL -> new OldustryGeneratorBlockEntity(kindOf(state), pos, state);
             case LUMINATOR -> new OldustryLuminatorBlockEntity(pos, state);
@@ -144,6 +149,9 @@ public abstract class OldustryMachineBlockEntity extends BlockEntity implements 
     }
 
     public int comparator() {
+        if (this instanceof OldustryTeleporterBlockEntity teleporter) {
+            return teleporter.linked() ? 15 : 0;
+        }
         int duration = kind.duration();
         if (duration > 0) {
             return Math.min(15, progress * 15 / duration);
@@ -163,6 +171,9 @@ public abstract class OldustryMachineBlockEntity extends BlockEntity implements 
     public static void clientTick(Level level, BlockPos pos, BlockState state, OldustryMachineBlockEntity be) {
         if (state.getValue(MachineBlock.ACTIVE)) {
             Oldustry.clientMachineLoop.accept(pos, be.kind());
+            if (be instanceof OldustryTeleporterBlockEntity) {
+                OldustryTeleporterBlockEntity.idleParticles(level, pos);
+            }
         } else {
             Oldustry.clientMachineLoopStop.accept(pos);
         }
@@ -179,6 +190,10 @@ public abstract class OldustryMachineBlockEntity extends BlockEntity implements 
             case CANNING -> ((OldustryCannerBlockEntity) this).tickCanner(level);
             case ELECTROLYZER -> ((OldustryElectrolyzerBlockEntity) this).tickElectrolyzer(level, pos);
             case MAGNETIZER -> ((OldustryMagnetizerBlockEntity) this).tickMagnetizer(level, pos);
+            case TESLA -> ((OldustryTeslaBlockEntity) this).tickTesla(level, pos);
+            case TELEPORTER -> ((OldustryTeleporterBlockEntity) this).tickTeleporter(level, pos);
+            case TERRAFORMER -> ((OldustryTerraformerBlockEntity) this).tickTerraformer(level, pos);
+            case MASS -> ((OldustryMassFabricatorBlockEntity) this).tickMass(level, pos);
             case INDUCTION -> {
                 dischargeSlot(2);
                 yield ((OldustryInductionBlockEntity) this).tickInduction(level, pos);
@@ -349,7 +364,10 @@ public abstract class OldustryMachineBlockEntity extends BlockEntity implements 
         super.loadAdditional(input);
         ContainerHelper.loadAllItems(input, items);
         energy = input.getIntOr("energy", 0);
-        clampEnergyToCapacity();
+        // Mass fab inject can sit above the 1M threshold until the next UU. Clamping would delete that remainder.
+        if (kind.type != OldustryMachineKind.Type.MASS) {
+            clampEnergyToCapacity();
+        }
         progress = input.getIntOr("progress", 0);
         totalEmitted = input.getLongOr("emitted", 0);
         totalSunken = input.getLongOr("sunken", 0);
@@ -386,7 +404,7 @@ public abstract class OldustryMachineBlockEntity extends BlockEntity implements 
         boolean powered = level != null && level.hasNeighborSignal(worldPosition);
         return switch (kind.type) {
             case STORAGE -> face != facing;
-            case MACERATOR, EXTRACTOR, COMPRESSOR, RECYCLER, FURNACE, LUMINATOR, MINING, PUMPING, CANNING, MAGNETIZER, INDUCTION -> true;
+            case MACERATOR, EXTRACTOR, COMPRESSOR, RECYCLER, FURNACE, LUMINATOR, MINING, PUMPING, CANNING, MAGNETIZER, INDUCTION, TESLA, TERRAFORMER, MASS -> true;
             // Electrolyzer is NOT an EnergyNet sink — only drains adjacent storage.
             default -> false;
         };

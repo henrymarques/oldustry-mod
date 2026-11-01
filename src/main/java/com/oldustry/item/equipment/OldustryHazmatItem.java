@@ -134,29 +134,34 @@ public class OldustryHazmatItem extends Item {
         if (!(event.getEntity() instanceof LivingEntity entity) || entity.level().isClientSide() || !wearing(entity)) {
             return;
         }
-        float damage = event.getContainer().getNewDamage();
-        if (damage <= 0) {
+        if (event.getContainer().getNewDamage() <= 0) {
             return;
         }
-        OldustryHazmatArmor.Piece[] pieces = pieces(entity);
-        OldustryHazmatArmor.Hit hit = OldustryHazmatArmor.absorb(damage, pieces, attack(event.getSource()));
-        for (int i = 0; i < 4; i++) {
-            ItemStack stack = entity.getItemBySlot(SLOTS[i]);
-            int worn = hit.hazmat(i) + hit.vanillaWear()[i];
-            if (worn > 0) {
-                stack.hurtAndBreak(worn, entity, SLOTS[i]);
+        OldustryHazmatArmor.Attack attack = attack(event.getSource());
+        // Wear and the nano discharge follow the landed hit. The incoming event also sees lava ticks the cooldown drops.
+        event.getContainer().addModifier(net.neoforged.neoforge.common.damagesource.DamageContainer.Reduction.ARMOR, (container, vanilla) -> {
+            float base = container.getNewDamage();
+            if (base <= 0f) {
+                return 0f;
             }
-            int eu = hit.nano(i);
-            if (eu > 0 && stack.getItem() instanceof NanoSuitItem) {
-                ElectricItem.setEnergy(stack, Math.max(0, ElectricItem.energy(stack) - eu));
+            OldustryHazmatArmor.Hit hit = OldustryHazmatArmor.absorb(base, pieces(entity), attack);
+            for (int i = 0; i < 4; i++) {
+                ItemStack stack = entity.getItemBySlot(SLOTS[i]);
+                int worn = hit.hazmat(i) + hit.vanillaWear()[i];
+                if (worn > 0) {
+                    stack.hurtAndBreak(worn, entity, SLOTS[i]);
+                }
+                int eu = hit.nano(i);
+                if (eu > 0 && stack.getItem() instanceof NanoSuitItem) {
+                    ElectricItem.setEnergy(stack, Math.max(0, ElectricItem.energy(stack) - eu));
+                }
             }
-        }
-        if (hit.fireResist() && entity instanceof Player player) {
-            player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, OldustryHazmatArmor.RESIST_TICKS, 1));
-        }
-        event.getContainer().setNewDamage(hit.remaining());
-        // The pass already applied hazmat, nano and vanilla ratios. The +1 display must not reduce again.
-        event.getContainer().addModifier(net.neoforged.neoforge.common.damagesource.DamageContainer.Reduction.ARMOR, (container, vanilla) -> 0f);
+            if (hit.fireResist() && entity instanceof Player player) {
+                player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, OldustryHazmatArmor.RESIST_TICKS, 1));
+            }
+            // The pass already applied hazmat, nano and vanilla ratios. The +1 display must not reduce again.
+            return Math.max(0f, base - hit.remaining());
+        });
     }
 
     @SubscribeEvent

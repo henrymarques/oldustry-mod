@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:glass_fibre_cable",
+    "D": "minecraft:diamond",
+    "F": "oldustry:frequency_transmitter",
+    "G": "oldustry:advanced_circuit",
+    "M": "oldustry:advanced_machine"
+  },
+  "pattern": [
+    "GFG",
+    "CMC",
+    "GDG"
+  ],
+  "result": {
+    "id": "oldustry:teleporter"
+  }
+}

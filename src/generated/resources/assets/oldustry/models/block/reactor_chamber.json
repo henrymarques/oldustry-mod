@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/reactor_chamber_down",
+    "east": "oldustry:block/reactor_chamber_west",
+    "north": "oldustry:block/reactor_chamber_south",
+    "particle": "oldustry:block/reactor_chamber_south",
+    "south": "oldustry:block/reactor_chamber_north",
+    "up": "oldustry:block/reactor_chamber_up",
+    "west": "oldustry:block/reactor_chamber_east"
+  }
+}

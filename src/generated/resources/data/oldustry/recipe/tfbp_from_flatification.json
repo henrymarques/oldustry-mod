@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "oldustry:tfbp_flatification"
+  ],
+  "result": {
+    "id": "oldustry:tfbp"
+  }
+}

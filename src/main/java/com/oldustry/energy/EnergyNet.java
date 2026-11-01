@@ -53,15 +53,22 @@ public final class EnergyNet {
                 if (source.offerEnergy() <= 0) {
                     break;
                 }
-                emit(level, source);
+                emit(level, source, source.offerEnergy());
             }
         }
     }
 
-    private void emit(ServerLevel level, EnergyTile source) {
-        int packet = source.offerEnergy();
+    /**
+     * Push one packet from a source and return what the net did not consume.
+     * The reactor uses this so adjacent chambers send the leftover after the core.
+     */
+    public int emitAmount(ServerLevel level, EnergyTile source, int packet) {
+        return emit(level, source, packet);
+    }
+
+    private int emit(ServerLevel level, EnergyTile source, int packet) {
         if (packet <= 0) {
-            return;
+            return 0;
         }
         List<EnergyTile> order = new ArrayList<>();
         Map<BlockPos, Integer> index = new HashMap<>();
@@ -112,6 +119,7 @@ public final class EnergyNet {
         if (injected > 0) {
             source.addEmitted(injected);
         }
+        return packet - take;
     }
 
     private void walk(

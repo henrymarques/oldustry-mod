@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": "minecraft:iron_bars",
+    "D": "minecraft:diamond",
+    "V": "oldustry:heat_vent"
+  },
+  "pattern": [
+    "#V#",
+    "#D#",
+    "#V#"
+  ],
+  "result": {
+    "id": "oldustry:advanced_heat_vent"
+  }
+}

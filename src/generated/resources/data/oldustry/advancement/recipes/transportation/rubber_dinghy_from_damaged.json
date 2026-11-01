@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_damaged_dinghy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:damaged_rubber_dinghy"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:rubber_dinghy_from_damaged"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_damaged_dinghy"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:rubber_dinghy_from_damaged"
+    ]
+  }
+}

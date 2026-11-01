@@ -1,0 +1,26 @@
+{
+  "parent": "oldustry:build_terraformer",
+  "criteria": {
+    "end": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.terraform_end_cultivation.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "oldustry:tfbp_cultivation"
+    },
+    "title": {
+      "translate": "advancements.oldustry.terraform_end_cultivation.title"
+    }
+  },
+  "requirements": [
+    [
+      "end"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "X": "#c:rubber"
+  },
+  "pattern": [
+    "X X",
+    "XXX"
+  ],
+  "result": {
+    "id": "oldustry:rubber_dinghy"
+  }
+}

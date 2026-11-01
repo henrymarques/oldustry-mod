@@ -43,6 +43,9 @@ public final class WrenchHandler {
         } else if (player != null && player.isShiftKeyDown()) {
             face = face.getOpposite();
         }
+        if (level.getBlockEntity(pos) instanceof com.oldustry.machine.OldustryTerraformerBlockEntity terra && terra.hasBlueprint()) {
+            return Result.ROTATE;
+        }
         Wrenchable wrenchable = resolve(state, level.getBlockEntity(pos));
         if (wrenchable != null && wrenchable.canSetFacing(state, face)) {
             return Result.ROTATE;
@@ -68,6 +71,13 @@ public final class WrenchHandler {
             face = nextFace(state, resolve(state, level.getBlockEntity(pos)));
         } else if (player != null && player.isShiftKeyDown()) {
             face = face.getOpposite();
+        }
+        if (level.getBlockEntity(pos) instanceof com.oldustry.machine.OldustryTerraformerBlockEntity terra && terra.hasBlueprint()) {
+            if (!level.isClientSide()) {
+                terra.ejectBlueprint();
+                play(level, pos);
+            }
+            return Result.ROTATE;
         }
         Wrenchable wrenchable = resolve(state, level.getBlockEntity(pos));
         if (intended == Result.ROTATE && wrenchable != null && wrenchable.canSetFacing(state, face)) {

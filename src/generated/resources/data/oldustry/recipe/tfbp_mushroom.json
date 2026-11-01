@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": "oldustry:tfbp",
+    "M": "minecraft:brown_mushroom",
+    "m": "minecraft:mycelium"
+  },
+  "pattern": [
+    "mMm",
+    "M#M",
+    "mMm"
+  ],
+  "result": {
+    "id": "oldustry:tfbp_mushroom"
+  }
+}

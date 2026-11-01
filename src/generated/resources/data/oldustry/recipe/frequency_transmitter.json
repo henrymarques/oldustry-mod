@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "oldustry:electronic_circuit",
+    "oldustry:insulated_copper_cable"
+  ],
+  "result": {
+    "id": "oldustry:frequency_transmitter"
+  }
+}

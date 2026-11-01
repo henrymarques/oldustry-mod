@@ -1,13 +1,17 @@
 package com.oldustry.data.recipe;
 
+import com.oldustry.reactor.OldustryReactor;
 import com.oldustry.registry.OldustryItems;
 import com.oldustry.registry.OldustryTags;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 
 final class OldustryMachineRecipes extends RecipeProvider {
@@ -307,6 +311,64 @@ final class OldustryMachineRecipes extends RecipeProvider {
             .unlockedBy("has_advanced_machine", has(OldustryItems.ADVANCED_MACHINE.get()))
             .save(output);
 
+        // Tesla (JAR Recipies: RRR / RMR / ICI). R = redstone, M = MV transformer.
+        shaped(RecipeCategory.DECORATIONS, OldustryItems.TESLA.get())
+            .define('R', Items.REDSTONE)
+            .define('M', OldustryItems.MV_TRANSFORMER.get())
+            .define('I', OldustryTags.Items.INGOTS_REFINED_IRON)
+            .define('C', OldustryItems.ELECTRONIC_CIRCUIT.get())
+            .pattern("RRR")
+            .pattern("RMR")
+            .pattern("ICI")
+            .unlockedBy("has_mv_transformer", has(OldustryItems.MV_TRANSFORMER.get()))
+            .save(output);
+
+        // Teleporter (JAR Recipies: GFG / CMC / GDG). D is industrial diamond or vanilla diamond.
+        shaped(RecipeCategory.DECORATIONS, OldustryItems.TELEPORTER.get())
+            .define('G', OldustryItems.ADVANCED_CIRCUIT.get())
+            .define('F', OldustryItems.FREQUENCY_TRANSMITTER.get())
+            .define('C', OldustryItems.GLASS_FIBRE_CABLE.get())
+            .define('M', OldustryItems.ADVANCED_MACHINE.get())
+            .define('D', OldustryItems.INDUSTRIAL_DIAMOND.get())
+            .pattern("GFG")
+            .pattern("CMC")
+            .pattern("GDG")
+            .unlockedBy("has_advanced_machine", has(OldustryItems.ADVANCED_MACHINE.get()))
+            .save(output, OldustryRecipeProvider.id("teleporter_from_industrial_diamond"));
+        shaped(RecipeCategory.DECORATIONS, OldustryItems.TELEPORTER.get())
+            .define('G', OldustryItems.ADVANCED_CIRCUIT.get())
+            .define('F', OldustryItems.FREQUENCY_TRANSMITTER.get())
+            .define('C', OldustryItems.GLASS_FIBRE_CABLE.get())
+            .define('M', OldustryItems.ADVANCED_MACHINE.get())
+            .define('D', Items.DIAMOND)
+            .pattern("GFG")
+            .pattern("CMC")
+            .pattern("GDG")
+            .unlockedBy("has_diamond", has(Items.DIAMOND))
+            .save(output, OldustryRecipeProvider.id("teleporter_from_diamond"));
+
+        shaped(RecipeCategory.DECORATIONS, OldustryItems.TERRAFORMER.get())
+            .define('G', Items.GLOWSTONE_DUST)
+            .define('T', OldustryItems.TFBP.get())
+            .define('D', Items.DIRT)
+            .define('M', OldustryItems.ADVANCED_MACHINE.get())
+            .pattern("GTG")
+            .pattern("DMD")
+            .pattern("GDG")
+            .unlockedBy("has_advanced_machine", has(OldustryItems.ADVANCED_MACHINE.get()))
+            .save(output);
+
+        shaped(RecipeCategory.DECORATIONS, OldustryItems.MASS_FABRICATOR.get())
+            .define('G', Items.GLOWSTONE_DUST)
+            .define('C', OldustryItems.ADVANCED_CIRCUIT.get())
+            .define('A', OldustryItems.ADVANCED_MACHINE.get())
+            .define('L', OldustryItems.LAPOTRON_CRYSTAL.get())
+            .pattern("GCG")
+            .pattern("ALA")
+            .pattern("GCG")
+            .unlockedBy("has_advanced_machine", has(OldustryItems.ADVANCED_MACHINE.get()))
+            .save(output);
+
         // Personal Safe (JAR column: circuit / machine / chest). The chest is the vanilla block, same field as the toolbox.
         shaped(RecipeCategory.DECORATIONS, OldustryItems.PERSONAL_SAFE.get())
             .define('c', OldustryItems.ELECTRONIC_CIRCUIT.get())
@@ -316,6 +378,81 @@ final class OldustryMachineRecipes extends RecipeProvider {
             .pattern("M")
             .pattern("C")
             .unlockedBy("has_machine", has(OldustryItems.MACHINE_CASING.get()))
+            .save(output);
+
+        shaped(RecipeCategory.DECORATIONS, OldustryItems.REACTOR_CHAMBER.get())
+            .define('C', OldustryItems.DENSE_COPPER_PLATE.get())
+            .define('M', OldustryItems.MACHINE_CASING.get())
+            .pattern(" C ")
+            .pattern("CMC")
+            .pattern(" C ")
+            .unlockedBy("has_machine", has(OldustryItems.MACHINE_CASING.get()))
+            .save(output);
+
+        shaped(RecipeCategory.DECORATIONS, OldustryItems.NUCLEAR_REACTOR.get())
+            .define('c', OldustryItems.ADVANCED_CIRCUIT.get())
+            .define('C', OldustryItems.REACTOR_CHAMBER.get())
+            .define('G', OldustryItems.GENERATOR.get())
+            .pattern(" c ")
+            .pattern("CCC")
+            .pattern(" G ")
+            .unlockedBy("has_chamber", has(OldustryItems.REACTOR_CHAMBER.get()))
+            .save(output);
+
+        shapeless(RecipeCategory.MISC, OldustryItems.URANIUM_CELL.get())
+            .requires(OldustryItems.EMPTY_CELL.get())
+            .requires(OldustryItems.URANIUM_INGOT.get())
+            .unlockedBy("has_uranium", has(OldustryItems.URANIUM_INGOT.get()))
+            .save(output, OldustryRecipeProvider.id("uranium_cell_from_ingot"));
+
+        shapeless(RecipeCategory.MISC, OldustryItems.URANIUM_CELL.get())
+            .requires(OldustryItems.RE_ENRICHED_URANIUM_CELL.get())
+            .requires(OldustryItems.COAL_DUST.get())
+            .unlockedBy("has_re_enriched", has(OldustryItems.RE_ENRICHED_URANIUM_CELL.get()))
+            .save(output, OldustryRecipeProvider.id("uranium_cell_from_re_enriched"));
+
+        shaped(RecipeCategory.MISC, OldustryItems.NEAR_DEPLETED_URANIUM_CELL.get(), 8)
+            .define('C', OldustryItems.EMPTY_CELL.get())
+            .define('U', OldustryItems.URANIUM_INGOT.get())
+            .pattern("CCC")
+            .pattern("CUC")
+            .pattern("CCC")
+            .unlockedBy("has_uranium", has(OldustryItems.URANIUM_INGOT.get()))
+            .save(output);
+
+        shaped(RecipeCategory.MISC, OldustryItems.DUAL_URANIUM_CELL.get())
+            .define('U', OldustryItems.URANIUM_CELL.get())
+            .define('C', OldustryItems.DENSE_COPPER_PLATE.get())
+            .pattern("UCU")
+            .unlockedBy("has_uranium_cell", has(OldustryItems.URANIUM_CELL.get()))
+            .save(output);
+
+        shaped(RecipeCategory.MISC, OldustryItems.QUAD_URANIUM_CELL.get())
+            .define('U', OldustryItems.DUAL_URANIUM_CELL.get())
+            .define('C', OldustryItems.DENSE_COPPER_PLATE.get())
+            .pattern(" U ")
+            .pattern("CCC")
+            .pattern(" U ")
+            .unlockedBy("has_dual_cell", has(OldustryItems.DUAL_URANIUM_CELL.get()))
+            .save(output);
+
+        shapeless(RecipeCategory.MISC, new ItemStackTemplate(
+                OldustryItems.DEPLETED_ISOTOPE_CELL.get(),
+                DataComponentPatch.builder().set(DataComponents.DAMAGE, OldustryReactor.ISOTOPE_CRAFT_DAMAGE).build()))
+            .requires(OldustryItems.NEAR_DEPLETED_URANIUM_CELL.get())
+            .requires(OldustryItems.COAL_DUST.get())
+            .unlockedBy("has_near_depleted", has(OldustryItems.NEAR_DEPLETED_URANIUM_CELL.get()))
+            .save(output);
+
+        shaped(RecipeCategory.MISC, OldustryItems.NUKE.get())
+            .define('R', OldustryItems.RE_ENRICHED_URANIUM_CELL.get())
+            .define('C', OldustryItems.ADVANCED_CIRCUIT.get())
+            .define('U', OldustryItems.URANIUM_BLOCK.get())
+            .define('M', OldustryItems.ADVANCED_MACHINE.get())
+            .pattern("RCR")
+            .pattern("UMU")
+            .pattern("RCR")
+            .unlockedBy("has_re_enriched", has(OldustryItems.RE_ENRICHED_URANIUM_CELL.get()))
             .save(output);
     }
 }

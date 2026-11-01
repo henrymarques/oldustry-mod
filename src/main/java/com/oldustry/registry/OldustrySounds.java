@@ -40,7 +40,21 @@ public final class OldustrySounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> ELECTROLYZER = sound("electrolyzer");
     public static final DeferredHolder<SoundEvent, SoundEvent> MAGNETIZER = sound("magnetizer");
     public static final DeferredHolder<SoundEvent, SoundEvent> INDUCTION = sound("induction");
+    public static final DeferredHolder<SoundEvent, SoundEvent> TELEPORTER_LOOP = sound("teleporter_loop");
+    public static final DeferredHolder<SoundEvent, SoundEvent> TELEPORTER_USE = sound("teleporter_use");
+    public static final DeferredHolder<SoundEvent, SoundEvent> TERRAFORMER = sound("terraformer");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MASS_FABRICATOR = sound("mass_fabricator");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MASS_FABRICATOR_SCRAP = sound("mass_fabricator_scrap");
+    public static final DeferredHolder<SoundEvent, SoundEvent> NUCLEAR_REACTOR = sound("nuclear_reactor");
+    public static final DeferredHolder<SoundEvent, SoundEvent> GEIGER_LOW = sound("geiger_low");
+    public static final DeferredHolder<SoundEvent, SoundEvent> GEIGER_MED = sound("geiger_med");
+    public static final DeferredHolder<SoundEvent, SoundEvent> GEIGER_HIGH = sound("geiger_high");
     public static final DeferredHolder<SoundEvent, SoundEvent> DYNAMITE_REMOTE = sound("dynamite_remote");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MINING_LASER = sound("mining_laser");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MINING_LASER_LOW = sound("mining_laser_low");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MINING_LASER_LONG = sound("mining_laser_long");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MINING_LASER_SCATTER = sound("mining_laser_scatter");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MINING_LASER_EXPLOSIVE = sound("mining_laser_explosive");
     public static final DeferredHolder<SoundEvent, SoundEvent> NANO_SABER_SWING = sound("nano_saber_swing");
     public static final DeferredHolder<SoundEvent, SoundEvent> NANO_SABER_POWER = sound("nano_saber_power");
 

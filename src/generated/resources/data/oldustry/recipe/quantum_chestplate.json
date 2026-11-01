@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "oldustry:advanced_alloy",
+    "I": "oldustry:iridium_plate",
+    "L": "oldustry:lapotron_crystal",
+    "n": "oldustry:nano_chestplate"
+  },
+  "pattern": [
+    "AnA",
+    "ILI",
+    "IAI"
+  ],
+  "result": {
+    "id": "oldustry:quantum_chestplate"
+  }
+}

@@ -27,6 +27,14 @@ public final class ChainsawStats {
     public static final float ATTACK_DAMAGE = 6f;
     public static final float ATTACK_SPEED = -3.1f;
 
+    /**
+     * JAR {@code hitEntity}: after the swing, a player attacker awards {@code killCreeperChainsaw}
+     * when the target is a creeper and {@code getHealth() <= 0}. The EU {@code use} is not required.
+     */
+    public static boolean killedCreeper(boolean player, boolean creeper, float health) {
+        return player && creeper && health <= 0f;
+    }
+
     public static Item.Properties properties(Item.Properties props, ToolMaterial material) {
         HolderGetter<Block> blocks = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
         return props

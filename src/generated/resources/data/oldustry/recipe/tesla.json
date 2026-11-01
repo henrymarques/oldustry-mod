@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:electronic_circuit",
+    "I": "#c:ingots/refined_iron",
+    "M": "oldustry:mv_transformer",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "RRR",
+    "RMR",
+    "ICI"
+  ],
+  "result": {
+    "id": "oldustry:tesla"
+  }
+}

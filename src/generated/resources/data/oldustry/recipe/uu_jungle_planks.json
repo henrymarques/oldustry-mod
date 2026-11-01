@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": "oldustry:uu_matter"
+  },
+  "pattern": [
+    "MM ",
+    "MM ",
+    "M  "
+  ],
+  "result": {
+    "count": 48,
+    "id": "minecraft:jungle_planks"
+  }
+}

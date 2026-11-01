@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:rsh_condensator",
+    "L": "minecraft:lapis_block",
+    "R": "minecraft:redstone",
+    "S": "oldustry:reactor_heat_exchanger",
+    "V": "oldustry:reactor_heat_vent"
+  },
+  "pattern": [
+    "RVR",
+    "CLC",
+    "RSR"
+  ],
+  "result": {
+    "id": "oldustry:lzh_condensator"
+  }
+}

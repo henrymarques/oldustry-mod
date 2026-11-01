@@ -25,7 +25,11 @@ public enum OldustryMachineKind implements StringRepresentable {
     CANNER("canner", Type.CANNING, 600, 32, 1, 0.85f, 4),
     ELECTROLYZER("electrolyzer", Type.ELECTROLYZER, 20000, 0, 1, 0.8f, 2),
     MAGNETIZER("magnetizer", Type.MAGNETIZER, 100, 32, 1, 0.8f, 0),
-    INDUCTION("induction", Type.INDUCTION, 10000, 128, 2, 0.8f, 5);
+    INDUCTION("induction", Type.INDUCTION, 10000, 128, 2, 0.8f, 5),
+    TESLA("tesla", Type.TESLA, 10000, 128, 2, 1.0f, 0),
+    TELEPORTER("teleporter", Type.TELEPORTER, 0, 0, 0, 1.0f, 0),
+    TERRAFORMER("terraformer", Type.TERRAFORMER, 100000, 512, 3, 1.0f, 1),
+    MASS_FABRICATOR("mass_fabricator", Type.MASS, 1000000, 512, 3, 0.7f, 3);
 
     public enum Type {
         GENERATOR,
@@ -46,7 +50,11 @@ public enum OldustryMachineKind implements StringRepresentable {
         CANNING,
         ELECTROLYZER,
         MAGNETIZER,
-        INDUCTION
+        INDUCTION,
+        TESLA,
+        TELEPORTER,
+        TERRAFORMER,
+        MASS
     }
 
     private final String id;

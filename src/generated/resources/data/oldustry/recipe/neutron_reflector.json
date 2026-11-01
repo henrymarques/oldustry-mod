@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:dense_copper_plate",
+    "T": "oldustry:tin_dust",
+    "c": "oldustry:coal_dust"
+  },
+  "pattern": [
+    "TcT",
+    "cCc",
+    "TcT"
+  ],
+  "result": {
+    "id": "oldustry:neutron_reflector"
+  }
+}

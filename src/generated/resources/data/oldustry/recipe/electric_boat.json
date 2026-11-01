@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "@": "oldustry:water_mill",
+    "C": "oldustry:insulated_copper_cable",
+    "X": "#c:ingots/refined_iron"
+  },
+  "pattern": [
+    "CCC",
+    "X@X",
+    "XXX"
+  ],
+  "result": {
+    "id": "oldustry:electric_boat"
+  }
+}

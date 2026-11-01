@@ -1,0 +1,32 @@
+{
+  "parent": "oldustry:build_mfe",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:mining_laser"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_mining_laser.description"
+    },
+    "icon": {
+      "id": "oldustry:mining_laser"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_mining_laser.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

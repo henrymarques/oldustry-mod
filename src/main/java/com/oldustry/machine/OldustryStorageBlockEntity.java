@@ -52,6 +52,15 @@ final class OldustryStorageBlockEntity extends OldustryMachineBlockEntity {
         };
     }
 
+    int stored() {
+        return energy;
+    }
+
+    void setStored(int value) {
+        energy = Math.max(0, value);
+        setChanged();
+    }
+
     boolean tickStorage() {
         chargeSlot(0);
         dischargeSlot(1);

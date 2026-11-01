@@ -1,0 +1,26 @@
+{
+  "parent": "oldustry:build_teleporter",
+  "criteria": {
+    "far": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.teleport_far_away.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "oldustry:teleporter"
+    },
+    "title": {
+      "translate": "advancements.oldustry.teleport_far_away.title"
+    }
+  },
+  "requirements": [
+    [
+      "far"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

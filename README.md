@@ -32,7 +32,7 @@ On Windows, use `gradlew.bat` instead of `./gradlew`. The built mod JAR is place
 
 ## Contributing
 
-**Contributions to every part of the mod are welcome**: gameplay and machine behavior, NeoForge code, textures and other art, sound, translations, documentation, accessibility, compatibility, testing, and bug reports. You do not need to work on a large feature; focused fixes and polish are valuable too.
+**Contributions to every part of the mod are welcome**: gameplay and machine behavior, quality of life improvements, NeoForge code, textures and other art, sound, translations, documentation, accessibility, compatibility, testing, and bug reports. You do not need to work on a large feature; focused fixes and polish are valuable too.
 
 Open an issue to discuss an idea or report a problem, or send a pull request with a focused change. Please only contribute code and assets that you have the right to share.
 

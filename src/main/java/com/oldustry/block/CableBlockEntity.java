@@ -1,12 +1,25 @@
 package com.oldustry.block;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.oldustry.energy.CableKind;
 import com.oldustry.energy.EnergyNet;
 import com.oldustry.energy.EnergyNetLogic;
 import com.oldustry.energy.EnergyTile;
+import com.oldustry.item.tool.ObscuratorSample;
+import com.oldustry.item.tool.ObscuratorStats;
 import com.oldustry.registry.OldustryBlockEntities;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -25,6 +38,8 @@ public class CableBlockEntity extends BlockEntity implements EnergyTile {
     private int ticksUntilNextUpdate;
     private boolean powered;
     private boolean netted;
+    /** JAR {@code retextureRef*} on hardened foam. Index is {@link Direction#get3DDataValue()}. */
+    private final ObscuratorSample[] paint = new ObscuratorSample[6];
 
     public CableBlockEntity(BlockPos pos, BlockState state) {
         this(kindOf(state), pos, state);
@@ -118,6 +133,10 @@ public class CableBlockEntity extends BlockEntity implements EnergyTile {
         output.putBoolean("open", open);
         output.putLong("flow", totalFlow);
         output.putBoolean("active", powered);
+        List<PaintFace> stored = storedPaint();
+        if (!stored.isEmpty()) {
+            output.store("obscurator", PaintFace.CODEC.listOf(), stored);
+        }
     }
 
     @Override
@@ -126,6 +145,87 @@ public class CableBlockEntity extends BlockEntity implements EnergyTile {
         open = input.getBooleanOr("open", true);
         totalFlow = input.getLongOr("flow", 0);
         powered = input.getBooleanOr("active", false);
+        java.util.Arrays.fill(paint, null);
+        input.read("obscurator", PaintFace.CODEC.listOf()).ifPresent(list -> {
+            for (PaintFace face : list) {
+                if (face.side >= 0 && face.side < paint.length) {
+                    paint[face.side] = face.sample;
+                }
+            }
+        });
+    }
+
+    public ObscuratorSample face(Direction side) {
+        return paint[side.get3DDataValue()];
+    }
+
+    public boolean hasPaint() {
+        for (ObscuratorSample sample : paint) {
+            if (sample != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** JAR {@code retexture}. False when the face already shows this sample, so EU is not spent. */
+    public boolean paint(Direction side, ObscuratorSample sample) {
+        BlockState state = getBlockState();
+        int foam = state.hasProperty(CableBlock.FOAM) ? state.getValue(CableBlock.FOAM) : 0;
+        if (!ObscuratorStats.canPrint(foam)) {
+            return false;
+        }
+        int index = side.get3DDataValue();
+        ObscuratorSample old = paint[index];
+        if (!ObscuratorStats.paintChanges(old != null, sample.sameBlock(old), sample.sameState(old), sample.sameFace(old))) {
+            return false;
+        }
+        paint[index] = sample;
+        syncPaint();
+        return true;
+    }
+
+    /** JAR clears the arrays when foam drops below 2 or the painter recolours foam. */
+    public void clearPaint() {
+        if (!hasPaint()) {
+            return;
+        }
+        java.util.Arrays.fill(paint, null);
+        syncPaint();
+    }
+
+    private void syncPaint() {
+        setChanged();
+        if (level instanceof ServerLevel server) {
+            server.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
+        }
+    }
+
+    private List<PaintFace> storedPaint() {
+        List<PaintFace> stored = new ArrayList<>();
+        for (int i = 0; i < paint.length; i++) {
+            if (paint[i] != null) {
+                stored.add(new PaintFace(i, paint[i]));
+            }
+        }
+        return stored;
+    }
+
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return saveCustomOnly(registries);
+    }
+
+    private record PaintFace(int side, ObscuratorSample sample) {
+        static final Codec<PaintFace> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Codec.INT.fieldOf("side").forGetter(PaintFace::side),
+            ObscuratorSample.CODEC.fieldOf("sample").forGetter(PaintFace::sample)
+        ).apply(instance, PaintFace::new));
     }
 
     @Override

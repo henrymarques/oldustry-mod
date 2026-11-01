@@ -1,6 +1,40 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "oldustry:item/re_battery"
+    "type": "minecraft:range_dispatch",
+    "entries": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "oldustry:item/re_battery_1"
+        },
+        "threshold": 1.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "oldustry:item/re_battery_2"
+        },
+        "threshold": 2.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "oldustry:item/re_battery_3"
+        },
+        "threshold": 3.0
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "oldustry:item/re_battery_4"
+        },
+        "threshold": 4.0
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "oldustry:item/re_battery_0"
+    },
+    "property": "oldustry:battery_fill"
   }
 }

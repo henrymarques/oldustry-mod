@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:dense_copper_plate",
+    "T": "#c:ingots/tin",
+    "c": "oldustry:electronic_circuit"
+  },
+  "pattern": [
+    " c ",
+    "TCT",
+    " T "
+  ],
+  "result": {
+    "id": "oldustry:heat_exchanger"
+  }
+}

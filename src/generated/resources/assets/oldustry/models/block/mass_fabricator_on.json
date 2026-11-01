@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "oldustry:block/mass_fabricator_on_down",
+    "east": "oldustry:block/mass_fabricator_on_west",
+    "north": "oldustry:block/mass_fabricator_on_south",
+    "particle": "oldustry:block/mass_fabricator_on_south",
+    "south": "oldustry:block/mass_fabricator_on_north",
+    "up": "oldustry:block/mass_fabricator_on_up",
+    "west": "oldustry:block/mass_fabricator_on_east"
+  }
+}

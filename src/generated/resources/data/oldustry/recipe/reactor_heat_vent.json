@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:dense_copper_plate",
+    "V": "oldustry:heat_vent"
+  },
+  "pattern": [
+    "C",
+    "V",
+    "C"
+  ],
+  "result": {
+    "id": "oldustry:reactor_heat_vent"
+  }
+}

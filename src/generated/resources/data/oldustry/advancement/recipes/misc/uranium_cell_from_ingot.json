@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:uranium_cell_from_ingot"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_uranium": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:uranium_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_uranium"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:uranium_cell_from_ingot"
+    ]
+  }
+}

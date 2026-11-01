@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "S": "oldustry:heat_exchanger"
+  },
+  "pattern": [
+    " G ",
+    "GSG",
+    " G "
+  ],
+  "result": {
+    "id": "oldustry:component_heat_exchanger"
+  }
+}

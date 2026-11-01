@@ -235,6 +235,7 @@ public class CableBlock extends BaseEntityBlock implements Wrenchable, SimpleWat
         if (state.getValue(FOAM) > 0 && (stack.getItem() instanceof CutterItem || (stack.isEmpty() && player.isShiftKeyDown()))) {
             if (!level.isClientSide()) {
                 level.setBlock(pos, state.setValue(FOAM, 0), Block.UPDATE_ALL);
+                clearPaint(level, pos);
                 if (stack.getItem() instanceof CutterItem) {
                     stack.hurtAndBreak(1, player, hand);
                     OldustrySounds.play(level, null, pos, OldustrySounds.CUTTER.get(), SoundSource.BLOCKS, 1f, 1f);
@@ -264,6 +265,9 @@ public class CableBlock extends BaseEntityBlock implements Wrenchable, SimpleWat
             if (state.getValue(COLOR) != color) {
                 if (!level.isClientSide()) {
                     level.setBlock(pos, state.setValue(COLOR, color), Block.UPDATE_ALL);
+                    if (state.getValue(FOAM) > 0) {
+                        clearPaint(level, pos);
+                    }
                     stack.hurtAndBreak(1, player, hand);
                     OldustrySounds.play(level, null, pos, OldustrySounds.PAINTER.get(), SoundSource.BLOCKS, 1f, 1f);
                 }
@@ -298,6 +302,12 @@ public class CableBlock extends BaseEntityBlock implements Wrenchable, SimpleWat
             s = s.setValue(prop, from.getValue(prop));
         }
         return s.setValue(WATERLOGGED, from.getValue(WATERLOGGED));
+    }
+
+    private static void clearPaint(Level level, BlockPos pos) {
+        if (level.getBlockEntity(pos) instanceof CableBlockEntity cable) {
+            cable.clearPaint();
+        }
     }
 
     @Override

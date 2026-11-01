@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "X": "oldustry:carbon_plate"
+  },
+  "pattern": [
+    "X X",
+    "XXX"
+  ],
+  "result": {
+    "id": "oldustry:carbon_boat"
+  }
+}

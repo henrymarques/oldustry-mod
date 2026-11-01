@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "oldustry:advanced_circuit",
+    "C": "oldustry:2x_insulated_gold_cable",
+    "E": "oldustry:energy_crystal",
+    "r": "minecraft:redstone"
+  },
+  "pattern": [
+    "rEr",
+    "CAC",
+    "rrr"
+  ],
+  "result": {
+    "id": "oldustry:obscurator"
+  }
+}

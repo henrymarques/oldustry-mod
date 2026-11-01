@@ -44,8 +44,8 @@ public class Oldustry {
         OldustryEffects.register(modEventBus);
         OldustryDataComponents.register(modEventBus);
         OldustryBlocks.register(modEventBus);
-        OldustryItems.register(modEventBus);
         OldustryEntities.register(modEventBus);
+        OldustryItems.register(modEventBus);
         OldustryBlockEntities.register(modEventBus);
         OldustryMenus.register(modEventBus);
         OldustryFeatures.register(modEventBus);
@@ -60,7 +60,11 @@ public class Oldustry {
     }
 
     private static void setup(FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> DispenserBlock.registerBehavior(OldustryItems.SCRAP_BOX.get(), new DefaultDispenseItemBehavior() {
+        event.enqueueWork(() -> {
+            DispenserBlock.registerBehavior(OldustryItems.RUBBER_DINGHY.get(), new net.minecraft.core.dispenser.BoatDispenseItemBehavior(OldustryEntities.RUBBER_DINGHY.get()));
+            DispenserBlock.registerBehavior(OldustryItems.CARBON_BOAT.get(), new net.minecraft.core.dispenser.BoatDispenseItemBehavior(OldustryEntities.CARBON_BOAT.get()));
+            DispenserBlock.registerBehavior(OldustryItems.ELECTRIC_BOAT.get(), new net.minecraft.core.dispenser.BoatDispenseItemBehavior(OldustryEntities.ELECTRIC_BOAT.get()));
+            DispenserBlock.registerBehavior(OldustryItems.SCRAP_BOX.get(), new DefaultDispenseItemBehavior() {
             @Override
             protected ItemStack execute(BlockSource source, ItemStack stack) {
                 ItemStack drop = ScrapBoxItem.roll(source.level().getRandom());
@@ -76,7 +80,8 @@ public class Oldustry {
                 stack.shrink(1);
                 return stack;
             }
-        }));
+        });
+        });
     }
 
     private static void payloads(RegisterPayloadHandlersEvent event) {

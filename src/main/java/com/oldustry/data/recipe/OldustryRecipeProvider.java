@@ -24,6 +24,8 @@ public class OldustryRecipeProvider extends RecipeProvider {
         new OldustryCableRecipes(registries, output).buildRecipes();
         new OldustryElectricEquipmentRecipes(registries, output).buildRecipes();
         new OldustryEnergyRecipes(registries, output).buildRecipes();
+        new OldustryUuRecipes(registries, output).buildRecipes();
+        new OldustryReactorRecipes(registries, output).buildRecipes();
     }
 
     static String id(String path) {

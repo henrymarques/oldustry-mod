@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": "minecraft:glowstone_dust",
+    "I": "oldustry:iridium_plate",
+    "L": "oldustry:lapotron_crystal",
+    "M": "oldustry:machine_casing",
+    "n": "oldustry:nano_leggings"
+  },
+  "pattern": [
+    "MLM",
+    "InI",
+    "G G"
+  ],
+  "result": {
+    "id": "oldustry:quantum_leggings"
+  }
+}

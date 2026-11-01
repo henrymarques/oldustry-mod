@@ -1,0 +1,26 @@
+{
+  "parent": "oldustry:build_chainsaw",
+  "criteria": {
+    "killed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.kill_creeper_chainsaw.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "oldustry:chainsaw"
+    },
+    "title": {
+      "translate": "advancements.oldustry.kill_creeper_chainsaw.title"
+    }
+  },
+  "requirements": [
+    [
+      "killed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

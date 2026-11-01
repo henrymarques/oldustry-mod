@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": "oldustry:uu_matter"
+  },
+  "pattern": [
+    " M ",
+    "MM ",
+    "MM "
+  ],
+  "result": {
+    "count": 32,
+    "id": "minecraft:flint"
+  }
+}

@@ -25,12 +25,13 @@ public final class OldustryMachineLayout {
         PUMP,
         CANNER,
         ELECTROLYZER,
-        INDUCTION
+        INDUCTION,
+        MATTER
     }
 
     public static boolean hasGui(OldustryMachineKind kind) {
         return switch (kind.type) {
-            case TRANSFORMER, LUMINATOR, MAGNETIZER -> false;
+            case TRANSFORMER, LUMINATOR, MAGNETIZER, TESLA, TELEPORTER, TERRAFORMER -> false;
             default -> true;
         };
     }
@@ -64,6 +65,7 @@ public final class OldustryMachineLayout {
             case CANNING -> Overlay.CANNER;
             case ELECTROLYZER -> Overlay.ELECTROLYZER;
             case INDUCTION -> Overlay.INDUCTION;
+            case MASS -> Overlay.MATTER;
             default -> Overlay.PROCESS;
         };
     }
@@ -127,6 +129,12 @@ public final class OldustryMachineLayout {
                 case 2 -> xy(56, 53);   // discharge
                 case 3 -> xy(113, 35);  // output A
                 case 4 -> xy(131, 35);  // output B
+                default -> hidden();
+            };
+            // JAR ContainerMatter: output 114,18; amplifier 114,54. Battery slot stays off the GUI.
+            case MASS -> switch (index) {
+                case 0 -> xy(114, 54);
+                case 1 -> xy(114, 18);
                 default -> hidden();
             };
             default -> hidden();

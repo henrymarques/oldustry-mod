@@ -25,6 +25,39 @@ public final class OldustryMachineModels {
         gens.registerSimpleItemModel(block, model);
     }
 
+    /** One texture on every face. Tesla's sheet is a single 16×16 tile. */
+    public static void uniform(BlockModelGenerators gens, MachineBlock block) {
+        Identifier model = ModelTemplates.CUBE_ALL.create(block, TextureMapping.cube(block), gens.modelOutput);
+        var variant = BlockModelGenerators.plainVariant(model);
+        gens.blockStateOutput.accept(
+            MultiVariantGenerator.dispatch(block)
+                .with(BlockModelGenerators.createBooleanModelDispatch(MachineBlock.ACTIVE, variant, variant))
+                .with(BlockModelGenerators.ROTATION_FACING)
+        );
+        gens.registerSimpleItemModel(block, model);
+    }
+
+    public static void facingActive(BlockModelGenerators gens, Block block) {
+        Identifier off = ModelTemplates.CUBE.create(block, cubeMap(block, ""), gens.modelOutput);
+        Identifier on = ModelTemplates.CUBE.createWithSuffix(block, "_on", cubeMap(block, "_on"), gens.modelOutput);
+        gens.blockStateOutput.accept(
+            MultiVariantGenerator.dispatch(block)
+                .with(BlockModelGenerators.createBooleanModelDispatch(
+                    MachineBlock.ACTIVE,
+                    BlockModelGenerators.plainVariant(on),
+                    BlockModelGenerators.plainVariant(off)
+                ))
+                .with(BlockModelGenerators.ROTATION_FACING)
+        );
+        gens.registerSimpleItemModel(block, off);
+    }
+
+    public static void staticFaces(BlockModelGenerators gens, Block block) {
+        Identifier model = ModelTemplates.CUBE.create(block, cubeMap(block, ""), gens.modelOutput);
+        gens.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(model)));
+        gens.registerSimpleItemModel(block, model);
+    }
+
     public static void machine(BlockModelGenerators gens, MachineBlock block) {
         Identifier off = ModelTemplates.CUBE.create(block, cubeMap(block, ""), gens.modelOutput);
         Identifier on = ModelTemplates.CUBE.createWithSuffix(block, "_on", cubeMap(block, "_on"), gens.modelOutput);

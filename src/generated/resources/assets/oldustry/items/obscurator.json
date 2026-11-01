@@ -1,0 +1,18 @@
+{
+  "model": {
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "oldustry:item/obscurator"
+      },
+      {
+        "type": "minecraft:special",
+        "base": "oldustry:item/obscurator",
+        "model": {
+          "type": "oldustry:obscurator"
+        }
+      }
+    ]
+  }
+}

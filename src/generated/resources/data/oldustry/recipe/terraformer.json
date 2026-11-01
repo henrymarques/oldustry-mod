@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "D": "minecraft:dirt",
+    "G": "minecraft:glowstone_dust",
+    "M": "oldustry:advanced_machine",
+    "T": "oldustry:tfbp"
+  },
+  "pattern": [
+    "GTG",
+    "DMD",
+    "GDG"
+  ],
+  "result": {
+    "id": "oldustry:terraformer"
+  }
+}

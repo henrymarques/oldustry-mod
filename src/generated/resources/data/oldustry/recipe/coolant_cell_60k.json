@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:coolant_cell_30k",
+    "T": "#c:ingots/tin",
+    "c": "oldustry:dense_copper_plate"
+  },
+  "pattern": [
+    "TCT",
+    "TcT",
+    "TCT"
+  ],
+  "result": {
+    "id": "oldustry:coolant_cell_60k"
+  }
+}

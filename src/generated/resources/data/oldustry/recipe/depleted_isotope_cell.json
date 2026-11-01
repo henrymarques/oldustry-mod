@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "oldustry:near_depleted_uranium_cell",
+    "oldustry:coal_dust"
+  ],
+  "result": {
+    "components": {
+      "minecraft:damage": 9999
+    },
+    "id": "oldustry:depleted_isotope_cell"
+  }
+}

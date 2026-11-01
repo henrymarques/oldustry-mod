@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "oldustry:empty_cell",
+    "U": "oldustry:uranium_ingot"
+  },
+  "pattern": [
+    "CCC",
+    "CUC",
+    "CCC"
+  ],
+  "result": {
+    "count": 8,
+    "id": "oldustry:near_depleted_uranium_cell"
+  }
+}

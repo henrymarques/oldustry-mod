@@ -44,6 +44,8 @@ public class OldustryBlockLoot extends BlockLootSubProvider {
         add(OldustryBlocks.NUKE.get(), noDrop());
         add(OldustryBlocks.DYNAMITE.get(), noDrop());
         dropSelf(OldustryBlocks.PERSONAL_SAFE.get());
+        dropSelf(OldustryBlocks.NUCLEAR_REACTOR.get());
+        add(OldustryBlocks.REACTOR_CHAMBER.get(), block -> createSingleItemTable(OldustryItems.MACHINE_CASING.get()));
         dropSelf(OldustryBlocks.MACHINE_CASING.get());
         dropSelf(OldustryBlocks.ADVANCED_MACHINE.get());
         dropSelf(OldustryBlocks.MINING_PIPE.get());

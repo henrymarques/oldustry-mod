@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:uu_cocoa"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_uu_matter": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:uu_matter"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_uu_matter"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:uu_cocoa"
+    ]
+  }
+}

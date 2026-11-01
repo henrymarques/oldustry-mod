@@ -1,0 +1,32 @@
+{
+  "parent": "oldustry:build_mfsu",
+  "criteria": {
+    "has": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:terraformer"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.oldustry.build_terraformer.description"
+    },
+    "icon": {
+      "id": "oldustry:terraformer"
+    },
+    "title": {
+      "translate": "advancements.oldustry.build_terraformer.title"
+    }
+  },
+  "requirements": [
+    [
+      "has"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
