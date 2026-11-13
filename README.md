@@ -1,15 +1,19 @@
 # Oldustry
 
-**Oldustry** is an industrial automation mod for **Minecraft 26.2** and **NeoForge**. Build an EU power network, process resources with machines, and work your way from basic tools to more capable equipment. It draws inspiration from classic IndustrialCraft 2 while adapting its systems and presentation to modern Minecraft.
+**Oldustry** is an industrial automation mod for **Minecraft 26.2** and **NeoForge**. Build an EU power network, process resources with machines, and work your way from basic tools to nuclear power, quantum armor, and crop breeding. It is a modern reading of classic IndustrialCraft 2 — the same EU, cables, machines, and progression feel — adapted to current Minecraft APIs and presentation.
 
-Oldustry is in active development. Some systems are playable now, while others are still being built or polished.
+The planned classic feature set is **complete**. Development stays active for quality-of-life improvements, polish, compatibility, and new optional features on top of that base.
 
-## What is available
+## Features
 
-- **EU power:** generators, cables, transformers, batteries, and storage blocks. Cable loss, voltage tiers, and overvoltage matter when designing a network.
-- **Machines:** the macerator, extractor, compressor, recycler, electric and induction furnaces, miner, pump, canner, electrolyzer, and magnetizer.
-- **Resources and tools:** rubber trees, tin and uranium, bronze equipment, electric drills, powered tools, and wearable power packs.
-- **Modern conveniences:** in-game configuration, useful energy tooltips, and optional integrations with JEI, Jade, and Curios.
+- **EU power:** generators, cables, transformers, batteries, and storage. Cable loss, voltage tiers, and overvoltage matter when designing a network.
+- **Machines:** macerator, extractor, compressor, recycler, electric and induction furnaces, miner, pump, canner, electrolyzer, magnetizer, mass fabricator, terraformer, and Tesla coil.
+- **Nuclear:** reactor with chambers, fuel cells, heat vents/exchangers, plating, condensators, and related components.
+- **Teleportation:** teleporter paired with the frequency transmitter.
+- **Resources and world:** rubber trees, tin and uranium, foam, painters, scaffolds, and advanced crafting.
+- **Tools and combat:** bronze gear, electric drills and chainsaw, mining laser, nano saber, hazmat, nano and quantum suits, jetpacks, and related equipment.
+- **Crops and booze:** crop sticks, crossbreeding, Crop-Matron, Cropnalyzer, barrel fermentation, and mugs.
+- **Modern conveniences:** in-game configuration, energy tooltips, and optional integrations with JEI, Jade, and Curios.
 
 ## Requirements
 

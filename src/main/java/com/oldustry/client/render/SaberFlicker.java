@@ -7,13 +7,10 @@ import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemMode
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import org.jspecify.annotations.Nullable;
 
 /** JAR {@code ItemNanoSaber.getIcon}: while active, each draw picks active or activeAlternate. */
-@OnlyIn(Dist.CLIENT)
 public record SaberFlicker() implements RangeSelectItemModelProperty {
     public static final MapCodec<SaberFlicker> CODEC = MapCodec.unit(new SaberFlicker());
     private static final RandomSource RANDOM = RandomSource.create();
