@@ -145,6 +145,8 @@
   "item.oldustry.lzh_condensator": "Condensador LZH",
   "info.oldustry.reactor.heat": "Calor: %s / %s",
   "info.oldustry.reactor.pulses": "Pulsos: %s / %s",
+  "block.oldustry.crop": "Crop",
+  "item.oldustry.crop_seed": "Semente de Crop",
   "item.oldustry.fertilizer": "Fertilizante",
   "item.oldustry.weed_ex": "Weed-EX",
   "item.oldustry.grin_powder": "Pó de Grin",

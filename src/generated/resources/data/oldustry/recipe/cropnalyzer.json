@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "oldustry:electronic_circuit",
+    "G": "minecraft:glass",
+    "R": "minecraft:redstone",
+    "c": "oldustry:insulated_copper_cable"
+  },
+  "pattern": [
+    "cc ",
+    "RGR",
+    "RCR"
+  ],
+  "result": {
+    "id": "oldustry:cropnalyzer"
+  }
+}

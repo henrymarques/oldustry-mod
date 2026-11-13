@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": "minecraft:chest",
+    "C": "oldustry:crop",
+    "M": "oldustry:machine_casing",
+    "c": "oldustry:electronic_circuit"
+  },
+  "pattern": [
+    "cBc",
+    "CMC",
+    "CCC"
+  ],
+  "result": {
+    "id": "oldustry:crop_matron"
+  }
+}

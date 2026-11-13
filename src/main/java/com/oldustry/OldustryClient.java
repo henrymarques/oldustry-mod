@@ -86,6 +86,7 @@ public class OldustryClient {
         event.register(OldustryMenus.MACHINE.get(), OldustryMachineScreen::create);
         event.register(OldustryMenus.PERSONAL_SAFE.get(), PersonalSafeScreen::new);
         event.register(OldustryMenus.NUCLEAR_REACTOR.get(), OldustryReactorScreen::new);
+        event.register(OldustryMenus.CROPANALYZER.get(), com.oldustry.client.screen.CropnalyzerScreen::new);
     }
 
     @SubscribeEvent

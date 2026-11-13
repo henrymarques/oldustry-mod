@@ -57,6 +57,7 @@ public class OldustryBlockTags extends BlockTagsProvider {
         tag(BlockTags.WOODEN_FENCES).add(OldustryBlocks.IRON_FENCE.getKey());
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(OldustryBlocks.IRON_SCAFFOLD.getKey());
         tag(BlockTags.MINEABLE_WITH_AXE).add(OldustryBlocks.WOODEN_SCAFFOLD.getKey());
+        tag(BlockTags.MINEABLE_WITH_AXE).add(OldustryBlocks.BARREL.getKey());
         // Climb is JAR entityInside (forward boost), not ladder CLIMBABLE.
 
         tag(BlockTags.LOGS).add(OldustryBlocks.RUBBER_LOG.getKey());

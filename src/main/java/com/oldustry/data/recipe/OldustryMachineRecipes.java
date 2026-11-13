@@ -300,6 +300,30 @@ final class OldustryMachineRecipes extends RecipeProvider {
             .unlockedBy("has_iron_fence", has(OldustryItems.IRON_FENCE.get()))
             .save(output);
 
+        // Crop-Matron (JAR: cBc / CMC / CCC). C = crop sticks, B = chest.
+        shaped(RecipeCategory.DECORATIONS, OldustryItems.CROP_MATRON.get())
+            .define('c', OldustryItems.ELECTRONIC_CIRCUIT.get())
+            .define('B', Items.CHEST)
+            .define('C', OldustryItems.CROP.get())
+            .define('M', OldustryItems.MACHINE_CASING.get())
+            .pattern("cBc")
+            .pattern("CMC")
+            .pattern("CCC")
+            .unlockedBy("has_crop", has(OldustryItems.CROP.get()))
+            .save(output);
+
+        // Cropnalyzer (JAR: "cc " / "RGR" / "RCR").
+        shaped(RecipeCategory.TOOLS, OldustryItems.CROPANALYZER.get())
+            .define('c', OldustryItems.INSULATED_COPPER_CABLE.get())
+            .define('R', Items.REDSTONE)
+            .define('G', Items.GLASS)
+            .define('C', OldustryItems.ELECTRONIC_CIRCUIT.get())
+            .pattern("cc ")
+            .pattern("RGR")
+            .pattern("RCR")
+            .unlockedBy("has_circuit", has(OldustryItems.ELECTRONIC_CIRCUIT.get()))
+            .save(output);
+
         // ── Induction (JAR: CCC / CFC / CMC) ──
         shaped(RecipeCategory.DECORATIONS, OldustryItems.INDUCTION.get())
             .define('C', Items.COPPER_INGOT)

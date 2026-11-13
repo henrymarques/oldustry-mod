@@ -317,6 +317,24 @@ tasks.register('teleporterCheck', JavaExec) {
     enableAssertions = true
 }
 
+tasks.register('cropCheck', JavaExec) {
+    group = 'verification'
+    description = 'Checks crop growth, crossing and weed spread'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.crop.CropCheck'
+    enableAssertions = true
+}
+
+tasks.register('d6Check', JavaExec) {
+    group = 'verification'
+    description = 'Checks D6 Crop-Matron / Cropnalyzer / Barrel numbers'
+    dependsOn tasks.named('compileTestJava')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.oldustry.crop.D6Check'
+    enableAssertions = true
+}
+
 tasks.register('quantumCheck', JavaExec) {
     group = 'verification'
     description = 'Checks quantum absorb, fall cancel, cleanse and leg ticks'
@@ -395,6 +413,8 @@ tasks.named('test', Test).configure {
     dependsOn tasks.named('reactorCheck')
     dependsOn tasks.named('laserCheck')
     dependsOn tasks.named('quantumCheck')
+    dependsOn tasks.named('cropCheck')
+    dependsOn tasks.named('d6Check')
 }
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.

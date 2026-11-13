@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_crop": {
+      "conditions": {
+        "items": [
+          {
+            "items": "oldustry:crop"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldustry:crop_matron"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_crop"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldustry:crop_matron"
+    ]
+  }
+}

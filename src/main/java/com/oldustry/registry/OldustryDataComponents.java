@@ -5,6 +5,8 @@ import java.util.List;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.oldustry.Oldustry;
+import com.oldustry.crop.CropSeed;
+import com.oldustry.item.BoozeContents;
 import com.oldustry.item.explosive.RemoteLink;
 import com.oldustry.item.tool.ObscuratorSample;
 
@@ -154,6 +156,30 @@ public final class OldustryDataComponents {
             .persistent(ObscuratorSample.CODEC)
             .networkSynchronized(ObscuratorSample.STREAM)
             .build()
+    );
+
+    /** Bred crop seed: id plus the three stats and the scan level. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<CropSeed>> CROP_SEED = COMPONENTS.register(
+        "crop_seed",
+        () -> DataComponentType.<CropSeed>builder().persistent(CropSeed.CODEC).networkSynchronized(CropSeed.STREAM).build()
+    );
+
+    /** Remaining units in a hydrating cell. Full = 10000 (JAR ItemGradual maxDamage). */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> HYDRATION = COMPONENTS.register(
+        "hydration",
+        () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT).build()
+    );
+
+    /** Uses left on Weed-EX. Full = 64 (JAR maxDamage). */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> WEED_EX_USES = COMPONENTS.register(
+        "weed_ex_uses",
+        () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.VAR_INT).build()
+    );
+
+    /** Beer / rum in a mug or a portable barrel. Absent means empty. */
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<BoozeContents>> BOOZE = COMPONENTS.register(
+        "booze",
+        () -> DataComponentType.<BoozeContents>builder().persistent(BoozeContents.CODEC).networkSynchronized(BoozeContents.STREAM).build()
     );
 
     public static void register(IEventBus bus) {

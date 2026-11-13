@@ -31,6 +31,7 @@ public abstract class OldustryMachineScreen extends AbstractContainerScreen<Oldu
             case PUMPING -> new OldustryPumpScreen(menu, inventory, title);
             case CANNING -> new OldustryCannerScreen(menu, inventory, title);
             case ELECTROLYZER -> new OldustryElectrolyzerScreen(menu, inventory, title);
+            case CROP_MATRON -> new OldustryCropMatronScreen(menu, inventory, title);
             case INDUCTION -> new OldustryInductionScreen(menu, inventory, title);
             case MASS -> new OldustryMassFabricatorScreen(menu, inventory, title);
             default -> throw new IllegalArgumentException("Machine has no GUI: " + menu.kind());

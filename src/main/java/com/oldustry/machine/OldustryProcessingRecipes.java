@@ -119,7 +119,9 @@ public final class OldustryProcessingRecipes {
             return new ItemStack(OldustryItems.COALFUEL_CELL.get());
         }
         if (item == OldustryItems.WATER_CELL.get()) {
-            return new ItemStack(OldustryItems.HYDRATING_CELL.get());
+            ItemStack cell = new ItemStack(OldustryItems.HYDRATING_CELL.get());
+            cell.set(com.oldustry.registry.OldustryDataComponents.HYDRATION.get(), com.oldustry.item.HydratingCellItem.MAX);
+            return cell;
         }
         return ItemStack.EMPTY;
     }

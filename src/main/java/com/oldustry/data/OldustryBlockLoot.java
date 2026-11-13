@@ -9,6 +9,10 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 public class OldustryBlockLoot extends BlockLootSubProvider {
     public OldustryBlockLoot(HolderLookup.Provider lookup) {
@@ -33,12 +37,17 @@ public class OldustryBlockLoot extends BlockLootSubProvider {
         dropSelf(OldustryBlocks.IRON_FENCE.get());
         dropSelf(OldustryBlocks.WOODEN_SCAFFOLD.get());
         dropSelf(OldustryBlocks.IRON_SCAFFOLD.get());
+        // JAR BlockBarrel.getBlockDropped: scaffold + empty barrel. Punch path keeps contents.
+        add(OldustryBlocks.BARREL.get(), block -> LootTable.lootTable()
+            .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(OldustryBlocks.WOODEN_SCAFFOLD.get())))
+            .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(OldustryItems.BARREL.get()))));
         dropSelf(OldustryBlocks.RUBBER_SHEET.get());
         dropSelf(OldustryBlocks.RESIN_SHEET.get());
         dropSelf(OldustryBlocks.RUBBER_LOG.get());
         add(OldustryBlocks.RUBBER_LEAVES.get(), block -> createLeavesDrops(block, OldustryBlocks.RUBBER_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
         dropSelf(OldustryBlocks.RUBBER_SAPLING.get());
         dropSelf(OldustryBlocks.IMPROVED_FURNACE.get());
+        dropSelf(OldustryBlocks.CROP.get());
         add(OldustryBlocks.CONSTRUCTION_FOAM.get(), noDrop());
         add(OldustryBlocks.ITNT.get(), noDrop());
         add(OldustryBlocks.NUKE.get(), noDrop());

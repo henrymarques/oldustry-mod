@@ -12,6 +12,7 @@ import com.oldustry.block.MachineBlock;
 import com.oldustry.block.MachineCasingBlock;
 import com.oldustry.block.ItntBlock;
 import com.oldustry.block.NukeBlock;
+import com.oldustry.block.OldustryBarrelBlock;
 import com.oldustry.block.OldustryReactorBlock;
 import com.oldustry.block.OldustryReactorChamberBlock;
 import com.oldustry.block.PersonalSafeBlock;
@@ -72,6 +73,11 @@ public final class OldustryBlocks {
         "iron_scaffold",
         props -> new ScaffoldBlock(true, props),
         p -> p.mapColor(MapColor.METAL).strength(0.8f).sound(SoundType.METAL).noOcclusion()
+    );
+    public static final DeferredBlock<OldustryBarrelBlock> BARREL = BLOCKS.registerBlock(
+        "barrel",
+        OldustryBarrelBlock::new,
+        p -> p.mapColor(MapColor.WOOD).strength(1.0f).sound(SoundType.WOOD)
     );
     public static final DeferredBlock<RubberSheetBlock> RUBBER_SHEET = BLOCKS.registerBlock(
         "rubber_sheet",
@@ -145,6 +151,7 @@ public final class OldustryBlocks {
     public static final DeferredBlock<MachineBlock> CANNER = machine(OldustryMachineKind.CANNER);
     public static final DeferredBlock<MachineBlock> ELECTROLYZER = machine(OldustryMachineKind.ELECTROLYZER);
     public static final DeferredBlock<MachineBlock> MAGNETIZER = machine(OldustryMachineKind.MAGNETIZER);
+    public static final DeferredBlock<MachineBlock> CROP_MATRON = machine(OldustryMachineKind.CROP_MATRON);
     public static final DeferredBlock<MachineBlock> INDUCTION = machine(OldustryMachineKind.INDUCTION);
     public static final DeferredBlock<MachineBlock> TESLA = machine(OldustryMachineKind.TESLA);
     public static final DeferredBlock<MachineBlock> TELEPORTER = machine(OldustryMachineKind.TELEPORTER);
@@ -191,6 +198,15 @@ public final class OldustryBlocks {
         "mining_pipe_tip",
         props -> new MiningPipeBlock(true, props),
         p -> p.mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(6.0f, 10.0f).sound(SoundType.METAL)
+    );
+
+    public static final DeferredBlock<com.oldustry.block.OldustryCropBlock> CROP = BLOCKS.registerBlock(
+        "crop",
+        com.oldustry.block.OldustryCropBlock::new,
+        p -> p.mapColor(MapColor.PLANT).strength(0.8f, 0.2f).sound(SoundType.GRASS).noOcclusion()
+            .isViewBlocking((s, l, pos) -> false)
+            .isSuffocating((s, l, pos) -> false)
+            .lightLevel(s -> s.getValue(com.oldustry.block.OldustryCropBlock.CROP).emittedLight(s.getValue(com.oldustry.block.OldustryCropBlock.SIZE)))
     );
 
     public static final DeferredBlock<CableBlock> INSULATED_COPPER_CABLE = cable(CableKind.COPPER);
@@ -263,7 +279,7 @@ public final class OldustryBlocks {
             BATBOX.get(), MFE.get(), MFSU.get(), LV_TRANSFORMER.get(), MV_TRANSFORMER.get(), HV_TRANSFORMER.get(),
             MACERATOR.get(), EXTRACTOR.get(), COMPRESSOR.get(), RECYCLER.get(), ELECTRIC_FURNACE.get(), LUMINATOR.get(),
             MINER.get(), PUMP.get(), CANNER.get(),
-            ELECTROLYZER.get(), MAGNETIZER.get(), INDUCTION.get(), TESLA.get(), TELEPORTER.get(), TERRAFORMER.get(),
+            ELECTROLYZER.get(), MAGNETIZER.get(), CROP_MATRON.get(), INDUCTION.get(), TESLA.get(), TELEPORTER.get(), TERRAFORMER.get(),
             MASS_FABRICATOR.get()
         );
     }

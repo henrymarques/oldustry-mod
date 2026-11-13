@@ -83,6 +83,7 @@ public class OldustryItemTags extends TagsProvider<Item> {
         tag(ItemTags.SHOVELS).add(OldustryItems.MINING_DRILL.getKey());
         tag(ItemTags.SHOVELS).add(OldustryItems.DIAMOND_DRILL.getKey());
         tag(ItemTags.HOES).add(OldustryItems.BRONZE_HOE.getKey());
+        tag(ItemTags.HOES).add(OldustryItems.ELECTRIC_HOE.getKey());
         tag(ItemTags.HEAD_ARMOR).add(OldustryItems.BRONZE_HELMET.getKey());
         tag(ItemTags.CHEST_ARMOR).add(OldustryItems.BRONZE_CHESTPLATE.getKey());
         tag(ItemTags.CHEST_ARMOR).add(OldustryItems.COMPOSITE_VEST.getKey());

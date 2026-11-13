@@ -8,6 +8,8 @@ import com.oldustry.machine.OldustryMachineMenu;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
+import com.oldustry.menu.CropnalyzerMenu;
+
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
@@ -28,6 +30,9 @@ public final class OldustryMenus {
 
     public static final DeferredHolder<MenuType<?>, MenuType<OldustryReactorMenu>> NUCLEAR_REACTOR =
         MENUS.register("nuclear_reactor", () -> IMenuTypeExtension.create(OldustryReactorMenu::fromClient));
+
+    public static final DeferredHolder<MenuType<?>, MenuType<CropnalyzerMenu>> CROPANALYZER =
+        MENUS.register("cropnalyzer", () -> IMenuTypeExtension.create(CropnalyzerMenu::fromClient));
 
     public static void register(IEventBus bus) {
         MENUS.register(bus);

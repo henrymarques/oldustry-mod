@@ -25,6 +25,7 @@ public final class OldustryMachineLayout {
         PUMP,
         CANNER,
         ELECTROLYZER,
+        CROP_MATRON,
         INDUCTION,
         MATTER
     }
@@ -64,6 +65,7 @@ public final class OldustryMachineLayout {
             case PUMPING -> Overlay.PUMP;
             case CANNING -> Overlay.CANNER;
             case ELECTROLYZER -> Overlay.ELECTROLYZER;
+            case CROP_MATRON -> Overlay.CROP_MATRON;
             case INDUCTION -> Overlay.INDUCTION;
             case MASS -> Overlay.MATTER;
             default -> Overlay.PROCESS;
@@ -137,6 +139,13 @@ public final class OldustryMachineLayout {
                 case 1 -> xy(114, 18);
                 default -> hidden();
             };
+            // JAR ContainerCropmatron: fert 62,20+i*18; hydr 98; weed 134.
+            case CROP_MATRON -> switch (index) {
+                case 0, 1, 2 -> xy(62, 20 + index * 18);
+                case 3, 4, 5 -> xy(98, 20 + (index - 3) * 18);
+                case 6, 7, 8 -> xy(134, 20 + (index - 6) * 18);
+                default -> hidden();
+            };
             default -> hidden();
         };
     }
@@ -159,6 +168,7 @@ public final class OldustryMachineLayout {
             case PUMP -> xywh(62, 36, 14, 14); // JAR GuiPump energy bolt
             case CANNER -> xywh(31, 27, 14, 14); // JAR GuiCanner energy at 31,27
             case ELECTROLYZER -> xywh(79, 34, 25, 16);
+            case CROP_MATRON -> xywh(26, 38, 14, 14);
             case INDUCTION -> xywh(56, 36, 14, 14);
             default -> null;
         };

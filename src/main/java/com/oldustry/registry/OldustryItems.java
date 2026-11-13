@@ -18,7 +18,11 @@ import com.oldustry.reactor.OldustryReflectorItem;
 import com.oldustry.reactor.OldustryUraniumCellItem;
 import com.oldustry.reactor.OldustryVentSpreadItem;
 import com.oldustry.item.construction.CutterItem;
+import com.oldustry.item.BarrelItem;
+import com.oldustry.item.BoozeMugItem;
 import com.oldustry.item.DebugItem;
+import com.oldustry.item.HydratingCellItem;
+import com.oldustry.item.WeedExItem;
 import com.oldustry.item.explosive.DynamiteItem;
 import com.oldustry.item.explosive.RemoteItem;
 import com.oldustry.item.FrequencyTransmitterItem;
@@ -32,8 +36,10 @@ import com.oldustry.item.ElectricArmorItem;
 import com.oldustry.item.equipment.ElectricJetpackItem;
 import com.oldustry.item.ElectricItem;
 import com.oldustry.item.ElectricToolItem;
+import com.oldustry.item.tool.ElectricHoeItem;
 import com.oldustry.item.tool.ElectricTreetapItem;
 import com.oldustry.item.tool.ElectricWrenchItem;
+import com.oldustry.item.tool.CropnalyzerItem;
 import com.oldustry.item.tool.EuReaderItem;
 import com.oldustry.item.tool.ObscuratorItem;
 import com.oldustry.item.utility.FilledTinCanItem;
@@ -63,6 +69,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.ColorCollection;
@@ -91,6 +98,7 @@ public final class OldustryItems {
     public static final DeferredItem<BlockItem> RUBBER_SAPLING = ITEMS.registerSimpleBlockItem(OldustryBlocks.RUBBER_SAPLING);
     public static final DeferredItem<BlockItem> IMPROVED_FURNACE = ITEMS.registerSimpleBlockItem(OldustryBlocks.IMPROVED_FURNACE);
     public static final DeferredItem<BlockItem> CONSTRUCTION_FOAM = ITEMS.registerSimpleBlockItem(OldustryBlocks.CONSTRUCTION_FOAM);
+    public static final DeferredItem<BlockItem> CROP = ITEMS.registerSimpleBlockItem(OldustryBlocks.CROP);
     public static final DeferredItem<BlockItem> MACHINE_CASING = ITEMS.registerSimpleBlockItem(OldustryBlocks.MACHINE_CASING);
     public static final DeferredItem<BlockItem> ADVANCED_MACHINE = ITEMS.registerSimpleBlockItem(OldustryBlocks.ADVANCED_MACHINE);
     public static final DeferredItem<Item> GENERATOR = ITEMS.registerItem("generator",
@@ -120,6 +128,7 @@ public final class OldustryItems {
     public static final DeferredItem<BlockItem> CANNER = ITEMS.registerSimpleBlockItem(OldustryBlocks.CANNER);
     public static final DeferredItem<BlockItem> ELECTROLYZER = ITEMS.registerSimpleBlockItem(OldustryBlocks.ELECTROLYZER);
     public static final DeferredItem<BlockItem> MAGNETIZER = ITEMS.registerSimpleBlockItem(OldustryBlocks.MAGNETIZER);
+    public static final DeferredItem<BlockItem> CROP_MATRON = ITEMS.registerSimpleBlockItem(OldustryBlocks.CROP_MATRON);
     public static final DeferredItem<BlockItem> INDUCTION = ITEMS.registerSimpleBlockItem(OldustryBlocks.INDUCTION);
     public static final DeferredItem<BlockItem> TESLA = ITEMS.registerSimpleBlockItem(OldustryBlocks.TESLA);
     public static final DeferredItem<BlockItem> TELEPORTER = ITEMS.registerItem(
@@ -210,7 +219,7 @@ public final class OldustryItems {
     public static final DeferredItem<Item> BRONZE_AXE = ITEMS.registerItem("bronze_axe", props -> new Item(props.axe(OldustryMaterials.BRONZE, 6, -3.1f)));
     public static final DeferredItem<Item> BRONZE_SWORD = ITEMS.registerItem("bronze_sword", props -> new Item(props.sword(OldustryMaterials.BRONZE, 3, -2.4f)));
     public static final DeferredItem<Item> BRONZE_SHOVEL = ITEMS.registerItem("bronze_shovel", props -> new Item(props.shovel(OldustryMaterials.BRONZE, 1.5f, -3f)));
-    public static final DeferredItem<Item> BRONZE_HOE = ITEMS.registerItem("bronze_hoe", props -> new Item(props.hoe(OldustryMaterials.BRONZE, -2, -1f)));
+    public static final DeferredItem<Item> BRONZE_HOE = ITEMS.registerItem("bronze_hoe", props -> new HoeItem(OldustryMaterials.BRONZE, -2, -1f, props));
 
     public static final DeferredItem<Item> BRONZE_HELMET = ITEMS.registerItem("bronze_helmet", props -> new Item(props.humanoidArmor(OldustryMaterials.BRONZE_ARMOR, ArmorType.HELMET)));
     public static final DeferredItem<Item> BRONZE_CHESTPLATE = ITEMS.registerItem("bronze_chestplate", props -> new Item(props.humanoidArmor(OldustryMaterials.BRONZE_ARMOR, ArmorType.CHESTPLATE)));
@@ -248,7 +257,10 @@ public final class OldustryItems {
     public static final DeferredItem<Item> COALFUEL_CELL = item("coalfuel_cell");
     public static final DeferredItem<Item> BIOFUEL_CELL = item("biofuel_cell");
     public static final DeferredItem<Item> ELECTROLYZED_WATER_CELL = item("electrolyzed_water_cell");
-    public static final DeferredItem<Item> HYDRATING_CELL = item("hydrating_cell");
+    public static final DeferredItem<Item> HYDRATING_CELL = ITEMS.registerItem(
+        "hydrating_cell",
+        props -> new HydratingCellItem(props.stacksTo(1).component(OldustryDataComponents.HYDRATION.get(), HydratingCellItem.MAX))
+    );
 
     public static final DeferredItem<Item> FUEL_CAN = item("fuel_can");
     public static final DeferredItem<Item> FILLED_FUEL_CAN = item("filled_fuel_can");
@@ -327,12 +339,21 @@ public final class OldustryItems {
     public static final DeferredItem<Item> DEPLETED_ISOTOPE_CELL = ITEMS.registerItem(
         "depleted_isotope_cell", props -> new OldustryIsotopeCellItem(props.stacksTo(1).durability(OldustryReactor.FUEL_LIFE))
     );
+    public static final DeferredItem<Item> CROP_SEED = item("crop_seed");
     public static final DeferredItem<Item> FERTILIZER = item("fertilizer");
-    public static final DeferredItem<Item> WEED_EX = item("weed_ex");
+    public static final DeferredItem<Item> WEED_EX = ITEMS.registerItem(
+        "weed_ex",
+        props -> new WeedExItem(props.stacksTo(1).component(OldustryDataComponents.WEED_EX_USES.get(), WeedExItem.MAX_USES))
+    );
     public static final DeferredItem<Item> GRIN_POWDER = item("grin_powder");
     public static final DeferredItem<Item> TERRA_WART = item("terra_wart");
     public static final DeferredItem<Item> HOPS = item("hops");
-    public static final DeferredItem<Item> BARREL = item("barrel");
+    public static final DeferredItem<Item> BARREL = ITEMS.registerItem("barrel", props -> new BarrelItem(props.stacksTo(1)));
+    public static final DeferredItem<Item> BOOZE_MUG = ITEMS.registerItem("booze_mug", props -> new BoozeMugItem(props.stacksTo(1)));
+    public static final DeferredItem<Item> CROPANALYZER = ITEMS.registerItem(
+        "cropnalyzer",
+        props -> new CropnalyzerItem(props.stacksTo(1))
+    );
     public static final DeferredItem<Item> DEBUG_ITEM = ITEMS.registerItem("debug_item", DebugItem::new);
     public static final DeferredItem<Item> DYNAMITE = ITEMS.registerItem("dynamite", props -> new DynamiteItem(props, false));
     public static final DeferredItem<Item> STICKY_DYNAMITE = ITEMS.registerItem("sticky_dynamite", props -> new DynamiteItem(props, true));
@@ -383,7 +404,7 @@ public final class OldustryItems {
     public static final DeferredItem<Item> CHAINSAW = ITEMS.registerItem("chainsaw", props -> new ChainsawItem(
         new ElectricCharge.Spec(10000, 100, 1, true),
         ChainsawStats.properties(props, OldustryMaterials.CHAINSAW)));
-    public static final DeferredItem<Item> ELECTRIC_HOE = ITEMS.registerItem("electric_hoe", props -> new ElectricToolItem(new ElectricCharge.Spec(10000, 100, 1, true), 50, props.hoe(OldustryMaterials.BRONZE, -2, -1f)));
+    public static final DeferredItem<Item> ELECTRIC_HOE = ITEMS.registerItem("electric_hoe", props -> new ElectricHoeItem(props.hoe(OldustryMaterials.BRONZE, -2, -1f)));
     public static final DeferredItem<Item> OD_SCANNER = ITEMS.registerItem("od_scanner", props -> new ScannerItem(new ElectricCharge.Spec(10000, 50, 1, true), false, props));
     public static final DeferredItem<Item> OV_SCANNER = ITEMS.registerItem("ov_scanner", props -> new ScannerItem(new ElectricCharge.Spec(10000, 50, 2, true), true, props));
     public static final DeferredItem<Item> OBSCURATOR = ITEMS.registerItem("obscurator", ObscuratorItem::new);

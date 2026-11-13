@@ -14,6 +14,8 @@ import com.oldustry.block.PersonalSafeBlock;
 import com.oldustry.client.render.ObscuratorRenderer;
 import com.oldustry.client.render.PersonalSafeRenderer;
 import com.oldustry.block.DynamiteBlock;
+import com.oldustry.block.OldustryCropBlock;
+import com.oldustry.crop.OldustryCrop;
 import com.oldustry.block.MachineBlock;
 import com.oldustry.block.OldustryLuminatorBlock;
 import com.oldustry.block.MachineCasingBlock;
@@ -36,6 +38,7 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
@@ -93,11 +96,13 @@ public class OldustryModelProvider extends ModelProvider {
         blockModels.createCrossBlockWithDefaultItem(OldustryBlocks.RUBBER_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createFurnace(OldustryBlocks.IMPROVED_FURNACE.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
         cube(blockModels, OldustryBlocks.CONSTRUCTION_FOAM.get());
+        cube(blockModels, OldustryBlocks.BARREL.get());
         OldustryMachineModels.casing(blockModels, OldustryBlocks.MACHINE_CASING.get());
         OldustryMachineModels.casing(blockModels, OldustryBlocks.ADVANCED_MACHINE.get());
         OldustryMachineModels.miningPipe(blockModels, OldustryBlocks.MINING_PIPE.get(), true);
         OldustryMachineModels.miningTip(blockModels, OldustryBlocks.MINING_PIPE_TIP.get());
         personalSafe(blockModels);
+        crop(blockModels);
         itnt(blockModels, OldustryBlocks.ITNT.get());
         itnt(blockModels, OldustryBlocks.NUKE.get());
         dynamite(blockModels, OldustryBlocks.DYNAMITE.get());
@@ -111,7 +116,7 @@ public class OldustryModelProvider extends ModelProvider {
                 OldustryMachineModels.luminator(blockModels, luminator);
             } else if (block instanceof MachineBlock machine) {
                 // blockTesla.png is 16×16: every side, on or off, is that one tile.
-                if (machine.kind == OldustryMachineKind.TESLA) {
+                if (machine.kind == OldustryMachineKind.TESLA || machine.kind == OldustryMachineKind.CROP_MATRON) {
                     OldustryMachineModels.uniform(blockModels, machine);
                 } else {
                     OldustryMachineModels.machine(blockModels, machine);
@@ -157,6 +162,38 @@ public class OldustryModelProvider extends ModelProvider {
             block.asItem(), TextureMapping.particle(block), blockModels.modelOutput
         );
         blockModels.itemModelOutput.accept(block.asItem(), ItemModelUtils.specialModel(base, new PersonalSafeRenderer.Unbaked()));
+    }
+
+    private static void crop(BlockModelGenerators gens) {
+        Block block = OldustryBlocks.CROP.get();
+        Identifier stick = cropCross(gens, "stick");
+        Identifier upgraded = cropCross(gens, "stick_upgraded");
+        java.util.Map<String, Identifier> stages = new HashMap<>();
+        for (OldustryCrop kind : OldustryCrop.values()) {
+            if (kind == OldustryCrop.NONE) {
+                continue;
+            }
+            for (int size = 1; size <= kind.maxSize(); size++) {
+                stages.put(kind.getSerializedName() + "_" + size, cropCross(gens, kind.getSerializedName() + "_" + size));
+            }
+        }
+        gens.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(
+            PropertyDispatch.initial(OldustryCropBlock.CROP, OldustryCropBlock.SIZE, OldustryCropBlock.UPGRADED).generate((kind, size, isUpgraded) -> {
+                Identifier model = isUpgraded ? upgraded : stick;
+                if (kind != OldustryCrop.NONE && size > 0) {
+                    model = stages.getOrDefault(kind.getSerializedName() + "_" + Math.min(size, kind.maxSize()), model);
+                }
+                return BlockModelGenerators.plainVariant(model);
+            })
+        ));
+        gens.registerSimpleItemModel(block, stick);
+    }
+
+    /** JAR {@code RenderBlockCrop}: four axis planes at ±0.25, sunk 1/16. Same as {@code minecraft:block/crop}. */
+    private static Identifier cropCross(BlockModelGenerators gens, String name) {
+        Identifier texture = Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "block/crop/" + name);
+        Identifier model = Identifier.fromNamespaceAndPath(Oldustry.MOD_ID, "block/crop/" + name);
+        return ModelTemplates.CROP.create(model, TextureMapping.crop(new Material(texture)), gens.modelOutput);
     }
 
     private static void cube(BlockModelGenerators blockModels, Block block) {

@@ -2,6 +2,8 @@ package com.oldustry.registry;
 
 import com.oldustry.Oldustry;
 import com.oldustry.block.CableBlockEntity;
+import com.oldustry.block.OldustryBarrelBlockEntity;
+import com.oldustry.block.OldustryCropBlockEntity;
 import com.oldustry.block.OldustryReactorBlockEntity;
 import com.oldustry.block.OldustryReactorChamberBlockEntity;
 import com.oldustry.block.PersonalSafeBlockEntity;
@@ -46,6 +48,18 @@ public final class OldustryBlockEntities {
         BLOCK_ENTITIES.register("reactor_chamber", () -> new BlockEntityType<>(
             OldustryReactorChamberBlockEntity::new,
             java.util.Set.of(OldustryBlocks.REACTOR_CHAMBER.get())
+        ));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<OldustryCropBlockEntity>> CROP =
+        BLOCK_ENTITIES.register("crop", () -> new BlockEntityType<>(
+            OldustryCropBlockEntity::new,
+            java.util.Set.of(OldustryBlocks.CROP.get())
+        ));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<OldustryBarrelBlockEntity>> BARREL =
+        BLOCK_ENTITIES.register("barrel", () -> new BlockEntityType<>(
+            OldustryBarrelBlockEntity::new,
+            java.util.Set.of(OldustryBlocks.BARREL.get())
         ));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CableBlockEntity>> CABLE =

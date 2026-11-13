@@ -1,7 +1,9 @@
 package com.oldustry.machine;
 
 import com.oldustry.item.ElectricItem;
+import com.oldustry.item.HydratingCellItem;
 import com.oldustry.item.UpgradeItem;
+import com.oldustry.item.WeedExItem;
 import com.oldustry.registry.OldustryItems;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -75,6 +77,7 @@ public final class OldustryMachineSlots {
                 case 2 -> Role.DISCHARGE;
                 default -> Role.HIDDEN;
             };
+            case CROP_MATRON -> slot >= 0 && slot < 9 ? Role.INPUT : Role.HIDDEN;
             default -> Role.HIDDEN;
         };
     }
@@ -128,6 +131,12 @@ public final class OldustryMachineSlots {
             case FURNACE, INDUCTION -> level != null && canSmelt(level, stack);
             case TERRAFORMER -> stack.getItem() instanceof com.oldustry.item.TfbpItem;
             case MASS -> stack.is(OldustryItems.SCRAP.get()) || stack.is(OldustryItems.SCRAP_BOX.get());
+            case CROP_MATRON -> switch (slot) {
+                case 0, 1, 2 -> stack.is(OldustryItems.FERTILIZER.get());
+                case 3, 4, 5 -> stack.getItem() instanceof HydratingCellItem;
+                case 6, 7, 8 -> stack.getItem() instanceof WeedExItem;
+                default -> false;
+            };
             default -> true;
         };
     }
@@ -148,6 +157,7 @@ public final class OldustryMachineSlots {
             case TELEPORTER -> new int[0];
             case TERRAFORMER -> new int[] { 0 };
             case MASS -> new int[] { 0, 1, 2 };
+            case CROP_MATRON -> new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
             default -> new int[] { 0, 1, 6 };
         };
     }

@@ -41,7 +41,8 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
 public abstract class OldustryMachineBlockEntity extends BlockEntity implements EnergyTile, WorldlyContainer, MenuProvider {
-    public static final int SIZE = 7;
+    /** Nine for Crop-Matron (3×3 fertilizer / hydration / Weed-EX). Other machines hide the extras. */
+    public static final int SIZE = 9;
     protected final OldustryMachineKind kind;
     protected final NonNullList<ItemStack> items = NonNullList.withSize(SIZE, ItemStack.EMPTY);
     protected int energy;
@@ -92,6 +93,7 @@ public abstract class OldustryMachineBlockEntity extends BlockEntity implements 
             case CANNER -> new OldustryCannerBlockEntity(pos, state);
             case ELECTROLYZER -> new OldustryElectrolyzerBlockEntity(pos, state);
             case MAGNETIZER -> new OldustryMagnetizerBlockEntity(pos, state);
+            case CROP_MATRON -> new OldustryCropMatronBlockEntity(pos, state);
             case INDUCTION -> new OldustryInductionBlockEntity(pos, state);
             case TESLA -> new OldustryTeslaBlockEntity(pos, state);
             case TELEPORTER -> new OldustryTeleporterBlockEntity(pos, state);
@@ -190,6 +192,7 @@ public abstract class OldustryMachineBlockEntity extends BlockEntity implements 
             case CANNING -> ((OldustryCannerBlockEntity) this).tickCanner(level);
             case ELECTROLYZER -> ((OldustryElectrolyzerBlockEntity) this).tickElectrolyzer(level, pos);
             case MAGNETIZER -> ((OldustryMagnetizerBlockEntity) this).tickMagnetizer(level, pos);
+            case CROP_MATRON -> ((OldustryCropMatronBlockEntity) this).tickMatron(level, pos);
             case TESLA -> ((OldustryTeslaBlockEntity) this).tickTesla(level, pos);
             case TELEPORTER -> ((OldustryTeleporterBlockEntity) this).tickTeleporter(level, pos);
             case TERRAFORMER -> ((OldustryTerraformerBlockEntity) this).tickTerraformer(level, pos);
@@ -404,7 +407,7 @@ public abstract class OldustryMachineBlockEntity extends BlockEntity implements 
         boolean powered = level != null && level.hasNeighborSignal(worldPosition);
         return switch (kind.type) {
             case STORAGE -> face != facing;
-            case MACERATOR, EXTRACTOR, COMPRESSOR, RECYCLER, FURNACE, LUMINATOR, MINING, PUMPING, CANNING, MAGNETIZER, INDUCTION, TESLA, TERRAFORMER, MASS -> true;
+            case MACERATOR, EXTRACTOR, COMPRESSOR, RECYCLER, FURNACE, LUMINATOR, MINING, PUMPING, CANNING, MAGNETIZER, CROP_MATRON, INDUCTION, TESLA, TERRAFORMER, MASS -> true;
             // Electrolyzer is NOT an EnergyNet sink — only drains adjacent storage.
             default -> false;
         };

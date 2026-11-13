@@ -21,6 +21,13 @@ final class OldustryConstructionRecipes extends RecipeProvider {
 
     @Override
     protected void buildRecipes() {
+        shaped(RecipeCategory.MISC, OldustryItems.CROP.get(), 2)
+            .define('S', Items.STICK)
+            .pattern("S S")
+            .pattern("S S")
+            .unlockedBy("has_stick", has(Items.STICK))
+            .save(output);
+
         shapeless(RecipeCategory.MISC, OldustryItems.CONSTRUCTION_FOAM.get(), 3)
             .requires(OldustryTags.Items.DUSTS_CLAY)
             .requires(Items.WATER_BUCKET)

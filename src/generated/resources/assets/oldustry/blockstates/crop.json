@@ -1,0 +1,1108 @@
+{
+  "variants": {
+    "crop=aurelia,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=aurelia,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=aurelia,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/aurelia_1"
+    },
+    "crop=aurelia,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/aurelia_1"
+    },
+    "crop=aurelia,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/aurelia_2"
+    },
+    "crop=aurelia,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/aurelia_2"
+    },
+    "crop=aurelia,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/aurelia_3"
+    },
+    "crop=aurelia,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/aurelia_3"
+    },
+    "crop=aurelia,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/aurelia_4"
+    },
+    "crop=aurelia,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/aurelia_4"
+    },
+    "crop=aurelia,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/aurelia_5"
+    },
+    "crop=aurelia,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/aurelia_5"
+    },
+    "crop=aurelia,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/aurelia_5"
+    },
+    "crop=aurelia,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/aurelia_5"
+    },
+    "crop=aurelia,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/aurelia_5"
+    },
+    "crop=aurelia,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/aurelia_5"
+    },
+    "crop=blackthorn,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=blackthorn,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=blackthorn,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/blackthorn_1"
+    },
+    "crop=blackthorn,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/blackthorn_1"
+    },
+    "crop=blackthorn,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/blackthorn_2"
+    },
+    "crop=blackthorn,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/blackthorn_2"
+    },
+    "crop=blackthorn,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/blackthorn_3"
+    },
+    "crop=blackthorn,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/blackthorn_3"
+    },
+    "crop=blackthorn,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/blackthorn_4"
+    },
+    "crop=blackthorn,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/blackthorn_4"
+    },
+    "crop=blackthorn,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/blackthorn_4"
+    },
+    "crop=blackthorn,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/blackthorn_4"
+    },
+    "crop=blackthorn,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/blackthorn_4"
+    },
+    "crop=blackthorn,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/blackthorn_4"
+    },
+    "crop=blackthorn,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/blackthorn_4"
+    },
+    "crop=blackthorn,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/blackthorn_4"
+    },
+    "crop=carrots,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=carrots,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=carrots,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/carrots_1"
+    },
+    "crop=carrots,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/carrots_1"
+    },
+    "crop=carrots,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/carrots_2"
+    },
+    "crop=carrots,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/carrots_2"
+    },
+    "crop=carrots,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/carrots_3"
+    },
+    "crop=carrots,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/carrots_3"
+    },
+    "crop=carrots,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/carrots_3"
+    },
+    "crop=carrots,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/carrots_3"
+    },
+    "crop=carrots,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/carrots_3"
+    },
+    "crop=carrots,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/carrots_3"
+    },
+    "crop=carrots,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/carrots_3"
+    },
+    "crop=carrots,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/carrots_3"
+    },
+    "crop=carrots,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/carrots_3"
+    },
+    "crop=carrots,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/carrots_3"
+    },
+    "crop=cocoa,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=cocoa,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=cocoa,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/cocoa_1"
+    },
+    "crop=cocoa,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/cocoa_1"
+    },
+    "crop=cocoa,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/cocoa_2"
+    },
+    "crop=cocoa,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/cocoa_2"
+    },
+    "crop=cocoa,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/cocoa_3"
+    },
+    "crop=cocoa,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/cocoa_3"
+    },
+    "crop=cocoa,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/cocoa_4"
+    },
+    "crop=cocoa,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/cocoa_4"
+    },
+    "crop=cocoa,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/cocoa_4"
+    },
+    "crop=cocoa,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/cocoa_4"
+    },
+    "crop=cocoa,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/cocoa_4"
+    },
+    "crop=cocoa,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/cocoa_4"
+    },
+    "crop=cocoa,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/cocoa_4"
+    },
+    "crop=cocoa,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/cocoa_4"
+    },
+    "crop=coffee,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=coffee,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=coffee,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/coffee_1"
+    },
+    "crop=coffee,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/coffee_1"
+    },
+    "crop=coffee,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/coffee_2"
+    },
+    "crop=coffee,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/coffee_2"
+    },
+    "crop=coffee,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/coffee_3"
+    },
+    "crop=coffee,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/coffee_3"
+    },
+    "crop=coffee,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/coffee_4"
+    },
+    "crop=coffee,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/coffee_4"
+    },
+    "crop=coffee,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/coffee_5"
+    },
+    "crop=coffee,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/coffee_5"
+    },
+    "crop=coffee,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/coffee_5"
+    },
+    "crop=coffee,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/coffee_5"
+    },
+    "crop=coffee,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/coffee_5"
+    },
+    "crop=coffee,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/coffee_5"
+    },
+    "crop=cyazint,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=cyazint,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=cyazint,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/cyazint_1"
+    },
+    "crop=cyazint,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/cyazint_1"
+    },
+    "crop=cyazint,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/cyazint_2"
+    },
+    "crop=cyazint,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/cyazint_2"
+    },
+    "crop=cyazint,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/cyazint_3"
+    },
+    "crop=cyazint,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/cyazint_3"
+    },
+    "crop=cyazint,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/cyazint_4"
+    },
+    "crop=cyazint,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/cyazint_4"
+    },
+    "crop=cyazint,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/cyazint_4"
+    },
+    "crop=cyazint,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/cyazint_4"
+    },
+    "crop=cyazint,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/cyazint_4"
+    },
+    "crop=cyazint,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/cyazint_4"
+    },
+    "crop=cyazint,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/cyazint_4"
+    },
+    "crop=cyazint,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/cyazint_4"
+    },
+    "crop=dandelion,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=dandelion,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=dandelion,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/dandelion_1"
+    },
+    "crop=dandelion,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/dandelion_1"
+    },
+    "crop=dandelion,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/dandelion_2"
+    },
+    "crop=dandelion,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/dandelion_2"
+    },
+    "crop=dandelion,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/dandelion_3"
+    },
+    "crop=dandelion,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/dandelion_3"
+    },
+    "crop=dandelion,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/dandelion_4"
+    },
+    "crop=dandelion,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/dandelion_4"
+    },
+    "crop=dandelion,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/dandelion_4"
+    },
+    "crop=dandelion,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/dandelion_4"
+    },
+    "crop=dandelion,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/dandelion_4"
+    },
+    "crop=dandelion,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/dandelion_4"
+    },
+    "crop=dandelion,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/dandelion_4"
+    },
+    "crop=dandelion,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/dandelion_4"
+    },
+    "crop=ferru,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=ferru,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=ferru,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/ferru_1"
+    },
+    "crop=ferru,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/ferru_1"
+    },
+    "crop=ferru,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/ferru_2"
+    },
+    "crop=ferru,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/ferru_2"
+    },
+    "crop=ferru,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/ferru_3"
+    },
+    "crop=ferru,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/ferru_3"
+    },
+    "crop=ferru,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/ferru_4"
+    },
+    "crop=ferru,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/ferru_4"
+    },
+    "crop=ferru,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/ferru_4"
+    },
+    "crop=ferru,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/ferru_4"
+    },
+    "crop=ferru,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/ferru_4"
+    },
+    "crop=ferru,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/ferru_4"
+    },
+    "crop=ferru,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/ferru_4"
+    },
+    "crop=ferru,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/ferru_4"
+    },
+    "crop=hops,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=hops,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=hops,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/hops_1"
+    },
+    "crop=hops,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/hops_1"
+    },
+    "crop=hops,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/hops_2"
+    },
+    "crop=hops,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/hops_2"
+    },
+    "crop=hops,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/hops_3"
+    },
+    "crop=hops,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/hops_3"
+    },
+    "crop=hops,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/hops_4"
+    },
+    "crop=hops,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/hops_4"
+    },
+    "crop=hops,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/hops_5"
+    },
+    "crop=hops,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/hops_5"
+    },
+    "crop=hops,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/hops_6"
+    },
+    "crop=hops,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/hops_6"
+    },
+    "crop=hops,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/hops_7"
+    },
+    "crop=hops,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/hops_7"
+    },
+    "crop=melon,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=melon,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=melon,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/melon_1"
+    },
+    "crop=melon,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/melon_1"
+    },
+    "crop=melon,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/melon_2"
+    },
+    "crop=melon,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/melon_2"
+    },
+    "crop=melon,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/melon_3"
+    },
+    "crop=melon,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/melon_3"
+    },
+    "crop=melon,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/melon_4"
+    },
+    "crop=melon,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/melon_4"
+    },
+    "crop=melon,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/melon_4"
+    },
+    "crop=melon,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/melon_4"
+    },
+    "crop=melon,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/melon_4"
+    },
+    "crop=melon,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/melon_4"
+    },
+    "crop=melon,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/melon_4"
+    },
+    "crop=melon,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/melon_4"
+    },
+    "crop=nether_wart,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=nether_wart,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=nether_wart,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/nether_wart_1"
+    },
+    "crop=nether_wart,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/nether_wart_1"
+    },
+    "crop=nether_wart,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/nether_wart_2"
+    },
+    "crop=nether_wart,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/nether_wart_2"
+    },
+    "crop=nether_wart,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/nether_wart_3"
+    },
+    "crop=nether_wart,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/nether_wart_3"
+    },
+    "crop=nether_wart,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/nether_wart_3"
+    },
+    "crop=nether_wart,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/nether_wart_3"
+    },
+    "crop=nether_wart,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/nether_wart_3"
+    },
+    "crop=nether_wart,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/nether_wart_3"
+    },
+    "crop=nether_wart,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/nether_wart_3"
+    },
+    "crop=nether_wart,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/nether_wart_3"
+    },
+    "crop=nether_wart,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/nether_wart_3"
+    },
+    "crop=nether_wart,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/nether_wart_3"
+    },
+    "crop=none,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=none,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=none,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=none,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=none,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=none,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=none,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=none,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=none,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=none,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=none,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=none,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=none,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=none,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=none,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=none,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=potato,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=potato,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=potato,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/potato_1"
+    },
+    "crop=potato,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/potato_1"
+    },
+    "crop=potato,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/potato_2"
+    },
+    "crop=potato,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/potato_2"
+    },
+    "crop=potato,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/potato_3"
+    },
+    "crop=potato,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/potato_3"
+    },
+    "crop=potato,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/potato_3"
+    },
+    "crop=potato,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/potato_3"
+    },
+    "crop=potato,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/potato_3"
+    },
+    "crop=potato,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/potato_3"
+    },
+    "crop=potato,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/potato_3"
+    },
+    "crop=potato,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/potato_3"
+    },
+    "crop=potato,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/potato_3"
+    },
+    "crop=potato,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/potato_3"
+    },
+    "crop=pumpkin,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=pumpkin,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=pumpkin,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/pumpkin_1"
+    },
+    "crop=pumpkin,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/pumpkin_1"
+    },
+    "crop=pumpkin,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/pumpkin_2"
+    },
+    "crop=pumpkin,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/pumpkin_2"
+    },
+    "crop=pumpkin,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/pumpkin_3"
+    },
+    "crop=pumpkin,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/pumpkin_3"
+    },
+    "crop=pumpkin,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/pumpkin_4"
+    },
+    "crop=pumpkin,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/pumpkin_4"
+    },
+    "crop=pumpkin,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/pumpkin_4"
+    },
+    "crop=pumpkin,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/pumpkin_4"
+    },
+    "crop=pumpkin,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/pumpkin_4"
+    },
+    "crop=pumpkin,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/pumpkin_4"
+    },
+    "crop=pumpkin,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/pumpkin_4"
+    },
+    "crop=pumpkin,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/pumpkin_4"
+    },
+    "crop=redwheat,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=redwheat,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=redwheat,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/redwheat_1"
+    },
+    "crop=redwheat,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/redwheat_1"
+    },
+    "crop=redwheat,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/redwheat_2"
+    },
+    "crop=redwheat,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/redwheat_2"
+    },
+    "crop=redwheat,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/redwheat_3"
+    },
+    "crop=redwheat,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/redwheat_3"
+    },
+    "crop=redwheat,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/redwheat_4"
+    },
+    "crop=redwheat,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/redwheat_4"
+    },
+    "crop=redwheat,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/redwheat_5"
+    },
+    "crop=redwheat,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/redwheat_5"
+    },
+    "crop=redwheat,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/redwheat_6"
+    },
+    "crop=redwheat,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/redwheat_6"
+    },
+    "crop=redwheat,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/redwheat_7"
+    },
+    "crop=redwheat,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/redwheat_7"
+    },
+    "crop=reed,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=reed,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=reed,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/reed_1"
+    },
+    "crop=reed,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/reed_1"
+    },
+    "crop=reed,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/reed_2"
+    },
+    "crop=reed,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/reed_2"
+    },
+    "crop=reed,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/reed_3"
+    },
+    "crop=reed,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/reed_3"
+    },
+    "crop=reed,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/reed_3"
+    },
+    "crop=reed,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/reed_3"
+    },
+    "crop=reed,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/reed_3"
+    },
+    "crop=reed,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/reed_3"
+    },
+    "crop=reed,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/reed_3"
+    },
+    "crop=reed,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/reed_3"
+    },
+    "crop=reed,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/reed_3"
+    },
+    "crop=reed,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/reed_3"
+    },
+    "crop=rose,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=rose,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=rose,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/rose_1"
+    },
+    "crop=rose,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/rose_1"
+    },
+    "crop=rose,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/rose_2"
+    },
+    "crop=rose,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/rose_2"
+    },
+    "crop=rose,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/rose_3"
+    },
+    "crop=rose,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/rose_3"
+    },
+    "crop=rose,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/rose_4"
+    },
+    "crop=rose,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/rose_4"
+    },
+    "crop=rose,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/rose_4"
+    },
+    "crop=rose,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/rose_4"
+    },
+    "crop=rose,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/rose_4"
+    },
+    "crop=rose,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/rose_4"
+    },
+    "crop=rose,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/rose_4"
+    },
+    "crop=rose,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/rose_4"
+    },
+    "crop=stickreed,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=stickreed,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=stickreed,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/stickreed_1"
+    },
+    "crop=stickreed,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/stickreed_1"
+    },
+    "crop=stickreed,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/stickreed_2"
+    },
+    "crop=stickreed,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/stickreed_2"
+    },
+    "crop=stickreed,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/stickreed_3"
+    },
+    "crop=stickreed,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/stickreed_3"
+    },
+    "crop=stickreed,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/stickreed_4"
+    },
+    "crop=stickreed,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/stickreed_4"
+    },
+    "crop=stickreed,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/stickreed_4"
+    },
+    "crop=stickreed,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/stickreed_4"
+    },
+    "crop=stickreed,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/stickreed_4"
+    },
+    "crop=stickreed,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/stickreed_4"
+    },
+    "crop=stickreed,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/stickreed_4"
+    },
+    "crop=stickreed,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/stickreed_4"
+    },
+    "crop=terra_wart,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=terra_wart,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=terra_wart,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/terra_wart_1"
+    },
+    "crop=terra_wart,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/terra_wart_1"
+    },
+    "crop=terra_wart,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/terra_wart_2"
+    },
+    "crop=terra_wart,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/terra_wart_2"
+    },
+    "crop=terra_wart,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/terra_wart_3"
+    },
+    "crop=terra_wart,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/terra_wart_3"
+    },
+    "crop=terra_wart,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/terra_wart_3"
+    },
+    "crop=terra_wart,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/terra_wart_3"
+    },
+    "crop=terra_wart,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/terra_wart_3"
+    },
+    "crop=terra_wart,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/terra_wart_3"
+    },
+    "crop=terra_wart,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/terra_wart_3"
+    },
+    "crop=terra_wart,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/terra_wart_3"
+    },
+    "crop=terra_wart,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/terra_wart_3"
+    },
+    "crop=terra_wart,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/terra_wart_3"
+    },
+    "crop=tulip,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=tulip,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=tulip,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/tulip_1"
+    },
+    "crop=tulip,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/tulip_1"
+    },
+    "crop=tulip,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/tulip_2"
+    },
+    "crop=tulip,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/tulip_2"
+    },
+    "crop=tulip,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/tulip_3"
+    },
+    "crop=tulip,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/tulip_3"
+    },
+    "crop=tulip,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/tulip_4"
+    },
+    "crop=tulip,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/tulip_4"
+    },
+    "crop=tulip,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/tulip_4"
+    },
+    "crop=tulip,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/tulip_4"
+    },
+    "crop=tulip,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/tulip_4"
+    },
+    "crop=tulip,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/tulip_4"
+    },
+    "crop=tulip,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/tulip_4"
+    },
+    "crop=tulip,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/tulip_4"
+    },
+    "crop=venomilia,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=venomilia,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=venomilia,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/venomilia_1"
+    },
+    "crop=venomilia,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/venomilia_1"
+    },
+    "crop=venomilia,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/venomilia_2"
+    },
+    "crop=venomilia,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/venomilia_2"
+    },
+    "crop=venomilia,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/venomilia_3"
+    },
+    "crop=venomilia,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/venomilia_3"
+    },
+    "crop=venomilia,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/venomilia_4"
+    },
+    "crop=venomilia,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/venomilia_4"
+    },
+    "crop=venomilia,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/venomilia_5"
+    },
+    "crop=venomilia,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/venomilia_5"
+    },
+    "crop=venomilia,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/venomilia_6"
+    },
+    "crop=venomilia,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/venomilia_6"
+    },
+    "crop=venomilia,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/venomilia_6"
+    },
+    "crop=venomilia,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/venomilia_6"
+    },
+    "crop=weed,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=weed,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=weed,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/weed_1"
+    },
+    "crop=weed,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/weed_1"
+    },
+    "crop=weed,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/weed_2"
+    },
+    "crop=weed,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/weed_2"
+    },
+    "crop=weed,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/weed_3"
+    },
+    "crop=weed,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/weed_3"
+    },
+    "crop=weed,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/weed_3"
+    },
+    "crop=weed,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/weed_3"
+    },
+    "crop=weed,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/weed_3"
+    },
+    "crop=weed,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/weed_3"
+    },
+    "crop=weed,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/weed_3"
+    },
+    "crop=weed,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/weed_3"
+    },
+    "crop=weed,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/weed_3"
+    },
+    "crop=weed,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/weed_3"
+    },
+    "crop=wheat,size=0,upgraded=false": {
+      "model": "oldustry:block/crop/stick"
+    },
+    "crop=wheat,size=0,upgraded=true": {
+      "model": "oldustry:block/crop/stick_upgraded"
+    },
+    "crop=wheat,size=1,upgraded=false": {
+      "model": "oldustry:block/crop/wheat_1"
+    },
+    "crop=wheat,size=1,upgraded=true": {
+      "model": "oldustry:block/crop/wheat_1"
+    },
+    "crop=wheat,size=2,upgraded=false": {
+      "model": "oldustry:block/crop/wheat_2"
+    },
+    "crop=wheat,size=2,upgraded=true": {
+      "model": "oldustry:block/crop/wheat_2"
+    },
+    "crop=wheat,size=3,upgraded=false": {
+      "model": "oldustry:block/crop/wheat_3"
+    },
+    "crop=wheat,size=3,upgraded=true": {
+      "model": "oldustry:block/crop/wheat_3"
+    },
+    "crop=wheat,size=4,upgraded=false": {
+      "model": "oldustry:block/crop/wheat_4"
+    },
+    "crop=wheat,size=4,upgraded=true": {
+      "model": "oldustry:block/crop/wheat_4"
+    },
+    "crop=wheat,size=5,upgraded=false": {
+      "model": "oldustry:block/crop/wheat_5"
+    },
+    "crop=wheat,size=5,upgraded=true": {
+      "model": "oldustry:block/crop/wheat_5"
+    },
+    "crop=wheat,size=6,upgraded=false": {
+      "model": "oldustry:block/crop/wheat_6"
+    },
+    "crop=wheat,size=6,upgraded=true": {
+      "model": "oldustry:block/crop/wheat_6"
+    },
+    "crop=wheat,size=7,upgraded=false": {
+      "model": "oldustry:block/crop/wheat_7"
+    },
+    "crop=wheat,size=7,upgraded=true": {
+      "model": "oldustry:block/crop/wheat_7"
+    }
+  }
+}
