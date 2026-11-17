@@ -79,10 +79,7 @@ public final class DynamiteProjectile extends ThrowableItemProjectile {
         return 0.04;
     }
 
-    @Override
-    protected float getAirDrag() {
-        return 0.98F;
-    }
+    // 26.1 hardcodes throwable air inertia (0.99); getAirDrag() is 26.2+.
 
     @Override
     public void tick() {

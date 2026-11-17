@@ -12,7 +12,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ArmorSlot;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.SimpleContainerData;
@@ -73,7 +72,7 @@ public class OldustryMachineMenu extends AbstractContainerMenu {
             Player player = inventory.player;
             for (int i = 0; i < ARMOR.length; i++) {
                 EquipmentSlot eq = ARMOR[i];
-                addSlot(new ArmorSlot(inventory, player, eq, 39 - i, 8 + i * 18, 84, emptyArmor(eq)));
+                addSlot(new OldustryArmorSlot(inventory, player, eq, 39 - i, 8 + i * 18, 84, emptyArmor(eq)));
             }
         }
         addStandardInventorySlots(inventory, 8, OldustryMachineLayout.inventoryTop(kind));

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "C": "oldustry:3x_insulated_hv_cable",
     "D": "oldustry:electronic_circuit",

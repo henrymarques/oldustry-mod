@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
   "ingredients": [
     "oldustry:re_enriched_uranium_cell",
     "oldustry:coal_dust"

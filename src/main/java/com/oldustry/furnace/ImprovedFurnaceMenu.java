@@ -8,13 +8,14 @@ import net.minecraft.world.inventory.AbstractFurnaceMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.crafting.RecipePropertySet;
+import net.minecraft.world.item.crafting.RecipeType;
 
 public class ImprovedFurnaceMenu extends AbstractFurnaceMenu {
     public ImprovedFurnaceMenu(int id, Inventory inventory) {
-        super(OldustryMenus.IMPROVED_FURNACE.get(), RecipePropertySet.FURNACE_INPUT, RecipeBookType.FURNACE, id, inventory);
+        super(OldustryMenus.IMPROVED_FURNACE.get(), RecipeType.SMELTING, RecipePropertySet.FURNACE_INPUT, RecipeBookType.FURNACE, id, inventory);
     }
 
     public ImprovedFurnaceMenu(int id, Inventory inventory, Container container, ContainerData data) {
-        super(OldustryMenus.IMPROVED_FURNACE.get(), RecipePropertySet.FURNACE_INPUT, RecipeBookType.FURNACE, id, inventory, container, data);
+        super(OldustryMenus.IMPROVED_FURNACE.get(), RecipeType.SMELTING, RecipePropertySet.FURNACE_INPUT, RecipeBookType.FURNACE, id, inventory, container, data);
     }
 }

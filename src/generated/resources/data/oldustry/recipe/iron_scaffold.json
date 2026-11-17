@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "P": "#c:ingots/refined_iron",
     "s": "oldustry:iron_fence"

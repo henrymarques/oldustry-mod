@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "F": "oldustry:iron_fence",
     "M": "oldustry:machine_casing",

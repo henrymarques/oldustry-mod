@@ -54,7 +54,7 @@ public class LivingEntityEquipmentMixin {
     }
 
     /**
-     * 26.2 skips {@code getFluidFallingAdjustedMovement} while sprinting. Quantum legs keep that sink.
+     * Vanilla skips fluid-fall adjustment while sprinting; quantum legs still sink in water.
      */
     @Redirect(
         method = "getFluidFallingAdjustedMovement",

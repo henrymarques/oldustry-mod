@@ -1,5 +1,8 @@
 {
   "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.0,
   "ingredient": "#c:dusts/tin",
   "result": {
     "id": "oldustry:tin_ingot"

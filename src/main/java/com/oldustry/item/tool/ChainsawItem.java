@@ -8,7 +8,7 @@ import java.util.List;
 import com.oldustry.energy.ElectricCharge;
 import com.oldustry.registry.OldustrySounds;
 
-import net.minecraft.advancements.triggers.CriteriaTriggers;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;

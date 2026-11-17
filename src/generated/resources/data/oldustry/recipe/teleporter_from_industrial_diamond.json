@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "C": "oldustry:glass_fibre_cable",
     "D": "oldustry:industrial_diamond",

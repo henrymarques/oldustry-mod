@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
   "ingredients": [
     "oldustry:small_iron_dust",
     "oldustry:small_iron_dust"

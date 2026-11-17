@@ -1,5 +1,6 @@
 package com.oldustry.data.recipe;
 
+import com.oldustry.OldustryDyes;
 import com.oldustry.registry.OldustryItems;
 import com.oldustry.registry.OldustryTags;
 
@@ -11,7 +12,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.ColorCollection;
 import net.neoforged.neoforge.common.Tags;
 
 final class OldustryEquipmentRecipes extends RecipeProvider {
@@ -89,17 +89,20 @@ final class OldustryEquipmentRecipes extends RecipeProvider {
             .unlockedBy("has_wool", has(ItemTags.WOOL))
             .save(output);
 
-        ColorCollection.zipApply(Items.DYE, OldustryItems.PAINTERS.map(item -> item.get()), (dye, painter) -> shapeless(RecipeCategory.MISC, painter)
-            .requires(OldustryItems.PAINTER.get())
-            .requires(dye)
-            .group("painter")
-            .unlockedBy("has_painter", has(OldustryItems.PAINTER.get()))
-            .save(output));
-        OldustryItems.PAINTERS.forEach(painter -> shapeless(RecipeCategory.MISC, OldustryItems.PAINTER.get())
-            .requires(painter.get())
-            .group("painter")
-            .unlockedBy("has_" + painter.getId().getPath(), has(painter.get()))
-            .save(output, OldustryRecipeProvider.id("painter_from_" + painter.getId().getPath())));
+        for (DyeColor color : DyeColor.values()) {
+            var painter = OldustryItems.painter(color);
+            shapeless(RecipeCategory.MISC, painter.get())
+                .requires(OldustryItems.PAINTER.get())
+                .requires(OldustryDyes.dye(color))
+                .group("painter")
+                .unlockedBy("has_painter", has(OldustryItems.PAINTER.get()))
+                .save(output);
+            shapeless(RecipeCategory.MISC, OldustryItems.PAINTER.get())
+                .requires(painter.get())
+                .group("painter")
+                .unlockedBy("has_" + painter.getId().getPath(), has(painter.get()))
+                .save(output, OldustryRecipeProvider.id("painter_from_" + painter.getId().getPath()));
+        }
 
         shaped(RecipeCategory.COMBAT, OldustryItems.NANO_HELMET.get())
             .define('C', OldustryItems.CARBON_PLATE.get())
@@ -188,7 +191,7 @@ final class OldustryEquipmentRecipes extends RecipeProvider {
         // AdvRecipe turns a Block into meta 32767, so W is any wool, not only white.
         shaped(RecipeCategory.COMBAT, OldustryItems.HAZMAT_HELMET.get())
             .define('R', OldustryTags.Items.RUBBER)
-            .define('O', Items.DYE.pick(DyeColor.ORANGE))
+            .define('O', Items.ORANGE_DYE)
             .define('G', Items.GLASS)
             .define('#', Items.IRON_BARS)
             .pattern(" O ")
@@ -198,7 +201,7 @@ final class OldustryEquipmentRecipes extends RecipeProvider {
             .save(output);
         shaped(RecipeCategory.COMBAT, OldustryItems.HAZMAT_CHESTPLATE.get())
             .define('R', OldustryTags.Items.RUBBER)
-            .define('O', Items.DYE.pick(DyeColor.ORANGE))
+            .define('O', Items.ORANGE_DYE)
             .pattern("R R")
             .pattern("ROR")
             .pattern("ROR")
@@ -206,7 +209,7 @@ final class OldustryEquipmentRecipes extends RecipeProvider {
             .save(output);
         shaped(RecipeCategory.COMBAT, OldustryItems.HAZMAT_LEGGINGS.get())
             .define('R', OldustryTags.Items.RUBBER)
-            .define('O', Items.DYE.pick(DyeColor.ORANGE))
+            .define('O', Items.ORANGE_DYE)
             .pattern("ROR")
             .pattern("R R")
             .pattern("R R")

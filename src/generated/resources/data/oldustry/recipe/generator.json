@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "B": "oldustry:re_battery",
     "F": "minecraft:furnace",

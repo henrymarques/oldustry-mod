@@ -1,6 +1,6 @@
 # Oldustry
 
-**Oldustry** is an industrial automation mod for **Minecraft 26.2** and **NeoForge**. Build an EU power network, process resources with machines, and work your way from basic tools to nuclear power, quantum armor, and crop breeding. It is a modern reading of classic IndustrialCraft 2 — the same EU, cables, machines, and progression feel — adapted to current Minecraft APIs and presentation.
+**Oldustry** is an industrial automation mod for **Minecraft 26.1.2** and **NeoForge**. Build an EU power network, process resources with machines, and work your way from basic tools to nuclear power, quantum armor, and crop breeding. It is a modern reading of classic IndustrialCraft 2 — the same EU, cables, machines, and progression feel — adapted to current Minecraft APIs and presentation.
 
 The planned classic feature set is **complete**. Development stays active for quality-of-life improvements, polish, compatibility, and new optional features on top of that base.
 
@@ -17,8 +17,8 @@ The planned classic feature set is **complete**. Development stays active for qu
 
 ## Requirements
 
-- Minecraft **26.2**
-- NeoForge **26.2.0.67** or newer for Minecraft 26.2
+- Minecraft **26.1.2**
+- NeoForge **26.1.2.127** or newer for Minecraft 26.1.2
 - JDK **25** to build from source
 
 JEI, Jade, and Curios are optional.

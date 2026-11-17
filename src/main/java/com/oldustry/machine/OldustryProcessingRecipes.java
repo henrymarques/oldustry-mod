@@ -98,7 +98,7 @@ public final class OldustryProcessingRecipes {
             return new ItemStack(OldustryItems.ANCIENT_SCRAP_DUST.get(), 2);
         }
         for (DyeColor color : DyeColor.values()) {
-            if (item == Items.WOOL.pick(color)) {
+            if (item == com.oldustry.OldustryDyes.wool(color).asItem()) {
                 return new ItemStack(Items.STRING);
             }
         }

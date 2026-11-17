@@ -1,5 +1,6 @@
 package com.oldustry.item.construction;
 
+import com.oldustry.OldustryDyes;
 import com.oldustry.registry.OldustrySounds;
 
 import net.minecraft.core.BlockPos;
@@ -15,8 +16,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.Tags;
 
 public class PainterItem extends Item {
     private final DyeColor color;
@@ -62,10 +63,10 @@ public class PainterItem extends Item {
 
     private BlockState paint(BlockState state) {
         if (state.is(BlockTags.WOOL)) {
-            return Blocks.WOOL.pick(color).defaultBlockState();
+            return OldustryDyes.wool(color).defaultBlockState();
         }
-        if (state.is(BlockTags.CONCRETE)) {
-            return Blocks.CONCRETE.pick(color).defaultBlockState();
+        if (state.is(Tags.Blocks.CONCRETES)) {
+            return OldustryDyes.concrete(color).defaultBlockState();
         }
         return null;
     }

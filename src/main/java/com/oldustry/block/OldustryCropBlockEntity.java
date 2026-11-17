@@ -558,7 +558,7 @@ public class OldustryCropBlockEntity extends BlockEntity {
     }
 
     private static ItemStack dye(DyeColor color) {
-        return new ItemStack(Items.DYE.pick(color));
+        return new ItemStack(com.oldustry.OldustryDyes.dye(color));
     }
 
     private ItemStack seedStack(OldustryCrop crop, int seedGrowth, int seedGain, int seedResistance, int seedScan) {

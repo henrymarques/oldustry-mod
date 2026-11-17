@@ -82,7 +82,8 @@ public final class OldustryBlocks {
     public static final DeferredBlock<RubberSheetBlock> RUBBER_SHEET = BLOCKS.registerBlock(
         "rubber_sheet",
         RubberSheetBlock::new,
-        p -> p.mapColor(MapColor.COLOR_BLACK).strength(0.8f).sound(SoundType.WOOL).noOcclusion().bounceRestitution(0.8f)
+        // Bounce is RubberSheetBlock.entityInside; bounceRestitution() is 26.2+.
+        p -> p.mapColor(MapColor.COLOR_BLACK).strength(0.8f).sound(SoundType.WOOL).noOcclusion()
     );
     public static final DeferredBlock<ResinSheetBlock> RESIN_SHEET = BLOCKS.registerBlock(
         "resin_sheet",

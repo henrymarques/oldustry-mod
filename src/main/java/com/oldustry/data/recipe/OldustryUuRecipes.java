@@ -6,7 +6,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
@@ -35,7 +34,7 @@ final class OldustryUuRecipes extends RecipeProvider {
         uu("uu_oak_log", Items.OAK_LOG, 8, " M ", "   ", "   ");
         uu("uu_cactus", Items.CACTUS, 48, " M ", "MMM", "M M");
         uu("uu_vine", Items.VINE, 24, "M  ", "M  ", "M  ");
-        uu("uu_wool", Items.WOOL.pick(DyeColor.WHITE), 12, "M M", "   ", " M ");
+        uu("uu_wool", Items.WHITE_WOOL, 12, "M M", "   ", " M ");
         uu("uu_coal", Items.COAL, 20, "  M", "M  ", "  M");
         uu("uu_diamond", Items.DIAMOND, 1, "MMM", "MMM", "MMM");
         uu("uu_redstone", Items.REDSTONE, 24, "   ", " M ", "MMM");

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
   "ingredients": [
     "oldustry:coffee_mug_dark",
     "minecraft:sugar",

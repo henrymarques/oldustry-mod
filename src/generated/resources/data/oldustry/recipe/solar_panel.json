@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "C": "#c:dusts/coal",
     "E": "oldustry:electronic_circuit",

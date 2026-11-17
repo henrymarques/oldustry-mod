@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "#": "oldustry:compressed_coal_ball",
     "O": "minecraft:obsidian"

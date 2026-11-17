@@ -1,5 +1,8 @@
 {
   "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.0,
   "ingredient": "#c:dusts/tin",
   "result": {
     "id": "oldustry:tin_ingot"

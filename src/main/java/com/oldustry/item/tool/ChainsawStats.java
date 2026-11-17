@@ -47,9 +47,16 @@ public final class ChainsawStats {
                         Tool.Rule.minesAndDrops(blocks.getOrThrow(BlockTags.MINEABLE_WITH_AXE), material.speed()),
                         // JAR flat efficiency on leaves/wool/vines (IShearable + Material.leaves).
                         Tool.Rule.minesAndDrops(HolderSet.direct(BuiltInRegistries.BLOCK.wrapAsHolder(Blocks.COBWEB)), SPEED),
-                        Tool.Rule.overrideSpeed(blocks.getOrThrow(BlockTags.SHEARS_EXTREME_BREAKING_SPEED), SPEED),
-                        Tool.Rule.overrideSpeed(blocks.getOrThrow(BlockTags.SHEARS_MAJOR_BREAKING_SPEED), SPEED),
-                        Tool.Rule.overrideSpeed(blocks.getOrThrow(BlockTags.SHEARS_MINOR_BREAKING_SPEED), SPEED)
+                        // 26.1 shears use LEAVES/WOOL/vine holders; SHEARS_*_BREAKING_SPEED tags are 26.2+.
+                        Tool.Rule.overrideSpeed(blocks.getOrThrow(BlockTags.LEAVES), SPEED),
+                        Tool.Rule.overrideSpeed(blocks.getOrThrow(BlockTags.WOOL), SPEED),
+                        Tool.Rule.overrideSpeed(
+                            HolderSet.direct(
+                                BuiltInRegistries.BLOCK.wrapAsHolder(Blocks.VINE),
+                                BuiltInRegistries.BLOCK.wrapAsHolder(Blocks.GLOW_LICHEN)
+                            ),
+                            SPEED
+                        )
                     ),
                     1.0F,
                     0,

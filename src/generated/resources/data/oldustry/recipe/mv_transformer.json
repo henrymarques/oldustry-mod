@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "C": "oldustry:2x_insulated_gold_cable",
     "M": "oldustry:machine_casing"

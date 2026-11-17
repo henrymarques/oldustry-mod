@@ -51,7 +51,7 @@ public final class OldustryCableModels {
         Identifier hardened = ModelTemplates.CUBE_ALL.createWithSuffix(
             block,
             "_hard",
-            TextureMapping.cube(Blocks.CONCRETE.pick(net.minecraft.world.item.DyeColor.LIGHT_GRAY)),
+            TextureMapping.cube(Blocks.LIGHT_GRAY_CONCRETE),
             gens.modelOutput
         );
         var coreV = BlockModelGenerators.plainVariant(core);

@@ -72,10 +72,11 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.ArmorType;
-import net.minecraft.world.level.block.ColorCollection;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.List;
 
 public final class OldustryItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Oldustry.MOD_ID);
@@ -228,7 +229,21 @@ public final class OldustryItems {
     public static final DeferredItem<Item> COMPOSITE_VEST = ITEMS.registerItem("composite_vest", props -> new Item(props.humanoidArmor(OldustryMaterials.COMPOSITE_ARMOR, ArmorType.CHESTPLATE)));
 
     public static final DeferredItem<Item> PAINTER = item("painter");
-    public static final ColorCollection<DeferredItem<Item>> PAINTERS = ColorCollection.prefixWithColor(ColorCollection.create("painter")).map(OldustryItems::coloredPainter);
+    @SuppressWarnings("unchecked")
+    private static final DeferredItem<Item>[] PAINTER_BY_ID = new DeferredItem[DyeColor.values().length];
+    static {
+        for (DyeColor color : DyeColor.values()) {
+            PAINTER_BY_ID[color.getId()] = ITEMS.registerItem(
+                color.getName() + "_painter",
+                props -> new PainterItem(color, props.stacksTo(1).durability(32))
+            );
+        }
+    }
+    public static final List<DeferredItem<Item>> PAINTERS = List.of(PAINTER_BY_ID);
+
+    public static DeferredItem<Item> painter(DyeColor color) {
+        return PAINTER_BY_ID[color.getId()];
+    }
 
     public static final DeferredItem<Item> TOOLBOX = ITEMS.registerItem("toolbox", ToolboxItem::new);
     public static final DeferredItem<Item> TIN_CAN = item("tin_can");
@@ -459,11 +474,6 @@ public final class OldustryItems {
 
     private static DeferredItem<Item> tfbp(String name, com.oldustry.machine.OldustryTfbp kind) {
         return ITEMS.registerItem(name, props -> new TfbpItem(kind, props));
-    }
-
-    private static DeferredItem<Item> coloredPainter(String name) {
-        DyeColor color = DyeColor.byName(name.substring(0, name.length() - "_painter".length()), DyeColor.WHITE);
-        return ITEMS.registerItem(name, props -> new PainterItem(color, props.stacksTo(1).durability(32)));
     }
 
     public static void register(IEventBus bus) {

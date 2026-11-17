@@ -32,7 +32,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 
 /**
  * Soft Curios: packs/solar/static keep working in accessory slots.
- * ponytail: IItemHandler deprecated in 26.2; Curios still exposes {@code curios:item_handler}.
+ * ponytail: IItemHandler may be deprecated on newer NeoForge; Curios still exposes {@code curios:item_handler}.
  */
 @SuppressWarnings("removal")
 @EventBusSubscriber(modid = Oldustry.MOD_ID)

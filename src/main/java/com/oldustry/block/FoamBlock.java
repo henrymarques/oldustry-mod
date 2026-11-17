@@ -9,7 +9,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
@@ -96,7 +95,7 @@ public class FoamBlock extends Block {
 
     public static void harden(Level level, BlockPos pos) {
         // 26.2: IC2 blockWall (concreto vanilla não existia em 1.5.2). Não voltar a um bloco próprio.
-        level.setBlock(pos, Blocks.CONCRETE.pick(DyeColor.LIGHT_GRAY).defaultBlockState(), Block.UPDATE_ALL);
+        level.setBlock(pos, Blocks.LIGHT_GRAY_CONCRETE.defaultBlockState(), Block.UPDATE_ALL);
     }
 
     public static boolean canFoamAt(Level level, BlockPos pos) {
